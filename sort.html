@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sort</title>
+</head>
+<body>
+  <script>
+    let arr = [6, 9, 2, 8, 7, 5, 3]
+    let temp = [6, 9, 8, 7]
+    console.log(arr)
+
+    function bubbleSort (array) {
+      for (let i = 0, iLen = array.length; i < iLen; i++) {
+        for (let j = 0, jLen = array.length - 1 - i; j < jLen; j++) {
+          if (array[j] > array[j + 1]) {
+            [array[j], array[j + 1]] = [array[j + 1], array[j]]
+          }
+        }
+      }
+    }
+    function selectionSort(array) {
+      for (let i = 0, iLen = array.length; i < iLen; i++) {
+        let indexMin = i
+        for (let j = i + 1, jLen = array.length; j < jLen; j++) {
+          if (array[j] < array[indexMin]) {
+            indexMin = j
+            // [array[i], array[]]
+          }
+        }
+        if (i !== indexMin) {
+          [array[i], array[indexMin]] = [array[indexMin], array[i]]
+        }
+      }
+    }
+    function insertionSort (arr) {
+      let length = arr.length
+      let j
+      let temp
+      for (let i = 0; i < length; i++) {
+        j = i
+        temp = arr[i]
+        while (j > 0 && arr[j - 1] > temp) {
+          arr[j] = arr[j - 1]
+          j--
+        }
+        arr[j] = temp
+      }
+    }
+    function mergeSort (array) {
+      if (array.length === 1) {
+        return array
+      }
+      let mid = Math.floor((array.length) / 2)
+      let arrLeft = array.slice(0, mid)
+      let arrRight = array.slice(mid, array.length)
+      return merge( mergeSort(arrLeft), mergeSort(arrRight))
+    }
+    function merge(left, right) {
+      let result = []
+      let ll = 0
+      let rl = 0
+      while (ll < left.length && rl < right.length) {
+        if (right[rl] < left[ll]) {
+          result.push(right[rl++])
+        } else {
+          result.push(left[ll++])
+        }
+      }
+      while (ll < left.length) {
+        result.push(left[ll++])
+      }
+      while (rl < right.length) {
+        result.push(right[rl++])
+      }
+      return result
+    }
+    function quickSort(array, left, right) {
+      let index
+      if (array.length > 1) {
+        index = partition(array, left, right)
+        if (left < index - 1) {
+          quickSort(array, left, index - 1)
+        }
+        if (index < right) {
+          quickSort(array, index, right)
+        }
+      }
+    }
+    function partition (array, left, right) {
+      let pivot = array[Math.floor((left + right) / 2)]
+      let i = left
+      let j = right
+      while (i <= j) {
+        while (array[i] < pivot) {
+          i++
+        }
+        while (pivot < array[j]) {
+          j--
+        }
+        if (i <= j) {
+          [array[i], array[j]] = [array[j], array[i]]
+          i++
+          j--
+        }
+      }
+      return i
+    }
+
+    // console.log(insertionSort(arr))
+    // console.log(mergeSort(arr))
+    // selectionSort(arr)
+    // bubbleSort(arr)
+    quickSort(arr, 0, arr.length - 1)
+    console.log(arr)
+  </script>
+</body>
+</html>

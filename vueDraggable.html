@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>vueDraggable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>vue-draggable</h1>
+<h2>Description</h2>
+<p>使本地的html5对于vue可以拖放。<br />
+基于Sortable.js<br />
+（<em>tip:</em>  我的dome里没有引入sortable.js，只引入了vuedraggable也能正常运行。）  </p>
+<h2>Feature</h2>
+<ul>
+<li>支持sortable.js的全部特征</li>
+<li>保持视图模型和html同步</li>
+<li>兼容vue.js 2.0 transition-group</li>
+<li>支持取消</li>
+<li>当需要全部控制时事件会报告所有的变化。（<em>Events reporting any changes when full control is needed</em>）  </li>
+</ul>
+<h2>支持vue.js 2.0</h2>
+<p><strong>Typical use</strong>  </p>
+<pre><code>&lt;draggable v-model=&quot;myArray&quot; :options=&quot;group:'people'&quot; @start=&quot;drag=true&quot; @end=&quot;drag=false&quot;&gt;
+    &lt;div v-for=&quot;element in myArray&quot; :key=&quot;element.id&quot;&gt;{{element.name}}&lt;/div&gt;
+&lt;/draggable&gt;
+</code></pre>
+
+<p><strong>.vue</strong>  </p>
+<pre><code>import draggable from 'vuedraggable'
+...
+export default {
+    components: {
+        draggable
+    },
+}
+...
+</code></pre>
+
+<p><strong>With transition-group:</strong>  </p>
+<pre><code>&lt;draggable v-model=&quot;myArray&quot;&gt;
+    &lt;transition-group&gt;
+        &lt;div v-for=&quot;element in myArray&quot; :key=&quot;element.id&quot;&gt;
+            {{element.name}}
+        &lt;/div&gt;
+    &lt;/transition-group&gt;
+&lt;/draggable
+</code></pre>
+
+<p>可拖动组件应当直接包裹draggable元素，或者transition-component包括可拖动的元素。  </p>
+<p><strong>with footer slot</strong>  </p>
+<pre><code>&lt;draggable v-model=&quot;myArray&quot; :options=&quot;{draggable:'.item'}&quot;&gt;
+    &lt;div v-for=&quot;element in myArray&quot; :key=&quot;element.id&quot; class=&quot;item&quot;&gt;
+        {{element.name}}
+    &lt;/div&gt;
+    &lt;button slot=&quot;footer&quot; @click=&quot;addPeople&quot;&gt;Add&lt;/button&gt;
+&lt;/draggable&gt;
+</code></pre>
+
+<p><strong>with Vuex:</strong>  </p>
+<pre><code>&lt;draggable v-model=&quot;myList&quot;&gt;&lt;/draggable&gt;
+
+computed: {
+    myList: {
+        get() {
+            return this.$store.state.myList
+        },
+        set() {
+            this.$store.commit('updateList', value)
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Props</strong>  </p>
+<p><strong>value</strong><br />
+引入一个数组做为内部元素的v-for指令使用。  </p>
+<p><strong>list</strong>
+它基本与value相同。不同点是list同步与拖出和放入事件。list使用splice方法处理数组。这个参数不能与value同时存在，只能二选一。  </p>
+<p><strong>options</strong><br />
+用于初始化sortable。这里的所有方法需要使用“on”开头。这样才能使用sortable里的事件。  </p>
+<p><strong>element</strong><br />
+用于指定draggabel组件被创建为什么html标签。也可以使用vue组件里的element。如果需要设置参数或事件时可以参考componentData去创建组件。  </p>
+<p><strong>clone</strong><br />
+当option里的clone参数值是true时，原组件会克隆元素。viewModel元素被克隆为独一无二的参数并返回被克隆后的版本。  </p>
+<p><strong>move</strong><br />
+当这个参数是空时会返回sortable的onMove方法。如果返回false会取消drag操作。
+	function onMoveCallback(evt, originalEvent) {
+		...
+		// return false; - for cancel
+	} </p>
+<p>evt对象拥有和sortable onMove 事件相同的性质，并且还加了3个性质。  </p>
+<p>拖动的元素：index, element, futureIndex<br />
+相关的元素：index, element, list, component</p>
+<ul>
+<li>
+draggedContext: context linked to dragged element
+<ul>
+<li>index: dragged element index</li>
+<li>element: dragged element underlying view model element</li>
+<li>futureIndex: potential index of the dragged element if the drop operation is accepted</li>
+</ul>
+</li>
+<li>
+relatedContext: context linked to current drag operation
+<ul>
+<li>index: target element index</li>
+<li>element: target element view model element</li>
+<li>list: target list</li>
+<li>component: target VueComponent</li>
+</ul>
+</li>
+</ul>
+<p>html:  </p>
+<pre><code>&lt;draggable :list=&quot;list&quot; :move=&quot;checkMove&quot;&gt;
+</code></pre>
+
+<p>javascript:  </p>
+<pre><code>checkMove: function(evt) {
+    return (evt.draggedContext.element.name!=='apple');
+}
+</code></pre>
+
+<p><strong>componentData</strong><br />
+用于传递附加信息给子组件。使用element参数声明。<br />
+它有2个参数：<br />
+props: 把信息传递给子组件<br />
+on: 当发生相应事件时  </p>
+<p>html:  </p>
+<pre><code>&lt;draggable element=&quot;el-collapse&quot; :list=&quot;list&quot; :component-data=&quot;getComponentData()&quot;&gt;
+    &lt;el-collapse-item v-for=&quot;e in list&quot; :title=&quot;e.title&quot; :name=&quot;e.name&quot; :key=&quot;e.name&quot;&gt;
+        &lt;div&gt;{{e.description}}&lt;/div&gt;
+    &lt;/el-collapse-item&gt;
+&lt;/draggable&gt;
+</code></pre>
+
+<p>vue:  </p>
+<pre><code>methods: {
+    handleChange() {
+        console.log('changed');
+    },
+    inputChanged(value) {
+        this.activeNames = value;
+    },
+    getComponentData() {
+        return {
+            on: {
+                change: this.handleChange,
+                input: this.inputChanged
+            },
+                props: {
+            value: this.activeNames
+            }
+        };
+    }
+}
+</code></pre>
+
+<p><strong>Events</strong><br />
+支持sortable的事件
+start/add/remove/update/end/choose/sort/filter/clone<br />
+在使用这些事件时需要在前面加上“on”，即：onStart/onAdd/...<br />
+当list参数不是空时并且相应的数组被drag-and-drop操作过就会触发change事件。这个事件的argument包括：  </p>
+<ul>
+<li>
+added
+<ul>
+<li>newIndex</li>
+<li>element</li>
+</ul>
+</li>
+<li>
+removed
+<ul>
+<li>oldIndex</li>
+<li>element</li>
+</ul>
+</li>
+<li>
+moved
+<ul>
+<li>newIndex</li>
+<li>oldIndex</li>
+<li>element  
+</li>
+</ul>
+</li>
+<li>
+added: contains information of an element added to the array
+<ul>
+<li>newIndex: the index of the added element</li>
+<li>element: the added element</li>
+</ul>
+</li>
+<li>
+removed: contains information of an element removed from to the array
+<ul>
+<li>oldIndex: the index of the element before - - remove</li>
+<li>element: the removed element</li>
+</ul>
+</li>
+<li>
+moved: contains information of an element moved within the array
+<ul>
+<li>newIndex: the current index of the moved - - - element</li>
+<li>oldIndex: the old index of the moved element</li>
+<li>element: the moved element</li>
+</ul>
+</li>
+</ul>
+<p><strong>Slots</strong>  </p>
+<hr />
+<p>1/10/2018 12:50:54 PM by stone</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

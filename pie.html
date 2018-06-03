@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>pie</title>
+  <style>
+  #main,
+  #pie,
+  #dataset,
+  #dataZoom,
+  #drag,
+  #calendar,
+  #sunburst,
+  #testpie {
+    width: 600px;
+    height: 400px;
+  }
+  </style>
+  <script src="echarts.js"></script>
+</head>
+<body>
+  <div id="pie"></div>
+  <script>
+    echarts.init(document.getElementById('pie')).setOption({
+      title: {
+        text: 'from text',
+        x: 'center',
+        y: 'center'
+      },
+      series: [
+        {
+          type: 'pie',
+          name: 'from name',
+          // hoverAnimation: false,
+          hoverOffset: 10,
+          selectedMode: true,
+          clockkwise: true,
+          startAngle: 45,
+          // minAngle: 90,
+          avoidLabelOverlap: false,
+          itemStyle: {
+
+          },
+          data: [
+            { name: 'a', value: 28 },
+            { name: 'b', value: 234 },
+            { name: 'c', value: 57 }
+          ]
+        }
+      ]
+    })
+  </script>
+</body>
+</html>
