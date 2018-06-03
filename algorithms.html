@@ -1,0 +1,107 @@
+<html>
+	<head>
+		<title>algorithms</title>
+	</head>
+	<body>
+		<script>
+			
+  // console.log(54151)
+  class Set {
+    constructor () {
+      this.items = {}
+    }
+    add (value) {
+      this.items[value] = value
+    }
+    has (value) {
+      return this.items.hasOwnProperty(value)
+    }
+    remove (value) {
+      if (this.has(value)) {
+        delete this.items[value]
+        return true
+      }
+      return false
+    }
+    size () {
+      return Object.keys(this.items).length
+    }
+    values () {
+      let values = []
+      for (let i in this.items) {
+        if (this.has(i)) {
+          values.push(this.items[i])
+        }
+      }
+      return values
+    }
+    // 集合操作
+    unicon (otherSet) {
+      let uniconSet = new Set()
+      let a = this.values()// 返回本集合的数据组成的数组
+      let b = otherSet.values()//
+      for (let i = 0, iLen = a.length; i < iLen; i++) {
+        uniconSet.add(a[i])
+      }
+      for (let i = 0, iLen = b.length; i < iLen; i++) {
+        uniconSet.add(b[i])
+      }
+      // for (let x of this.items) uniconSet.add(x)
+      // for (let x of otherSet) uniconSet.add(x)
+      return uniconSet
+    }
+    intersection (otherSet) {
+      let intersectionSet = new Set()
+      let a = this.values()
+      for (let i = 0, iLen = a.length; i < iLen; i++) {
+        if (otherSet.has(a[i])) {
+          intersectionSet.add(a[i])
+        }
+      }
+      return intersectionSet
+    }
+    difference (otherSet) {
+      let differenceSet = new Set()
+      for (let key in this.items) {
+        if (!otherSet.has(key)) {
+          differenceSet.add(key)
+        }
+      }
+      return differenceSet
+    }
+    sub (otherSet) {
+      if (this.size() > otherSet.size()) {
+        return false
+      } else {
+        let a = this.values()
+        for (let i = 0, iLen = a.length; i < iLen; i++) {
+          if (!otherSet.has(a[i])) {
+            return false
+          }
+        }
+        return true
+      }
+    }
+  }
+  let set0 = new Set()
+  set0.add(1)
+  set0.add(2)
+  console.log(set0.remove(1))
+  console.log(set0.items)
+  set0.add(3)
+  console.log(set0.size())
+  console.log(set0.values())
+  let set1 = new Set()
+  set1.add('a')
+  set1.add('b')
+  set1.add(1)
+  set1.add(3)
+  console.log(set1.unicon(set0))
+  console.log(set1.intersection(set0))
+  console.log(set1.difference(set0))
+  let set2 = new Set()
+  set2.add(3)
+  console.log(set2.sub(set1))
+		</script>
+	</body>
+</html>

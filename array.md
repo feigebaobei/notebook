@@ -1,0 +1,239 @@
+# array对象
+##简介
+null
+
+##属性
+**constructor** 返回构造原型  
+
+    var arr = new Array();
+    console.log(arr.constructor);
+
+**length** 返回数组的长度  
+    
+    var arr = [1,3,3,4,5,6,'b','a'];
+    console.log(arr.length);
+
+**prototype** 得到或操作数组的属性和方法  
+
+    var arr = ['a', 'b'];
+    console.log(arr.prototype)
+
+##方法
+**concat()** 在一个数组后连接几个数组，并返回新的数组。不改变原来的各个数组。  
+
+    var a = [1,2];
+    var b = [3];
+    var c = [4];
+    var d = a.concat(b,c);
+    console.log(d); // [1,2,3,4]
+
+**join(separator)** 把指定数组内的各元素用，指定的间隔符（默认为英文逗号）分隔开。返回字符串。  
+separator，分隔符。
+    var joinStr = d.join('ok'); // "1ok2ok3ok4"
+
+**pop()** 返回并删除指定数组的最后一个元素。  
+
+    var newd = d.pop(); // 4
+
+**push()** 在数组的末尾添加新元素并返回数组的新长度  
+
+    newd.push('a'); // 5 
+
+**revserse()** 把指定数组排倒序  
+
+    newd.reverse(); // ['a', 4, 3, 2, 1]
+
+**shift()** 返回并删除指定数组的第一个元素  
+
+    newd.shift(); // 'a'
+
+**slice(start, end)** 返回指定数组的选定部分  
+start，必填。
+end，非必填。
+    
+    var e = newd.slic(1,3); // [3, 2]
+
+**sort(sortby)** 把指定数组的各元素按照指定方法（sortby）排序。会改变原数组。  
+sortby，可选。必须是函数。
+
+    var f = [1,7,3,6,8,4,2];
+    function sortNum(a, b) {return a - b};
+    f.sort(sortNum); // [1,2,3,4,6,7,8]
+
+**splice(start,howmany,item0,item1,...)** 把数组的指定部分替换为指定内容  
+start，必填。
+howmany，必填。
+item0,...，非必填。
+
+    f.splice(2,4,'a'); // [1,2,'a',8]
+
+**toSource()**  
+
+
+**toString()** 返回由指定数组转化的字符串。不改变原数组。  
+
+    f.toString(); // '1,2,a,8'
+
+**toLocaleString()** 返回由指定数组转化的本地字符串。不改变原数组。  
+
+    f.toLocaleString(); // '1,2,a,8'
+
+**unshift(item0, item1, ...)** 在数组的头部添加若干个元素,并返回新的长度。   
+
+    f.unshift(0,1,2); // 6
+
+**valueOf()** 返回指定数据  
+
+    f.valueOf(); // [0,1,2,1,2,'a',8]
+
+**indexOf(search, start)** 返回search首次出现的位置。  
+es5时添加的新方法。  
+search，必填。  
+start，非必填。  
+
+    f.indexOf(2,3); // 4
+
+**lastIndexOf(search, start)** 返回指定范围内，最后一次出现的位置。  
+
+    f.lastIndexOf(1, -2); // 3
+
+**reduce(fn, init)** 遍历当前数组。  
+
+    f.reduce(function () {}, 0)
+
+**reduceRight(fn, init)** 从右边开始遍历当前数组。  
+
+    f.reduce(function () {}, 0)
+
+**map(fn，obj)** 对原数组的每个元素依次执行fn。返回一位新数组，原数组不变。  
+fn，必填，对每个元素操作的方法。
+obj，非必填，fn执行时this指向的对象。即上下文参数。  
+
+    f.splice(f.indexOf('a',0),1);
+    var g = 2;
+    f.map(function(item, index, arr) {return item * this}, g); // [0,2,4,2,4,16]
+
+**forEach(fn, obj)** 对指定数组的每个元素依次执行fn。不返回东西。  
+fn，必填。
+obj，上下文参数。
+
+    f.forEach(function(item,index, arr) {console.log(item)}); // 0 2 4 2 4 16
+
+可用于娄数组对象。  
+
+    // 我不会，不好意思。
+
+**filter(boolean|fn)** 用指定数组中满足条件的元素组成新数组并返回。  
+boolean|fn，必填，判断结果是true的元素组成的数组。
+
+    var h = f.filter(function (item) {
+        return item > 2
+    })
+    //[4,4,16]
+
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+****  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
