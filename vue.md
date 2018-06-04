@@ -24,6 +24,8 @@
 	npm run dev
 	npm run build
 
+*tip:*为了打包后文件引用路径正确，需要修改config/index.js assetsPublicPath: './' (根据实际情况修改)
+
 ##混合
 **基础**  
 混合对象可以包含任何组件选项。当组件使用混合对象是所有混合对象的选项将会混入到组件本身的选项中。  

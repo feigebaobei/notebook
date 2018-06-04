@@ -119,7 +119,7 @@ obj，上下文参数。
 
     f.forEach(function(item,index, arr) {console.log(item)}); // 0 2 4 2 4 16
 
-可用于娄数组对象。  
+可用于类数组对象。  
 
     // 我不会，不好意思。
 
@@ -131,109 +131,35 @@ boolean|fn，必填，判断结果是true的元素组成的数组。
     })
     //[4,4,16]
 
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-****  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**some(fn)** 把数组中的每一项都运行给定的函数。若有一项返回true，则返回true。反之返回false。不改变原数组。  
+fn，必填，返回boolean值。
+
+    var bool0 = h.some(function(item, index, arr) {
+        return item % 2 === 0
+    })
+    // bool0 = true
+
+**every(fn)** 用数组中的每一项都运行给定的函数。若都返回true，则返回true。反之返回false。不改变原数组。  
+fn，必填，返回boolean值。  
+
+    var bool1 = h.every(function (item, index, arr) {
+        return item % 2 === 0
+    })
+    // bool1 = true
+
+**数组去重**
+
+    function distinct(arr) {
+        var temp = [],
+            obj = {}
+        for (var i = 0, iLen = arr.length; i < iLen; i < iLen; i++) {
+            if (!obj[arr[i]]) {
+                obj[arr[i]] = 1
+                temp.push(arr[i])
+            }
+        }
+        return temp
+    }
+
+___
+2018/03/30 by stone

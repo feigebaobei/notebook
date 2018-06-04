@@ -494,7 +494,6 @@ cookie的作用
 
     setcookie(name, "", time()-10);
 
-会话session
 |||
 |-|-|
 |||
