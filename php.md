@@ -494,10 +494,12 @@ cookie的作用
 
     setcookie(name, "", time()-10);
 
+session  
+
 |||
 |-|-|
-|||
-|||
+|创建session|`sesion_start()`|
+|注销、销毁|`unset($_session['name']);`或`session_destroy();`|
 |||
 |||
 
