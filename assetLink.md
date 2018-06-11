@@ -43,12 +43,20 @@
 |ellipsis|https://cdn.jsdelivr.net/npm/ellipsis.js@0.1.3/ellipsis.js|
 |ellipsis git|https://github.com/glinford/ellipsis.js|
 
-
+##ztree
 |名称|链接|
 |-|-|
-|||
-|||
-|||
-|||
+|ztree 链接|https://www.jsdelivr.com/package/npm/ztree|
+|css|https://cdn.jsdelivr.net/npm/ztree@3.5.24/css/zTreeStyle/zTreeStyle.css|
+|js all|https://cdn.jsdelivr.net/npm/ztree@3.5.24/js/jquery.ztree.all.js|
+|说明|ztree需要jq1.4以上|
+
+##jquery-validation
+|名称|链接|
+|-|-|
+|js|https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js|
+|汉语包|https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/localization/messages_zh.js|
+
+
 |||
 |||
