@@ -186,7 +186,7 @@ debugger // 加断点
     // 通过原型继承一个新对象
     function inherit(proto) {
         if (proto == null ) throw TypeError()
-        if (Object.create) return Objcet.create(proto)
+        if (Object.create) return Object.create(proto)
         var t = typeof proto
         if (t !== 'object' && t !== 'function') throw TypeError();
         var F = function () {}
@@ -268,11 +268,40 @@ delete 只能删除自在属性，不能删除继承属性。
     o.constructor.prototype // 得到o对象的原型
     p.isPrototypeOf(o) // p是否是o的原型
 
+存取器  
+es5时添加的2个方法。（`getter`, `setter`）  
+存取器属性可以继承
+
+|数据属性|存取器属性|
+|-|-|
+|值，可写性，可枚举性，可配置性|读取，写入，可枚举，可配置|
+
+    Object.getOwnPropertyDescriptor(o, prop) // 返回o对象的prop属性的属性描述。只能操作自有属性。 
+
+    Object.defineProperty(o, 'prop', {
+        value: 1, // 值
+        writable: true, // 可写入
+        enumerable: false, // 不可枚举
+        configurable: true // 可配置
+        })
+
+|||
+|-|-|
+|若对象不可扩展|可以编辑已有的自有属性，不可添加新属性。|
+|若存取器属性是不可配置|则不能修改它的可配置性和可枚举性|
+|存取器属性是不可配置|不能修改getter/setter方法。不能将它转换为数据属性|
+|若数据属性是不可配置的|不能转换为存取属性|
+|若数据属性是不可配置的|不能将它的可写性从false改为true,可从true改为false|
+|若数据属性是不可配置且不可写的|不能修改它的值，可配置但不可写属性的值是可以修改的|
+|||
+|||
+
 `__proto__`用来直接查询、设置对象原型。但不推荐使用。因为safari/chrome支持。ie,opera不支持。ff虽然支持，但是限制修改不可扩展对象的原型  
 
 可扩展性  
 
     Object.preventExtensions(o) // 设置o为不可扩展对象。设置为不可扩展对象后不能再回到可扩展对象。若为不可对象扩展属性。虽不会报错，但没有执行结果。
+    Object.esExtensible(o) // o对象是否可扩展
     Object.seal(o) // 封印o对象。不仅不能扩展对象，而且还不能删除它已有的属性。
     Object.isSealed(o) // 检测是否封印。
     Object.freeze(o) // 冻结对象。不可修改。
@@ -283,21 +312,15 @@ delete 只能删除自在属性，不能删除继承属性。
     JSON.stringify(o)
     JSON.parse(s)
 
+类属性
+
+    function classof(o) {
+        if (o === null) return 'Null'
+        if (o === undefined) return 'Undefined'
+        return Object.prototype.toString.call(o).slice(8, -1)
+    }
 
 
-
-
-
-
-
-
-                formatter: function (value, row, index) {
-                  if (row.id % 2 == 0) {
-                    return {
-                      checked: true
-                    }
-                  }
-                }
 
 
 

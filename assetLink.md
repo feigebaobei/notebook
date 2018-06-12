@@ -62,3 +62,9 @@
 |-|-|
 |vivid-icons 链接|https://www.jsdelivr.com/package/npm/vivid-icons?path=dist|
 |vivid-icons|https://cdn.jsdelivr.net/npm/vivid-icons@1.0.1/dist/vivid-icons.js|
+
+##@tensorflow/tfjs
+|名称|链接|
+|-|-|
+|@tensorflow/tfjs 链接|https://www.jsdelivr.com/package/npm/@tensorflow/tfjs|
+|@tensorflow/tfjs|https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6/dist/tf.min.js|
