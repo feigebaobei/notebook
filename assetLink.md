@@ -57,6 +57,8 @@
 |js|https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js|
 |汉语包|https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/localization/messages_zh.js|
 
-
-|||
-|||
+##vivid-icons.js
+|名称|链接|
+|-|-|
+|vivid-icons 链接|https://www.jsdelivr.com/package/npm/vivid-icons?path=dist|
+|vivid-icons|https://cdn.jsdelivr.net/npm/vivid-icons@1.0.1/dist/vivid-icons.js|

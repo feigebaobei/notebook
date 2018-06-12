@@ -160,6 +160,20 @@ debugger // 加断点
         }
     }
 
+对象常见的用法。  
+|创建|create|
+|设置|set|
+|查找|query|
+|删除|delete|
+|检测|test|
+|枚举|enumerate|
+
+内置对象  
+宿主对象  
+自定义对象  
+自有属性  
+继承属性  
+
 创建一个对象  
 
     var a = new Array();
@@ -184,7 +198,8 @@ delete 只能删除自在属性，不能删除继承属性。
 严格模式下不能删除全局属性、方法。  
 
     o.hasOwnPreperty(name) // 是否是自有属性
-    o.propertyIsEnumerable(name) // 是否可枚举
+    o.propertyIsEnumerable(name) // 在自有属性中是否可枚举。继承的属性不可枚举。
+    'prop' in o // 为对象中是否有属性prop
 
     // o继承p中的全部属性、方法
     function extend(o, p) {
@@ -276,6 +291,13 @@ delete 只能删除自在属性，不能删除继承属性。
 
 
 
+                formatter: function (value, row, index) {
+                  if (row.id % 2 == 0) {
+                    return {
+                      checked: true
+                    }
+                  }
+                }
 
 
 

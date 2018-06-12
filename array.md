@@ -39,7 +39,7 @@ separator，分隔符。
 
     newd.push('a'); // 5 
 
-**revserse()** 把指定数组排倒序  
+**reverse()** 把指定数组排倒序  
 
     newd.reverse(); // ['a', 4, 3, 2, 1]
 
