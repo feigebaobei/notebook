@@ -320,11 +320,29 @@ es5时添加的2个方法。（`getter`, `setter`）
         return Object.prototype.toString.call(o).slice(8, -1)
     }
 
+let  
+
+- 定义变量时和var一样  
+- 显示定义变量的作用域。只在表达式内可用。  
+
+解构赋值  
+（需要在es6中学习）
 
 
+迭代器  
+（需要在es6中学习）  
+
+生成器  
+（需要在es6中学习）  
+
+数组推导  
+（需要在es6中学习）  
+
+解构赋值  
+（需要在es6中学习）
 
 
-
+ECMAScript for XML (E4X)
 
 
 
