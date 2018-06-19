@@ -495,60 +495,7 @@ bind
     a.add(f)
     a.add(f)
 
-
-
-开源工场
-stone
-Feige177105
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let  
->>>>>>> 0f678ed8e2f156cabd8d595d8ecceb6454883a05
 
 - 定义变量时和var一样  
 - 显示定义变量的作用域。只在表达式内可用。  
@@ -571,6 +518,158 @@ let
 
 
 ECMAScript for XML (E4X)
+
+浏览器兼容性的网站  
+
+|链接|名称|
+|-|-|
+|https://developer.mozilla.org|mozilla开发者中心|
+|https://msdn.microsoft.com|microsoft开发者网络|
+|https://develop.apple.com/safari|apple开发都网络里的safari开发中心|
+|https://code.google.com/doctype|开发web的一本百科全书|
+|https://en.wikipedia.org/wiki/Comparison_of_layout_engines_(HTML_5)|wikipadia文章跟踪html5特性和api在各浏览器里的实现状态|
+|https://en.wikipedia.org/wiki/Compparison_of_layout_engines_(Document_Object_Model)|跟踪dom特性的实现状态|
+|https://a.deveria.com/caniuse|（何时可用……）跟踪web特性的实现状态|
+|https://www.quirksmode.org/dom|各浏览器的dom兼容性表格|
+|https://webdevout.net/brower-support|跟踪浏览器开发商对于web标准的实现的站点|
+
+    <!--[if IE 6]>
+    // code
+    <![endif]-->
+    <!--[if lte IE 7]>
+    // code
+    <![endif]-->
+    <!--[if !IE]>
+    // code
+    <![endif]-->
+    <!--[if gte IE 8]>
+    // code
+    <![endif]-->
+
+js没有权限写入或删除客户计算机上的任意文件或列出任意目录。
+
+|名称|介绍|
+|-|-|
+|Prototype||
+|Dojo||
+|YUI||
+|Closure||
+|GWT||
+
+window对象的setTimeout()方法
+
+    function fn () {
+        // code
+    }
+    var t = setTimeout(fn, 500) // 只有写方法名字，不能写参数。若要写参数可写为
+    var t = setTimeout(function () {
+        fn2(param)
+    }, 500)
+
+window对象的clearTimeout()方法
+
+    clearTimeout(t)
+
+window对象的setInterval()方法
+
+    var t = setInterval(fn, 500)
+    var t = setInterval(function () {
+        fn2(param)
+    }, 500)
+
+window对象的clearTimeout()方法
+
+    clearInterval(t)
+
+location  
+
+    location.hash // 片段。#以后的，即内部链接。  
+    location.pathname
+    location.search
+    location.host
+    location.href
+    location.port
+    location.protocol
+    location.replace
+    location.assgin
+
+    function urlArgs() {
+        var args = {}
+        var query = location.search.substring(1)
+        var arr = query.split('&')
+        for (let i = 0, iLen = arr.length; i < iLen; i++) {
+            var pos = arr[i].indexOf('=')
+            if (pos === -1) {
+                continue
+            }
+            var key = arr[i].substring(0, pos)
+            var value = arr[i].substring(pos + 1)
+            args[key] = value
+        }
+        return args
+    }
+
+history  
+
+    history.go(0)
+    history.go(2)
+    history.go(-2)
+
+navigator(浏览器嗅探)  
+
+    navigator.appName // 浏览器的全称
+    navigator.appVersion // 
+    navigator.userAgent // 
+    navigator.platform // 
+    navigator.platform // 
+    navigator.onLine // 
+
+    function getBrowser () {
+      var s = navigator.userAgent.toLowerCase()
+      var match = /(webkit)[\/]([\w.]+)/.exec(s) ||
+                  /(opera)(?:.*version)?[\/]([\w.]+)/.exec(s) ||
+                  /(msie) ([\w.]+)/.exec(s) ||
+                  !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
+                  []
+      return {name: match[1] || '', version: match[2] || '0'}
+    }
+
+screen
+
+    screen.availHeight
+    screen.availLeft
+    screen.availTop
+    screen.availWidth
+    screen.colorDepth
+    screen.height
+    screen.width
+    screen.pixelDepth
+    screen.orientation
+
+对话框
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -21,7 +21,7 @@
 anchorname: 锚的名字。
 
     var baidu = 'baidu'
-    var link = baidu.anchor(baidu) // <a name="baidu">baidu</a>
+    var link = baidu.anchor(link) // <a name="link">baidu</a>
 
 **big()** 用`<big>`包裹字符串。并返回这个字符串。  
 
@@ -214,7 +214,7 @@ start, 必填，
 end, 非必填， 
 [start, end)
 
-    var substring0 = baidu.substring(2, 4) // ai
+    var substring0 = baidu.substring(2, 4) // id
 
 **toLocaleLowerCase()** 按照本地方式把字符串转化为小写。并返回新字符串。  
     
