@@ -99,7 +99,13 @@ start，非必填。
 
 **reduce(fn, init)** 遍历当前数组。  
 
-    f.reduce(function () {}, 0)
+    f.reduce(function (total, currentValue, currentIndex, arr) {}, initialValue)
+
+total，必填。初始值或计算结束后的返回值。
+currentValue, 必填。当前元素。
+currentIndex, 非必填。当前元素的索引。
+arr，必填。当前数组。
+initialValue，非必填。传递给函数的初始值。
 
 **reduceRight(fn, init)** 从右边开始遍历当前数组。  
 

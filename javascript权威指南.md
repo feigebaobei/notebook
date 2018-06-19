@@ -112,8 +112,8 @@ web socket
     "x" in point // true
     "z" in point // false
 
-    instanceof
-    typeof
+    o instanceof Object // o的是否是Object的实例
+    o typeof Object // o的原型是否是Object
 
     eval()
     // 在严格模式下。可以更改局部变量，不能在局部作用域内定义新的变量或函数。
@@ -277,7 +277,7 @@ es5时添加的2个方法。（`getter`, `setter`）
 |值，可写性，可枚举性，可配置性|读取，写入，可枚举，可配置|
 
     Object.getOwnPropertyDescriptor(o, prop) // 返回o对象的prop属性的属性描述。只能操作自有属性。 
-
+    // 设置属性权限
     Object.defineProperty(o, 'prop', {
         value: 1, // 值
         writable: true, // 可写入
@@ -301,7 +301,7 @@ es5时添加的2个方法。（`getter`, `setter`）
 可扩展性  
 
     Object.preventExtensions(o) // 设置o为不可扩展对象。设置为不可扩展对象后不能再回到可扩展对象。若为不可对象扩展属性。虽不会报错，但没有执行结果。
-    Object.esExtensible(o) // o对象是否可扩展
+    Object.isExtensible(o) // o对象是否可扩展
     Object.seal(o) // 封印o对象。不仅不能扩展对象，而且还不能删除它已有的属性。
     Object.isSealed(o) // 检测是否封印。
     Object.freeze(o) // 冻结对象。不可修改。
@@ -319,6 +319,233 @@ es5时添加的2个方法。（`getter`, `setter`）
         if (o === undefined) return 'Undefined'
         return Object.prototype.toString.call(o).slice(8, -1)
     }
+
+创建数组  
+
+    var a = []
+    var a = [1, 3, 4]
+    var a = [1, true, 'string']
+    var base = 1024, a = [base, base + 1, base + 2]
+    var a = new Array()
+    var a = new Array(10)
+
+运行稀疏数组时速度比较慢。
+
+    a.length
+
+    Array.isArray([]) // true 是否是数组对象
+    Array.isArray({}) // false
+
+    // 判断一个对象是否是类数组对象。
+    function isArrayLick (o) {
+        if (o &&
+            typyof o === 'object' &&
+            isFinite(o.length) && 
+            o.length >= 0 && 
+            o.length === Math.floor(o.length) &&
+            o.length < Math.pow(2, 32)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+类数组对象  
+
+    var a = { '0': 'a', '1': 'b', '2': 'c' }
+    Array.prototype.join.call(a, '+') // 'a+b+c'
+    Array.prototype.slice.call(a, 0) // ['a', 'b', 'c']
+    Array.prototype.map.call(a, function (item) {
+        return x.toUpperCase()
+    }) // ['A', 'B', 'C']
+
+函数
+
+    funciton factorial(x) {
+        if (x > 0) return x
+        return x * factorial(x-1)
+    }
+
+函数命名  
+描述性强、简洁
+
+this 非严格模式 全局对象  
+this 严格模式 undefined
+
+    a = a || [] // a若不存在就赋值为[]
+
+    arguments[n]
+    argument.callee // 当前正在执行的函数
+    argument.caller // 访问调用栈
+
+立即执行函数  
+
+    (function (variable) {
+        // code
+    } ())
+
+闭包  
+
+1. 外部不能直接访问内容定义的方法、属性。  
+2. 加载完后执行。  
+3. 命名空间与其它闭包隔离。  
+4. 在页面生命周期内一直存在。  
+
+    `
+    f.call(o, item0, item1, item2)  
+    f.apply(o, [item0, item1, item2])
+    `
+
+bind  
+
+    function f () {
+        // code
+    }
+    f.bind(o) // 为函数f绑定一个对象并返回一个新的函数
+
+函数式编辑（又叫柯里化）
+
+    var sum = function (x, y) { return x + y }
+    var succ = sum.bind(null, 1)
+    var a = succ(2)
+    console.log(a) // 3
+
+高级函数（操作函数的函数）
+
+动态可继承  
+鸭式辩型(具有鸭子的特性的东西都可以当成鸭子对待。)  
+
+    Object.getOwnPropertyNames(o) // 得到o对象中的所有的属性值
+
+集合类
+
+    function Set () {
+      this.values = {}
+      this.n = 0
+      this.add.apply(this, arguments)
+    }
+    Set.prototype.add = function () {
+      for (var i = 0, iLen = arguments.length; i < iLen; i++) {
+        var str = Set._v2s(arguments[i])
+        if (!this.values.hasOwnProperty(str)) {
+          this.values[str] = arguments[i]
+        }
+      }
+      return this
+    }
+    Set._v2s = function (val) {
+      switch (val) {
+        case undefined: return 'u'
+        case null: return 'n'
+        case true: return 't'
+        case false: return 'f'
+        default: switch(typeof val) {
+          case 'number':
+            return '#' + val
+          case 'string':
+            return '"' + val
+          default:
+            return '@' + objectId(val)
+        }
+      }
+      function objectId(o) {
+        var prop = "|**objectid**|"
+        console.log(Set._v2s.next)
+        if (!o.hasOwnProperty(prop)) {
+          o[prop] = Set._v2s.next++
+        }
+        return o[prop]
+      }
+    }
+    Set._v2s.next = 100
+    Set.prototype.remove = function () {
+      arguments.forEach(function (item, index, arr) {
+        if (this.values.hasOwnProperty(item)) {
+          delete this.values[item]
+          this.n--
+        }
+      })
+      return this
+    }
+    Set.prototype.contains = function (value) {
+      return this.values.hasOwnProperty(Set._v2s(value))
+    }
+    Set.prototype.size = function () {
+      return this.n
+    }
+    Set.prototype.foreach = function (f, context) {
+      for (var key in this.values) {
+        if (this.values.hasOwnProperty(key)) {
+          f.call(context, this.values[key])
+        }
+      }
+    }
+
+    var f = function () {
+      console.log('f')
+    }
+    var a = new Set()
+    a.add('s')
+    a.add(4)
+    a.add(5)
+    a.add(true)
+    a.add(true)
+    a.add(false)
+    a.add(function () {console.log('string')})
+    a.add(f)
+    a.add(f)
+
+
+
+开源工场
+stone
+Feige177105
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
