@@ -65,8 +65,8 @@ undefined 没有初始化
 
 |值|转换为字串|转换为数字|转换为bool值|转换为对象|
 |-|-|-|-|-|
-|undefined|"undefined"|NaN|false|throws TypeError|
-|null|"null"|0|false|throws TypeError|
+|undefined|"undefined"|NaN|false|throw TypeError|
+|null|"null"|0|false|throw TypeError|
 |true|"true"|1|`-`|new Boolean(true)|
 |false|"false"|0|`-`|new Boolean(false)|
 |`""`|`-`|0|false|new String('')|
@@ -577,7 +577,7 @@ window对象的setInterval()方法
         fn2(param)
     }, 500)
 
-window对象的clearTimeout()方法
+window对象的clearInterval()方法
 
     clearInterval(t)
 
@@ -647,6 +647,161 @@ screen
     screen.orientation
 
 对话框
+
+    document.getElementById('id')
+    document.getElementsByClassName('class')
+    document.getElementsByName('tagName')
+    document.getElementsByName('tagName')[2] // 得到第二个tagname元素
+    document.divname // 得到<div name="divname"></div>
+    document.divname.style.display = 'none'
+
+    parentNode
+    childNodes
+    firstChild
+    lastChild
+    nodeType
+    nodeValue
+    nodeName
+    firstElementChild,
+    lastElementChild,
+    nextElementSibling,
+    previousElementSibling,
+    childElementCount,
+
+    getAttribute('name')
+    setAttribute()
+
+    var div = document.createElement('div')
+    body.appendChild(div)
+    body.insertBefore(div, childElement)
+    n.parentNode.removeChild(n) // 删除n节点
+
+    document.documentElement // 文档的根节点
+    document.documentElement.clientWidth // 根节点的视口的尺寸
+
+    window.pageXOffset
+    window.pageYOffset
+    document.documentElement.scrollLeft
+    document.documentElement.scrollTop
+
+    document.body.clientWidth
+    document.body.clientHeight
+
+    element.getBoundingClientRect() // 返回当前元素在视口坐标中的位置。
+    var offsets = element.getScrollOffsets() // 返回当前元素在文档坐标中的位置
+    
+
+    clip(top right bottom left) // 可见范围
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+元素的位置(offset……)   
+（需要整理这部分知识）  
+
+    // js中的css属性不能出现减号。需要使用大写字母。属性值里可以出现减号。
+    e.style.fontSize = '24px'
+    e.style // js得到元素的全部样式。
+
+setInterval的时间间隔设置为负数时，当成0时间间隔执行。  
+
+    function shake (id, oncomplete, distance, time) {
+      var element
+      if (typeof id === 'string') {
+        element = document.getElementById(id)
+      }
+      if (!time) time = 500
+      if (!distance) distance = 5
+      console.log(element.style)
+      var originalStyle = element.style.cssText
+      element.style.position = 'relative'
+      var start = (new Date()).getTime()
+      animate()
+      function animate() {
+        var now = (new Date()).getTime()
+        var elapsed = now - start
+        var fraction = elapsed / time
+        if (fraction < 1) {
+          var x = distance * Math.sin(fraction * 4 * Math.PI)
+          element.style.left = x + 'px'
+          setTimeout(animate, Math.min(25, time - elapsed))
+        } else {
+          element.style.cssText = originalStyle
+          if (oncomplete) oncomplete(element)
+        }
+      }
+    }
+    var fa = function (element) {
+      console.log(element)
+    }
+    shake('div', fa, 40, 2000)
+
+    function fadeOut (id, oncomplete, time) {
+      var element
+      if (typeof id === 'string') {
+        element = document.getElementById(id)
+      }
+      if (!time) time = 500
+      // var ease = Math.sqrt()
+      var start = (new Date()).getTime()
+      animate();
+      function animate() {
+        var elapsed = (new Date()).getTime() - start
+        var fraction = elapsed / time
+        if (fraction < 1) {
+          var opacity = 1 - Math.sqrt(fraction)
+          element.style.opacity = String(opacity)
+          setTimeout(animate, Math.min(25, time - elapsed))
+        } else {
+          element.style.opacity = '0'
+          if (oncomplete) {
+            oncomplete(element)
+          }
+        }
+      }
+    }
+    fadeOut('div', fa, 2000)
+
+    addEventListener(), removeEventListener()
+    attachEvent(), detachEvent()
+    // true 指定事件处理程序被注册为捕获阶段、目标阶段。
+    // false 冒泡阶段、目标阶段。
+    event.stopPropagation() // 阻止事件冒泡
+    event.preventDefault() // 阻止默认事件。ie使用event.returnValue = false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
