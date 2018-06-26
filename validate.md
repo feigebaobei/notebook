@@ -153,7 +153,7 @@
 |required(callback)|boolean|-|
 |remote(url)|boolean|是否发起远程校验。url指向一个远程服务器。|
 |minlength(length)|boolean|设置最小长度|
-|maxlength|boolean|设置最大长度|
+|maxlength|number|设置最大长度|
 |ranglength([min, max])|boolean|设置一个长度范围|
 |min(value)|boolean|设置最小值|
 |max(value)|boolean|设置最大值|
@@ -206,6 +206,10 @@ validator对象的方法
             }
         }
     })
+
+##取消验证
+
+    $('#form').validate().resetForm()
 
 ##注意事项：
 这些注意事项都是他不完美的地方。  
