@@ -60,11 +60,12 @@ cpu接口类型->LGA***（触点式。数字表示触点的数量。）
 |PS/2接口|不支持热插拔||
 |USB接口|1.0/1.1/2.0/3.0等。只有主板、数据线、设备同时采用3.0才能发挥最佳性能。|![](./imaga/usb.png)|
 |E-SATA接口|外置SATA接口|![](./image/esata.png)|
-|VUA(Video Graphics Array)/DVI(Digital Visual Interface/HEMI(High-Definition Multimedia Interface)||![](./image/videoInterface.png|
+|VUA(Video Graphics Array)/DVI(Digital Visual Interface/HEMI(High-Definition Multimedia Interface)||![](./image/videoInterface.png)|
 ||||
 ||||
 ||||
-||||
+||||  
+
 cpu性能指标  
 
 |||
