@@ -25,6 +25,8 @@
 会影响到整个电脑系统的性能和稳定性。  
 ![](./image/mainboard.png)  
 
+![](./image/hardware/mainboardWork.png)
+
 cpu接口类型->LGA***（触点式。数字表示触点的数量。）  
 
 主板分类（结构）  
@@ -63,8 +65,29 @@ cpu接口类型->LGA***（触点式。数字表示触点的数量。）
 |VUA(Video Graphics Array)/DVI(Digital Visual Interface/HEMI(High-Definition Multimedia Interface)||![](./image/videoInterface.png)|
 |机箱前置面板针脚|||
 |其他接口||![](./image/hardware/elseInterface.png)|
+
+主板上的无器件  
+
+![](./image/hardware/element.png)
+
+|名称|说明|图片|
+|-|-|-|
+|芯片组（北桥芯片、南桥芯片）|北桥负责与cpu的联系，控制内存、PCI-E、PCI的数据传输。南桥负责联系低速设备和输入输出设备||
+|BIOS芯片|为计算机提供最低级的、最直接的控制。||
+|CPU供电模块|一般包括（电容、电厂线圈、MOSFET管、驱动芯片）|![](./image/hardware/cpuProvidePower.png)|
+|板载显卡|兼容性好、运行稳定、性能偏低。有的主板添加了的集成显存，这使得板载显卡的性能可能比部分独立显卡都要好。|![](./image/hardware/showRemember.png)|
+|板载声卡|可分为软声卡、硬声卡。硬声卡有DSP芯片不需要CPU参与|![](./image/hardware/soundCardAtBoard.png)|
+|CMOS电池|为CMOS存储器供电|![](./image/hardware/CMOSBattery.png)|
+|时钟芯片|数据传送时同步时钟|![](./image/hardware/timeElement.png)|
+|IO控制芯片||![](./image/hardware/IOElement.png)|
+|IDE芯片|||
+|RAID芯片|||
+||||
 ||||
 ||||  
+
+
+
 
 cpu性能指标  
 
