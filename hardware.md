@@ -58,7 +58,7 @@ cpu接口类型->LGA***（触点式。数字表示触点的数量。）
 |PCI插槽|显卡、声卡、网卡……||
 |电源接口|24芯（20芯的不多见了）。还有cpu电源接口、PCI电源接口。||
 |PS/2接口|不支持热插拔||
-|USB接口|1.0/1.1/2.0/3.0等。只有主板、数据线、设备同时采用3.0才能发挥最佳性能。|![](./imaga/usb.png)|
+|USB接口|1.0/1.1/2.0/3.0等。只有主板、数据线、设备同时采用3.0才能发挥最佳性能。|![](./image/usb.png)|
 |E-SATA接口|外置SATA接口|![](./image/esata.png)|
 |VUA(Video Graphics Array)/DVI(Digital Visual Interface/HEMI(High-Definition Multimedia Interface)||![](./image/videoInterface.png)|
 ||||
