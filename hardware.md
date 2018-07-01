@@ -62,7 +62,7 @@ cpu接口类型->LGA***（触点式。数字表示触点的数量。）
 |E-SATA接口|外置SATA接口|![](./image/esata.png)|
 |VUA(Video Graphics Array)/DVI(Digital Visual Interface/HEMI(High-Definition Multimedia Interface)||![](./image/videoInterface.png)|
 |机箱前置面板针脚|||
-|其他接口||![](./image/hardware.png)|
+|其他接口||![](./image/hardware/elseInterface.png)|
 ||||
 ||||  
 
@@ -99,12 +99,3 @@ cpu性能指标
 |||
 
 
-
-队列第一期的前端部分有8个页面已经全部完成。  
-1. 韩博丞负责做《kafka-topic》、《vhost详情》。  
-2. 田片做了《kafka集群》（这个页面的前后端都是他写的。）  
-3. 我做了《队列审核》、《vhost审核》、《topic审核》、《数据转移》、《队列操作日志》。帮助后端在添加php页面的动态数据。  
-
-配合后端做队列二期。  
-
-因为这个项目采用前后端不分离的方式开发，所以后端的工作比较重些。上周写完蛋静态页面就一直等着后端的接口。这周试着帮后端添加动态数据。学会以了从数据库中单表查询数据后通过mvc显示在视图层。下周学习增改查删，帮助后端多做些事，项目快点上线。
