@@ -167,9 +167,15 @@ cpu编号识别
 ||||
 ||||  
 
+cpu性能优化  
 
-|||
-|||
+|||图片|
+|-|-|-|
+|bios性能优化|进入bios-Advance BIOS Features-CPU Internal Cache=>true||
+|bios性能优化|进入bios-Advance BIOS Features-Hyper-Threading Technology=>true||
+|设置cpu优先级|进入任务管理器-进程选项卡-右键任务-设置优先级-低||
+|使用软件优化cpu|1. process tamer 2. task assignment manager||
+||||
 |||
 |||
 |||
