@@ -201,9 +201,26 @@ cpu的超频方法
 
 声卡  
 
-|||
-|||
-|||
+|板载声卡0|板载声卡0|独立声卡|
+|-|-|-|
+|![](./image/hardware/soundCard0.png)|![](./image/hardware/soundCard1.png)|![](./image/hardware/soundCard2.png)|  
+
+|接口|说明|图片|
+|-|-|-|
+|speaker|用于耳机、音响。绿色。|![](./image/hardware/soundCard4.png)|
+|line in|将品质好的声音输入声音芯片。蓝色。||
+|Mic in|连接话筒。红色。||
+|MIDI/游戏摇杆接口|连接电子合成乐器。||
+|橙色|中央、重低音|![](./image/hardware/soundCard3.png)|
+|黑色|后方环绕声道||
+|灰色|侧面环绕声道||  
+
+外置声卡  
+
+||||
+|-|-|-|
+|usb软声卡|||
+|usb硬声卡|||
 |||
 
 
