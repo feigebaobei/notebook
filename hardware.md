@@ -174,11 +174,46 @@ cpu性能优化
 |bios性能优化|进入bios-Advance BIOS Features-CPU Internal Cache=>true||
 |bios性能优化|进入bios-Advance BIOS Features-Hyper-Threading Technology=>true||
 |设置cpu优先级|进入任务管理器-进程选项卡-右键任务-设置优先级-低||
-|使用软件优化cpu|1. process tamer 2. task assignment manager||
+|使用软件优化cpu|1. process tamer 2. task assignment manager||  
+
+cpu的超频方法  
+
 ||||
+|-|-|-|
+|bios设置|进入bios-Frequency/Voltage Control-CPU Freqency=>auto或AllCores||
+|提高cpu核心供电||![](./image/hardware/cpuV.png)电压增加可能导致cpu烧毁。建议一点一点地增加：0.025v,0.05v,0.1v|
+|主板设置|查看主板说明书。||
+|软件超频|1. ClockGen 2. Crystal CPUID 3. RMClock 4. CPUCool||  
+
+###板卡  
+
+常见的板卡有显卡、声卡、网卡。为电脑提供输出输入等功能。主板只能有这些功能。但独立板卡性能更好。  
+
+显卡的构成  
+
+![](./image/hardware/showCardContruter.png)
+||||
+|-|-|-|
+||1. 显示芯片。 |越大越好|
+||2. 显存。 |越大越好|
+||3. 接口。|![](./image/hardware/showCardInterface.png)|
+||4. 固件。||
+
+声卡  
+
 |||
 |||
 |||
 |||
+
+
+
+
+
+
+
+
+
+
 
 
