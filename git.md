@@ -113,6 +113,11 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 如果在`$ rm <file>`误删了。需要恢复回来。
 
 	$ git checkout -- <file>
+
+##删除untracked file  
+
+	$ git clean -f
+
 ##远程仓库
 1. 生成ssh key.  
 	$ ssh-keygen -t rsa -C '18515195415@163.com'
