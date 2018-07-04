@@ -191,8 +191,7 @@ cpu的超频方法
 
 显卡的构成  
 
-![](./image/hardware/showCardContruter.png)
-||||
+|||![](./image/hardware/showCardContruter.png)|
 |-|-|-|
 ||1. 显示芯片。 |越大越好|
 ||2. 显存。 |越大越好|
@@ -237,24 +236,36 @@ cpu的超频方法
 
 网卡  
 
+![](./image/hardware/networkCardStructure.png)  
+
+只要连接网络（包括局域网）就需要网卡。  
+
+网卡的结构  
+
 ||||
+|-|-|-|
+|芯片|有软硬之分。软网卡会占用系统资源。|2种传输标准。10/100Mbit/s 10/100/1000Mbit/s|
+|网络隔离变压器|又叫数据泵|![](./image/hardware/dataPump.png)|
+|金手指|又叫总线接口|ISA接口。不常见。![](./image/hardware/ISA.png)  PCI接口。![](./image/hardware/PCI.png)  PCI-X接口。![](./image/hardware/PCIX.png)  PCI-E ![](./image/hardware/PCIE.png)  Mini-PCI ![](./image/hardware/Mini-PCI.png)  PCMCIA无线网卡 ![](./image/hardware/PCMCIA.png)  usb接口网卡 ![](./image/hardware/networkUSB.png)|
+|BOOTROM|||
+|EEPROM|||
+|外部接口|BNC RJ-45 光纤|![](./image/hardware/networkOutInterface0.png)  ![](./image/hardware/networkOutInterface1.png)|
+|指示灯|用来表明工作状态||
+|固定挡板|||
+|二极管|||
+|电阻|||
+|电容|||  
+
+网卡的工作原理  
+
 ||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
+|-|-|-|
+|将电脑上的数据封装为帧通过网线发送到网络上。|||
+|将其他设备上传过来的帧组合为数据发到到所在电脑中。|||
+|每个网卡都有一个MAC地址。放在只读存储芯片中。|||  
+
+内存  
+
 ||||
 ||||
 ||||
