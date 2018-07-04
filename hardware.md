@@ -99,7 +99,7 @@ cpu接口类型->LGA***（触点式。数字表示触点的数量。）
 ###cpu  
 
 cpu的结构  
-![](./image/hardware/cpu.pmg)  
+![](./image/hardware/cpu.png)  
 
 |名称|说明|图片|
 |-|-|-|
