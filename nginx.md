@@ -24,3 +24,4 @@ mac下
     正常停止   sudo kill -QUIT 主进程号
      
     快速停止   sudo kill -TERM 主进程号
+
