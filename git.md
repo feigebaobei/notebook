@@ -183,9 +183,17 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 6. 推送标签到远程库
 	$ git push origin v1.0
 
+##上传大于100m的文件。
+我找到2种方法。1，git large file storage 2, 配置上传大小阈值。  
+** 1. git large file storage **  
+[这是文章链接](http://www.liuxiao.org/2017/02/git-处理-github-不允许上传超过-100mb-文件的问题/)  
+[这里还有一个文章链接](https://blog.csdn.net/Tyro_java/article/details/53440666)  
+** 2. 配置上传大小阈值 **
+	
+	$ cd file/path
+	$ git config http.postBuffer 314572800
 
-
-
+我设置成最大300m.(300*1024*1024=314572800)
 
 
 
