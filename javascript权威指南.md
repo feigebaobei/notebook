@@ -611,9 +611,18 @@ location
 
 history  
 
+    history.length
+    history.back()
+    history.forward()
     history.go(0)
     history.go(2)
     history.go(-2)
+    history.pushState(data, title [, url])
+        data是一个对象或null。
+        title是页面的标题。（当前浏览器都忽略这个参数）
+        url是页面的url。不写为当前页。
+        会触发window.onpopstate事件。
+    history.replaceState(data, title [, url])
 
 navigator(浏览器嗅探)  
 
