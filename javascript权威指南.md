@@ -643,6 +643,12 @@ navigator(浏览器嗅探)
       return {name: match[1] || '', version: match[2] || '0'}
     }
 
+userAgent  
+
+    Safari浏览器的UA：Mozilla/5.0 (平台;加密类型;操作系统或CPU;语言）AppleWebKit/AppleWebKit版本号(KHTML, like Gecko) Safari/Safari 版本号
+
+    Chrome浏览器的UA：Mozilla/5.0 (平台；加密类型；操作系统或CPU;语言)AppleWebKit/AppleWebKit版本号（KHTML, link Geocko）Chrome/chrome版本号 Safari/safari版本号
+
 screen
 
     screen.availHeight
@@ -806,8 +812,25 @@ setInterval的时间间隔设置为负数时，当成0时间间隔执行。
 
 
 
+touch端的事件  
 
+- touchstart  
+- touchmove  
+- touchend  
+- touchcancel  
 
+TouchEvent // 触摸状态发生改变是触发的event    
+Touch  // 触摸点  
+TouchList  // 一组touches。多点触摸时才用到  
+
+一般触摸事件会和鼠标事件同时被触发。若使用了触摸事件，请使用 `event.preventDefault()`来阻止鼠标事件。  
+
+touch事件的对象是dom元素。  
+绑定方法是使用`addEventListener`  
+
+touchstart 的对象是`target`是事件发生位置的最具体的那个元素。  
+先触发`touchstart`再触发`touchmove`事件。touchmove的对象是touchstart的对象。不同设备敏感距离不一样。性能开销比较大。  
+手指抬起时会触发`touchend`事件。移出触屏设备时也会触发。  
 
 
 
