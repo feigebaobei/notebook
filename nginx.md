@@ -25,3 +25,4 @@ mac下
      
     快速停止   sudo kill -TERM 主进程号
 
+    /usr/local/openresty/Nginx/conf/vhost // nginx的配置文件
