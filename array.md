@@ -51,7 +51,7 @@ separator，分隔符。
 start，必填。
 end，非必填。
     
-    var e = newd.slic(1,3); // [3, 2]
+    var e = newd.slice(1,3); // [3, 2]
 
 **sort(sortby)** 把指定数组的各元素按照指定方法（sortby）排序。会改变原数组。  
 sortby，可选。必须是函数。
