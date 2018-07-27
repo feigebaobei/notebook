@@ -241,6 +241,35 @@ end, 非必填，
 
     var val0 = baidu.valueOf() // baidu
 
+**includes** 返回是否包含指定的字符串。  
 
+    var bool0 = baidu.includes('ai')
 
+**startsWith** 是否以指定字符串开头。  
+
+    baidu.startsWith('bai') // true
+
+**endsWith** 是否以指定字符串结尾
+    
+    baidu.endsWith('du') // du
+
+**repeat** 将字符串重复n次  
+
+    baidu.repeat(3) // 'baidubaidubaidu'
+
+**padStart(n, string)** 在开头使用指定的字符串补齐字符串。  
+
+    baidu.padStart(10, 'ab') // abababaidu
+
+**padEnd(n, string)** 在结尾使用指定字符串补齐字符串。  
+
+    baidu.padEnd(8, 'abcde') // baiduabc
+
+**`${variable}`** 模板字符串  
+
+    `str0 ${baidu} str1` // str0 baidu str1
+
+**raw()** 
+
+（待续）  
 
