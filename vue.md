@@ -228,3 +228,31 @@ data: {
 ![](./image/vue1.png)  
 
 ![](./image/vue0.png)  
+
+## 使用图片
+
+**在img中使用图片。**  
+
+	import imgSrc from '@/asstes/images/xxxx.png'
+
+	data () {
+		return {
+			src: imgSrc
+		}
+	}
+	
+	<img :src="src" >
+
+**在css中使用图片。（背景图片）**  
+
+	import imgSrc from '@/assets/images/xx.png'
+
+	data () {
+		return {
+			bgImg: {
+				backgroundImage: 'url(' + imgSrc + ')'
+			}
+		}
+	}
+
+	<div :style="bgImg"></div>

@@ -167,5 +167,79 @@ fn，必填，返回boolean值。
         return temp
     }
 
+**将类数组对象转为数组对象**  
+
+    Array.from(objArr)
+    [].slice.call(objArr)
+
+**Array.of(item0[, item1, item2])** 将一组值转化为一个数组。  
+
+    Array.of('a', 3, 2, 'b', 'c') // ['a', 3, 2, 'b', 'c']
+
+**Array.copyWithin(target, start = 0, end = this.length)** 将数组内部指定位置的成员复制到其它位置（会覆盖原有成员）。  
+
+**Array.find(fn(item, index, arr) {})** 返回第一个符合条件的元素。  
+
+    [3, 3, 5, -6, 12].find((item, index, arr) => {
+        return item < 0
+    }) // -6
+
+**Array.findIndex(function (item, index, arr) => {})** 返回第一个符合条件的数组元素的位置。  
+
+    [3, 3, 5, -6, 12].findIndex((item, index, arr) => {
+        return item < 0
+    }) // 3
+
+**Array.fill(value, start, end)** 为数组填充值。  
+
+value 必填。填充的值。  
+start 选填。开始的位置。  
+end 选填。结束的位置。不包含这个位置。  
+
+**Array.entries()** 对键值对的遍历。  
+
+    let arr = [0, 1, 2, "3", "3", 6, 7, 7, 8]
+    for ( let [key, value] of arr.entries()) {
+        // console.log(item)
+        console.log(key)
+        console.log(value)
+    }
+
+**Array.keys()** 对键的遍历  
+
+    for (let key of arr.keys()) {
+        console.log(key)
+    }
+
+**Array.values()** 对值的遍历  
+
+    for (let key of arr.keys()) {
+        console.log(key)
+    }
+
+**Array.includes(value, start)** 数组中是否包含给定的值。  
+
+    arr.includes('3') // true,
+    arr.includes(9) // false,
+
+****
+****
+****
+****
 ___
 2018/03/30 by stone
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
