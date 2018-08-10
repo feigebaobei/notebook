@@ -85,7 +85,7 @@ then可以接受2个参数。（resolve时执行，reject时执行）。可以�
 then指定的方法会在当前所有脚本执行完后执行。  
 catch是then(null, rejection)的别名，用于指定发生错误时的回调函数。  
 promise对象的rejected状态会向上冒泡。会被最近的一个catch函数捕获。  
-
+定义promise时就会立即执行。绑定的then方法会在所有同级js文件执行后执行。  
 
 
 
