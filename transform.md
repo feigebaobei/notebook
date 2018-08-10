@@ -1,7 +1,7 @@
 #transform
 
 `transform` 改变、变形。  
-`translate` 调动、转化、翻译。  
+`translate` 调动、转化、翻译。属于`transform`  
 `transition` 过渡
 
 **transform**  
