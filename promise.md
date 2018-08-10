@@ -6,6 +6,9 @@
 4. promise的错误会一直冒泡。  
 5. 处于pending状态时，无法知道进展到哪个阶段。  
 
+**不能返回值。就像一个if判断一样，分别执行一个函数。**
+**resolved时执行resolve函数。rejected时执行reject函数。**
+
 **实例化promise对象**
 
     const promise = new Promise((resolve, reject) => {
@@ -67,17 +70,21 @@
 
 **可以嵌套**
 
-    const p1 = new Promise((resolve, reject) => {})
-    const p2 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (condition) {
-                resolve(p1)
-            } else {
-                reject(condition)
-            }
-        })
+    const p1 = new Promise(function (resolve, reject) {
+      setTimeout(() => reject(new Error('fail')), 3000)
     })
+    const p2 = new Promise(function (resolve, reject) {
+      setTimeout(() => resolve(p1), 1000)
+    })
+    p2
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
 
+改变状态后需要使用`return`才能取消代码向下执行。  
+then可以接受2个参数。（resolve时执行，reject时执行）。可以利用这个特性实现链式写法。  
+then指定的方法会在当前所有脚本执行完后执行。  
+catch是then(null, rejection)的别名，用于指定发生错误时的回调函数。  
+promise对象的rejected状态会向上冒泡。会被最近的一个catch函数捕获。  
 
 
 
