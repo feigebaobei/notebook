@@ -19,4 +19,7 @@ markdown插件
 
 - command + option + o 在浏览器中预览  
 - command + option + x 导出html
+- command + option + c html标记拷贝到剪贴板
+- ctrl + alt + o 在浏览器中预览  
+- ctrl + alt + x 导出html
 - ctrl + alt + c html标记拷贝到剪贴板
