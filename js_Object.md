@@ -12,13 +12,13 @@
 	obj1.b.c = 4;
 	console.log(JSON.stringify(obj3)); // { a: 0, b: { c: 0}}
 
-**object.assign(target, source1[, source2, source3])** // 将多个源对象的可枚举属性添加到目标对象。这是浅复制。  
+**Object.assign(target, source1[, source2, source3])** // 将多个源对象的可枚举属性添加到目标对象。这是浅复制。  
 
-**object.keys(obj)** // 返回一个数组，包含对象中的键。  
+**Object.keys(obj)** // 返回一个数组，包含对象中的键。  
 
-**object.values(obj)** // 返回一个数组，包含对象中的值。  
+**Object.values(obj)** // 返回一个数组，包含对象中的值。  
 
-**object.entries(obj)** // 返回一个数组，  包含对象中的键组成的数组，和对象中的值组成的数组。  
+**Object.entries(obj)** // 返回一个数组，  包含对象中的键组成的数组，和对象中的值组成的数组。  
 
 **克隆对象** 
 
@@ -76,6 +76,163 @@
 
     Object.setPrototypeOf(obj, prototype) // 设置一个对象的prototype属性，返回这个对象
     Object.getPrototypeOf(obj) // 得到对象的prototype属性
+
+**Object.defineProperty(object, prototype, describeObject)** // 为指定的对象的指定的属性设置描述。  
+
+    Object.defineProperty(person, 'name', {
+        writable: false, // 不可修改
+        confiurable: false, // 不可删除
+        value: 'haha'
+    })
+
+**set(), get()** // 设置属性和得到属性时的操作。  
+
+    var obj = {
+        value: 0,
+        set val(v) {
+            this.value = v
+        },
+        get val() {
+            return this.value
+        }
+    } 
+
+## 创建对象  
+
+### 工厂模式  
+
+使用函数封装按指定接口创建对象。  
+1. 创建一个对象。  
+2. 为这个对象创建一些属性。  
+3. 返回这个对象。  
+
+    let person（name, age, job）=> {
+        var o = new Object(); // 或Object.create(obj)
+        o.name = name
+        o.age = age
+        o.job = job
+        o.sayName= () => {
+            console.log(this.name)
+        }
+        return o
+    }
+    let p1 = person('a', 23, 'web')
+
+### 构造函数模式  
+
+用来创建特定类型的对象。从而定义对象类型的属性和方法。  
+1. 通过new来调用。
+2. 没有return语句。  
+
+    // 定义
+    Person(name, age) { // 一般首字母大写
+        this.name = name;
+        this.age = age
+        this.sayName = () => {
+            console.log(this.name)
+        }
+    }
+    // 使用
+    var persion1 = new Person('a', 23)
+
+### 原型模式  
+
+使用function的prototype属性。这个属性指向一个对象。这个对象包含所有实例共享的属性和方法。  
+
+    let Person () => {}
+    Person.prototype.name = 'ha'
+    Person.prototype.age = 23
+    Person.prototype.sayName = () => {
+        console.log(this.name)
+    }
+    var p1 = new Person()
+
+### 结合使用(混合模式)
+
+使用原型模式定义共享属性。使用构造函数模式或工厂模式创建私有属性。  
+
+    let Person (name, age) => {
+        this.name = name,
+        ...
+    }
+    Person.prototype = {
+        sayName: () => {
+            ...
+        }
+    }
+    let p1 = new Person('a', 43)
+
+### 动态原型模式  
+
+    let Person(name, age) => {
+        this.name = name
+        this.age = age
+        if (typeof this.sayName !== 'function') {
+            Person.prototype.sayName = () => {...}
+        }
+    }
+
+### 寄生构造函数模式  
+
+### 稳妥构造函数模式  
+
+## 继承  
+
+将一个原型对象的prototype指针。指向别一个对象。  
+
+    let SuperType = () => {...}
+    let SubType = () => {...}
+    SubType.prototype = new SuperType()
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
+
+
+****  
 
 
 

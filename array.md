@@ -60,12 +60,12 @@ sortby，可选。必须是函数。
     function sortNum(a, b) {return a - b};
     f.sort(sortNum); // [1,2,3,4,6,7,8]
 
-**splice(start,howmany,item0,item1,...)** 把数组的指定部分替换为指定内容  
+**splice(start,howmany,item0,item1,...)** 把数组的指定部分替换为指定内容，以数组的格式返回被删除的项目。  
 start，必填。
 howmany，必填。
 item0,...，非必填。
 
-    f.splice(2,4,'a'); // [1,2,'a',8]
+    f.splice(2,4,'a'); // [3,4,6,7]
 
 **toSource()**  
 
@@ -132,7 +132,7 @@ obj，上下文参数。
 **filter(boolean|fn)** 用指定数组中满足条件的元素组成新数组并返回。  
 boolean|fn，必填，判断结果是true的元素组成的数组。
 
-    var h = f.filter(function (item) {
+    var h = f.filter(function (item, index, arr) {
         return item > 2
     })
     //[4,4,16]
