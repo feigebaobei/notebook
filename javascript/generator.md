@@ -6,6 +6,9 @@
 4. 内部使用`yield`表达式。只能在genrator函数内部使用。  
 5. yield表达式必须在
 
+**用途**  
+1. 用于多次返回数据。（数列）
+
 ```
     function * hwGenerator () {
         yield 'hello'
@@ -100,8 +103,61 @@
         yield: 'y'
     }
 
-****
-****
+**对象属性的generator函数**  
+
+    let obj = {
+        * g () {...},
+        k: function * () {...}
+    }
+
+**generator函数的this**  
+
+    // 生成一个空对象，使用`call`方法绑定generator函数内部的`this`
+    function * F() {
+        this.a = 1
+        yield this.b = 2
+        yield this.c = 3
+    }
+    let obj = {}
+    let f = new F.call(obj)
+    f.next() // { value: 2, done: false }
+    f.next() // { value: 3, done: false }
+    f.next() // { value: undefined, done: true }
+    obj.a // 1
+    obj.b // 2
+    obj.c // 3
+
+**斐波那契数列**  
+
+    function * fib (max) {
+        let count = 0,
+            i = 0, 
+            j = 1
+        while (count < max) {
+            yield i
+            [i, j] = [j, i + j]
+            count++
+        }
+    }
+
+**大衍数列**  
+
+    function * dayan (max) {
+        let bool = true,
+            count = 1
+        while (count <= max) {
+            if (bool) {
+                yield (count * count - 1) / 2
+            }else {
+                yield (count * count) / 2
+            }
+            bool = !bool
+            count++
+        }
+    }
+
+
+
 ##
 ##
 ##
