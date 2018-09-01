@@ -100,13 +100,13 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 
 将多个promise对象包装成一个promise对象。  
 
-    var p = Promise([p1, p2, p3]) // 参数可以不是数组，但一定要有Iterator接口，且第个成员必须是promise实例。  
+    var p = Promise([p1, p2, p3]) // 参数可以不是数组，但一定要有Iterator接口，且每个成员必须是promise实例。  
 
 全是的resolved时p执行then方法。有一个rejected就执行p的catch方法。  
 
 **Promise.prototype.race()**  
 
-    var p = Promise([p1, p2, p3]) // 最先改变状态的promise对象决定p的状态。  
+    var p = Promise.race([p1, p2, p3]) // 最先改变状态的promise对象决定p的状态。  
 
 **Promise.resolve()**  
 
@@ -121,7 +121,7 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 |||
 |-|-|
 |promise对象|直接返回，不做操作。|
-|thentable(具有then方法的对象) let a = {then: () => {...}}|转化为的promise对象后立即执行其then方法。|
+|thenable(具有then方法的对象) let a = {then: () => {...}}|转化为的promise对象后立即执行其then方法。|
 |不是thentable对象的、不是对象的|返回一个新的promise对象。状态是resolved.|
 |无参数|返回一个的resolved状态的promise对象。|
 
@@ -158,7 +158,7 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 
 **一段代码限时3s执行完。否则报错。**  
 
-    const p1 = new Promise([new Promise((resolve, reject) => {
+    const p1 = new Promise.race([new Promise((resolve, reject) => {
         // code
     }), new Promise((resolve, reject) => {
         setTimeout(() => {

@@ -24,6 +24,8 @@
 
 ##yield  
 
+`yield`表达式，本身没有值，总是等于`undefined`  
+
 ##与iterator接口的关系  
 
     var myIterator = {}
@@ -156,10 +158,99 @@
         }
     }
 
+**自增id**  
+
+    function * next_id () {
+        let current_id = 0
+        while (true) {
+            yield current_id++
+        }
+    }
+    // usage 
+    let idNum = next_id() // 得到实例
+    idNum.next() // { value: 0, done: false }
+    idNum.next() // { value: 1, done: false }
+    idNum.next() // { value: 2, done: false }
+    idNum.next() // { value: 3, done: false }
+    // 会一直运行下去，没有结束。
+
+**状态机**  
+
+    function * isClock (init = false) {
+        let ticking = init
+        while (true) {
+            yield ticking = !ticking
+        }
+    }
+
+**异步操作**  
+
+    function * load () {
+        ...
+        yield ajaxEvent()
+        otherAjaxEvent()
+    }
+
+    let l = load()
+    l.next() // ajaxEvent
+    l.next() // otherAjaxEvent
+    // 利用了g函数暂停执行的效果
+
+**同步操作**  
+
+    function * main () {
+        let result = yield ajaxRequist('url');
+        console.log(result)
+    }
+    function ajaxRequest('url') {
+        makeAjax(url, fuction (response) {
+            ...
+            it.next(response)
+        })
+    }
+    var it = main()
+    it.next()
+
+## 协程  
+
+有点像函数，也有点像线程。  
+
+1. 协程A开始。  
+2. 执行到一半时暂停，执行权转移到协程B.  
+3. 协程交还执行权。  
+4. 协程A恢复执行。  
+
+## Thunk 函数  
+
+传值调用 call by value （c/js就是用的这种）
+
+    let x = 1
+    f(x + 5) // f(6)
+
+传名调用 caal by name  (haskell语言就是用这种)  
+
+    let x = 1
+    f(x + 5) // f(x + 5)
+
+它是传名调用的一种实现策略。  
+把参数放到一个临时函数中，再将临时函数传入函数体。  
+
+    let thunk = () => {
+        return x + 5
+    }
+    let f = (thunk) => {
+        retunr thunk() * 2
+    }
 
 
-##
-##
+****
+****
+****
+****
+****
+****
+****
+****
 ##
 ##
 ##

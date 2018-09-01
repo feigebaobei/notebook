@@ -72,7 +72,9 @@
     Object.getOwnPropertySymbols(obj) // 以数组形式返回对象自身的所有Symbol属性
     Object.ownKeys(obj) // 以数组形式返回对象自身的所有属性
 
-**__proto__属性**
+**__proto__属性**  
+
+指向取决于对象创建时的实现方式。  
 
     Object.setPrototypeOf(obj, prototype) // 设置一个对象的prototype属性，返回这个对象
     Object.getPrototypeOf(obj) // 得到对象的prototype属性
