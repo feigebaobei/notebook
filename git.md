@@ -118,7 +118,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 
 	$ git clean -f
 
-##远程仓库
+##把本地代码推到远程仓库
 1. 生成ssh key.  
 	$ ssh-keygen -t rsa -C '18515195415@163.com'
 3. 在github网站上添加第一步中生成的ssh key。
