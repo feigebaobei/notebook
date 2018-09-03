@@ -130,7 +130,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git push origin master // 第二次及以后
 
 ##从远程克隆仓库
-1. 创建一个仓库。
+1. 在远程（如：github）创建一个仓库。
 2. 克隆这个仓库
 	$ git clone git@github.com:feigebaobei/gitskills.git
 
