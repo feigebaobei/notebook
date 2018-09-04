@@ -195,9 +195,16 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 
 我设置成最大300m.(300*1024*1024=314572800)
 
+## 查看git配置信息  
 
+	git config --global --list // 查看当前用户（global）配置
+	git config --system --list // 查看系统config
+	git config --local --list // 查看当前仓库配置信息
 
+## 测试是否联通  
 
+	ssh -T git@github.com
+	ssh -T git@gitlab.com
 
 
 
