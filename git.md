@@ -21,10 +21,10 @@ Git是目前世界上最先进的分布式版本控制系统（没有之一）�
 
 **Windows**  
 
-在Git官网直接下载安装程序
+在Git官网直接下载安装程序  
 
 	$ git config --global user.name "Your Name"
-	$ git config --global user.name "email@example.com"
+	$ git config --global user.email "email@example.com"
 
 因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心，如果有人故意冒充别人怎么办？这个不必担心，首先我们相信大家都是善良无知的群众，其次，真的有冒充的也是有办法可查的。  
 也可以下载git for windows

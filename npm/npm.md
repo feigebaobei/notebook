@@ -66,3 +66,52 @@ npm
 各个项目使用各个依赖版本可能与别的项目的版本不一样。  
 使用的工具适合使用全局安装。  
 项目的依赖适合使用本地安装。  
+
+##安装淘宝镜像  
+
+    npm i -g cnpm --regitstry=https://registry.npm.taobao.org
+
+安装项目依赖时报错。  
+
+    $ npm i
+
+    > chromedriver@2.41.0 install D:\code\github\colosseum\node_modules\chromedriver
+    > node install.js
+
+    Downloading https://chromedriver.storage.googleapis.com/2.41/chromedriver_win32.zip
+    Saving to C:\Users\Admin\AppData\Local\Temp\chromedriver\chromedriver_win32.zip
+
+安装项目依赖的解决方法。  
+
+    npm install chromedriver --chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver
+
+从远程拉下来的项目运行`npm run dev`时报错。  
+
+     94% asset optimization ERROR  Failed to compile with 18 errors14:20:00                                                                                                                                                                                                        
+     error  in ./src/components/elementui/user.vue
+
+    Module build failed: Error: ENOENT: no such file or directory, scandir 'D:\code                                                                                                                                                                                                \github\colosseum\node_modules\node-sass\vendor'
+        at Object.fs.readdirSync (fs.js:904:18)
+        at Object.getInstalledBinaries (D:\code\github\colosseum\node_modules\node-                                                                                                                                                                                                sass\lib\extensions.js:129:13)
+        at foundBinariesList (D:\code\github\colosseum\node_modules\node-sass\lib\e                                                                                                                                                                                                rrors.js:20:15)
+        at foundBinaries (D:\code\github\colosseum\node_modules\node-sass\lib\error                                                                                                                                                                                                s.js:15:5)
+        at Object.module.exports.missingBinary (D:\code\github\colosseum\node_modul                                                                                                                                                                                                es\node-sass\lib\errors.js:45:5)
+        at module.exports (D:\code\github\colosseum\node_modules\node-sass\lib\bind                                                                                                                                                                                                ing.js:15:30)
+        at Object.<anonymous> (D:\code\github\colosseum\node_modules\node-sass\lib\                                                                                                                                                                                                index.js:14:35)
+        at Module._compile (module.js:653:30)
+        at Object.Module._extensions..js (module.js:664:10)
+        at Module.load (module.js:566:32)
+        at tryModuleLoad (module.js:506:12)
+        at Function.Module._load (module.js:498:3)
+        at Module.require (module.js:597:17)
+        at require (internal/module.js:11:18)
+        at Object.sassLoader (D:\code\github\colosseum\node_modules\sass-loader\lib                                                                                                                                                                                                \loader.js:46:72)
+
+     @ ./node_modules/vue-style-loader!./node_modules/css-loader?{"sourceMap":true}                                                                                                                                                                                                !./node_modules/vue-loader/lib/style-compiler?{"vue":true,"id":"data-v-500a44fa                                                                                                                                                                                                ","scoped":false,"hasInlineConfig":false}!./node_modules/sass-loader/lib/loader                                                                                                                                                                                                .js?{"sourceMap":true}!./node_modules/vue-loader/lib/selector.js?type=styles&in                                                                                                                                                                                                dex=0!./src/components/elementui/user.vue 4:14-384 13:3-17:5 14:22-392
+     @ ./src/components/elementui/user.vue
+     @ ./src/router/index.js
+     @ ./src/main.js
+     @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-serv                                                                                                                                                                                                er ./src/main.js
+解决方法。  
+
+    npm rebuild node-sass
