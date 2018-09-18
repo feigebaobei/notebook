@@ -140,6 +140,10 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 ##分支
 1. 创建分支
 	$ git branch dev
+	$ git checkout dev
+	$ git add --all
+	$ git commit -m 'dev'
+	$ git push -u origin dev
 2. 切换分支
 	$ git checkout dev
 3. 查看当前分支
