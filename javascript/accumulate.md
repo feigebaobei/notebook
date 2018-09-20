@@ -135,3 +135,22 @@
         }
         return boxArr
     }
+
+    // 快速排序
+    let quickSort = (arr) => {
+        if (arr.length <= 1) {
+            return arr
+        }
+        let index = Math.floor(arr.length / 2),
+            pivot = arr.splice(index, 1)[0],
+            left = [],
+            right = []
+        for (let i = 0, iLen = arr.length; i < iLen; i++) {
+            if (arr[i] <= pivot) {
+                left.push(arr[i])
+            } else {
+                right.push(arr[i])
+            }
+        }
+        return quickSort(left).concat([pivot], quickSort(right))
+    }
