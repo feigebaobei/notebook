@@ -261,3 +261,10 @@ data: {
 	}
 
 	<div :style="bgImg"></div>
+
+**static/非static**  
+
+static文件夹下不用`require`  
+
+	"imgPath": require('../../assets/logo.png')
+	"imgPath": ('../../../static/logo.png')

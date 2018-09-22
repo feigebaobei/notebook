@@ -23,7 +23,7 @@
 ##1.容器的属性  
 |属性名称|说明|默认值|值|
 |-|-|-|-|
-|flex-direction|主轴的方向|row|row-reverse, cloumn, column-reverse|
+|flex-direction|主轴的方向|row|row-reverse, column, column-reverse|
 |flex-wrap|如何换行|nowrap|wrap, wrap-reverse|
 |flex-flow|flex-direction和flex-wrap属性的简写|row nowrap||
 |justify-content|项目在主轴的对齐方式|flex-start|flex-end, center, space-between, space-around|
