@@ -85,7 +85,19 @@ ctrl+shift+c
 ##chineslocalistion
 当地汉化包。  
 
+##html/css/js prettify
+格式化html/css/js  
+1. 在html/css/js文件中右击。  
+2. html/css/js prettify -> set plugin options  
+3. 在打开的文件中设置node的路径。  
 
+    "node.path": {
+      "windows": "D:/path/to/node",
+      "linux": "D:/path/to/node",
+      "osx": "D:/path/to/node"
+    }
+使用:ctrl+shift+h  
+右击-html/css/js prettify - prettify code
 
 
 ##删除插件

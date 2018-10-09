@@ -136,6 +136,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 1. 在远程（如：github）创建一个仓库。
 2. 克隆这个仓库
 	$ git clone git@github.com:feigebaobei/gitskills.git
+	$ git clone http://****:****/xxx.git
 
 ##分支
 1. 创建分支
