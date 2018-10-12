@@ -25,7 +25,7 @@ npm
 ||||
 |-|-|-|
 |uninstall|卸载模块||
-|update|更新模块||
+|update|更新模块|按照package.js里标注的版本号进行更新|
 |outdated|检查模块是否已经过时||
 |ls|查看安装的模块||
 |help|查看详细信息||
