@@ -5,7 +5,11 @@
 
 安装  
 
-	npm i vux
+	npm i vux // 有时需要翻墙
+    // 还需要安装 vux-loader
+    // npm i vux-loader // 有时需要翻墙
+    // npm i less -D // 有时需要翻墙
+    // npm i less-loader -D // 有时需要翻墙
 
 vux2必须配合vux-loader使用, 请在build/webpack.base.conf.js里参照如下代码进行配置：
 

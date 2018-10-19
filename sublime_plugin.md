@@ -15,6 +15,18 @@ markdown插件
 - command + option + k 插入链接
 - command + option + k 插入图片
 
+##markdownpreview
+markdown插件可以实现在浏览器中实时浏览。  
+
+preference -> key binding-user
+{
+  { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} }
+}
+
+快捷键： 
+
+- alt + m 在默认浏览器中打开
+
 ##omnimarkuppreviewer
 可视化md文件。可实时更新。  
 
@@ -42,6 +54,9 @@ less语言高亮
 
 ## alignment 
 =对齐
+可设置更多的对齐方法
+打开 preference -> package setting -> alignment -> setting user
+输入 "alignment_chars": ["=", "//"]
 默认是ctrl+alt+a。可设置为ctrl+shift+alt+a.重启sublime后可使用。  
 
 ##sublime-autoprefixer
