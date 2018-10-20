@@ -85,6 +85,9 @@ ctrl+shift+c
 ##chineslocalistion
 当地汉化包。  
 
+##latexBox
+
+
 
 
 
