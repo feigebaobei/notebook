@@ -227,7 +227,18 @@ data: {
 
 ## 表单输入绑定 ##
 
-用 `v-model` 指令在表单 `<input>` 及 `<textarea>` 元素上创建双向数据绑定。但 v-model 本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。   
+用 `v-model` 指令在表单 `<input>` 及 `<textarea>` 元素上创建双向数据绑定。但 v-model 本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。  
+
+	<input v-model="searchText"/>
+	// 等价于
+	<input :value="searchText" @input="searchText = $event.target.value">
+	
+	<custom-input :value="searchText" @input="searchText = $event"></custom-input>
+	<input :value="searchText" @input="$emit('input', $event.target.value)"/> // custome-input.vue
+
+- 将value绑定到prop里的value上。  
+- 在组件中input事件被触发时，使用自定义的input事件抛出新值。  
+
 ## 组件 ##
 
 ![](./image/vue1.png)  
