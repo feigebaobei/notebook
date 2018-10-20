@@ -128,6 +128,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 2. 在github网站上创建一个新的仓库。
 3. 关联本场仓库和远程仓库。
 	$ git remote add origin git@github.com:feigebaobei/learngit.git
+	$ git remote add origin http://****:****/xxx.git
 4. 把本场库的内容推送到远程库上。
 	$ git push -u origin master // 第一次
 	$ git push origin master // 第二次及以后
@@ -136,10 +137,15 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 1. 在远程（如：github）创建一个仓库。
 2. 克隆这个仓库
 	$ git clone git@github.com:feigebaobei/gitskills.git
+	$ git clone http://****:****/xxx.git
 
 ##分支
 1. 创建分支
 	$ git branch dev
+	$ git checkout dev
+	$ git add --all
+	$ git commit -m 'dev'
+	$ git push -u origin dev
 2. 切换分支
 	$ git checkout dev
 3. 查看当前分支
@@ -208,6 +214,21 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 
 	ssh -T git@github.com
 	ssh -T git@gitlab.com
+
+## git 规范  
+
+|分类|名称|命名方式|是否可删|
+|-|-|-|-|
+|master|主分支|-|否|
+|dev|主要开发分支|-|否|
+|-|f_li_1012_select|f_yourname_time_function|及时删除|
+|-|dev_li_1012_select|dev_yourname_time_function|及时删除|
+|-|bug_li_1012_select|bug_yourname_time_function|及时删除|  
+
+commit 必须写注释。  
+先pull再push  
+有冲突必须解决 `git reset HEAD HEAD^`  
+merge前保证当前工作区干净  
 
 
 

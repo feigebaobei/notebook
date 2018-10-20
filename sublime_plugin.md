@@ -15,6 +15,18 @@ markdown插件
 - command + option + k 插入链接
 - command + option + k 插入图片
 
+##markdownpreview
+markdown插件可以实现在浏览器中实时浏览。  
+
+preference -> key binding-user
+{
+  { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} }
+}
+
+快捷键： 
+
+- alt + m 在默认浏览器中打开
+
 ##omnimarkuppreviewer
 可视化md文件。可实时更新。  
 
@@ -42,6 +54,9 @@ less语言高亮
 
 ## alignment 
 =对齐
+可设置更多的对齐方法
+打开 preference -> package setting -> alignment -> setting user
+输入 "alignment_chars": ["=", "//"]
 默认是ctrl+alt+a。可设置为ctrl+shift+alt+a.重启sublime后可使用。  
 
 ##sublime-autoprefixer
@@ -87,8 +102,19 @@ ctrl+shift+c
 
 ##latexBox
 
+##html/css/js prettify
+格式化html/css/js  
+1. 在html/css/js文件中右击。  
+2. html/css/js prettify -> set plugin options  
+3. 在打开的文件中设置node的路径。  
 
-
+    "node.path": {
+      "windows": "D:/path/to/node",
+      "linux": "D:/path/to/node",
+      "osx": "D:/path/to/node"
+    }
+使用:ctrl+shift+h  
+右击-html/css/js prettify - prettify code
 
 
 ##删除插件

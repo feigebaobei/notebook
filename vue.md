@@ -261,3 +261,67 @@ data: {
 	}
 
 	<div :style="bgImg"></div>
+
+**static/非static**  
+
+static文件夹下不用`require`  
+
+	"imgPath": require('../../assets/logo.png')
+	"imgPath": ('../../../static/logo.png')
+
+## ref  
+
+**用来给元素或子元素注册引用信息。**  
+
+		// *.vue
+		<div ref="first"></div>
+		<child ref="second"></child>
+
+		// js
+		this.$refs.first // div
+		this.$refs.second // childe子组件
+
+##组件间的数据传递  
+
+### 父->子
+
+1. <child :data="value"></child>  
+	// child
+	props: [value]
+2. 在子组件中定义方法fc，这个方法修改当前组件的数据。在父组件中使用this.$refs.child.fc(props)。
+
+### 子->父
+
+2. 使用this.$refs.child得到子组件中的所有信息。然后操作。这个方法比较暴力。  
+2. 在子组件中定义一个方法fc，这个方法返回当前组件的相当数据。在父组件中使用this.$refs.child.fc()。这个方法可以在父组件需要子组件中的数据时调用。  
+
+### 兄->弟  
+
+1. 动态路由  
+```
+	// router.js
+	{
+		path: "path/:id",
+		component: vue,
+		name: pathName
+	}
+	// js
+	this.$route.params.id
+```
+
+2. bus通信(我不会)
+1. vuex  
+
+### 祖先->后代  
+
+1. provide/inject
+```
+// parent
+provide: {key: 'value'},
+provide: () => {
+	...
+	return { key: 'value' }
+}
+// child
+inject: ['key']
+```
