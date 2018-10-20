@@ -76,6 +76,20 @@
     this.$router.push({ name: 'user', params: { userId: 123 }})
 
 ### 重定向、别名。
+
+redirect  
+    
+    redirect: '/b'
+    redirect: {name: 'foo'}
+    redirect: to => {
+        // 方法接收目标路由作为参数
+        // return 重定向的 字符串路径/路径对象
+    }
+
+alias  
+
+    alias: '/b'
+
 ### 路由组件传参  
 
 **定义路由：** router file  
