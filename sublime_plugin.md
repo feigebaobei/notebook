@@ -100,6 +100,8 @@ ctrl+shift+c
 ##chineslocalistion
 当地汉化包。  
 
+##latexBox
+
 ##html/css/js prettify
 格式化html/css/js  
 1. 在html/css/js文件中右击。  
