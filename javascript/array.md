@@ -222,7 +222,14 @@ end 选填。结束的位置。不包含这个位置。
     arr.includes('3') // true,
     arr.includes(9) // false,
 
-****
+**for of** 遍历数组中每一个元素的方法。  
+
+可以使用`return`/`break`/`continue`  
+
+    for (let item of arr) {
+        //
+    }
+
 ****
 ****
 ****
