@@ -143,7 +143,22 @@ alias
 |3. 函数模式|方便做更多的操作|  
 
 ## HTML5 History模式
-（待续）  
+
+|||
+|-|-|
+|hash模式|默认|使用url的hash来模拟一个完整的url，于是当url改变时，页面不会重新加载。|
+|history模式|-|充分利用`history.pushState`api来完成url跳转，无须重新加载页面。|
+
+###设置路由模式
+
+    const router = new Router({
+        mode: 'history', // 或者'hash'
+        routes:[...]
+    })
+
+###history  
+
+1. 需要后台配置支持。    
 
 ## vue服务端渲染文档
 （待续）  

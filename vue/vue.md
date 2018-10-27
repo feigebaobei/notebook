@@ -121,6 +121,7 @@ v-on:click.prevent="methods"
 vue通过watch选项提供一个当需要数据变化时执行异步操作或操作开销较大时使用的方法。
 ## class与style绑定 ##
 **class**  
+
 1. `v-bind:class="{active:isActive}"`
 2. `<div class="static" v-bind:class="{active: isActive, 'text-danger': hasError}"></div>  
 data: {
@@ -128,8 +129,8 @@ data: {
   hasError: false
 }`
 3. `<div v-bind:class="classObj"></div> data:{classObj:{active:true,'text-danger':false}}`
-4. `<div v-bind:class=[active,errorclass]></div> data:{active: "active", errorclass="error"}`
-5. `<div v-bind:class="[{active:isActive},errorclass]"></div>`
+4. `<div v-bind:class="[active,errorclass]"></div> data:{active: "active", errorclass="error"}`
+5. `<div v-bind:class="[{active:isActive},errorclass]"></div>` active 可以不用加引号。  
 6. 父组件、子组件上的class都会被应用到渲染出来的html上。  
 **style**  
 `v-bind:style`是一个js对象。css属性名可以使用驼峰式或短横分隔  
