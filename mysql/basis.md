@@ -122,12 +122,12 @@ like 可以与 % 一起使用。
 添加、删除表字段。  
 
     alter table tn drop fieldname; // 若删除最后一列则会失败。
-    alter table tn add i int; // 添加一个i列，类型是int.
+    alter table tn add column field int; // 添加一个i列，类型是int.
 
 更改列定义、名称。  
 modify/change
 
-    alter table tn nodify fieldname char(10); // 更改类型
+    alter table tn modify fieldname char(10); // 更改类型
     alter table tn change i j int;
 
 设置默认值  
@@ -143,7 +143,11 @@ modify/change
     alter table tn type = myisam;
     show table status like 'value$'\g;
 
-    alter table tn remane to tn2;
+    alter table tn rename to tn2;
+
+##查看表结构
+
+    desc tablename;
 
 ##索引
 
