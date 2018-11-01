@@ -1,12 +1,16 @@
 #Git  
 
+**基本概念**  
+
+commitID 全球版本号 git库的版本号是通过sha-1算法得到一个40位的哈希值。这个哈希值全球惟一，基本只要前6位就可以唯一标识。  
+
 **功能**  
 1. 记录每次文件的改动。(git跟踪并管理的是修改，而不是文件。)
 2. 多人协作编辑。
 
 Git是目前世界上最先进的分布式版本控制系统（没有之一）。 
 版本管理效果如下图。 
-![gitVersions](./image/gitVersions.png)  
+![gitVersions](../image/gitVersions.png)  
 
 ##install Git  
 
@@ -60,7 +64,7 @@ git只能跟踪文本文件的改动
 当反修改过的文本提交后都会有一个相应的版本号生成。如下图
 
 	$ git log // 查看提交的日志
-![git log](./image/gitLog.png)  
+![git log](../image/gitLog.png)  
 
 	$ git reset --hard HEAD^
 `HEAD`表示当前版本  
@@ -69,8 +73,13 @@ git只能跟踪文本文件的改动
 `HEAD~100`表示上100个版本  
 `git reset`表示把版本重新设置为……版本  
 `HEAD`是指向版本的指针  
-![head](./image/gitHead.jpg)
-![head](./image/gitHead1.jpg)
+![head](../image/gitHead.jpg)
+![head](../image/gitHead1.jpg)
+
+	git revet // 提交回滚，使用当前提交替换一个指定的版本。
+	git reset // 重置指定版本。默认参数 --soft 把commit的修改退回到git缓冲区。 --hard 把commit的修改丢弃。  
+	git reset --hard HEAD^
+	git reset --hard <commitID>
 
 ##版本前进  
 在不关闭命令行窗口的情况下。我们还可以看到在执行`git log`时输出的各版本信息。  
@@ -86,19 +95,19 @@ git只能跟踪文本文件的改动
 ##版本库  
 .git就是版本库  
 Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区。在我们第一次创建仓库时会自动创建一个分支`master`。有一个`HEAR`指针指向`master`  
-![](./image/gitwork2.jpg)  
+![](../image/gitwork2.jpg)  
 从修改文件到提交文件需要做
 1. 把修改过的文件添加到舞台。（添加到舞台后再修改文件还需要添加到舞台）  
 2. 把舞台上的文件移出舞台（在把文件添加到舞台后，提交前。有可能会用到。）
 2. 把舞台内的文件提交。  
 
 	$ git add <file> <file>
-![](./image/gitwork0.jpg)
+![](../image/gitwork0.jpg)
 
 	$ git reset HEAD <file>
 
 	$ git commit -m 'message'
-![](./image/gitwork1.jpg)  
+![](../image/gitwork1.jpg)  
 现在暂存区就没有任何东西了。  
 
 ##撤销修改  
@@ -107,7 +116,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 		$ git reset HEAD <file> // 
 		$ git checkout -- <file>
 
-![](./image/gitreset0.jpg)  
+![](../image/gitreset0.jpg)  
 
 ##删除文件  
 	$ rm <file>//git知道删除了文件，但是工作区和版本库不一致。这时需要下面这一步。
@@ -152,8 +161,9 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git branch
 4. 合并分支
 	$ git merge dev // 把dev分支合并到当前分支
-	git在fast forward模式下，删除分支后会丢掉分支信息。在--no-ff下，git会在merge时生成一个新的commit。这样就可以看到分支信息。
-	$ git merge --no-ff -m 'merge with no-ff' dev
+	git在fast forward模式下，删除分支后会丢掉分支信息。在--no-ff下，git会在merge时生成一个新的commit。这样就可以看到分支信息。在对于bug分支、功能分支合并时一般不关心每一次提交的版本，只要最后的版本。这时使用ff模式。  
+	$ git merge --no-ff -m 'merge with no-ff' dev  
+	![noff](../image/git/noff.png)  
 5. 删除分支
 	$ git branch -d dev
 	强行删除用-D
@@ -168,7 +178,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 ##多人协作
 1. 创建仓库。
 2. 设置协作者。
-![git log](./image/githelper0.jpg)  
+![git log](../image/githelper0.jpg)  
 把链接发给他，他接受请求后就可以一起开发同一个项目了。  
 3. 克隆项目
 4. 创建分支。就是项目中已经有了分支，在新克隆的项目中也协作者也看不到。需要协作者再创建一次相同名的分支。
