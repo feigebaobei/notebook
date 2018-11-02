@@ -85,13 +85,13 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |js|https://cdn.jsdelivr.net/npm/jasmine@3.3.0/lib/jasmine.js|
 |||  
 
-##velocity
+##velocity-animate
 
 |名称|链接|
 |-|-|
-|velocity|https://www.jsdelivr.com/package/npm/velocity|
-|js|https://cdn.jsdelivr.net/npm/velocity@0.7.2/index.js|
-|min|https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js|  
+|velocity|https://www.jsdelivr.com/package/npm/velocity-animate|
+|velocity|https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js|
+|velocity.ui|https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.js|  
 
 
 
