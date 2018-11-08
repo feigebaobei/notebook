@@ -356,10 +356,8 @@ inject: ['key']
 ###响应式原理
 
 vue把 data 选项中的属性使用 object.defineProperty 全部转变 setter/getter. 组件在每次改变数据时都会重新计算。  
-只有检测已有对象的变化。不能检测是添加、删除。可以为已在对象添加新属性、及属性值。    
+只有检测已有对象的变化。不能检测是否添加、删除属性。可以为已在对象添加新属性、及改变属性值。    
 
-	this.$set(this.obj, 'key', 'value') // 为已有的ob对象添加一个属性b = 'value';
-	this.obj = obj.assign({}, this.obj, {k0: v0, k1: v1}); // 为已有对象添加一个新的
 	// 根级响应式属性先声明再改变值。
 	data () {
 		return {
@@ -367,6 +365,8 @@ vue把 data 选项中的属性使用 object.defineProperty 全部转变 setter/g
 		}
 	}
 	this.obj = 'string'
+	this.$set(this.obj, 'key', 'value') // 为已有的ob对象添加一个属性b = 'value'; obj是根级数据。
+	this.obj = obj.assign({}, this.obj, {k0: v0, k1: v1}); // 为已有对象添加一个新的
 
 当改变数据时vue会开启一个队列。缓冲在同一事件循环中发生的所有数据改变。如果同一个watcher被多次触发，会只推入到队列一次。使用proomise.then/MessageChannel/setTimeout(fn, 0)执行。  
 当需要多次改变数据并每次改变都需要显示结果时：`Vue.nextTick(cb)`
