@@ -236,6 +236,7 @@ vuex允许程序员将`state/getters/mutations/actoins`分割、嵌套成模块�
         mutations: {...},
         actions: {...}
         // action接收的状态是局部状态。
+        // 可在带空间名的模块中访问全局内容
         // actions: {
         //   actionsItem ({state, commit, rootState}) { // 也可以写全部参数： context
         //      ... 
@@ -272,6 +273,13 @@ vuex允许程序员将`state/getters/mutations/actoins`分割、嵌套成模块�
                         getters: {...},
                         mutations: {...},
                         actions: {...}
+                        // 可以直接触发根级action/mutation
+                        // 使用{root: true}
+                        // actions: {
+                        //     actionsItem ({dispatch, commit, getters, rootGetters}) {
+                        //         dispatch('gettersItem', null, {root: true})
+                        //     }
+                        // }
                     }
                     spaceNameC: {
                         state: {...},
@@ -286,15 +294,45 @@ vuex允许程序员将`state/getters/mutations/actoins`分割、嵌套成模块�
 
 ###usage
 
+**不使用模块空间名**  
+
 `store.state.moduleName.stateKey` // 得到state里的moduleName命名空间内的stateKey的属性值。  
 getters/mutation/actions会注册到根状态管理里。  
 `store.getters.getName`得到get方法。多个模块间相同命名会的覆盖。  
 
+**使用模块空间名**  
+
+使用模塊空间名就是在相应部分（state等）添加了空间名。访问各部分时使用`store.part.spacename/partKey`。  
+空间名可嵌套多次。访问时要写上嵌套的空间名。  
+
+**context的内容**  
 
     context: {
-        ...
+        commit,
+        dispatch,
+        getters,
+        rootGetters,
+        rootState,
+        state
+        // 对象的基本属性
     }
 
+**createNamespacedHelpers**  
+
+可以基于某个命名空间值返回包括辅助函数的对象。  
+
+    // import { createNamespacedHelpers } from 'vuex'
+    const { mapState, mapActions } = createNamespacedHelpers('names/nameSubs')
+    computed: {
+        ...mapState({
+            vueKey: state => state.stateKey
+        })
+    },
+    methods: {
+        ...mapActions({
+            vueKey: actionKey
+        })
+    }
 
 --- 
 2018/11/08 by stone
