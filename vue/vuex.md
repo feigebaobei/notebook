@@ -222,5 +222,79 @@ action函数接受一个与store实例具有相同属性和方法的对象（con
         }
     }
 
+##modules
+
+vuex允许程序员将`state/getters/mutations/actoins`分割、嵌套成模块。  
+
+###define
+
+    // 分割成多个模块
+    // import ...
+    const moduleA = {
+        state: {...},
+        getters: {...},
+        mutations: {...},
+        actions: {...}
+        // action接收的状态是局部状态。
+        // actions: {
+        //   actionsItem ({state, commit, rootState}) { // 也可以写全部参数： context
+        //      ... 
+        //   }
+        // }
+    }
+    const moduleA = {
+        state: {...},
+        getters: {...},
+        mutations: {...},
+        actions: {...}
+    }
+    export default new Vuex.Store({
+        mudules: {
+            moduleAName: moduleA
+            moduleBName: moduleB
+        }
+    })
+    // 嵌套成多个模块
+    // 需要用到命名空间（namespaced: true）
+    // import ...
+    export default new Vuex.Store({
+        modules: {
+            spaceNameA: {
+                namespaced: true,
+                state: {...},
+                getters: {...},
+                mutations: {...},
+                actions: {...},
+                modules: {
+                    spaceNameB: {
+                        namespaced: true,
+                        state: {...},
+                        getters: {...},
+                        mutations: {...},
+                        actions: {...}
+                    }
+                    spaceNameC: {
+                        state: {...},
+                        getters: {...},
+                        mutations: {...},
+                        actions: {...}
+                    }
+                }
+            }
+        }
+    })
+
+###usage
+
+`store.state.moduleName.stateKey` // 得到state里的moduleName命名空间内的stateKey的属性值。  
+getters/mutation/actions会注册到根状态管理里。  
+`store.getters.getName`得到get方法。多个模块间相同命名会的覆盖。  
+
+
+    context: {
+        ...
+    }
+
+
 --- 
 2018/11/08 by stone
