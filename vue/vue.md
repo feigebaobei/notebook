@@ -210,8 +210,6 @@ data: {
 
 **按键修饰符**  
 
-
-
 - `<input @keyup.13="submit">`  
 - `<input @keyup.enter="submit">`  
 - `<input @keyup.tab="submit">`  
