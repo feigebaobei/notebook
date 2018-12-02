@@ -172,6 +172,20 @@ fn，必填，返回boolean值。
     Array.from(objArr)
     [].slice.call(objArr)
 
+**Array.from(arrayLike[, mapFn[, thisArg]])**  
+
+arrayLike 必填 数组、伪数组、可迭代对象。  
+mapFn 选填 把arrayLike里的数据放入新数组再对每个元素执行这个回调函数再返回到新数组。  
+thisArg 选填 mapFn的this对象  
+
+Array.from(obj, mapFn, thisArg) <=> Array.from(obj).map(mapFn, thisArg)
+
+    Array.from([1, 2, 3], x => x + x) // [2, 4, 6]
+    Array.from([1, 2, 3], function (item) {
+        return item + this
+    }, 5) // [6, 7, 8]
+    Array.from({length: 5}, (item, index) => index) // [0, 1, 2, 3, 4]
+
 **Array.of(item0[, item1, item2])** 将一组值转化为一个数组。  
 
     Array.of('a', 3, 2, 'b', 'c') // ['a', 3, 2, 'b', 'c']
@@ -194,7 +208,10 @@ fn，必填，返回boolean值。
 
 value 必填。填充的值。  
 start 选填。开始的位置。  
-end 选填。结束的位置。不包含这个位置。  
+end 选填。结束的位置。不包含这个位置。
+
+    let arrTemp = new Array(5) // 创建一个长度是5的数据
+    arr.fill(false, 1, 3) // [undefined, flase, flase, undefined, undefined]
 
 **Array.entries()** 对键值对的遍历。  
 

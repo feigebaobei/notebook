@@ -77,9 +77,21 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |layer.js|jsdeliver|1.7.1|zhouyongli|https://cdn.jsdelivr.net/npm/layer.js@1.7.1/index.min.js|
 |layer|cndjs|2.3|无|https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js|
 
+##jasmine
 
-|||
-|||
+|名称|链接|
+|-|-|
+|jasmine|https://www.jsdelivr.com/package/npm/jasmine|
+|js|https://cdn.jsdelivr.net/npm/jasmine@3.3.0/lib/jasmine.js|
+|||  
+
+##velocity-animate
+
+|名称|链接|
+|-|-|
+|velocity|https://www.jsdelivr.com/package/npm/velocity-animate|
+|velocity|https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js|
+|velocity.ui|https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.js|  
 
 
 
@@ -95,3 +107,5 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 
 
 
+---
+2018/10/29 by stone
