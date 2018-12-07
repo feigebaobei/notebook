@@ -67,3 +67,10 @@
 这里有路由规则，处理热更新。  
 应处理为`/.gitignore`  
 
+##命令
+
+###lavas init // 项目初始化
+###lavas build // 构建项目,生成到/dist目录中
+###lavas dev // 使用lavas内置的服务器启动项目.一般用于开发.
+###lavas start // 使用lavas内置的服务器启动服务端渲染项目
+###lavas static // 以当前目录为基准启动lavas内置服务器  

@@ -133,6 +133,21 @@ vue通过watch选项提供一个当需要数据变化时执行异步操作或操
         }
     }
 
+    watch: {
+    	key0: function (newValue, oldValue) {...},
+    	key1: 'fn',
+    	key2: {
+    		handler: funciton (newValue, oldValue) {...},
+    		deep: true
+    	},
+    	key3: {
+    		handler: fn,
+    		immediate: true // 侦听开始之后立即调用
+    	},
+    	key4: [fn0, fn1, fn2,...],
+    	'key5.key6': fn
+    }
+
 ## class与style绑定 ##
 **class**  
 
