@@ -98,9 +98,8 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |名称|链接|
 |-|-|
 |在移动端实现console功能的插件||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/vconsole|  
 |vConsole|https://cdn.jsdelivr.net/npm/vconsole@3.2.0/dist/vconsole.min.js|
-|vConsole|https://www.jsdelivr.com/package/npm/vconsole|
-|velocity.ui|https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.js|  
 
 
 
