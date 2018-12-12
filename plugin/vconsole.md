@@ -18,8 +18,12 @@
 
 ##usage
 
-    var vc = new VConsole(option)
-    // option
+    // 非AMD/CMD
+    let vConsole = new VConsole()
+    // AMD/CMD
+    let VConsole = require('vconsole/path/vc.js')
+    let vConsole = new VConsole()
+    // 与vue结合使用时若严格使用eslint准备会报“只加载未使用的problem” // 我也不会解决这个问题。
 
 实例化后才能使用。  
 直接使用。与console.log无区别。  
@@ -50,7 +54,7 @@ console.log('system', value) // 会把value输出支system.
 |vConsole.tool.isString(value)||||
 |vConsole.tool.isArray(value)||||
 |vConsole.tool.isBoolean(value)||||
-|vConsole.tool.isElement(value)|||???|
+|vConsole.tool.isElement(value)||||
 |vConsole.tool.isFunction(value)||||
 |vConsole.tool.isNull(value)||||
 |vConsole.tool.isNumber(value)||||
