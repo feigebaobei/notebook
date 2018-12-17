@@ -7,6 +7,9 @@
     npm install <tarball url>
     npm install <folder>
 
+    npm uninstall xxx
+    npm uninstall -g xxx
+
     npm i
 
 |缩写|全写||
