@@ -9,6 +9,8 @@ less(leaner style sheets)向后兼容的css扩展语言。
     npm i less
     npm i less -g
 
+若需要less.js把less文件编译为css文件，需要全局安装less.这样才能做在命令行里使用`lessc`
+
 ##usage
 
 ###variables
@@ -53,6 +55,11 @@ less(leaner style sheets)向后兼容的css扩展语言。
 
     @import 'name'
     @import 'name.css'
+
+###服务端和命令行的用法
+
+    lessc [option option=parameter ...] <source> [destination]
+    // lessc name.less toname.css
 
 ###
 ###
