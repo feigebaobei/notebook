@@ -14,7 +14,27 @@ less(leaner style sheets)向后兼容的css扩展语言。
 ##usage
 
 ###variables
+
+以@开头。  
+用在属性值时： @var  
+用在selector name/property name/url...时： @{var}  
+使用变量指向变量名称时。注意@的数量。  
+注意变量作用域。  
+属性名作为变量名是不是@开关，是$开头。（$prop）  
+最后定义的变量值会覆盖以前写的变量值。  
+
+###parent selector
+
+&  
+&-name  
+改变selector order: .select & => .select &
+
 ###mixins
+
+写一套样式，多个地方使用。  
+混合守卫。  
+若在cssset上使用`!important`则会作用于此样式集的每一个样式上。  
+
 ###nesting 
 
 &代表父选择器。  
@@ -22,6 +42,11 @@ less(leaner style sheets)向后兼容的css扩展语言。
 ###operation
 
 各算术操作符都可用于的less.带单位也行。  
+
+###extend(cssset)
+
+把选中的样式集合并到当前选择器中。  
+`selector:extend(otherSelector all)` // 合并所有来自otherSelector里的cssset.  
 
 ###function
 
@@ -42,6 +67,19 @@ less(leaner style sheets)向后兼容的css扩展语言。
         .class.first(); // 使用class类里的first类里的样式
     }
 
+###map
+
+使用ruleset的样式时使用[]  
+
+    #colos () {
+        primary: blue;
+        secondary: green;
+    }
+    .button {
+        color: #colors[primary];
+        border: 1px solid #colors[secondary];
+    }
+
 ###scope
 
 在作用域链是依次寻找。  
@@ -55,6 +93,19 @@ less(leaner style sheets)向后兼容的css扩展语言。
 
     @import 'name'
     @import 'name.css'
+    @import (keyword) 'file.suffix'
+
+|keyword|explain|可以使用多个keyword|
+|-|-|-|
+|reference|使用这个less文件编译，但是不输出它。||
+|inline|引入、输出这个文件，但不编译它。||
+|less|把这个文件按照less文件处理。不管后缀名是什么。||
+|css|把这个文件按照css文件处理。不管后缀名是什么。||
+|once|只引入一次|默认值|
+|multiply|可以引入多次||
+|optional|只有存在时才import。||  
+
+![](../image/plugin/convertStep.png)  
 
 ###服务端和命令行的用法
 
@@ -74,7 +125,7 @@ less(leaner style sheets)向后兼容的css扩展语言。
 ###在浏览器中使用
 
 第一种： 单独设置options  
-![](../image/plugin/less/lessStep.jpg)  
+![](../image/plugin/lessStep.jpg)  
 
 第二种： 在script标签中以`data-`属性的方法设置options  
 
@@ -154,6 +205,115 @@ less 跨平台的设置项
         warn: function (msg) {...},
         error: function (msg) {...}
     })
+
+##less函数
+
+|name|parameter|explain|example|
+|-|-|-|-|
+|Misc Funciton 杂乱的方法||||
+|color('str')||根据颜色格式的字符串返回颜色值||
+|image-size('file.png')||返回图片的宽度、高度||
+|image-height('file.png')||返回图片的高度||
+|image-width('file.png')||返回图片的宽度||
+|convert(value, 'unit')|value: 值+单位。unit: 单位|把value变为unit(单位)的数据。||
+|data-uri(mimeType, url)|mimeType: 数据类型。url:资源路径。|把指定资源转换为指定类型。||
+|default()|无参数|默认值|`.m(@x) when (default()) {color: @x}` `.m(@x) when not (default()) {...}`|
+|unit(dimension, unit)|dimension: 只有数值。无单位。unit: 单位|返回有单位的数据||
+|get-unit(value)||返回value的单位。无单位时返回'//nothing'||
+|svg-gradient(dirction, color0[, position0] [, color1, position1...], color3[, position3])||设置渐变色||
+|if(condition, value0, value1)||condition为true时返回value0,否则返回value1|condition可以使用 `not`, `and`, `or`关键字|
+|String Function||||
+|escape('str')||编码字符串|escape('a=1') a%3D1 (不能编码的字符,/?@&+~!$)|
+|e||||
+|%(string, arguments)|sSdDaA%|||
+|replace(string, pattern, repalcement, flags)|string:需要replace的字符串。pattern:正则字符串。replacement:替换的字符串。flags：作用范围（gi/可省）|||
+|List function||||
+|length(value, value2, value3)||返回values的长度||
+|extract(list, index)||返回list中index的value||
+|Math Function||||
+|ceil(float)||向上取整|ceil(2.4) => 3|
+|floor(float)||向下取整||
+|percentage(小数)||返回百分值||
+|round(Number, decimalPlaces)||保留多少位小数||
+|sqrt(value)||返回保持单位不变的情况下，值的平方。||
+|abs(value)||返回绝对值value||
+|sin(value)||返回保持单位不变。值的平方||
+|asin(Number)||返回反正弦值。||
+|cos(value)||||
+|acos(Number)||||
+|tan(value)||||
+|atan(Number)||||
+|pi()||得到pi的值||
+|pow(value, Number)||返回保持单位不变，值的指定次方。||
+|mod(value, Number)||求余||
+|min(value, value1, ...)||返回最小值||
+|max(value, value1, ...)||返回最大值||
+|Type Function||它们都是小写字母||
+|isnumber(value)||返回value是否可以转换为Number类型。||
+|isstring(value)||是否可转换为String类型||
+|iscolor(value)||||
+|iskeyword(value)||||
+|isurl(value)||||
+|ispixel(value)||是否是px单位||
+|isem(value)||||
+|ispercentage(value)||||
+|isunit(value, unit)||value的单位是否与指定的单位一样||
+|isruleset(value)||value是否是一个css样式集合。||
+|Color Definition Function||||
+|rgb(red, green, blue)|0-255/0-100%|返回16进制颜色值||
+|rgba(red, green, blue, alpha)||rgba(...)||
+|argb(color)|color / color object|#aarrggbb|argb(rgba(90, 23, 148, 0.5) => #80511794)|
+|hsl(hue, saturation, lightness)||#rrggbb||
+|hsla(hue, saturation, lightness, alpha)||rgba||
+|hsv(hue, saturation, value)|color|#rgb||
+|hsva(hue, saturation, value, alpha)||rgba||
+|Color Channel Function||||
+|hue(color)||得到hsl的hue值。0-360||
+|saturation(color)||得到hsl的saturation值。0-100||
+|lightness(color)||得到hsl的lightness值。0-100||
+|hsvhue(color)||得到hsv的hue值。||
+|hsvsaturation(color)||得到hsv的saturation值。||
+|hsvvalue(color)||得到hsv的value值。||
+|red(color)||得到red值||
+|green(color)||得到green值||
+|blue(color)||得到blue值||
+|alpha(color)||得到alpha值||
+|luma(color)||||
+|luminance(color)||||
+|Color Operation Functions||||
+|saturate(color, amount, method)|color, amount: 改变亮度的量。method。？？？|增加亮度||
+|desaturate(color, amount, method)|减少亮度|||
+|lighten()||||
+|darken()||||
+|fadein()||||
+|fadeout()||||
+|fade()||||
+|spin()||||
+|mix(color1, color2, weight)|weight:第一种颜色占的比重|返回2种颜色混合后的颜色。||
+|tint(color, weight)||返回指定颜色与白色混合后的颜色。||
+|shade(color, weight)||返回指定颜色与黑色混合后的颜色。||
+|greyscale(color)||返回无色相的颜色 <=> desaturate(color, 100%)||
+|contrast()|???|||
+|Color Blending Functions||||
+|multiply||||
+|screen||||
+|overlay||||
+|softlight||||
+|hardlight||||
+|difference||||
+|exclusion||||
+|average(c1, c2)||返回2个颜色的平均值。||
+
+##less的功能
+
+|||||
+|-|-|-|-|
+|操作选择器||||
+|操作color||||
+|嵌套||||
+|样式合并||||
+|map||||
+|||||
 
 ---
 
