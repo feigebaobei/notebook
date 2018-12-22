@@ -96,6 +96,10 @@ console.log('system', value) // 会把value输出支system.
     let vConsole = new VConsole()
     let pluginName = new VConsole.VConsolePlugin(PluginId, nameOfShowAtTab)
     // 为插件绑定事件
+    pluginName.on('renderTab', function () {
+        let html = '<div>hello</div>'
+        callback(html) // 必须执行此方法才能渲染插件。
+    })
     vConsole.addPlugin(pluginName)
 
 ###插件的事件类型

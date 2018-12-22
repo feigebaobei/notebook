@@ -17,7 +17,7 @@ less(leaner style sheets)向后兼容的css扩展语言。
 
 以@开头。  
 用在属性值时： @var  
-用在selector name/property name/url...时： @{var}  
+interpolation用在selector name/property name/url...时： @{var}  
 使用变量指向变量名称时。注意@的数量。  
 注意变量作用域。  
 属性名作为变量名是不是@开关，是$开头。（$prop）  
@@ -34,6 +34,17 @@ less(leaner style sheets)向后兼容的css扩展语言。
 写一套样式，多个地方使用。  
 混合守卫。  
 若在cssset上使用`!important`则会作用于此样式集的每一个样式上。  
+
+    //define
+    .var () {
+        color: red;
+    }
+    .thing1 {
+        .var;
+    }
+    .thing2 {
+        .var
+    }
 
 ###nesting 
 
@@ -306,13 +317,28 @@ less 跨平台的设置项
 
 ##less的功能
 
-|||||
+||less|sass|stylus|
 |-|-|-|-|
 |操作选择器||||
 |操作color||||
+|变量||||
 |嵌套||||
+|混合||||
+|继承||||
+|缓存||||
+|独立文件的变量是否在会覆盖|Y|N||
 |样式合并||||
 |map||||
+|命令行||||
+|脚本引用||||
+|是否install方便||||
+|css/scss/sass/less之间转换||||
+|迭代||||
+|原码地图||||
+|||||
+|||||
+|||||
+|||||
 |||||
 
 ---
