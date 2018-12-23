@@ -99,9 +99,51 @@ node.js本身包含http/fs……模块。
         eventEmitter.emit('event_name')
     }, 1000)
 
+node程序是由事件循环开始，到事件循环结束。  
+node的模块与包机制的实现参照了commonjs的标准，但不完全遵循。  
+在模块中有`this`就是`module`对象。`module`对象有2个属性`require`引入，`exports`输出。  
+输出有2种方法。  
 
+|输出|接收|使用|
+|-|-|-|
+|`module.exports = fn`|`var Fn = require('./name')`|`Fn.prop`|
+|`exports.fn = function(){}`|`var Fn = require('./name')`|`Fn.fn`|  
 
+exports是一个空对象。module.exports输出的是一个被赋值的元素。export.xxx输出的是一个包含xxx属性（方法）的对象。  
 
+包通常是一些模块的集合。  
 
+commonjs规范的包应该具备以下特征。  
 
+- package.json必须在包的顶层目录下。  
+- 二进制文件应该在bin目录下。  
+- js代码应该在lib目录下。   
+- 文档应该在doc目录下。  
+- 单元测试文件应该在test目录下。  
 
+package.json的字段说明  
+
+||||
+|-|-|-|
+|name|包的名称，必须是唯一的（相对于npm）。由小写英文字母、数字、下划线组成。不能有空格。||
+|description|简单说明||
+|version|语义化版本识别规范。||
+|keywords|关键字数组。通常用于搜索||
+|maintainers|维护者数组。每个元素包含name/email/web/...||
+|contributors|贡献者数组。每个元素包含name/email/web/...||
+|bugs|提交bug的地址，一般是网址、电子邮件。||
+|licenses|许可证数组。每个元素包含type许可证名称/url许可证文本的链接||
+|respositories|仓库托管地址数组。每个元素包含type/url/path||
+|dependencies|包的依赖。每个元素包含nema/version||  
+
+npm的文档请去`../npm/`  
+
+###调试
+
+    node debug fileName.js // 本地调试
+    node --debug[=port] fileName.js // 远程调试
+    node --debug-brk[=port] fileName.js // 远程调试
+    // use node-inspector
+    npm i -g node-inspector
+    node --debug-brk=5858 fileName.js
+    // 在浏览器中打开https://127.0.0.1.8080/debug?port=5858
