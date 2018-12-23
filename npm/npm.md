@@ -118,3 +118,14 @@ npm
 解决方法。  
 
     npm rebuild node-sass
+
+##创建假恶丑链接
+
+    npm link packagename
+
+require方法不能把全局安装的文件引入。若使用`npm link packagename`后就可以引入全局文件。  
+但是`npm link xxx`不支持windows.  -_-  
+
+---
+
+2018/12/23 by stone
