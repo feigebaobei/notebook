@@ -30,6 +30,7 @@ $state.reset() => 表示
 2. spinner 等待加载数据时的动画。 default/bubbles/circles/spiral/waveDots  
 3. ref   
 4. direction 触发加载数据的滑动方法 bottom/top  
+5. identifier 当指定的值改变时再次执行初始化方法。  
 
 ###slot
 
