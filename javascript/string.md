@@ -180,7 +180,7 @@ reg: 必填，
 
 **slice(start, end)** 返回指定范围的子字符串。  
 start, 必填，开始的index，若是负值表示从右边开始数。  
-end, 必填，开始的index，若是负值表示从右边开始数。  
+end, 选填，开始的index，若是负值表示从右边开始数。  
 [start, end)
 
     var slice0 = baidu.slice(-3,-1) // id

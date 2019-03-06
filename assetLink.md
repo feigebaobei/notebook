@@ -109,6 +109,16 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |jsdevlivr 链接|https://www.jsdelivr.com/package/npm/less|  
 |less.js|https://cdn.jsdelivr.net/npm/less@3.9.0/dist/less.min.js|
 
+##handlebars
+
+|名称|链接|
+|-|-|
+|前端模板脚本||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/handlebars|  
+|handlebars.js|https://cdn.jsdelivr.net/npm/handlebars@4.1.0/dist/handlebars.min.js|
+|handlebars.runtime.js||
+
+
 
 
 

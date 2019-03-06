@@ -147,3 +147,131 @@ npm的文档请去`../npm/`
     npm i -g node-inspector
     node --debug-brk=5858 fileName.js
     // 在浏览器中打开https://127.0.0.1.8080/debug?port=5858
+
+##core module
+
+###全局对象
+
+    global: {
+        precess: { // 当前node.js进程状态的对象
+            argv: [] // node filename 每个元素的一个运行参数。
+            stdout: 标准输出流。process.stdout.write提供了更底层的接口。
+            stdin: 标准输入流
+            nestTick: 为事件循环设置一项任务。可以把复杂的工作拆散，变成一个个较小的事件。
+        }
+    }
+
+
+###常用工具
+
+####util.inherits()
+
+实现对象间原型继承的函数。`util.inherits(subObj, baseObj)`只继承原型中的属性不继承构造函数中的。  
+
+####util.inspect()
+
+    util.inspect(obj, [showHidden], [depth], [colors])
+    showHidden: boolean 是否显示隐藏信息。
+    depth: number 最大递归层数。默认为2.
+    color: boolean true:ansi颜色编码。
+obj=>sting  
+
+####util.isArray()
+####util.isRegExp()
+####util.isDate()
+####util.isError()
+####util.format()
+####util.debug()
+
+###事件驱动
+
+####事件发射器
+
+events.EventEmitter  
+
+    let events = require('events')
+    let emitter = new event.EventEmitter()
+    emitter.on('someEvent', function (arg1, arg2) {
+        ...
+    })
+    emitter.on('someEvent', function (arg1, arg2) {
+        ...
+    })
+    emitter.emit('someEvent', 'str', number)
+    // 以str/number分别为参数传入fn
+
+    EventEmitter.on(event, listener)
+    EventEmitter.emit(event, [arg1....])
+    EventEmitter.once(event, listener)
+    EventEmitter.removeListener(event, listener)
+    EventEmitter.removeAllListeners([event])
+
+一定要为`error`事件设置`listener`否则会报错，中止整个程序。  
+
+###文件系统 fs
+
+提供文件的读取、写入、更名、删除、遍历目录、链接等posiz文件系统操作。  
+
+####fs.readFile(fileName, [encoding], [callback(err, data)])
+
+|-|-|-|
+|fileName|文件的名称||
+|encoding|文件的字符编码||
+|callback|回调函数||
+|error|有没有错误发生。||
+|data|文件内容||
+
+####fs.readFileSync(fileName, [encoding])
+####fs.open(path, flags, [mode], [callbakc(error, fd)])
+
+|参数|说明||
+|-|-|-|
+|path|文件的路径||
+|flags|以哪种方式打开文件|r: 读取模式 r+: 读写模式 w: 写入模式，若不存在则创建。 w+: 读写模式，若不存在则创建。 a: 追加模式，若不存在则创建。 a+: 读取追加模式，若不存在则创建。|
+|mode|在创建文件时给文件指定权限。||
+|fd|文件描述符||
+
+####fs.read(fd, buffer, offset, length, position, [callback(err, bytesRead, buffer)])
+
+|参数|说明||
+|-|-|-|
+|fd|文件描述符||
+|buffer|缓冲区对象||
+|offset|偏移量||
+|position|从当前文件的哪个位置读取文件||
+|err|||
+|bytesRead|读取文件的字节数||
+|buffer|缓冲区对象||
+
+####http
+
+    let http = require('http')
+    let server = http.Server() // init
+    server.on('request', function (request, response) {
+        ...
+    })
+    server.listen(3000) // 监听3000端口
+
+|http.Server的事件|回调函数|说明|
+|-|-|-|
+|request|fn(reqeust, response)||
+|connection||当tcp链接建立时触发。|
+|close||当服务器关闭时触发。不是在用户断开连接时。|
+
+|http.ServerRequest|回调函数|说明|
+|-|-|-|
+|data|fn(chunk: 请求到的数据){}|当请求体数据来时触发|
+|end||当请求体数据传输完成时触发|
+|close||当用户请求结束时触发，不同于end|  
+
+|http.ServerResponse|回调函数|说明|
+|-|-|-|
+|writeHead|(statusCode, [headers是一个类似关系数组的对象])|向请求的客户端发送响应头|
+|write|(data, [encoding])|向请求的客户端发送响应的内容|
+|end|[data], [encoding]|结束响应，告知客户端已经发送完成|  
+
+http.request(options: 请求的参数, callbac)  
+
+##WEB开发
+
+

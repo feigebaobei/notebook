@@ -80,6 +80,7 @@ git只能跟踪文本文件的改动
 	git reset // 重置指定版本。默认参数 --soft 把commit的修改退回到git缓冲区。 --hard 把commit的修改丢弃。  
 	git reset --hard HEAD^
 	git reset --hard <commitID>
+	git push -f -u origin <branchName>
 
 ##版本前进  
 在不关闭命令行窗口的情况下。我们还可以看到在执行`git log`时输出的各版本信息。  
@@ -174,7 +175,18 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git log --graph
 *tip:*master分支上是非常稳定的版本，用于发布。开发在dev分支上。各开发者在dev分支上再创建自己的分支。  
 ##bug分支  
-1. git stash // 我不知道为什么会用到它。
+1. git stash // 暂存内容
+	
+> git stash save // save
+> git stash list // find all stash list
+> git stash pop [stashIndex] // pop last stash
+> git stash show // show diff cur stash and last push
+> git stash apply // 当前变化合并到最后一次stash
+> git stash drop [stashIndex] // drop stashIndex
+> git stash clear // clear all stash
+> 
+
+当使用`git stash pop`出现冲突时,git不会删除保存在stash中的记录。需要使用`git stash drop`进行删除。  
 
 ##多人协作
 1. 创建仓库。
@@ -261,6 +273,43 @@ git 对象类型
 ###取消目录的git初始化  
 
     $ rm -rf .git
+
+##同一台电脑配置多个git账号
+`http://pan.baidu.com/s/1o8PbzMM`  
+在管理员模式下进行。  
+
+###1. 生成github.com的公钥、私钥。  
+
+    ssh-keygen -t rsa -C 10000@qq.com
+
+命名为id_rsa_github  
+密码为123456  
+
+###2. 生成git.other.com的公钥、私钥。  
+
+    ssh-keygen -t rsa -C 10000@qq.com
+
+使用邮箱地址可以相同。  
+命名为id_rsa_git_other // 不可与第一步中一样  
+密码为123456 // 可以相同  
+
+###3. 把这2套公钥分别上传到服务器。  
+
+###4. 在.ssh目录下创建config文本文件，并完成相关配置（最核心的地方）  
+
+为每一个账号配置一个Host。// 这个名字不会影响git命令  
+为每一个Host配置HostName和IdentityFile  
+若设置Host为`Host mygithub`，则使用git命令时就应该这样：`git clone git@mygithub:githubOfName/propName.git`  
+以下是例子：  
+HostName 真实的域名地。可以是ip也可以是域名。  
+IdentityFile id_rsa的地址  
+PreferredAuthentications 配置登录时使用什么权限认证。可设为：publickey, password publickey, keyboard-interactive等。  
+User 配置使用用户名  
+
+###5. 使用管理员身份打开git bash客户端。测试是否配置成功。  
+
+    sss -T git@github.com
+    sss -T git@github.com
 
 
 

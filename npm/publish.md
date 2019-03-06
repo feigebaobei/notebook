@@ -1,5 +1,14 @@
 在npm维护package可以方便版本更新、使用、复用。  
 这篇文章里会聊从零开始在npm上创建发布package.  
+简单来说就是：  
+
+1. 在本地初始化包。（npm init）  
+2. 创建内容。（最后规范）  
+3. 在https://www.npmjs.com网站上注册账号。  
+4. 在本地用这个账号登录。（npm login, 再输name,password,email）  
+5. 发布（npm publish）
+
+以下是详细步骤。  
 
 ###1. install
 
@@ -34,7 +43,33 @@ node, npm
 
 README.md // 介绍当前package，可以不创建。  
 index.js // 与package.json里的main值一样。它是作为入口文件的。  
-再创建package的内容。  
+再创建package的内容。包文档结构如下：  
+
+![](../image/npm/docuConstruct.jpg)  
+
+`assets` 是用来放置资源。  
+`assets/basic` 我个人习惯用来放置基本内容。可以不管。  
+`assets/img` 是用来放置图片。  
+`conponents` 是用来放置组件。  
+`conponents/vueName` 是用来放置当前组件需要的子组件。  
+`conponents/vueName/index` 一般是该组件。  
+`lib` 所有组件需要的数据资源。  
+`.gitignore` 指定需要git忽略的内容。  
+`index` 当前包的入口文件。  
+`package` 当前包的信息。  
+`README.md` 介绍当前包。  
+
+当前包的入口文件中index.js文件。在该文件中需要把名组件输出。  
+
+    // package/index.js
+    import first from './src/components/first'
+    import second from './src/components/second'
+    export {
+      first,
+      second
+    }
+
+
 
 ###7. 发布
 
@@ -70,15 +105,20 @@ index.js // 与package.json里的main值一样。它是作为入口文件的。
 
 ###8. 删除
 
-当前包的作者可以删除。admin角色（24 小时内删除）
+当前包的作者可以删除。admin角色（24 小时内可删除）
 
     npm unpublish packagename --force
 
-当前团队的拥有者。owner角色。点击删除。
+当前团队的拥有者或owner角色。点击删除按钮可把该package从team中删除。  
 
 ###9. 不足
 
-npm还有一些不足。eg:1.协作者不能删除package.2.多个协作者不能同时编辑同一个package.3.无法删除org。  
+npm还有一些不足。eg:1.协作者不能删除package.2.多个协作者不能同时编辑同一个package.3.无法删除org。4.24h后不可删除该包。  
+
+###10. 测试
+
+在发布前最后先测试是否能正常工作。我采用的方法是创建一个vue项目把package放在`src/components/`下。使用相对链接引用。这是开发阶段的测试。若需要在正式测试需要再创建一个vue项目。使用`npm i packageName`安装该包，再使用包。若通过这2个测试就可以正常使用了。  
+
 
 ---
 2018/11/06 by stone

@@ -18,7 +18,7 @@
 
 **Object.values(obj)** // 返回一个数组，包含对象中的值。  
 
-**Object.entries(obj)** // 返回一个数组，  包含对象中的键组成的数组，和对象中的值组成的数组。  
+**Object.entries(obj)** // 返回一个数组：由对象的key和对应的valuexe组成的数组组成的数组。
 
 **克隆对象** 
 
