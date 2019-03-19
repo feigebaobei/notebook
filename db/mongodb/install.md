@@ -28,6 +28,12 @@
 ![](../../image/db/mongodb/start.jpg)  
 在浏览器中输入`http://localhost:27017`。能看到`It looks like you are trying to access MongoDB over HTTP on the native driver port.`。说明安装成功。  
 
+##5. 启动
+
+net start MongoDB // 启动MongoDB服务  
+net stop MongoDB // 关闭MongoDB服务  
+C:\mongodb\bin\mongod.exe --remone // 移除MongoDB服务  
+
 ---
 
 2019/01/04 by stone

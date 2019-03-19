@@ -118,6 +118,15 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |handlebars.js|https://cdn.jsdelivr.net/npm/handlebars@4.1.0/dist/handlebars.min.js|
 |handlebars.runtime.js||
 
+##async
+
+|名称|链接|
+|-|-|
+|异步||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/async|  
+|async.js||
+|async.min.js|https://cdn.jsdelivr.net/npm/async@2.6.2/dist/async.min.js|  
+
 
 
 
