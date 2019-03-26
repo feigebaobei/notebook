@@ -127,6 +127,15 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |async.js||
 |async.min.js|https://cdn.jsdelivr.net/npm/async@2.6.2/dist/async.min.js|  
 
+##chai
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/chai|  
+|async.js|https://cdn.jsdelivr.net/npm/chai@4.2.0/chai.js|
+|async.min.js||  
+
 
 
 
