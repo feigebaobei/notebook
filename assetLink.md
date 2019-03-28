@@ -133,9 +133,40 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |-|-|
 |它是一个断言库||
 |jsdevlivr 链接|https://www.jsdelivr.com/package/npm/chai|  
-|async.js|https://cdn.jsdelivr.net/npm/chai@4.2.0/chai.js|
-|async.min.js||  
+|chai.js|https://cdn.jsdelivr.net/npm/chai@4.2.0/chai.js|
+|chai.min.js||  
 
+##sha1
+
+|名称|链接|
+|-|-|
+|哈希加密||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/sha1|  
+|sha1.js||
+|sha1.min.js||  
+|node 链接|https://cdn.jsdelivr.net/npm/sha1@1.1.1/sha1.min.js|  
+
+##base64
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/base64-js|  
+|base64.js||
+|base64.min.js||  
+|node 链接|https://cdn.jsdelivr.net/npm/base64-js@1.3.0/index.min.js|  
+
+##md5
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/md5.js|  
+|md5.js||
+|mdt.min.js||  
+|node 链接|https://cdn.jsdelivr.net/npm/md5.js@1.3.5/index.min.js|  
+
+ */
 
 
 
