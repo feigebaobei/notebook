@@ -143,8 +143,9 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |哈希加密||
 |jsdevlivr 链接|https://www.jsdelivr.com/package/npm/sha1|  
 |sha1.js||
-|sha1.min.js||  
-|node 链接|https://cdn.jsdelivr.net/npm/sha1@1.1.1/sha1.min.js|  
+|sha1.min.js|https://cdn.bootcss.com/js-sha1/0.6.0/sha1.min.js|  
+|node 链接|https://cdn.jsdelivr.net/npm/sha1@1.1.1/sha1.min.js|
+|eg|sha1('str')|  
 
 ##base64
 
@@ -163,8 +164,9 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |它是一个断言库||
 |jsdevlivr 链接|https://www.jsdelivr.com/package/npm/md5.js|  
 |md5.js||
-|mdt.min.js||  
-|node 链接|https://cdn.jsdelivr.net/npm/md5.js@1.3.5/index.min.js|  
+|mdt.min.js|https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js|  
+|node 链接|https://cdn.jsdelivr.net/npm/md5.js@1.3.5/index.min.js|
+|eg|md5('str')|  
 
  */
 
