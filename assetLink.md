@@ -168,7 +168,15 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |node 链接|https://cdn.jsdelivr.net/npm/md5.js@1.3.5/index.min.js|
 |eg|md5('str')|  
 
- */
+##underscore
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/underscore|  
+|underscore.js|https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.js|
+|underscore.min.js||  
+
 
 
 
