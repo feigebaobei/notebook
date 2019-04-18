@@ -129,3 +129,47 @@ exports对象就相当于一个命名空间。
 **map: []** 一般用来管理版本号、时间戳、路径转换。如`map:[[/(.*?)\.js/i, '$1-debug.js']]    var a = require('cs/a') // base/path/cs/a-debug.js`
 
 ### seajs.noConflict(Boolean)  是否释放define方法
+
+## plugin
+
+### 文本插件
+
+    preload: ['plugin-text']
+
+    define(function (require) {
+        let tpl = require('./a.tpl')
+    })
+
+### json插件 plugin-json
+
+    preload: ['plugin-json']
+
+    define(function(require, exports, module) {
+        var json = require('./a.json')
+        // ...
+    })
+
+### CoffeeScript插件
+
+将coffeescript转换为javascript并引入。  
+
+    alias: {
+        coffee: 'path/to/coffee-script'
+    },
+    preload: ['plugin-coffee']
+
+    define(function (require) {
+        let a = require('./a.coffee')
+        // ...
+    })
+
+### less插件
+
+    alias: {
+        'less': 'path/to/less'
+    },
+    preload: ['plugin-less']
+
+    define(function(require) {
+        require('./style.less')
+    })
