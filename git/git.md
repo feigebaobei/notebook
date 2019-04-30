@@ -36,6 +36,10 @@ Git是目前世界上最先进的分布式版本控制系统（没有之一）�
 因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心，如果有人故意冒充别人怎么办？这个不必担心，首先我们相信大家都是善良无知的群众，其次，真的有冒充的也是有办法可查的。  
 也可以下载git for windows
 
+##删除 repository
+
+	$ rm -rf .git
+
 ##create repository  
 
 	$ mkdir learngit
@@ -148,6 +152,9 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 2. 克隆这个仓库
 	$ git clone git@github.com:feigebaobei/gitskills.git
 	$ git clone http://****:****/xxx.git
+
+    $ git remote rm origin
+    $ git remote add origin git@...
 
 ##分支
 1. 创建分支

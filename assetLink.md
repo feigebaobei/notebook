@@ -177,6 +177,14 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |underscore.js|https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.js|
 |underscore.min.js||  
 
+##lab
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/lab.js|  
+|lab.js|https://cdn.jsdelivr.net/npm/lab.js@2018.1.1/dist/lab.js|
+|lab.min.js|https://cdn.jsdelivr.net/npm/lab.js@2018.1.1/dist/lab.min.js|  
 
 
 
