@@ -38,7 +38,7 @@
         /* 若引入的插件不是amd规范,则需要shim end */
         baseUrl: 'js/lib', // 相对于main.js的基本路径
         paths: {
-            'jquery': 'jquery.min', // 可省略ext
+            'jquery': 'jquery.min',
             'underscore': 'underscore.min',
             'backbone': 'https://www.xxx.xxx.min'
         }
