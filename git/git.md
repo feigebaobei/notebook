@@ -180,6 +180,10 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	若合并分支时报错。说明2个分支中有同一个文件有不同的修改。这时需要把当前分支上的文件内容修改为要合并的分支上的文件一样。然后再合并。
 7. 查看分支合并图
 	$ git log --graph
+8. 比较2个分支的文件差异  
+	$ git diff branch1 branch2 --stat // 显示出所有有差异的文件列表.
+	$ git diff branch1 branch2 <path/to/file> // 显示指定文件的详细差异.  
+	$ git diff branch1 branch2 // 显示出所有有差异的文件的详细差异.  
 *tip:*master分支上是非常稳定的版本，用于发布。开发在dev分支上。各开发者在dev分支上再创建自己的分支。  
 ##bug分支  
 1. git stash // 暂存内容
