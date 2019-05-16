@@ -176,7 +176,28 @@
 
 ### 寄生构造函数模式  
 
+对另一个构造函数（可以是原生数据对象）的扩展。  
+
+    function SpecialArray () {
+        var values = new Array() // 先定义一个对象
+        values.push.apply(values, arguments)
+        values.toPipeString = function () { // 再扩展这个对象(寄生于这个对象才扩展的)
+            return this.join('|')
+        }
+        return values
+    }
+
 ### 稳妥构造函数模式  
+
+定义一个对象的属性只能通过指定的方式访问，不能随意改动（甚至访问）。相较于构造函数更安全。因此叫稳妥构造函数。  
+
+    function Person (name, age) {
+        var o = new Object()
+        o.sayName = () => { // 只能通过sayName访问name属性。别的方法不可以访问。
+            return name
+        }
+        return o
+    }
 
 ## 继承  
 
