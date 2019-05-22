@@ -190,9 +190,9 @@ Array.from(obj, mapFn, thisArg) <=> Array.from(obj).map(mapFn, thisArg)
 
     Array.of('a', 3, 2, 'b', 'c') // ['a', 3, 2, 'b', 'c']
 
-**Array.copyWithin(target, start = 0, end = this.length)** 将数组内部指定位置的成员复制到其它位置（会覆盖原有成员）。  
+**Array.copyWithin(target, start = 0, end = this.length)** 将数组内部指定位置的成员复制到其它位置（会覆盖原有成员）。不会改变数组长度.  
 
-**Array.find(fn(item, index, arr) {})** 返回第一个符合条件的元素。  
+**Array.find(fn(item, index, arr) {}, obj)** 返回第一个符合条件的元素。  
 
     [3, 3, 5, -6, 12].find((item, index, arr) => {
         return item < 0

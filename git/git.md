@@ -36,6 +36,10 @@ Git是目前世界上最先进的分布式版本控制系统（没有之一）�
 因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心，如果有人故意冒充别人怎么办？这个不必担心，首先我们相信大家都是善良无知的群众，其次，真的有冒充的也是有办法可查的。  
 也可以下载git for windows
 
+##删除 repository
+
+	$ rm -rf .git
+
 ##create repository  
 
 	$ mkdir learngit
@@ -149,6 +153,9 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git clone git@github.com:feigebaobei/gitskills.git
 	$ git clone http://****:****/xxx.git
 
+    $ git remote rm origin
+    $ git remote add origin git@...
+
 ##分支
 1. 创建分支
 	$ git branch dev
@@ -173,6 +180,10 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	若合并分支时报错。说明2个分支中有同一个文件有不同的修改。这时需要把当前分支上的文件内容修改为要合并的分支上的文件一样。然后再合并。
 7. 查看分支合并图
 	$ git log --graph
+8. 比较2个分支的文件差异  
+	$ git diff branch1 branch2 --stat // 显示出所有有差异的文件列表.
+	$ git diff branch1 branch2 <path/to/file> // 显示指定文件的详细差异.  
+	$ git diff branch1 branch2 // 显示出所有有差异的文件的详细差异.  
 *tip:*master分支上是非常稳定的版本，用于发布。开发在dev分支上。各开发者在dev分支上再创建自己的分支。  
 ##bug分支  
 1. git stash // 暂存内容

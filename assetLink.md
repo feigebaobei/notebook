@@ -1,5 +1,13 @@
 #assetLink.md
 
+## 各cdn比较
+
+||||||
+|-|-|-|-|-|
+|1|bootcdn|快速，各版本。可复制script标签。|||
+|2|七牛表态文件|各版本，相关各插件，https/http，命令行工具。|staticfile cli 七牛静态资源命令行.每次都报超时.||
+|3|jsdelivr|国外，不用翻墙。有时不容易找到想要的文件。|||
+|4|google资源库|国外，在国内使用时速度有时不快。版本不好。有可能被墙，国外使用很好。|||  
 ##jquery3.3.1
 |名称|链接|
 |-|-|
@@ -168,7 +176,23 @@ layer。没有官方的cdn。只有网友自己推上去的layer。这些layer�
 |node 链接|https://cdn.jsdelivr.net/npm/md5.js@1.3.5/index.min.js|
 |eg|md5('str')|  
 
- */
+##underscore
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/underscore|  
+|underscore.js|https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.js|
+|underscore.min.js||  
+
+##lab
+
+|名称|链接|
+|-|-|
+|它是一个断言库||
+|jsdevlivr 链接|https://www.jsdelivr.com/package/npm/lab.js|  
+|lab.js|https://cdn.jsdelivr.net/npm/lab.js@2018.1.1/dist/lab.js|
+|lab.min.js|https://cdn.jsdelivr.net/npm/lab.js@2018.1.1/dist/lab.min.js|  
 
 
 
