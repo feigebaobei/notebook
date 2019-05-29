@@ -24,16 +24,44 @@
 ##4. 验证是否安装成功
 
 进入安装目录的bin目录下。打开cmd命令行。  
-执行`mongod dbpath ***\MongoDB\data\db`  
+执行`mongod dbpath path\to\MongoDB\data\db`  
 ![](../../image/db/mongodb/start.jpg)  
 在浏览器中输入`http://localhost:27017`。能看到`It looks like you are trying to access MongoDB over HTTP on the native driver port.`。说明安装成功。  
 
 ##5. 启动
 
+方法一
 net start MongoDB // 启动MongoDB服务  
 net stop MongoDB // 关闭MongoDB服务  
 C:\mongodb\bin\mongod.exe --remone // 移除MongoDB服务  
+方法二
+在全局变量中添加变量路径  
+方法三
+创建****.bat文件。  
+```
+    echo "MongoDB starting...."
+    mongod --dbpath path\to\mongodb\data
+    pause
+```
 
 ---
 
 2019/01/04 by stone
+
+
+**tip**
+创建数据库：
+如果没有添加到环境变量就会报错！！！根据提示输入相对路径即可
+
+PS D:\zyhsoftware\MongoDB\Server\4.0\bin> mongod --dbpath D:\zyhsoftware\MongoDB\Server\4.0\data\db
+mongod : 无法将“mongod”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径
+正确，然后再试一次。
+所在位置 行:1 字符: 1
++ mongod --dbpath D:\zyhsoftware\MongoDB\Server\4.0\data\db
++ ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (mongod:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+
+Suggestion [3,General]: 找不到命令 mongod，但它确实存在于当前位置。默认情况下，Windows PowerShell 不会从当前位置加载命令。如果信任此命令，请改为键入“.\mongod”。有关详细信息，请参阅 "get-help about_Command_Precedence"。
+PS D:\zyhsoftware\MongoDB\Server\4.0\bin> .\mongod --dbpath D:\zyhsoftware\MongoDB\Server\4.0\data\db
