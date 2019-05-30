@@ -64,6 +64,13 @@ git只能跟踪文本文件的改动
 	$ git status
 	$ git commit -m "message of resolve"//提交
 
+**取消跟踪文件**  
+
+	$ git rm --cached file.ext // 删除file.ext的跟踪,并保留本地文件.
+	$ git rm --f file.ext // 删除file.ext的跟踪,并删除本地文件.
+	$ git commit -m 'note' // 一定要有这步
+	// 不建议使用.gitignore方法
+
 ##版本回退  
 当反修改过的文本提交后都会有一个相应的版本号生成。如下图
 
