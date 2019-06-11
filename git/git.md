@@ -194,6 +194,10 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git log dev ^master // 查看dev有，master没有的提交。  
 	$ git log master..dev // 查看dev比master多提交了哪些提交内容。  
 	$ git log dev...master // 查看有什么不一样的提交。  
+8. 拉取远程分支
+	git checkout -b localbranchname origin/oribranchname // 本地分支与远程分支会建立映射关系。
+	git fetch origin oribranchname:localbranchname // 本地分支与远程分支不会建立映射关系。
+	git branch --set-upstream-to origin/oribranchname localbranchname // 使本地分支与远程分支建立映射关系
 *tip:*master分支上是非常稳定的版本，用于发布。开发在dev分支上。各开发者在dev分支上再创建自己的分支。  
 ##bug分支  
 1. git stash // 暂存内容
