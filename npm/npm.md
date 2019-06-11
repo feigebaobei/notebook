@@ -1,6 +1,7 @@
     npm install (with no args, in package dir)
     npm install [<@scope>/]<name>
     npm install [<@scope>/]<name>@<tag>
+    npm install [<@scope>/]<name>@<latest>
     npm install [<@scope>/]<name>@<version>
     npm install [<@scope>/]<name>@<version range>
     npm install <tarball file>
