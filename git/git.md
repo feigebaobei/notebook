@@ -195,6 +195,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git log master..dev // 查看dev比master多提交了哪些提交内容。  
 	$ git log dev...master // 查看有什么不一样的提交。  
 8. 拉取远程分支
+	git fetch
 	git checkout -b localbranchname origin/oribranchname // 本地分支与远程分支会建立映射关系。
 	git fetch origin oribranchname:localbranchname // 本地分支与远程分支不会建立映射关系。
 	git branch --set-upstream-to origin/oribranchname localbranchname // 使本地分支与远程分支建立映射关系
@@ -254,6 +255,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 
 ## 查看git配置信息  
 
+	git config --list // 查看当前用户在当前库的配置信息
 	git config --global --list // 查看当前用户（global）配置
 	git config --system --list // 查看系统config
 	git config --local --list // 查看当前仓库配置信息
