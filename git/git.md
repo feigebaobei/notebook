@@ -191,6 +191,7 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	$ git diff branch1 branch2 --stat // 显示出所有有差异的文件列表.
 	$ git diff branch1 branch2 <path/to/file> // 显示指定文件的详细差异.  
 	$ git diff branch1 branch2 // 显示出所有有差异的文件的详细差异.  
+	$ git diff version1 version2
 	$ git log dev ^master // 查看dev有，master没有的提交。  
 	$ git log master..dev // 查看dev比master多提交了哪些提交内容。  
 	$ git log dev...master // 查看有什么不一样的提交。  
