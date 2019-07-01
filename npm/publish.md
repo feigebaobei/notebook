@@ -103,6 +103,38 @@ index.js // 与package.json里的main值一样。它是作为入口文件的。
     // 解决方法
     // 改为正常的名字
 
+```
+npm ERR! path C:\Users\Admin\AppData\Local\Temp\npm-12284-cd09bc74\tmp\fromDir-8703ef80\package.tgz
+npm ERR! code EPERM
+npm ERR! errno -4048
+npm ERR! syscall unlink
+npm ERR! Error: EPERM: operation not permitted, unlink 'C:\Users\Admin\AppData\Local\Temp\npm-12284-cd09bc74\tmp\fromDir-8703ef80\package.tgz'
+npm ERR!  { Error: EPERM: operation not permitted, unlink 'C:\Users\Admin\AppData\Local\Temp\npm-12284-cd09bc74\tmp\fromDir-8703ef80\package.tgz'
+npm ERR!   cause:
+npm ERR!    { Error: EPERM: operation not permitted, unlink 'C:\Users\Admin\AppData\Local\Temp\npm-12284-cd09bc74\tmp\fromDir-8703ef80\package.tgz'
+npm ERR!      errno: -4048,
+npm ERR!      code: 'EPERM',
+npm ERR!      syscall: 'unlink',
+npm ERR!      path: 'C:\\Users\\Admin\\AppData\\Local\\Temp\\npm-12284-cd09bc74\\tmp\\fromDir-8703ef80\\package.tgz' },
+npm ERR!   isOperational: true,
+npm ERR!   stack: 'Error: EPERM: operation not permitted, unlink \'C:\\Users\\Admin\\AppData\\Local\\Temp\\npm-12284-cd09bc74\\tmp\\fromDir-8703ef80\\package.tgz\'',
+```
+
+大概意思是说没有登录.需要使用`npm login`登录。
+
+使用`npm login`登录时，输入Username/Password/Email后，提示：
+
+```
+npm ERR! code E409
+npm ERR! Registry returned 409 for PUT on http://registry.npm.taobao.org/-/user/org.couchdb.user:feigebaobei: [conflict] User feigebaobei already exists
+```
+
+去网上搜了一下，原因是淘宝镜像的问题。  
+
+`npm config set registry http://registry.npm.org`
+
+npm config [set | get | delete | list | edit]
+
 ###8. 删除
 
 当前包的作者可以删除。admin角色（24 小时内可删除）
