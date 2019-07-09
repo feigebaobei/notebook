@@ -1,12 +1,18 @@
 # worker
 
-在前端实现多线程工作。  
+在前端实现多线程工作。可以异步执行代码。  
 
 ## 使用分析
 
 ![过程泳道图](../image/javascript/worker.png)  
 
 ## api
+
+worker分为二种：专用worker/共享worker。它们的作用于它们的名字一样。专用worker，只有第一个生成它的脚本可使用，全局变量是：`DedicatedWorkerGlobalScope`。共享worker，可以被多个脚本使用。全局变量是：`SharedWorkerGlobalScope`.
+
+worker内不能操作dom.可操作WebSockets、indexedDB等。
+
+判断浏览器是否支持worker`window.Worker`
 
 ### 主线程
 
