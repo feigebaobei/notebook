@@ -1,12 +1,17 @@
 #Set
 
-set类似数组。其成员的值都是唯一的。  
+set类似数组。其成员的值都是唯一的。其键名与键值相同。  
 
 **数组去重**
 
     const set = new Set([1,2,3,2,4,2,3,4])
     console.log(set)
     [...new Set(array)] // 返回无重复的数组
+
+**数组与set转换**
+
+    var arr = Array.from(set)
+    var set = new Set(arr)
 
 **Set.add(value)** 为set对象添加一个值
 **Set.size** 返回set对象的长度
@@ -17,7 +22,7 @@ set类似数组。其成员的值都是唯一的。
 **Set.keys()** 返回一个以指定set对象的key组成的类数组对象。
 **Set.values()** 返回一个以指定set对象的value组成的类数组对象。
 **Set.entries()** 返回一个以key和value组成的数组组成的数组。
-**Set.forEach(fn(value, key) {})** 对set对象进行遍历操作。
+**Set.forEach(fn(value, key, set) {})** 对set对象进行遍历操作。(value 与 key 相同)
 
 set对象没有提供访问指定值的方法。要想访问指定值需要转为数组后再用数组的方法取指定值。  
 
