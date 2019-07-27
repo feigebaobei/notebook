@@ -42,18 +42,19 @@ node, npm
 ###6. 创建基本内容
 
 README.md // 介绍当前package，可以不创建。  
+npm init // 根据readme生成package.json文件。  
 index.js // 与package.json里的main值一样。它是作为入口文件的。  
 再创建package的内容。包文档结构如下：  
 
 ![](../image/npm/docuConstruct.jpg)  
 
-`assets` 是用来放置资源。  
-`assets/basic` 我个人习惯用来放置基本内容。可以不管。  
-`assets/img` 是用来放置图片。  
-`conponents` 是用来放置组件。  
-`conponents/vueName` 是用来放置当前组件需要的子组件。  
-`conponents/vueName/index` 一般是该组件。  
-`lib` 所有组件需要的数据资源。  
+`src/assets` 是用来放置资源。  
+`src/assets/basic` 我个人习惯用来放置基本内容。可以不管。  
+`src/assets/img` 是用来放置图片。  
+`src/conponents` 是用来放置组件。  
+`src/conponents/vueName` 是用来放置当前组件需要的子组件。  
+`src/conponents/vueName/index` 一般是该子组件的主体。  
+`src/lib` 所有组件需要的数据资源。  
 `.gitignore` 指定需要git忽略的内容。  
 `index` 当前包的入口文件。  
 `package` 当前包的信息。  
