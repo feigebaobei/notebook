@@ -75,7 +75,7 @@ cookie-parser 是一个解析/设置cookie的模块。在express框架使用需�
     app.use(cookieParser('signText')) // 若使用签名必须设置secret string,
     // app.use(cookieParser()) // 这是不使用签名的。
 
-这里有我翻译的[cookie-parser]()的文档。
+这里有我翻译的[cookie-parser](https://app.gitbook.com/@18515195415/s/bookrack/~/edit/drafts/-LkrcdXT7lc6rySclPKk/cookie-parser)的文档。
 
 ## 8. 日后项目改进。
 
