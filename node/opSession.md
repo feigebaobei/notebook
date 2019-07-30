@@ -78,11 +78,23 @@
 
     // @/models/user.js
 
+### 2. 连接数据库
+
+    // app.js
+    const mongoose = require('mongoose')
+    const url = 'mongodb://localhost:27017/confusion'
+    const connect = mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true})
+    connect.then(db => {
+      console.log('Connect correct to server')
+    }, err => {console.log(err)})
+
 ### 2. 创建注册的接口。
 
 注册的接口
     是否已经存在用户------存在------>不重复创建.
             |-----------不存在----->创建用户
+
+    // @/routes/users.js
 
 ### 3. 创建登录的接口。
 
@@ -91,12 +103,14 @@
         |-----------没登录----->验证username/password是否正确.----正确---->设置已经登录
                                         |----------------------不正确---->返回错误
 
+### 4. 创建登出的接口。
+
+
 
 ### 4. 编写登录验证的中间件。注意登录接口、登录验证中间件、登录后才可访问的接口的次序。
 
 
 
-### 5. 创建登出的接口。
 
 
 
