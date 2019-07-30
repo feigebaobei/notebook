@@ -88,13 +88,54 @@
       console.log('Connect correct to server')
     }, err => {console.log(err)})
 
-### 2. 创建注册的接口。
+### 3. 创建注册的接口。
 
 注册的接口
     是否已经存在用户------存在------>不重复创建.
             |-----------不存在----->创建用户
 
     // @/routes/users.js
+    // /session/first /session/view 注释了或删除了。
+    // 该文件在app.user(session(...))之前，所以得不到req.session
+    // // 查看session
+    // router.get('/session/first', (req, res, next) => {
+    //   let s = req.session
+    //   console.log(s)
+    //   res.send(s)
+    // })
+
+    // // 在session里保存浏览次数
+    // router.get('/session/view', (req, res, next) => {
+    //   let s = req.session
+    //   if (req.session.views) {
+    //     req.session.views++
+    //     res.send(`views: ${req.session.views} time.`)
+    //   } else {
+    //     req.session.views = 1
+    //     res.send('views: 1')
+    //   }
+    // })
+
+    router.post('/signup', (req, res, next) => {
+      console.log(req.body)
+      User.findOne({username: req.body.username}).then(user => {
+        if (user === null) {
+          return User.create({
+            username: req.body.username,
+            password: req.body.password
+          })
+        } else {
+          var err = new Error(`User ${req.body.username} already exist!`)
+          err.status = 403
+          next(err)
+        }
+      }).then(user => {
+        res.statusCode = 200
+        res.json({status: 'registration successful', user: user})
+      }).catch(err => {
+        res.send(err)
+      })
+    })
 
 ### 3. 创建登录的接口。
 
