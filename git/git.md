@@ -344,7 +344,17 @@ User 配置使用用户名
 	git remote rm origin
 	git remote add origin ****
 
+## 修改、删除远程仓库名称
 
+打开相应仓库——setting——修改成新名称——点击remane
+打开相应仓库——setting——在最下面有删除按钮，点击删除按钮——输入仓库的名字——点击确定
+
+## 远程仓库信息
+
+	git remote -v
+
+输出远程的仓库信息。
+若没有信息则说明远程没有相应仓库。
 
 ---
 2018/10/19 by stone
