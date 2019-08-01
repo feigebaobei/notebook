@@ -339,6 +339,10 @@ User 配置使用用户名
     sss -T git@github.com
     sss -T git@github.com
 
+## fatal: remote origin already exists
+
+	git remote rm origin
+	git remote add origin ****
 
 
 
