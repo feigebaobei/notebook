@@ -128,4 +128,33 @@ app.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), 
 } )
 ```
 
+### passport 基本使用方法
+
+初始化：app.use(passport.initialize());
+安装策略： passport.use(new BasicStrategy(...))
+使用策略：app.get('/...', passport.authenticate('basic'),(req,res)=>{...})
+其他方便函数：
+req.user 登陆后存在
+req.login() 仅在注册时手工调用。登陆时由策略自动调用。
+req.logout() 登出时调用
+
+无session的，如basic-auth，在每次使用时都要检查
+
+```
+app.get('/api/users/me',
+  passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json({ id: req.user.id, username: req.user.username });
+  });
+```
+
+有session的，在第一次由策略=>user。之后每次由sessionid=>user
+
+策略=>user 又分为2步
+web数据=>策略参数
+策略参数=>user
+
+sessionid=>user 也包含2件事
+serializeUser: user=>sessionid
+deserializeUser: sessionid=>user
 ## 使用jwt验证
