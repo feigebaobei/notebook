@@ -32,10 +32,57 @@ passport.deserializeUser(User.deserializeUser())
 
 ```
 
-3. 配置passport使用的策略及serializeUser / deserializeUser
-2. 在models/user.js中使用passport-local-mogoose(plm)
-3. 在routes/users.js中使用plm的注册、验证方法。
+3. 在models/user.js中使用passport-local-mogoose(plm)
 
+```
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema,
+  passportLocalMongoose = require('passport-local-mongoose'),
+  User = new Schema({
+    admin: {
+      type: Boolean,
+      default: false
+    }
+  })
+User.plugin(passportLocalMongoose)
+module.exports = mongoose.model('User', User)
+```
+
+4. 在routes/users.js中使用plm的注册、验证方法。
+
+```
+router.post('/signup', (req, res, next) => {
+  console.log(req.body)
+  User.register(new User({username: req.body.username}),
+    req.body.password,
+    (err, user) => {
+      if (err) {
+        res.statusCode = 500,
+        res.json({err: err})
+      } else {
+        passport.authenticate('local')(req, res, () => {
+          res.statusCode = 200
+          res.json({success: true, status: 'registration successful!'})
+        })
+      }
+    })
+})
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.statusCode = 200
+  res.json({success: true, status: 'you are successful logged in!'})
+})
+router.get('/logout', (req, res, next) => {
+  if (req.session) {
+    req.session.destroy()
+    res.clearCookie('session-id')
+    res.send('登出成功。重定向的事让前端做')
+  } else {
+    var err = new Error('you are not logged in!')
+    err.status = 403
+    next(err)
+  }
+})
+```
 ### 在npm上passport的文档。
 
 #### 策略
