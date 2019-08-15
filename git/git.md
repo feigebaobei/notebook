@@ -206,8 +206,9 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	
 > git stash save // save
 > git stash list // find all stash list
-> git stash pop [stashIndex] // pop last stash
+> git stash pop [stashIndex] // pop last stash 或弹出指定stash的内容。 git stash pop stash@{1}
 > git stash show // show diff cur stash and last push
+> git stash show [stash@{1}] [-p] // 查看哪些地方不同
 > git stash apply // 当前变化合并到最后一次stash
 > git stash drop [stashIndex] // drop stashIndex
 > git stash clear // clear all stash
