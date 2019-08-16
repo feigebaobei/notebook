@@ -136,3 +136,19 @@ es6不提供静态方法、静态属性。
     }
 
 每一个function都会形成一个作用域。变量声明时在函数中，所以就处于这个函数的作用域中，外部是无法访问的。要想访问变量，就必须new一个实例出来。  
+
+## 继承
+
+super() // 表示父类的构造函数。必须在子类的constractor里使用。
+先将父类实例对象的属性和方法加到this上，现用子类的构造函数修改this.
+父类的静态方法会被子类继承。
+
+## Object.getPrototypeOf(subClass) // 返回子类的父类
+
+## super()
+
+super() <=> subClass.prototype.constructor.call(this)
+super.param() // 在子类中使用父类的方法。
+super.param // 在子类中使用父类的属性。
+子类的__proto__指向父类
+子类的prototype属性的__proto__属性指向父类的prototype
