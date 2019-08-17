@@ -25,11 +25,15 @@
 ##yield  
 
 `yield`表达式，本身没有值，总是等于`undefined`  
+只能用在generator函数里。
+在表达式中使用时，必须放在`()`里
 
 ##与iterator接口的关系  
 
+Iterator接口是对应返回遍历的方法的。Generator函数正好是返回遍历器。
+
     var myIterator = {}
-    myIterator[Symbol.iterator] =  function * () {
+    myIterator[Symbol.iterator] =  function * () { // 为对象添加Iterator接口
         yield 1
         yield 2
         yield 3
@@ -39,6 +43,7 @@
 ## next方法的参数  
 
 该参数当作上一个yield表达式的返回值。  
+第一次执行next时传递参数是无效的。从第二次使用next()开始，使用参数才有效。
 
 ## for...of循环  
 
@@ -57,13 +62,13 @@
         console.log(`${key}: ${vlaue}`)
     }
 
-**Generator.prototype.throw()**  
+## **Generator.prototype.throw()**  
 1. iterator对象抛出错误时会被generator函数体内的捕获。第二次抛出不会捕获。  
 2. throw()方法执行时会以附带执行一次next()方法。  
 3. throw() 和g.throw()互不影响。  
 4. 一旦g执行过程中抛出错误，且没有被内部捕获。就不会再执行下去。再执行next()就会返回`{ value: undefined, done: true }`表示运行结束。  
 
-**Generator.prototype.return()**  
+## **Generator.prototype.return()**  
 
 1. 返回给定的值。并且终结遍历generator函数。  
 ```
