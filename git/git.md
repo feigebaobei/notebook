@@ -206,8 +206,9 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 	
 > git stash save // save
 > git stash list // find all stash list
-> git stash pop [stashIndex] // pop last stash
+> git stash pop [stashIndex] // pop last stash 或弹出指定stash的内容。 git stash pop stash@{1}
 > git stash show // show diff cur stash and last push
+> git stash show [stash@{1}] [-p] // 查看哪些地方不同
 > git stash apply // 当前变化合并到最后一次stash
 > git stash drop [stashIndex] // drop stashIndex
 > git stash clear // clear all stash
@@ -339,8 +340,22 @@ User 配置使用用户名
     sss -T git@github.com
     sss -T git@github.com
 
+## fatal: remote origin already exists
 
+	git remote rm origin
+	git remote add origin ****
 
+## 修改、删除远程仓库名称
+
+打开相应仓库——setting——修改成新名称——点击remane
+打开相应仓库——setting——在最下面有删除按钮，点击删除按钮——输入仓库的名字——点击确定
+
+## 远程仓库信息
+
+	git remote -v
+
+输出远程的仓库信息。
+若没有信息则说明远程没有相应仓库。
 
 ---
 2018/10/19 by stone

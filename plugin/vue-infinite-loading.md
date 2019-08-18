@@ -55,3 +55,10 @@ $state.reset() => 表示
 3. 页面初始化时，渲染加载按钮（也就是说不渲染InfiniteLoading组件）。  
 4. 点击加载按钮时。改变加载按钮的显示条件。出现InfiniteLoading组件，它开始工作。  
 5. InfiniteLoading加载数据后再次改变加载按钮的显示条件。  
+
+### vue-infinite-loading与选项卡结合使用。
+
+为vue-infinite-loading组件设置`:indentifier="sv"`
+为一个切换tab的事件（@click="fn"）绑定函数
+在该函数体中清空列表后改变sv
+
