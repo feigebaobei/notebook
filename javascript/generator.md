@@ -2,7 +2,7 @@
 
 1. 它是一个状态机，封装了多个内部状态。  
 2. 执行Generator函数时返回一个遍历器对象（iterator）。  
-3. 使用`function`与函数名之间的`*``。  
+3. 使用`function`与函数名之间的`*`。demo:`function * gen() {yield 'string'}`  
 4. 内部使用`yield`表达式。只能在genrator函数内部使用。  
 5. yield表达式必须在
 
@@ -24,7 +24,9 @@
 
 ##yield  
 
-`yield`表达式，本身没有值，总是等于`undefined`  
+Generator函数提供了一个可以暂停执行的函数。通过调用`next()`执行下一个内部状态。由`yield`表达式表示暂停标志。
+`yield`表达式，本身没有值，总是等于`undefined`，所以使用yield表达式时需要next()赋值。  
+yield 是惰性求值，只有执行到yield表达式时才求值。
 只能用在generator函数里。
 在表达式中使用时，必须放在`()`里
 
@@ -43,11 +45,14 @@ Iterator接口是对应返回遍历的方法的。Generator函数正好是返回
 ## next方法的参数  
 
 该参数当作上一个yield表达式的返回值。  
+`next()`可以写入参数。表示上一次yield的返回值。
 第一次执行next时传递参数是无效的。从第二次使用next()开始，使用参数才有效。
 
 ## for...of循环  
 
 只作用于yield表达式的。不作用于return。  
+若遇上return，则停止执行。
+generator对象返回的是iterator对象。且不需要执行next方法。
 
     // define
     function * objectEntries(obj) {
@@ -62,13 +67,32 @@ Iterator接口是对应返回遍历的方法的。Generator函数正好是返回
         console.log(`${key}: ${vlaue}`)
     }
 
+    function * numbers () {
+        yield 1
+        yield 2
+        return 3
+        yield 4
+        yield 5
+    }
+    [...numbers()] // [1, 2]
+    Array.from(numbers())
+    let [x, y] = numbers() // x: 1, y: 2
+    for (let n of numbers()) {
+        // 1
+        // 2
+    }
+
 ## **Generator.prototype.throw()**  
-1. iterator对象抛出错误时会被generator函数体内的捕获。第二次抛出不会捕获。  
+
+1. iterator对象(generator方法返回的)抛出错误时会被generator函数体内的捕获。第二次抛出时generator方法不捕获。  
+3. generator方法内部没写try...catch,则触发外部的try...catch。若外部没有try...catch，则报错并中断执行。
 2. throw()方法执行时会以附带执行一次next()方法。  
 3. throw() 和g.throw()互不影响。  
 4. 一旦g执行过程中抛出错误，且没有被内部捕获。就不会再执行下去。再执行next()就会返回`{ value: undefined, done: true }`表示运行结束。  
 
 ## **Generator.prototype.return()**  
+
+在generator函数内使用try...finally，并使用g.return(value)，则在执行g.return前执行finally内的代码再执行g.return(value)。此时返回的内容是`{value: value, done: true}`
 
 1. 返回给定的值。并且终结遍历generator函数。  
 ```
@@ -92,6 +116,7 @@ Iterator接口是对应返回遍历的方法的。Generator函数正好是返回
 **`yield*`**  
 
 在一个g内部调用另一个g.  
+返回iterator对象。  
 
     function * bar () {
         yield: 'x';
@@ -113,7 +138,8 @@ Iterator接口是对应返回遍历的方法的。Generator函数正好是返回
 **对象属性的generator函数**  
 
     let obj = {
-        * g () {...},
+        * g () {...}, // 在属性前写 *
+        // or
         k: function * () {...}
     }
 
@@ -133,6 +159,68 @@ Iterator接口是对应返回遍历的方法的。Generator函数正好是返回
     obj.a // 1
     obj.b // 2
     obj.c // 3
+
+**把generator方法改为构造函数**
+
+    function * gen () {
+        this.a = 1
+        yield this.b = 2
+        yield this.c = 3
+    }
+    function F () {
+        return gen.call(gen.prototype)
+    }
+    var f = new F()
+    f.next() // {value: 2, done: false}
+    f.next() // {value: 3, done: false}
+    f.next() // {value: undefined, done: true}
+    f.a // 1
+    f.b // 2
+    f.c // 3
+
+## 应用
+
+### 异步操作的同步化表达
+### 控制流管理
+
+    let steps = [step1Func, step2Func, step3Func];
+    function* iterateSteps(steps){
+      for (var i=0; i< steps.length; i++){
+        var step = steps[i];
+        yield step();
+      }
+    }
+
+    var it = iterateJobs(jobs);
+    var res = it.next();
+    while (!res.done){
+      var result = res.value;
+      // ...
+      res = it.next();
+    }
+
+### 部署iterator接口
+
+    function * iterEntries(obj) {
+        let keys = Object.keys(obj)
+        for (let key of keys) {
+            yield [key, obj[key]]
+        }
+    }
+    function * makeSimpleGenerator(arr) {
+        var index = 0
+        while (index < arr.length) {
+            yield arr[index++]
+        }
+    }
+
+### 作为数据结构
+
+    function * doStuff () {
+        yield ...
+        yield ...
+        yield ...
+    }
 
 **斐波那契数列**  
 
