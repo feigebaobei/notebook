@@ -15,6 +15,7 @@
 
 `Me`只能在class内部使用。  
 使用class表达式，可以写出立即执行的class  
+class里定义的方法不可枚举`Object.keys(Me.protoType) // []`
 
     person.sayName() // 'tom'    
 
@@ -75,7 +76,26 @@ constructor里定义的属性都是实例自身的属性。不在constructor里�
 
 ## generator方法
 
-在方法前加*，就是generator方法。
+在方法前加*，就是generator方法。也就是为使用`for...of`提供了条件。
+
+```
+class Foo {
+    constructor (...args) {
+        this.args = args
+    }
+    *[Symbol.iterator] () {
+        for (let arg of this.args) {
+            yield arg
+        }
+    }
+}
+for (let x of new Foo('first', 'second', 'third')) {
+    console.log(x)
+}
+// 'fisrt'
+// 'second'
+// 'third'
+```
 
 ## 静态方法
 
@@ -103,7 +123,7 @@ constructor里定义的属性都是实例自身的属性。不在constructor里�
 
 ## this
 
-class内部的方法中的this若没有指定则指向undefined。
+class内部的方法中的this默认指向类的实例。
 
     class Animal {
         constructor (name) {
@@ -143,7 +163,18 @@ super() // 表示父类的构造函数。必须在子类的constractor里使用�
 先将父类实例对象的属性和方法加到this上，现用子类的构造函数修改this.
 父类的静态方法会被子类继承。
 
-## Object.getPrototypeOf(subClass) // 返回子类的父类
+```
+class ColorPoint extends Point {
+}
+// 等同于
+class ColorPoint extends Point {
+  constructor(...args) {
+    super(...args) // 先使用super()，后为this绑定属性。
+  }
+}
+```
+
+## Object.getPrototypeOf(SubClass) // 返回子类的父类
 
 ## super()
 
@@ -152,3 +183,9 @@ super.param() // 在子类中使用父类的方法。
 super.param // 在子类中使用父类的属性。
 子类的__proto__指向父类
 子类的prototype属性的__proto__属性指向父类的prototype
+
+## 类的prototype属性和__proto__属性
+
+    SubClass.__proto__ === Class // 子类的`__proto__`指向父类
+    SubClass.prototype.__proto__ === Class.prototype // 子类的原型对象的__proto__指向父类的原型对象。
+
