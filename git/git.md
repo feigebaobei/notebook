@@ -237,8 +237,12 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 1. 创建标签。
 	$ git tag v1.0
 	$ git tag v1.0 f52c633
+	git tag v0.0.1 // 轻量级标签（保存提交对象的校验与信息的文件）
+	git tag -a v0.0.2 -m 'comment' // 含附注标签（）
+	git tag -s v0.0.2 -m 'comment'	 // 签署标签（）
 2. 查看所有标签
-	$ git tag
+	$ git tag // 查看所有标签
+    $ git tag -l 'v1.4.*' // 查看1.4.*的版本
 3. 查看标签信息
 	$ git show v1.0
 4. 为标签写说明
