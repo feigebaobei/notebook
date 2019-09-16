@@ -63,6 +63,7 @@ git只能跟踪文本文件的改动
 	$ git add readme.txt// 在提交前添加需要提交的文件
 	$ git status
 	$ git commit -m "message of resolve"//提交
+    $ git commit --amend // 修改git commit i 进入编辑状态 修改注释 esc :wq
 
 **取消跟踪文件**  
 
@@ -78,6 +79,11 @@ git只能跟踪文本文件的改动
 ![git log](../image/gitLog.png)  
 
 	$ git reset --hard HEAD^
+	git reset --soft <commit> // 重置head，不碰触文件。
+	git reset --hard <commit> // 重置head.把跟踪文件改为修改前
+	git reset --mixed <commit> // git reset <commit>的默认操作。重置head,不重置工作树。保存文件变更，不标记为commit
+	git reset --merge <commit> // 重置head.保留工作树与commit之间不同的文件。若这些文件有没有添加到舞台的文件，则中止重置。
+	git reset --keep <commit> // 重置head.保留工作树与commit之间不同的文件。若这些文件有本地变更，则中止重置。
 `HEAD`表示当前版本  
 `HEAD^`表示上一个版本  
 `HEAD^^`表示上上个版本  
@@ -99,7 +105,7 @@ git只能跟踪文本文件的改动
 	$ git reset --hard 2bee9c89
 在`--hard`后写下版本号。（可以不写全，git会帮我们找到，要从开头写，也叫做commit id）。  
 
-	$ git reflot// 查看命令历史  
+	$ git reflog// 查看命令历史  
 
 ##工作区(working directory)  
 工作区就是.git文件夹在的文件夹  
