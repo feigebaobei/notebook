@@ -289,7 +289,52 @@ router file
     })
 
 ## 路由懒加载  
-（待续）  
+
+      {
+        path: '',
+        component: resolve => {
+          require(['@/views/consumer/market'], resolve)
+        }
+      },
+
+# vue-router原理
+
+在vue实例中添加`_route`属性，并为其设置存取描述符。当`_route`改变时更新视图。
+
+## 1. 在vue实例中混入_route属性。
+使用`Vue.use(Router)`混入属性。在高版本的vue里，vue已经帮我们做了，所以不用再写了。
+
+## 2. 为_route设置存取描述符。
+
+原码里是这样定的。
+
+    // 为 vue 实例定义数据劫持
+    Vue.util.defineReactive(this, '_route', this._router.history.current)
+
+当_route改变时会更新视图。
+
+## 3. vue-router有三种模式。
+
+     / history 先使用history模式，若浏览器不运行history模式，再使用hash模式。  \
+     |                                                                      >浏览器支持的械
+     | hash 默认使用该模式。                                                 /
+    /
+    \
+     | abstract 非浏览器支持的模式
+     |
+     \
+
+## 4. 改变路由
+
+改变路由的方法有：`push``replace``go``back``forward``addRoutes`等。
+
+## 5. 更新视图
+
+以上这些方法会在各模式下触发相应的事件。
+
+history模式下为history.pushState/history.replaceState/popstate事件绑定方法。
+hash模式下为window.hash/window.replace/window.onpopstate事件绑定方法。
+非浏览器模式（即abstract）下，我不会。
 
 ----
 
