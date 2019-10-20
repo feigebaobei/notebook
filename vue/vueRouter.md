@@ -302,7 +302,9 @@ router file
 在vue实例中添加`_route`属性，并为其设置存取描述符。当`_route`改变时更新视图。
 
 ## 1. 在vue实例中混入_route属性。
-使用`Vue.use(Router)`混入属性。在高版本的vue里，vue已经帮我们做了，所以不用再写了。
+使用`Vue.use(Router)`混入属性。
+vue安装插件时会使用插件的install方法。
+vue-router相对于vue是一个插件。上面这行代码会调用vue-router里的install方法。
 
 ## 2. 为_route设置存取描述符。
 
