@@ -3,6 +3,12 @@
 状态管理。  
 在定义有state的组件及子组件都可以访问到数据。  
 
+## vuex的原理
+
+`store._vm.$data.$$state === store.state`
+在vue类上安装`$store`属性。里面会有store/commite/dispatch/getters等。分别是保存数据、同步修改数据、异步触发同步修改数据、得到数据。
+把传入的state作为一个隐藏的vue组件的data.再之后的原理就和vue的原理一样了。
+
 ##定义组成部分
 
 ###state
