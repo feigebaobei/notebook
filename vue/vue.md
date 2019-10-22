@@ -387,3 +387,41 @@ vue把 data 选项中的属性使用 object.defineProperty 全部转变 setter/g
 	Vue.nextTick(() => {
 		...
 	})
+
+## mixin
+
+它的作用是把指定的一些模块（如[A, B, C]）混入到一个指定的模块（如a.vue里的js模块）里。
+1. 数据对象、computed、filter、methods等会合并。以组件数据优先。
+2. 混入对象的生命周期钩子函数优先于组件的钩子函数。
+
+### demo
+
+	// mixin.js
+	import {...} from a.js
+	export default {
+		data () {
+			return {
+				...
+			}
+		},
+		computed: {...},
+		filters: {...},
+		methods: {...},
+		mounted: {...},
+		...
+	}
+	
+	// *.vue
+	import mixin from 'path/to/mixin'
+	export default {
+		mixins: [mixin],
+		data () {
+			return {...}
+		},
+		computed: {...},
+		...
+	}
+
+# vue的原理。
+
+把每个数据添加到观察者模式里。使用存取描述符处理绑定数据改变时重新渲染文档片段。在vue对象初始化时会把所有数据添加到观察者模式内。并把使用初始数据渲染出文档片段（此时是虚拟文档）再添加到指定dom里。
