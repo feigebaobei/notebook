@@ -314,19 +314,18 @@ git 对象类型
     $ rm -rf .git
 
 ##同一台电脑配置多个git账号
-`http://pan.baidu.com/s/1o8PbzMM`  
+这是参考的文档：`https://www.cnblogs.com/popfisher/p/5731232.html`  
 在管理员模式下进行。  
 
 ###1. 生成github.com的公钥、私钥。  
 
-    ssh-keygen -t rsa -C 10000@qq.com
+    ssh-keygen -t rsa -C 10000@qq.com // 邮箱使用自己的。
 
-命名为id_rsa_github  
-密码为123456  
+根据提示输入id_rsa的文件名（包括目录）。一般不要在这里修改文件名。再生成指纹（）文件后再修改文件名。此时修改需要保存公钥与私钥一致。（即：`id_rsa_name`与`id_rsa_name.pub`）
 
 ###2. 生成git.other.com的公钥、私钥。  
 
-    ssh-keygen -t rsa -C 10000@qq.com
+    ssh-keygen -t rsa -C 10000@qq.com // 邮箱使用自己的。
 
 使用邮箱地址可以相同。  
 命名为id_rsa_git_other // 不可与第一步中一样  
