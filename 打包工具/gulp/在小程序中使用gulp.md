@@ -28,7 +28,7 @@ function _join (dirname) {
 }
 // 匹配路径
 const path = {
-	lessPathl: ['src/**/*.less'],
+	lessPath: ['src/**/*.less'],
     jsPath: ['src/**/*.js'],
     copy: ['src/**/*.wxml', 'src/**/*.json', 'src/**/*.wxs']
 }
