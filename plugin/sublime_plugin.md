@@ -63,7 +63,7 @@ less语言高亮
 为css添加私有前缀。  
 使用方法：。。。。  
 
-##jamblys clipboard history
+##Jimbly's clipboard history
 粘贴板历史记录。  
 ctrl+shift+v显示复制的记录。  
 
@@ -121,6 +121,27 @@ ctrl+shift+c
 1. ctrl+shift+p  
 2. remove package  
 3. name // 输入插件的名称  
+
+## typescript
+Rename	^T ^M
+Find references	^T ^R
+Next reference	^T ^N
+Prev reference	^T ^P
+Format document	^T ^F
+Format selection	^T ^F
+Format line	^;
+Format braces	^ Shift ]
+Navigate to symbol	^ Alt R
+Go to definition	^T^D or F12
+Trigger completion	^Space
+Trigger signature help	Alt+,
+See previous signature in the tooltip	Alt + up
+See next signature in the tooltip	Alt + down
+Paste and format	^V or ⌘V
+Quick info	^T ^Q
+Build	(Win)^B or F7, (OSX) ⌘B or F7
+Error list	(via Command Palette)
+
 
 ---
 
