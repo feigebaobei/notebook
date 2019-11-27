@@ -60,7 +60,7 @@ index.js // 与package.json里的main值一样。它是作为入口文件的。
 `package` 当前包的信息。  
 `README.md` 介绍当前包。  
 
-当前包的入口文件中index.js文件。在该文件中需要把名组件输出。  
+当前包的入口文件中index.js文件。在该文件中输出各个组件。  
 
     // package/index.js
     import first from './src/components/first'
