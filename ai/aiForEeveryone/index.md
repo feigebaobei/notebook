@@ -1,3 +1,5 @@
+弱人工智能(Artificial Narrow Intelligence，简称ANI)、强人工智能(Artificial General Intelligence简称AGI)、超人工智能(Artificial Superintelligence简称ASI)
+
 请ai做一些自动化的任务比做一起自动化的工作更好些。
 如：让ai帮外科医生做x片识别，比让ai做外科医生更好。
 实现ai项目时若有大量数据更好，有小量数据也行。需要数据量有大小由做什么ai项目决定。
