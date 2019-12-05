@@ -19,7 +19,7 @@ Command + D：|选择当前光标所在的一个词 （继续按会继续选取�
 Command + K + U: |转换为大写  
 Command + K + L: |转换为小写  
 Command+ Shift + V: |粘贴并缩进  
-Command + F：|查找  
+Command + F：|查找。使用esc关闭  
 Command + Shift + F：|查找替换  
 Command + /: |注释/非注释  
 Command + option + [: |折叠代码  
