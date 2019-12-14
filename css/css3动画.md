@@ -63,7 +63,7 @@ animation定义动画的属性值。
 - animation-delay  
 - animation-iteration-count 动画重复播放的次数  
 - animation-direction 定义动画在下一周期是否逆向播放 normal|reverse|alternate|alternate-reverse|initial|inherit  
-- animation-fill-mode 动画不播放时的样式
+- animation-fill-mode 动画不播放时的样式（动画结束时的状态） none|forwards|backwards|both
 - animation-play-state 定义动画是否运行或停止 paused|runing  
 
 ![](./image/animation.png)
