@@ -7,6 +7,7 @@ File对象是基于Blob类型的对象。也有人说成：file对象是特殊�
 ### 构造函数
 
 `new File(bits, name[, options])`
+`var file = new File([blob], name[, options])`
 bits : file对象的数据。（array/blob/domstring）
 name : file对象的name值。  
 options: type MIME类型，lastModified 最后修改的时间值（unix时间戳）
@@ -28,4 +29,4 @@ file 没有方法。有一个从blob继承来的方法——slice.
 
 ## FileList
 
-    document.querySelector('#inputFile').files
+    document.querySelector('#inputFile').files[n]
