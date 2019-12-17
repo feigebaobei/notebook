@@ -25,9 +25,6 @@ miner
     5. broadcast new block
     6. confirm tranctions
 
-
-<<<<<<< HEAD
-
 # blockchain technologey (a step-by-step guide for beginners)
 
 数字信息可以被分配，不可以复制。区块链创建了一个新的互联网的主干。最初的设计是为了数字货币——bitcion。现在发现它还有别的潜在的用途。
@@ -90,7 +87,7 @@ miner
 3. 把高级编辑语言转化为EVM后执行。
 4. 
 5. 
-=======
+
 学习目标
 1. 讨论智能合约。
 2. 绘制以太访区块链的协议、元素结构和操作。
@@ -113,5 +110,124 @@ miner
 2. 当合约被事件触发（如：时间到期，提取资源）时。代码会执行。
 3. regulators会观察区块链中的交易的活动，理解这个市场。在此期间会一直保持私密。
 分布式总账也可以保存复制文档。它是安全的、不可修改的。
->>>>>>> e88ecaf87380bcd353e815397e195cdc4a5cd837
+
+# 算法和技术
+
+我们将讨论非对待加密的概念，定义hash的概念，探索使用算法去管理交易的全部和区块链上的区块的技术
+
+## goal of learning
+
+1. 概览公钥的加密工作。
+2. 解释简单的hash./點克尔树hash。
+3. 探索在区块链上使用hash和加密的应用。
+
+## public-key crytographic
+
+### discuss the concept of asymmetric key encryption
+
+在区块链协议中会用到各种各样的hash.我们将解释这些算法中的技术。如何管理交易的完整性和区块链中区块的完整性。
+学习的目标
+1. 概览公钥加密的工作方法。
+2. 理解简单的hash和默克尔树hash.
+3. 探索在保存区块链是使用hash和加密。
+
+### 公钥加密
+
+在分布式的区块链中的成员之间没有必要知道彼此。证书不能验证谁是许可证的驱动者。成员的加入、离开都是自愿的。
+如何知道（各个交易的正确、完整、。。。）都需要使用这节课的公钥加密算法。
+让我们学习一些简单的对称加密算法。使用相同的key加密、解密。（Ceasar Encryption）
+ceaser 在字母表中移动固定的数字。
+original -> move fixed number -> crypttion
+         <- 反向移动 <-
+实际使用中比上面的例子复杂很多。
+使用对称加密。
+1. 很容易从密文中得到密钥。
+2. 如何确定密钥传递给了交易参与方。
+这些问题会在彼此不知道对方的分布式网络中恶化。
+如何验证公钥加密地域的问题。
+使用2个不同的密钥代替同一套密钥解决加密问题。
+每个区块有各自的公钥、私钥。公钥是公开的，私钥是保存在自家的。下面它们的典型的使用过程。
+加密方法有2个属性（公钥、私钥）
+1. 用来源方的私钥加密数据
+2. 用来源方的公钥加密数据
+3. 把数据传递给接收方
+4. 接收方用自己的私钥解密数据
+5. 接收方用来源方的公钥解密数据
+这种加密方式确保只有指定的来源方可以发信息，只有指定的接收方可以接收信息。
+比较流行的公钥加密方法是Rivest Shamir Adleman(rsa)算法。通常这种加密算法是无密码用户身份验证。虽然这种加密算法在很多应用中使用，但是区块链需要一种高效并且强壮的算法。通常高效在区块链上的很多不同操作上决定性要求。
+Elliptic Curve Cryptgraphy(椭圆曲线密码体)
+bitcion / ethereum block chain都使用ecc家祖算法生成公钥、密钥对。
+为什么使用ecc不使用rsa?
+在给定bit数量时ecc比rsa强壮。256位ecc约等于3072位rsa加密强度。因此bit币、以太访都使用ecc加密。
+
+## secure hash
+
+你可以会问，我们为什么会学习加密hash.HAHSDF
+这节课我们将学习hash有区块链中的决定性作用、交易的完整性和数据的保密性。你还会听到hash rate / hash power.你应该有一些理解基本的hash技术。这节课的初衷就是让你提高这方面的知识。
+hash function / hash transform / maps 都是从一个任意长度的数据到一个惟一的固定长度的值。可以输入文档、tree data、block data甚至一个轻微不同的数据都会输出一个完全不同的输出值。
+hasf funciton 有2个基本的请求。如下：
+1. 一个算法function
+2. 自由碰撞。
+第一个参数
+第二个参数是代表惟一的原来的项。保证极小的可能使用不同数据对应到相同的hash值。
+选择一种很强算法提供这些参数，比如：secure hash.并且选择使用合适的位数在hash值中。通常使用256位hash.常用的hash function有：SHA-3/SHA-256/Keccak.
+256位hash有多好？
+一个256位的哈希空间的确非常大。
+我们将比较2种组织内的成员的不同的hash方法。简单的hash，merkle tree hash.
+我们将使用ADD作为hash function说明simple hash / merkle tree hash.
+我们使用数据10，4，6,21,19...60作为hash function.实际上hashing function 是非常复杂的并且SHA-3的变化，并且data value是非常巨大的。大体上256-512位。若使用简单hash方法则结果是所有的数据项被线性化并hash.若使用树结构方法，则数据在树结构的叶子节点处。这2种方法可以达到相同的hash结果。
+什么时候使用tree-structured hash/simple hash?
+当有确定项的数据被hash或验证复合block的完整性（不是个人项的完整性）是使用simple hash.
+当块与块的项的数量不同时使用tree-structured hash.如：交易数量不同，number of state,number of receipts.
+提示：state是多变的，可能是智能合约执行改变的，也可能是收到执行结果时。
+我们将学习更多关于他们的用法。
+tree-structure hash在执行重复操作时比较高效。比如：从一个块到下一个块交易改变、状态改变。
+在以太访中hashing function 被用在生成账目地址、数字签名、交易哈希、状态哈希、收到哈希、块头部哈希。
+
+## transaction integrity
+
+验证交易的完整性需要：
+1. 一个安全的惟一的地址。我们使用标准的方法验证在分布式网络中的参与者的惟一性。
+2. 使用发送者的数字签名验证交易
+3. 验证内容是否被修改。
+我们使用混合hash和公钥加密。我们将在最后2节课解决为些问题。让我们从账目的地址开始吧。生成账目的地址需要使用公钥-私钥对。
+1. 生成一个256位的随机数字作为私钥。
+2. 使用ecc加密算法、私钥，生成惟一的公钥。这就是一个私钥公钥对。
+3. hash方法使用公钥生成账目的地址。
+地址在大小上较短，只有20-160位.
+现在我们已经知道账目地址了。让我们去学习从这个地址开始初始化交易。交易转换资源必须验证、不可否认、不可修改。
+
+## securing blockchain
+
+main components of Ethereum block:
+1. block header
+2. transaction hash
+3. transaction root
+4. state hash
+5. state root
+integrity of a block
+1. block header不可以被修改。
+2. 交易不可被修改。
+3. 计算交易状态，hashed和验证。
+区块链不可被修改。在以太访中block hash 是在所有元素的头部的block.
+block header {
+  previous hash
+  nonce
+  timestamp
+  omer stamp
+  beneficiary
+  logs bloom
+  difficulty
+  extra data
+  block number
+  gas limit
+  gas used
+  max hash
+  state root
+  transaction root
+  receipt root
+}
+哈希和加密用于区块链上的各种各样的元素的安全。
+
+
 
