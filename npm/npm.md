@@ -71,6 +71,19 @@ npm
 使用的工具适合使用全局安装。  
 项目的依赖适合使用本地安装。  
 
+### 安装过程
+
+1. 执行`npm install`命令。
+2. npm向registry查询模块压缩包。
+3. 下载压缩包，存放在~/.npm目录
+4. 解压压缩包到当前目录的node_modules目录。
+
+本地会有2份数据，分别在`~/.npm`，`node_modules`里。因此可以实现缓存机制。
+```
+npm cache clean
+npm cache clean --force
+```
+
 ##安装淘宝镜像  
 
     npm i -g cnpm --regitstry=https://registry.npm.taobao.org
