@@ -8,7 +8,6 @@ ng-model
   把html元素绑定到程序数据。
   数据双向绑定。
   应用状态
-    invalid
     ...
 ng-bind
   绑定变量为dom元素的innerHTML
@@ -19,6 +18,51 @@ ng-show
 ng-disabled
 ng-hide
 ng-click
+ng-view
+  开创一个视图区，只占位符，没有值。
+
+## angular方法
+
+module
+config
+run 初始化全局数据，省略了控制器的环节，直接把数据挂载到全局作用域下。
+  ```
+  app.run(['$rootScope', '$timeout', function ($routScope, $timeout) {...}])
+  ```
+directive
+  ```
+  app.directive('directiveName', function () {
+    return {
+      restrict: string,
+      replace: boolean 是否使用html模板替换原来的元素
+      priority 规定指令的优先级
+      template string
+      templateUrl string
+      scope boolean | object
+        ture 继承父作用域，并新建独立作用域
+        false 共享父作用域
+        object 不继承父作用域，创建新的独立作用域
+          {
+            key0: '@' 子可以感受到父的变化，反之不行。
+            key0: '&' 双向绑定
+            key0: '=' 以函数的形式从父作用域中读取属性。
+          }
+      require
+    }
+    })
+  ```
+component 1.5.+
+  ```
+  app.component('componentName', {
+    template: string | funtion,
+    templateUrl: string,
+    transclude: boolean,
+    binding: object,
+    controllerAs: string,
+    require: string,
+    controller: string |function
+  })
+  ```
 
 ### 自定义指令
 
@@ -116,7 +160,7 @@ angular.module('myApp', []).controller('myCtrl', function () {...})
     ...
   })
 
-### http
+### http ($http)
 
 ```
 app.controller('c', function ($scope, $http) {
@@ -128,6 +172,32 @@ app.controller('c', function ($scope, $http) {
 
 $http.get('url').success(function (res) {...})
 ```
+
+### q ($q)
+
+angularjs自己封闭的一种promise对象。它有三种常用的方法。
+1. defer()
+2. all()
+3. when()
+
+#### defer
+
+该方法返回一个deferred对象。这个对象可以有3个常用的方法：
+resolve, reject, notify.
+在$q中使用resolve()变成完成状态。使用reject()变成拒绝状态。
+defer()用于创建一个deferred对象。defer.promise返回一个promise对象。
+
+#### all
+
+all()把多个promise对象组合成在一起。当所有promise执行成功后执行下面的代码。
+```
+$q.all([p0, p1, p2]).then(...).catch(...)
+```
+
+#### when
+
+when()方法使用的参数不确定。是否是promise都可以。
+
 ## select
 
 ```
