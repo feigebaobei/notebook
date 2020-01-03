@@ -528,25 +528,165 @@ addAfter1Second: function * () {...}
 call: 执行异步函数。
 put: 发出一个action，类似dispatch.
 
+# 输出文件
+
+## dva
+
+默认输出文件
+
+## dva/router
+
+默认输出`react-router`接口。
+`react-router-redux`接口通过routerRedux输出。
+`import {Router, Route, routerRedux} from 'dva/router`
+
+## dva/fetch
+
+异步请求库，输出isomorphic-fetch接口。
+
+## dva/sage
+
+输出redux-saga接口。
+
+## dva/dynamic
+
+解决组件动态加载问题的util方法
+
+```
+import dynamic from 'dva/dynamic'
+const UserPageComponent = dynamic({
+  app,
+  models: () => {
+    import('./models/users')
+  },
+  component: () => import('./routes/UserPage')
+  })
+```
+opts: {
+  app: dva实例
+  models: 返回promise数组的函数，promise返回dva model
+  component: 返回promise方法，promise返回react component
+}
+
 # api
 
+`const app = dva(opts)`
+opts: {
+  history: 默认hashHistory,
+  // 若想使用browserHistory，需要引入依赖。
+  // import createHistory from 'history/createBrowserHistory'
+  // history: createHistory()
+  initialState: detail {}
+  // hook
+  onError
+  onAction
+  onStateChange
+  onReducer
+  onEffect
+  onHmr
+  // 额外的reducer
+  extraReducers
+  // 额外的StoreEnhancer
+  extraEnhancers
+}
 
-## 通信问题
-## 通信问题
-## 通信问题
-## 通信问题
+## app.use(hooks)
 
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
-# 介绍
+配置hooks/注册插件。
+```
+import createLoading from 'dva-loading'
+...
+app.use(createLoading(opts))
+```
+
+### onError
+
+1. effect执行出错时触发。
+2. subscription通过done抛出错误。
+
+一般这么对待错误信息。
+```
+import {message} from 'antd'
+const app = dva({
+  onError (e) {
+    message.error(e.message || 'strign', 3)
+  }
+  })
+```
+
+### onAction(fn | fn[])
+
+```
+import createLogger from 'redux-logger'
+const app = dva({
+  onAction: createLogger(opts)
+  })
+```
+
+### onStateChange(fn)
+
+state改变时触发，用于state/localStorage/server……
+
+### onReducer(fn)
+
+封装 reducer 执行。比如借助 redux-undo 实现 redo/undo ：
+```
+import undoable from 'redux-undo';
+const app = dva({
+  onReducer: reducer => {
+    return (state, action) => {
+      const undoOpts = {};
+      const newState = undoable(reducer, undoOpts)(state, action);
+      // 由于 dva 同步了 routing 数据，所以需要把这部分还原
+      return { ...newState, routing: newState.present.routing };
+    },
+  },
+});
+```
+
+### onEffect(fn)
+
+封装effect执行。
+
+### onHmr(fn)
+
+### extraReducers
+
+### extraEnhancers
+
+## app.model(model)
+
+注册model
+
+## app.unmodel(namespace)
+
+取消model注册
+
+## app.replaceModel(model)
+
+替换model
+
+## app.router(({history, app}) => RouterConfig)
+
+```
+app.router(require('./router').default)
+// ./router
+export default function routerConfig({history}) {
+  return (
+    <Router history={history}>
+      <Router path="/" component={App}/>
+    </Router>
+    )
+}
+```
+
+## app.start(selector?)
+`app.start('#root')`
+
+# model
+
+## namespace
+## state
+## reducers
+## effects
+## subscriptions
