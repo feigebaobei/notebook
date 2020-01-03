@@ -98,10 +98,10 @@ animation定义动画的属性值。
 
 **属性**  
 
-- transition-property 设置过渡动画的css属性名称。  
-- transition-duration 完成过渡动画的时长。  
-- transition-time-function 过渡动画的速度曲线。  
-- transition-delay 过渡动画的延迟时间。  
+- transition-property 设置过渡动画的css属性名称。 none | all | property,property1,property2
+- transition-duration 完成过渡动画的时长。 time
+- transition-time-function 过渡动画的速度曲线。linear | ease | ease-in | ease-out | ease-in-out | cublic-bezier(n,n,n,n)
+- transition-delay 过渡动画的延迟时间。 time
 
 *`transition`与`animation`的区别在于前者只做过渡效果，后者着重做动画效果。若实在分不清就把`transition`记为过渡。过渡是直线型的，不可以拆线。`animation`记为动画。动画是可以做很多拆线型的。*
 
