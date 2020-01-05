@@ -1,6 +1,8 @@
 svg (Scalable Vector Graphics)
 可缩放矢量图形。
 svg是使用xml描述二维图形和绘图程序的语言。
+svg是纯粹的xml
+`<svg></svg>`
 
 ## demo
 
@@ -21,7 +23,7 @@ svg是使用xml描述二维图形和绘图程序的语言。
   xmlns 定义svg的命名空间。
 第四行 circle是一个圆。
 
-## svg in html
+## svg 在 html 中使用
 
 SVG 文件可通过以下标签嵌入 HTML 文档：`<embed>、<object> <iframe>`。
 
@@ -62,7 +64,16 @@ pluginspage 指向下载插件的url.
 ```
 codebase属性指向下载插件的url.
 
+### a
 
+```
+<a href="path/to/file.svg">string</a>
+```
 
+### img
+
+```
+<img src="path/to/file.svg" />
+```
 
 

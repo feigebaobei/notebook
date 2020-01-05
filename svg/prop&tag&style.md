@@ -1,42 +1,18 @@
-XML内容通过给明确的标签显示“命名空间声明”来告诉使用者哪个方言标签名称属于哪个。
 
+# 常用的属性
 
-# 命名空间
-
-命名空间使用xmlns指定。其值是一个string。一般是url样式，目的是使其惟一。
-
-命名空间是什么
-命名空间怎么使用
-
-## 默认命名空间
-
-在html标签上定义的xmlns是默认命名空间。作用于其及后代节点。
-若在svg标签上定义xmlns会覆盖默认命名空间。
-
-## dtd文件
-
-文档类型定义
-作用是定义xml文档的合法构建模块。
-可被声明于xml文档中，也可被作为一个外部文件引用。
-
-## svg是什么
-
-可
-
-## 常用的属性
-
-### x
-### y
-### width
-### height
-### viewport
+## x
+## y
+## width
+## height
+## viewport
 
 svg标签所占的区域大小
 ```
 ```
 svg中子标签不能带单位，单位在svg标签中初始化。
 
-### viewbox
+## viewbox
 
 svg在viewport中的实际占位。
 
@@ -44,7 +20,7 @@ svg在viewport中的实际占位。
 viewbox="x y width height"
 ```
 
-### preserveAspectRatio
+## preserveAspectRatio
 
 viewport/viewbox的对齐方式。
 ```
@@ -61,8 +37,8 @@ meet（内嵌）默认值 以scale_x scale_y中最小值为缩放标准。
 slicer（裁剪） 以scale_x scale_y中最大值为缩放标准。
 none（） 缩放时扭曲比例。
 
-## 常用标签
-### rect
+# 常用标签
+## rect
 
 ```
 <svg width="200" height="150" viewBox="0 0 200 100">
@@ -70,7 +46,7 @@ none（） 缩放时扭曲比例。
 </svg>
 ```
 
-### circle
+## circle
 
 ```
 <svg width="200" height="100" viewBox="0 0 200 100">
@@ -78,7 +54,7 @@ none（） 缩放时扭曲比例。
 </svg>
 ```
 
-### ellipse
+## ellipse
 
 ```
 ...
@@ -86,11 +62,11 @@ none（） 缩放时扭曲比例。
 ...
 ```
 
-### line
+## line
 ```
 <line x1="0" y1="0" x2="200" y2="100" style="..."></line>
 ```
-### polygon
+## polygon
 
 最后一个点会自动与起始点相连
 ```
@@ -98,14 +74,14 @@ none（） 缩放时扭曲比例。
 ```
 
 
-### polyline
+## polyline
 
 最后一个点不会自动与起始点相连
 ```
 <polyline points="...."></polyline>
 ```
 
-### path
+## path
 
 用于路径数据的命令。
 （这些命令指明当前点使用何种方式处理）
@@ -125,7 +101,7 @@ a elliptical arc 弧线
   rx ry x-axis-rotation large-arc-flag sweep-flag x y
   长轴 短轴 x轴的旋转角度 [0]:大弧[1]:小弧 [0]:顺时针的弧[1]:逆时针的弧 弧长的结束点（开始点是上一个命令的终点）
 
-### clipPath
+## clipPath
 
 超出指定区域的部分不显示。
 
@@ -136,7 +112,7 @@ a elliptical arc 弧线
 <rect clip-path="url(#id)" ...></rect>
 ```
 
-### g
+## g
 
 group的简写
 组内的元素可使用g上定义的样式。
@@ -148,7 +124,7 @@ use可以使用被定义后的g。
 </g>
 ```
 
-### use
+## use
 
 深度克隆节点。
 
@@ -157,7 +133,7 @@ use可以使用被定义后的g。
 <use x="20" y="30" xlink:href="#id"/>
 ```
 
-### defs
+## defs
 
 在svg中预定义一组元素。需要与g组合使用。
 ```
@@ -169,7 +145,7 @@ use可以使用被定义后的g。
 <use xlink:href="#id" x="50" y="50"/>
 ```
 
-### symbol 模板
+## symbol 模板
 
 定义一个图像模板。等价于defs+g。
 在uses标记实例化symbol模板。可以在svg文档是反复使用。
@@ -189,11 +165,11 @@ use可以使用被定义后的g。
 </svg>
 ```
 
-### text
+## text
 
 文本或文本组。
 
-### tspan
+## tspan
 
 文本组内文本。
 ```
@@ -204,10 +180,10 @@ use可以使用被定义后的g。
 </test
 ```
 
-## style的属性
+# style的属性
 
 
-### fill
+## fill
 
 16进制
 rgb
@@ -215,12 +191,12 @@ rgba
 trasparent
 word(red/green/...)
 
-### stroke
-### stroke-width
-### fill-opacity
-### opacity
-### stroke-opacity
-### fill-rule
+## stroke
+## stroke-width
+## fill-opacity
+## opacity
+## stroke-opacity
+## fill-rule
 
 inherit 默认
 nonzero 非0
