@@ -229,5 +229,199 @@ block header {
 }
 哈希和加密用于区块链上的各种各样的元素的安全。
 
+## decentralized systems
+
+### trust essential
+
+1. define elements of trust of blockchain
+2. discuss consensus protocol
+3. explasin 'trust'
+4. illustrate 'soft fork' and 'hard fork'
+
+### 在blockchain中建立信任
+
+1. secure chain using protocols
+2. validate transaction & blocks
+3. verify availability of resources
+4. executing & confirming transactions
+
+#### trust trail
+
+1. validate tx
+2. verify gas and resources
+3. select set of txs to create a block
+4. execute tx to get a new state
+4.1 Form block: consensus process(proof of work)
+5. form a new block
+6. work toward consensus
+7. new block added to chain and confirmed
+
+blockchain = registry of assets and transactions
+
+交易中的不确定性
+1. 不确定交易对方。
+2. 交易过程不透明。
+3. 违约问题。
+
+## conensus protocol
+
+有什么方法或协议选择下一个块。有一个叫proof of work的方法。
+pow使用hashing.
+下面我将讨论pow在bitcoin/ethereum中有使用。这是一个从矿工的视角看到的点。
+1. 计算block header elements中的hash，以得到value.
+
+## robustness
+
+trust不只执行常规的操作。也管理符合要求的例外操作。
+稳健性有能力管理例外事件。
+在分布式网络中的所有的重要的事情，如：blockchain中没有中介的保存。
+这节课就学习关于这些例外事件。这些问题可能出现在blockchain和处理过程。
+我们会讨论下面2种例外事件。
+1. double spending
+2. chain split 
+出现分支的概率很低，若真的出现了，则bitcoin会选择最长的链作为单一的链，别的分支被删除。
+etheruem中，只能在主链中添加新block，不能在runner-up链中添加block.
+
+## forks
+
+trust 在 forks里.fork在path里。
+fork分为Hard fork / soft fork.
+soft fork 就像软件补丁，
+hard fork 就像操作系统的新版本。
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# smart contranct
+
+## smart contranct basics
+
+这节课我们将致力于完成smart contranct。blockchain技术的计算的元素。我们现在从smart contranct开始。first course of the specialization, blockchain basic, we discussed how proven algorithms and techiques for encryption, hash and peer to peer networks have been create applied to the innovation of blockchain, a decentralized, trusted, distributed, immutable ledger. The concept of the smart contract was there well before the advent of the Bitcoin. Computer scientist Nick Szabo detailed his idea of cryptocurrency Bit gold as a sort of a precursor for Bitcoin. He alse outline the concept of smart contract in his 1996 publication. In fact, Szabo coind the term smart contract more than 20 years ago. Smart contract is a centerpiece and main thrust of Ethereum blockchain. It is the good, bad and the ugly of the blockchain technology. It's a powerful feature. Improper design and coding of a smart contract,
+smart contranct 包括：
+- design
+code
+deploy
+execute
+linux 平台的hyperledger blockchain有一个叫chaincode的smart contract 功能。
+chaincode is written in go language.在docker环境执行。
+docker是一个轻量级的执行程序的容器技术。
+你会在blockchain context中发现各种各样的smart contracts.
+
+学习目标：
+1. 可以解释smart contract的元素。
+2. 可以讨论使用solidity 写的 smart contract的程序的语言、语义。
+3. 可以设计smart contract及的问题。
+4. 使用remix开发环境创建、测试smart contract.然后使用remix部署smart contract.然后在web interface中调用。
+
+remix只是一个开发环境。
+
+smart contract的优势。
+1. 促进交易。
+2. 它是一个特定的blockchain操作的规则。
+3. 在去中心化的网络中执行资源转移的协议。
+4. 在blockchain添加可编程的、情报。
+5. 它代表了商业的逻辑层。
+
+## smart contranct defined
+
+关于currency transfer 的核实、验证。我们只检测UTXOs的存在和验证，余额，结构的特性。
+当一个链开放里给去中心化的应用时，需要信任、不可修改记录。
+
+学习目标：
+1. 定义smart contract的结构。
+2. 使用solidity去了解真实的交易。
+3. 在开发环境的remix，与一个smart contranct交互。
+
+如何明白一个指定的应用。答案在扮演关键角色的smart contract上。
+当smart contranct部署在链上时，smart contranct就不能被修改。
+
+在以太访里交易有：
+编译指令，
+交易的名字，
+数据、
+表示交易状态的变量、
+方法的集合：可以执行交易的意图
+id: ASCII 代表该元素，一般使用有意义的id。使用驼峰命名法。
+
+我们将使用完整的web开发环境——remix。(IDE)
+使用remix开发、测试一个交易。需要三个步骤。1. design. 2. code 3. test
+
+## processing smart contracts
+
+学习目标：
+1. 解释smart contract的地址。
+2. 手动编辑代码:
+2.1 byte code
+2.2 ABI(Application Binary Interface) & web3deploy
+2.3 function hash
+2.4 Gas estimates
+
+拥有者account可以有三种方法被创建。
+1. smart contract
+2. command-cli
+3. interface ui
+
+我们需要一个smart contract 的地址，去部署，并使用它里面的方法。
+地址是被hash处理过的。
+这是一个额外的拥有者账号的数字.
+
+compile artifacts
+1. name of the contract
+2. 生成可以在evm中执行后生成交易的代码。
+3. abi
+4. 可以在web应用上调用这个smart constract的脚本。
+5. 一个gas estimates的方法。
+6. 一个实时编码的smart contract
+
+## deploying smart contracts
+
+学习目标：
+1. 理解smart contract的部署。
+2. 探索remix的作品。
+3. 如何使用这些作品。
+
+smart contract的部署过程：
+1. smart contract是使用高级语言写的、编译的。
+2. ABI也可以生成高级语言的应用。如：web app.
+
+EVM提供了一个smart contract 代码的运行环境。
+合约地址是由发送方的账户地址、账户的nonce hash后生成的。
+若目标块不存在，则生成一个新的。
+smart contract上有交易合同的代码。
+交易会生成一个对象。
+
+在remix上部署一个合约，需要create or deploy.
+smart contract减到小于0时，会。。。
+
+在应用中取得一个smart contract需要 address and ABI of contract
+
+
+
+
+
+
+
+
+
+
+
+
+
+## text
+## text
+## text
+## text
+## text
+## text
+## text
