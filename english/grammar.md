@@ -148,3 +148,95 @@ populaition 人口。种群。
 
 
 verb+ed / be verb
+
+
+
+## time
+
+1. shall
+表示说话者的意图，允许，警告、命令、决心等。
+用于第二、第三人称时表示应该，可以。
+Shall I fetch the hammer?
+Shall we help you?
+Shall we go home?
+I'd love to > I'd like to
+Times flies.
+Time is money.
+Time tries all.
+All time is no time when it is past.
+Take time while time is, for time will be away.机不要失，失不再来。
+8点
+night o'clock
+4:50
+four fifty
+a.m. 上午
+p.m. 下午
+eight p.m. 下午8点。
+three twenty p.m.
+past
+five past six 6:05
+half 一半
+half past five 5:30
+quarter 1/4
+a quarter past twelve
+to
+a quarter to twelve 11:45
+a quarter to seven 6:45
+Excuse me, what time do you have?
+Could you tell me the correct time?
+what time / when 区别。前者对时间更准确。
+What time / When does your mother go to work?
+at 用于具体的时间
+at ten o'clock
+on 用于具体的天
+on October 在10月。
+in 用于季节、年。
+in summer, in September, in the afternoon.
+wake up
+get up
+do morning exercises 晨练
+have breakfast / eat breakfast
+go to school / go to work
+have lunch / eat lunch
+get home 回家
+go homework
+make dinner 做晚饭
+take a shower 淋浴。 / take a bath
+go to bed.
+always / usually / often / sometimes
+as usual 照常
+always > often > sometime
+总是 通常 有时
+from...to...
+from 8 p.m. to 10 p.m.
+how about 怎么样。表示询问。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## time
+## date
+## country and city
+## time
+## time
+## time
