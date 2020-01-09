@@ -39,11 +39,12 @@ return false 不重新渲染
 组件被重新渲染前。
 nextProps, nextState 最新的prop/state
 
-### componentDidUpdate(prevProps, prevState)
+### componentDidUpdate(prevProps, prevState, snapshot)
 
 更新时（不是挂载时）执行该方法。
 setState()后执行。
 prevProps, prevState 更新前的props/state
+snapshot：getSnapshotBeforeUpdate()的返回值
 
 ### render()
 

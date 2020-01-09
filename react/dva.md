@@ -127,6 +127,7 @@ action必须带有type属性，这是为了指明具体的行为。其它字段�
 这些方法接收2个参数。
 第一个参数：上一次处理数据的结果。
 第二个参数：当前方法需要处理的数据。
+返回newState
 
 ```
 reducers: {
@@ -576,7 +577,7 @@ opts: {
   // 若想使用browserHistory，需要引入依赖。
   // import createHistory from 'history/createBrowserHistory'
   // history: createHistory()
-  initialState: detail {}
+  initialState: detail {}，优先级高于model里的state。
   // hook
   onError
   onAction

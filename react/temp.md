@@ -206,7 +206,8 @@ componentDidMount // 组件被装载后执行
 componentWillReceiveProps // 
 shouldComponentUpdate  
 componentWillUpdate  
-componentDidUpdate  
+componentDidUpdate(prevProps, prevState) 当props/state更新后执行
+  prevProps/prevState 更新前的props/state
 componentWillUnmount  
 
 react ajax  
