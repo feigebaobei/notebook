@@ -211,16 +211,81 @@ from...to...
 from 8 p.m. to 10 p.m.
 how about 怎么样。表示询问。
 
+## date
+
+day 白天，日间。日子
+There are 24 hours in a day.
+There are seven days in week.
+Monday    Mon.
+Tuesday   Tues.
+Wednesday Wed.
+Thursday  Thur.
+Friday    Fri.
+Saturday  Sat.
+Sunday    Sun.
+everyday 第天。
+next day 下一天
+day after day 一天一天地
+yesterday 昨天。
+the day before yesterday 前天
+Tomorro is another day. 明天是新的一天。
+the day after tomorrow. 后天。
+What day was last 10th. 上个月的10日是星期几？
+What day is it today.
+January   Jan.
+February  Feb.
+March     Mar.
+April     Apr.
+May       May.
+June      Jun.
+July      Jul.
+Auguest   Aug.
+September Sept.
+October   Oct.
+November  Nov.
+December  Dec.
+April the sixth （美）4月6日
+
+|-|美|英|
+|4月6日|April the sixth|the sixth of April|
+|书写|April   6|6th April|
+|-|12/06/07 12.06.2007|06/12/07 06.12.2007|
+|-|-|-|
+two thousand and ten 2020年
+
+Rat
+Ox
+Tiger
+Hare
+Dragon
+Snake
+Horse
+Sheep
+Monkey
+Rooter
+Dog
+Boar
+What animal sign were you born under?
+late better than never. 亡羊补牢。
+
+unit9 Date festival
 
 
 
 
-
-
-
-
-
-
+terrific 极好的，极其的。非常的。
+schoolmate 同学
+wonderful 极好的。
+excellent 卓越的，极好的。
+perfect 完美
+fantastic 极发的。
+I am proud of you 我为了自豪。
+proud 自豪的。
+festival 节日，庆祝。
+fourth 第四。
+eleven 十一。
+twelve 十二。
+zodiac 星座。
 
 
 
@@ -235,7 +300,6 @@ how about 怎么样。表示询问。
 
 
 ## time
-## date
 ## country and city
 ## time
 ## time
