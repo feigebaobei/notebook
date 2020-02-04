@@ -1,7 +1,57 @@
-// 函数声明
-func function_name ([parameter list]) [return_types] {
-  // body code
+## 函数
+```
+func exerFn (a, b, c int) (d, e, f int) {
+// or
+// func exerFn (a, b, c int) (int, int, int) {
+  d = a + 3
+  e = b + 3
+  f = c + 3
+  return
+  // or
+  // return a + 3, b + 3, c + 3 // 可读性更好
 }
+// 使用空白符
+d, _, f := exerFn(a, b, c)
+```
+
+### 可变长度的参数
+
+```
+func main () {
+  ke("a", "a", "a", "a", "a", "a")
+}
+func ke (a string, strs ...string) {
+  fmt.Println(a)
+  fmt.Println(strs)
+  for _, v := range strs {
+    fmt.Println(v)
+  }
+}
+```
+
+### defer
+
+最后执行
+
+### 递归函数
+
+### 内置函数
+
+|name|description|||
+|-|-|-|-|
+|close|用于管道通信|||
+|len|返回长度、数量|||
+|cap|返回容量|||
+|new|用于值类型和用户定义的类型，如自定义结构。new(T)分配类型T的零值并返回其地址，即指向类型T的指针。|||
+|make|用于内置引用类型（切片、map、管道）|||
+|copy|用于复制切片|||
+|append|用于连接切片|||
+|panic|用于错误处理机制|||
+|recover|用于错误处理机制|||
+|print|-|||
+|println|-|||
+|printf|-|||
+|complex|用于创建和操作复数|||
 
 go 使用值传递
 
