@@ -37,6 +37,10 @@ defer的函数的参数会立即求值，不会立即执行。
 
 ### 递归函数
 
+func fn () {
+  fn()
+}
+
 ### 内置函数
 
 |name|description|||
@@ -160,8 +164,16 @@ switch {
 }
 ```
 
-### for
-### for
+## 指针
+
+没有指针运算。
+
+```
+var p *int
+// *T 指向T类型值的指针
+```
+& 生成其操作数的指针
+* 指向的底层值
 
 ## 结构体
 
@@ -217,38 +229,67 @@ key.title // "go"
 ## array
 
 长度不可改变
+`[n]T` n个T类型的值组成的数组
+```
+var a [10]int
+```
 
 ## 切片
 
 是数组的抽象。可以改变长度。
-var key [] type
-  var slice0 [] int
+切片是数组的引用。
+零值为nil
+```
+[]T // 元素类型为T的切片
+```
+var key []type
+  var slice0 []int
+
+```
+var s []int = a[1:4] // [1, 3]
+r := []bool{true, false, true}
+```
+len(s) // 长度
+cap(s) // 容量
+
+b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+// 追加内容
+s = append(s, 1, 2, 3)
 
 ## range
 
-## map
+可遍历切片或映射
+```
+for i, v := range s {
+  // i 下标
+  // v 下标对应的值的副本
+  ...
+}
+```
 
+## map 映射
+
+零值为nil
 无序的kv集合。
 // define
 var map_variable map[key_data_type]value_data_type
 map_variable := make(map[key_data_type]value_data_type)
   var countryCapitalMap map[string]string
-  // or 
+  // or
   // countryCapitalMap = make(map[string]string)
   countryCapitalMap := map[string]string {"France": "Paris", "Italy": "Rome", "Japan": "Tokyo", "India": "New delhi"}
+  // edit
   countryCapitalMap["France"] = "bl"
   countryCapitalMap["Japan"] = "jd"
+  // get
+  countryCapitalMap["Japan"]
   for country := range countryCapitalMap {
     fmt.Println(country, "capital:", countryCapitaylMap[country])
   }
 // delete 删除map中对应的key
   delete(countryCapitalMap, "France")
 
-## 递归函数
-
-func fn () {
-  fn()
-}
 
 ## 类型转换
 
