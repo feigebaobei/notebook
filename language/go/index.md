@@ -226,6 +226,41 @@ key := &book0
 key.title // "go"
 ```
 
+### 方法
+
+一类带特殊的接收者参数的函数
+```
+type Vertex struct {
+  X, Y float64
+}
+func (v Vertex) Abs() float64 {
+  return math.Sqrt(v.X * v.X + v.Y * v.Y)
+}
+```
+我看不懂教程，但是可以看懂demo
+```
+package main
+import (
+  "fmt"
+  "math"
+)
+type Vertex struct {
+  X, Y float64
+}
+func (v Vertex) Abs() float64 {
+  return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+func (v *Vertex) Scale(f float64) {
+  v.X = v.X * f
+  v.Y = v.Y * f
+}
+func main() {
+  v := Vertex{3, 4}
+  v.Scale(10)
+  fmt.Println(v.Abs())
+}
+```
+
 ## array
 
 长度不可改变
