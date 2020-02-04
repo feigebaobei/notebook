@@ -31,7 +31,9 @@ func ke (a string, strs ...string) {
 
 ### defer
 
-最后执行
+defer的函数的参数会立即求值，不会立即执行。
+会在外层函数返回后执行。
+推迟的函数会被压入栈中。当外层函数执行完后执行栈中函数。
 
 ### 递归函数
 
@@ -100,6 +102,66 @@ i := 42
 f := float64(i)
 v := uint(f)
 ```
+
+### 常量
+
+使用`const`，不能使用`:=`
+
+## 控制语句
+
+### for
+
+不使用小括号。
+
+```
+sum := 0
+for i := 0; i < 5; i++ {
+  sum += i
+}
+
+for sum < 1000 {
+  sum += sum
+}
+```
+### if
+
+不使用小括号。
+```
+if x < 0 {
+  ...
+} else {
+  ...
+}
+```
+
+### switch
+
+case里自带break
+
+```
+import ()
+switch os := runtime.GOOS; os {
+  case "darwin":
+    fmt.Println("OS X.")
+  case "linux":
+    fmt.Println("Linux.")
+  default:
+    fmt.Println("%s.\n", os)
+}
+
+t := time.Now()
+switch {
+  case t.Hour() < 12:
+    ...
+  case t.Hour() < 17:
+    ...
+  default:
+    ...
+}
+```
+
+### for
+### for
 
 ## 结构体
 
