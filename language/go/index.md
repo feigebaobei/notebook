@@ -61,6 +61,46 @@ go 使用值传递
 指针变量：指向一个值的内存地址。
 空指针： nil ptr == nil
 
+## 变量
+
+声明数据类型
+```
+x int, y int
+// 缩写 abbreviation
+x, y int
+```
+在函数内可以使用`:=` `k := 3`
+
+### 基本类型
+
+bool
+string
+int int8 int16 int32 int32 int64 uint uint8 uint16 uint32 uint 64 uintptr
+byte // uint8的别名
+rune // int 32的别名
+      // 表示一个unicode码点
+float32 float 64
+complex64 complex128
+
+### 零值
+
+数值 0
+布尔 false
+字符串 ""
+
+### 类型转换
+
+`T(v)`
+```
+var i int = 42
+var f float64 = float64(i)
+var u uint = uint(f)
+// 简写
+i := 42
+f := float64(i)
+v := uint(f)
+```
+
 ## 结构体
 
 ```
