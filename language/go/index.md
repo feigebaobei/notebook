@@ -1,3 +1,27 @@
+## import
+
+Go语言不仅允许我们导入本地包，还支持在语言级别调用远程的包。
+```
+package main
+import (
+  "fmt"
+  "github.com/myteam/exp/crc32"
+)
+go get github.com/myteam/exp/crc32
+// 然后执行
+go install
+go build
+```
+
+## package
+### 自定义包
+
+如果项目的目录不在 GOPATH 环境变量中，则需要把项目移到 GOPATH 所在的目录中，或者将项目所在的目录设置到 GOPATH 环境变量中，否则无法完成编译；
+使用 import 语句导入包时，使用的是包所属文件夹的名称；
+包中的函数名第一个字母要大写，否则无法在外部调用；
+自定义包的包名不必与其所在文件夹的名称保持一致，但为了便于维护，建议保持一致；
+调用自定义包时使用 包名 . 函数名 的方式，如上例：demo.PrintStr()。
+
 ## 函数
 ```
 func exerFn (a, b, c int) (d, e, f int) {
@@ -87,6 +111,24 @@ rune // int 32的别名
       // 表示一个unicode码点
 float32 float 64
 complex64 complex128
+
+### 类型对应
+
+|C语言类型               |CGO类型       |Go语言类型|
+|char                   | C.char      | byte |
+|singed char            | C.schar     | int8 |
+|unsigned char          | C.uchar     | uint8 |
+|short                  | C.short     | int16 |
+|unsigned short         | C.ushort    | uint16 |
+|int                    | C.int       | int32 |
+|unsigned int           | C.uint      | uint32 |
+|long                   | C.long      | int32 |
+|unsigned long          | C.ulong     | uint32 |
+|long long int          | C.longlong  | int64 |
+|unsigned long long int | C.ulonglong | uint64 |
+|float                  | C.float     | float32 |
+|double                 | C.double    | float64 |
+|size_t                 | C.size_t    | uint |
 
 ### 零值
 
@@ -260,6 +302,18 @@ func main() {
   fmt.Println(v.Abs())
 }
 ```
+### 接口 interface
+
+由一组方法签名定义的集合
+
+type interface_name interface {
+  method_name0[return_type]
+  method_name1[return_type]
+  method_name2[return_type]
+  ...
+  method_namen[return_type]
+}
+func (struct_name)
 
 ## array
 
@@ -334,16 +388,6 @@ var count int = 5
 var mean float32
 mean = float32(sum) / float32(count) // 3.400000
 
-## 接口 interface
-
-type interface_name interface {
-  method_name0[return_type]
-  method_name1[return_type]
-  method_name2[return_type]
-  ...
-  method_namen[return_type]
-}
-func (struct_name)
 
 ## 并发
 
@@ -357,3 +401,102 @@ func (struct_name)
 GoLand
 LiteIDE
 Eclicpse
+
+## go 调用 c
+
+需要使用cgo工具。
+cgo可以使go使用c代码。
+需要设置环境变量
+CGO_ENABLED="1" // 是否可以使用CGO工具 1 true 0 false
+查看 `go env`
+设置 `set CGO_ENABLED=1`
+`import "C"`
+
+### 在go文件中写入c代码
+```
+// temp.go
+package icrypto
+
+/*
+// c代码必须被注释
+#include <stdio.h>
+void myhello(int i) {
+printf("Hello C: %d\n", i);
+}
+ */
+import "C" // 被注释的C代码与import之间不能有空行。
+// 下面是go代码。
+import "fmt"
+func main() {
+  C.myhello(12)
+}
+
+// 执行
+go run temp.go
+// 输出
+Hello C:12
+```
+
+### 在go文件中引入c代码
+
+$ ls
+hello.c hello.h main.go
+$ cat hello.h
+void hello(int);
+$ cat hello.c
+#include <stdio.h>
+void hello(int i) {
+printf("Hello C: %d\n", i);
+}
+$ cat main.go
+package main
+// #include "hello.h"
+import "C"
+import "fmt"
+func main() {
+C.hello(C.int(12))
+fmt.Println("Hello Go");
+}
+编译运行
+$ go build && ./main
+Hello C: 12
+Hello Go
+编译成库文件
+如果c文件比较多，最好还是能够编译成一个独立的库文件，然后go来调用库。
+$ find mylib main
+mylib
+mylib/hello.h
+mylib/hello.c
+main
+main/main.go
+编译库文件
+$ cd mylib
+# gcc -fPIC -shared -o libhello.so hello.c
+编译go程序
+$ cd main
+$ cat main.go
+package main
+// #cgo CFLAGS: -I../mylib
+// #cgo LDFLAGS: -L../mylib -lhello
+// #include "hello.h"
+import "C"
+import "fmt"
+func main() {
+C.hello(C.int(12))
+fmt.Println("Hello Go");
+}
+$ go build main.go
+运行
+$ export LD_LIBRARY_PATH=../mylib
+$ ./main
+Hello C: 12
+Hello Go
+在我们的例子中，库文件是编译成动态库的，main程序链接的时候也是采用的动态库
+$ ldd main
+linux-vdso.so.1 => (0x00007fffc7968000)
+libhello.so => ../mylib/libhello.so (0x00007f513684c000)
+libpthread.so.0 => /lib64/libpthread.so.0 (0x00007f5136614000)
+libc.so.6 => /lib64/libc.so.6 (0x00007f5136253000)
+/lib64/ld-linux-x86-64.so.2 (0x000055d819227000)
+理论上讲也是可以编译成整个一静态链接的可执行程序，由于我的机器上缺少静态链接的系统库，比如libc.a，所以只能编译成动态链接。
+
