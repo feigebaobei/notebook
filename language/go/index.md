@@ -333,9 +333,7 @@ var a [10]int
 ```
 var key []type
   var slice0 []int
-
-```
-var s []int = a[1:4] // [1, 3]
+  z∑var s []int = a[1:4] // [1, 3]
 r := []bool{true, false, true}
 ```
 len(s) // 长度
@@ -343,7 +341,7 @@ cap(s) // 容量
 
 b := make([]int, 0, 5) // len(b)=0, cap(b)=5
 
-// 追加内容
+//                                                                 追加内容
 s = append(s, 1, 2, 3)
 
 ## range
