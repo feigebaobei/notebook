@@ -366,5 +366,9 @@ User 配置使用用户名
 输出远程的仓库信息。
 若没有信息则说明远程没有相应仓库。
 
+## 删除`.DS_Store`
+
+	find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+	// 将 .DS_Store 加入到 .gitignore
 ---
 2018/10/19 by stone
