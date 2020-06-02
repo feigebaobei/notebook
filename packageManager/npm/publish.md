@@ -26,7 +26,7 @@ node, npm
 
     mkdir ...
     cd ...
-    npm init
+    // 可以在no.6时执行 npm init
     // 再输入相应信息。
 
 ###4. adduser
@@ -39,6 +39,21 @@ node, npm
     //有可能是 npm adduser
     // 再输入账号、密码。
 
+#### 报错
+`409 Conflict - PUT https://registry.npm.taobao.org/-/user/org.couchdb.user:feigebaobei - [conflict] User feigebaobei already exists`
+意思是：xxx用户已经存在了。
+我们想要登录和用户是否存在没有关系。登录都是登录已经存在的用户的，不存在的用户都登录不上去。
+原因在于使用的npm注册者不对。这行报错信息中提示npm注册者是淘宝的代理。应该使用npm官方作为注册者。
+解决方法：执行`npm config set registry https://registry.npmjs.org/`
+
+#### tip
+建议使用`nrm`管理注册者
+```
+npm i -g nrm
+nrm ls // 显示可选注册者与当前使用的注册者
+nrm use npm // 使用指定的注册者
+```
+
 ###6. 创建基本内容
 
 README.md // 介绍当前package，可以不创建。  
@@ -46,7 +61,7 @@ npm init // 根据readme生成package.json文件。
 index.js // 与package.json里的main值一样。它是作为入口文件的。  
 再创建package的内容。包文档结构如下：  
 
-![](../image/npm/docuConstruct.jpg)  
+![](../../image/npm/docuConstruct.jpg)  
 
 `src/assets` 是用来放置资源。  
 `src/assets/basic` 我个人习惯用来放置基本内容。可以不管。  
@@ -70,9 +85,47 @@ index.js // 与package.json里的main值一样。它是作为入口文件的。
       second
     }
 
+###7. 测试
 
+分为npm模块、项目。
+若模块、项目在同一个目录下，可以使用相对路径。
+```
+npm link ../module
+```
 
-###7. 发布
+若不在同一目录下，可以使用全局路径。
+```
+cd 模块目录
+npm link
+// up to date in 0.206s
+// /Users/feige/.nvm/versions/node/v12.13.0/lib/node_modules/token_sdk_client -> /Users/feige/Documents/code/github/tokenSDKClient
+
+cd 项目目录
+npm link module_name
+// /Users/feige/Documents/code/github/mockvue/node_modules/token_sdk_client -> /Users/feige/.nvm/versions/node/v12.13.0/lib/node_modules/token_sdk_client -> /Users/feige/Documents/code/github/tokenSDKClient
+```
+
+解除link
+```
+cd 模块目录
+npm unlink
+
+cd 项目目录
+npm unlink module_name
+```
+
+#### 有可能报错
+
+`No ESLint configuration found`
+原因是在模块项目中没有`.eslintrc.js`文件。不是模块代码有错。与使用`vue-cli*`没关系。
+解决方法：删除`.eslintrc.js`（若没有则不用删除）。执行
+```
+npm i -g eslint
+eslint --init
+// 会在模块的根目录生成`.eslintrc.js`。这个文件中eslint的配置文件。若有不编码风格，可以在该文件里设置。若不知道怎么设置就去官网看看。https://eslint.org/
+```
+
+###8. 发布
 
     npm publish
 
@@ -136,7 +189,7 @@ npm ERR! Registry returned 409 for PUT on http://registry.npm.taobao.org/-/user/
 
 npm config [set | get | delete | list | edit]
 
-###8. 删除
+###9. 删除
 
 当前包的作者可以删除。admin角色（24 小时内可删除）
 
@@ -144,14 +197,9 @@ npm config [set | get | delete | list | edit]
 
 当前团队的拥有者或owner角色。点击删除按钮可把该package从team中删除。  
 
-###9. 不足
+###10. 不足
 
 npm还有一些不足。eg:1.协作者不能删除package.2.多个协作者不能同时编辑同一个package.3.无法删除org。4.24h后不可删除该包。  
-
-###10. 测试
-
-在发布前最后先测试是否能正常工作。我采用的方法是创建一个vue项目把package放在`src/components/`下。使用相对链接引用。这是开发阶段的测试。若需要在正式测试需要再创建一个vue项目。使用`npm i packageName`安装该包，再使用包。若通过这2个测试就可以正常使用了。  
-
 
 ---
 2018/11/06 by stone

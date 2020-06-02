@@ -1,6 +1,7 @@
 #stylus
 
 受到sass的启发做的stylus.它是一个css的预编译工具。需要依赖node.js.  
+`npm i stylus stylus-loader --save-dev`  
 
 dry 没有括号，没有分号  
 

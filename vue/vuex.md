@@ -304,7 +304,7 @@ vuex允许程序员将`state/getters/mutations/actoins`分割、嵌套成模块�
 
 `store.state.moduleName.stateKey` // 得到state里的moduleName命名空间内的stateKey的属性值。  
 getters/mutation/actions会注册到根状态管理里。  
-`store.getters.getName`得到get方法。多个模块间相同命名会的覆盖。  
+`store.getters.getName`得到get方法。多个模块间相同命名会覆盖。  
 
 **使用模块空间名**  
 
