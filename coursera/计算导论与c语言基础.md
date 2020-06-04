@@ -91,7 +91,7 @@ dec // 10
 `-3.4*10^38~3.4*10^38`
 `-1.7*10^308~1.7*10^308`
 `-1.7*10^308~1.7*10^308`
-setprecision(100) // 精度100位
+setprecision(100) // 精度100位，包括整数位。
 常量使用后缀表示
 ```
 n = 10000L;
@@ -245,13 +245,23 @@ xcode编译快捷键
 
 c++不支持可变长数组。
 
+字符数据、数组（一维数组、二维数组、三维数组、……）。
+`cin/cin.get()/EOF/(c=cin.get())!=EOF/cin.get(c)/getchar()`
+`cin.get(ch, number, endChar)` // 遇到终止符，停止读取，指针不移动。
+`cin.getline(ch, number, endChar)` // 缓冲区指针移动终止符之后
+不能用赋值语句将一个字符串常量或字符数组直接赋给另一个字符数组。
+
+`for (len1 = 0; str[len1] != '\0'; len1++)`
+`str2[len2++] += str[len1++]`
 
 
-
-
-
-
-
-
-
-
+// char a[10] = {'a', 'b', 'c'}
+// char a[] = {'c', 'd', 'e'}
+// char a[] = "qwertgfds"
+// // char a[6] = "wertytrds"
+// while ((c = cin.get()) != EOF) {}
+// while (cin.get(c))
+// while(c = getchar()) {} // 不跳过任何字符
+// char a[10] = "qwertyu"
+// cin >> str;
+// cin.get(ch, 10, '\n')

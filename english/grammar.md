@@ -273,19 +273,7 @@ unit9 Date festival
 
 
 
-terrific 极好的，极其的。非常的。
-schoolmate 同学
-wonderful 极好的。
-excellent 卓越的，极好的。
-perfect 完美
-fantastic 极发的。
-I am proud of you 我为了自豪。
-proud 自豪的。
-festival 节日，庆祝。
-fourth 第四。
-eleven 十一。
-twelve 十二。
-zodiac 星座。
+
 
 
 
