@@ -116,6 +116,20 @@ ctrl+shift+c
 使用:ctrl+shift+h  
 右击-html/css/js prettify - prettify code
 
+F5  开始调试
+Ctrl+F5 停止调试
+F9  设置断点
+F10 Step over，执行一步，不进入函数
+F11 Step into，进入函数
+Shift+F11 Step out，跳出函数
+
+## gogdb
+
+## gosublime
+使用git下载后放在pakeage里。
+
+## sublimegdb
+可以调试代码
 
 ##删除插件
 1. ctrl+shift+p  
