@@ -310,11 +310,16 @@ include `""` 优先当前目录，再系统目录。 `<>`在系统目录里找�
 数组的名字不是变量，是常量。
 当函数中的以数组为参数时，实际上传递是整个数组。数组的名字代表数据的地址。这种操作很危险。
 
-
-
-
-
-
+递归
+1. 连续发生的动作是什么。
+2. 不同次动作间的关系。
+3. 边界条件是什么。
+利用递归进行“自动分析”
+1. 假设有一个函数可以给出答案。
+2. 该函数如何解决问题。
+3. 最简单的情况下答案是什么。
+双递归
+`f(x) = g(x-1); g(x) = f(x) - 1;`
 
 Xcode 出现Thread 1: signal SIGABRT
 代码语言：C
@@ -353,15 +358,14 @@ eclipse为程序员提供了多种窗口组合。每种组合都被称为perspec
 3. 设置断点
 4. 可终止调试
 
-
-
-
 c++是c的超集
 
 gcc gnu compiler collection gnu编译器套件
 
 # gcc与g++的区别
 
+它是c语言的编译器。
+它把源文件（人类可读懂的代码）转化为机器语言（机器可读懂的代码）`gcc -v // 查看版本`
 在编译阶段g++是调用gcc的。所以二者是等价的。
 它们都最编译器。都可以编译c或c++代码。
 
@@ -382,7 +386,6 @@ gcc gnu compiler collection gnu编译器套件
 ||||
 ||||
 
-
 # sublime + c
 
 1. 检查环境。
@@ -397,6 +400,215 @@ command + b
 command + shift + b
 ```
 
+# c
 
+程序需要包含`main()`函数。代码从main()函数开始执行。
+1972年在dec pdp-11计算机上首次使用。
+几乎所有的unix应用程序都是使用c语言写的。
+1. 高效率。
+2. 处理底层的活动。
+3. 在多种计算机平台上编译。
+vi / vim
+c中的数据类型
+1. 基本类型：整数类型、浮点类型
+2. 枚举类型
+3. void类型
+4. 派生类型：指针类型、数组类型、结构类型、共用体类型、函数类型。
+|类型|存储大小(单位：byte)|值范围|
+|-|-|-|
+|char|1|`-128~127 / 0~255`|
+|unsigned char|1|0-255|
+|signed char|1|`-128~127`|
+|int|2/4||
+|unsigned int|2/4||
+|short|2||
+|unsigned short|2||
+|long|4||
+|unsigned long|4||
+||||
+sizeof()
+c语言为每种数据类型设计了不同的存储方式。
+float:  sign exponent fraction
+        1bit   8bit    23bit
+double: sign exponent fraction
+        1bit   11bit   52bit
+存储类
+1. auto 变量默认的存储类。只能在函数内使用。
+2. register 在寄存器中。
+3. static 保持此变量存活。
+4. extern 引用别的文件中定义的变量、方法等。
+c使用传值调用。
+#define ONE 1
+#define TWO 2
+enum DAY {
+  mon = 1, tue, wed, sun
+}
+先定义枚举类型，再定义枚举变量。
+enum DAY {...};
+enum DAY day;
+枚举类型连续时，才能被遍历。
+int a = 1;
+enum day wk = (enum day) a;
+```
+int *p;
+int a = 0;
+p = &a;
+// p是地址。*p是地址对应的值。
+```
+`a[i] <=> *(a+i)`
+```
+int a[10] = {0};
+int *p = null;
+p = a; // 指向数组
+p = *(a[3]);
+```
+在定义时或者和 sizeof、& 一起使用时才表示整个数组，出现在表达式中就会被转换为指向数组第 0 个元素的指针。
+```
+int *(p[5]) // 指针数组
+int (*p)[5] // 二维数组指针
+int max (int x, int y) {...}
+int (*p)(int, int) = max
+char a[6] = {'h', 'e', 'l', 'l', 'e', '\0'};
+char g[] = "hello";
+strcpy(s0, s1)
+strcat(s0, s1)
+strlen(s0)
+strcmp(s0, s1)
+strchr(s0, ch)
+strstr(s0, s1)
+
+scanf() // 
+printf()
+getchar() // 读取一个字符
+putchar()
+gets() // 
+puts()
+eof是文件结束的标志。
+终止符 '\0'
+
+FILE *fopen(const char * filename, const char * mode);
+filename 
+mode
+```
+编译器：词法分析、语法分析、语义分析、性能优化、生成可执行文件五个步骤。
+编译：
+1. 把源文件 => 二进制指令。它是中间文件（或临时文件）
+链接：
+1. 把二进制指令与它需要的系统组件（如标准库、动态链接库）结合起来。
+
+`%[flag][width][.precision]type`
+flag      - 左对齐
+          + 右对齐
+width     最小宽度
+precision 精度
+#         输入时加前缀（0b/0/0x）
+
+// printf("%-9.4d")
+
+a+=a;
+a++;
+++a;
+强制类型转换
+(type_name) expresss
+%f  float
+%lf double
+%ld long int
+
+scanf()       printf()
+getchar()     putchar()
+gets()        puts()
+```
+// 定义字符串
+char s[20] = "sdfgh";
+char *s = "sdfg";
+```
+// 输入
+```
+char c;
+c = getchar();
+char s[30];
+gets(s);
+char s2[30];
+scanf("%s fromat");
+```
+strcat(s1, s2)
+strcpy(s0, s1)
+strcmp(s0, s1)
+
+|||||
+|-|-|-|-|
+|scanf|`scanf("fromat%s", &s)`|||
+|printf|`printf("fromat %d, %s"), i, s`|||
+|gets|`gets(str)`|||
+|puts|`puts(str)`|||
+|getchar|`var = getchar()`|||
+|putchar|`putchar(var)`|||
+
+dataTypes fn () {
+  // body
+  return dataType
+}
+
+头文件里是函数的声明（不是定义）。可以把头文件的内容复制到源文件中，同样可以运行。头文件中声明的函数定义在其它源文件中。它些源文件是已经被编译好的，并以动态链接库、静态链接库（它们合称为系统库）的形式存在。
+
+标准c语言有15个标准库。
+
+|||||
+|-|-|-|-|
+|合格程序员|`<stdio.h> <ctype.h> <stdlib.h> <string.h>`|||
+|熟练程序员|`<assert.h> <limits.h> <stddef.h> <time.h>`|||
+|优秀程序员|`<float.h> <math.h> <error.h> <locale.h> <setjmp.h> <signal.h> <stdarg.h>`|||
+
+c程序从main开始到main结束。main不能被其它函数调用。
+
+预处理指令有2个：`#include / #define`(不需要;)
+预处理就是预先处理、提前处理。
+预处理结果保存为与源文件同名的`*.i`文件。
+以`#`开头的命令就是预处理命令。
+编译：vc/vs编译后为`*.obj`,gcc编译后为`*.o`。每次编译只编译一个源文件。
+链接：多个目标文件+系统库=可执行程序
+`<>`在系统路径中查找头文件。常用于标准头文件。
+`""`先在当前目录找，再去系统路径中找。常用于自定义头文件。
+宏定义
+1. `#define 宏名 字符串`
+2. 不加;
+3. 从定义到`#undef`
+4. 可嵌套
+5. 大写字母
+6. 可用于表示数据类型
+
+宏定义与形参间不能有空格。
+宏在预处理阶段展开为字符串。
+
+条件编译
+```
+#if 整型常量表达式1
+code0
+#elif
+code1
+#elif
+code2
+#endif
+
+#ifdef 宏名 若定义了该宏则执行
+code0
+#else
+code1
+#endif
+
+#ifndef 宏名 若宏未被定义则执行
+code0
+#else
+code1
+#endif
+```
+数组名和数组首地址不总是等价的。
+数组指针：指向数组的指针。`int *p = arr;`
+指向数组的元素。`int *p = &(arr[0]);`
+访问数组元素的方法：
+1. 使用下标。`arr[i]`
+2. 使用指针加、减相应的序号。`*(p+i)`
+像数组、字符串、动态分配的内存都使用它们的指针传入函数。
+指针函数是返回指针的函数。
 
 

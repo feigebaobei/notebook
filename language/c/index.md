@@ -121,5 +121,8 @@ int * myFn() {
 
 ## gcc
 
+## 输入、输出
+
+puts("2345tytfds");
 
 

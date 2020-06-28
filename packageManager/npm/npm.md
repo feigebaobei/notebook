@@ -133,7 +133,7 @@ npm cache clean --force
 
     npm rebuild node-sass
 
-##创建假恶丑链接
+## 创建本地链接（常用于开发、调试）
 
     npm link packagename
 
