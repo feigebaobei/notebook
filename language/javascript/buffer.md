@@ -28,9 +28,11 @@ hex
 ## 创建buffer
 
 ```
+buf.write(string[, offset[, length]][, encoding]) // 在缓冲区写入数据。length是写入的长度。
 Buffer.alloc(size[, fill[, encoding]]) // 创建一个指定大小、指定填充内容、指定编码格式的buffer。
   // allocate 分配、指定
-
+buf.toString([encoding[, start[, end]]]) // 从缓冲区读取数据
+buf.toJSON()
 Buffer.concat(list[, totalLength])
 buf.compare(otherBuffer) // 比较
 buf.copy(targetBuffer[, targetStart[, sourceStart[, sourceEnd]]]) // 拷贝缓冲区。targetBuffer里包括buf。

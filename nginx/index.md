@@ -26,3 +26,14 @@ mac下
     快速停止   sudo kill -TERM 主进程号
 
     /usr/local/openresty/Nginx/conf/vhost // nginx的配置文件
+
+## 服务器上全局配置nginx
+
+`ps aux|grep nginx` // 输入nginx的xxx.
+
+`vim /etc/profile`
+
+// 添加
+export PATH=/usr/local/nginx/sbin
+
+`source /etc/profile`
