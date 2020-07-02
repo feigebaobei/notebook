@@ -42,3 +42,15 @@
     
     vue init username/repo projectName
 
+## config
+
+在`@vue/cli`创建的项目中没有配置文件。不是代表没有配置文件，而是没有显式创建出来。
+`@vue/cli`的配置文件是在根目录的`vue.config.js`文件。若没有该文件，则需要手动创建。其基本结果是
+```
+// vue.config.js
+module.exports = {
+    // config
+}
+```
+在该文件里调试的配置项会在被`@vue/cli-service`自动加载。
+各配置项可参考 https://cli.vuejs.org/zh/config
