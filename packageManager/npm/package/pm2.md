@@ -31,6 +31,7 @@ pm2 start api.js -i <process> // 我不会
 pm2 reload all // 热更新所有的应用
 
 pm2 logs // 输出
+  ctrl + c// 退出
 pm2 logs APP-NAME
 pm2 logs --json
 pm2 logs --format
@@ -45,14 +46,3 @@ pm2 install <module_name> // 安装pm2的模块
 
 pm2 update
 ```
-
-## describe
-## describe
-## describe
-## describe
-## describe
-## describe
-## describe
-## describe
-## describe
-## describe

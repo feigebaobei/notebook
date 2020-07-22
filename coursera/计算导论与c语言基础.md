@@ -537,7 +537,7 @@ strcmp(s0, s1)
 
 |||||
 |-|-|-|-|
-|scanf|`scanf("fromat%s", &s)`|||
+|scanf|`scanf("fromat %s", &s)`|||
 |printf|`printf("fromat %d, %s"), i, s`|||
 |gets|`gets(str)`|||
 |puts|`puts(str)`|||
@@ -618,3 +618,134 @@ code1
 5. 数组是有类型的。定义数组时、使用sizeof/&时数组名表示整个数组。在表达式中数组名表示指向数组的指针。
 
 结构体只能逐一赋值。
+结构体是一种数据类型。它是一种创建变量的模板，编译器不为它分配内存空间。
+结构体变量是包含一个实实在在的数据，占用内存。
+```
+struct stu *pstu = &stu0; // 得到结构体变量的地址
+(*pstu).memberName;
+pstu->memberName;
+```
+
+```
+enum typeName{valueName0, valueName1, valueName2, ...};
+```
+valueName0等不能被赋值。
+结构体变量的值只能是定义结构时的值之一。
+结构体变量被赋值：
+`weekDay = (enum week)2`
+需要使用强转换。
+
+```
+union unionName {
+  type vn;
+  type vn2;
+}
+```
+联合体（共用体）占内存为成员列表中最大的成员决定。
+每改变一个成员，则整个联合体都会变。
+
+typedef oldName newName;
+const int max = 100; // 被const定义的值不能被改变。
+
+打开文件 -- 读写文件 -- 关闭文件
+获取文件的相关信息。
+文件流：数据在文件与内存间的传递。
+文件保存在磁盘。
+输入流：数据从文件复制到内存的过程。
+输出流：从内存保存到文件的过程。
+数据流：数据源和程序间传递的过程。
+```
+<stdio.h>
+fopen()
+feof()
+ferror()
+fclose()
+FILE *fopen(char *filename, char *mode)
+```
+fopen()返回：文件名、文件状态、当前读写位置等信息的结构体变量的地址。
+```
+FILE *fp;
+// 打开文件失败会返回null.
+// 当失败时停止操作文件。
+if ((fp=fopen("D://demo.txt", "rb") == null) {
+  printf("fail to open file");
+  exit(0);
+}
+```
+控制文件的权限字符串
+||||
+|-|-|-|
+|r|只读||
+|w|写入。若不存在则创建一个新的。若存在则清空内容。||
+|a|追回。若不存在则创建一个新的。若存在则追加内容。||
+|r+|读写。可读可写。若不存在则打开失败。||
+|w+|写入/更新。若不存在则创建一个新的。若存在则清空内容。||
+|a+|追加/更新。若不存在则创建一个新的。若存在则追加内容。||
+|t|打开方式：文本文件||
+|b|打开方式：二进制文件||
+`int fclose(FILE *fp)`
+```
+fgetc(fp);
+fputc(fp);
+fgets(str, n, fp);
+fputs(str, fp);
+fread(ptr, size, count, fp);
+fwrite(ptr, size, count, fp);
+fscanf(fp, format, ...);
+fprintf(fp, format, ...);
+rewind(fp);
+fseek(fp, offset, origin);
+```
+EOF <=> end of file
+mmu l
+```
+void mf (int *p) {}
+void mf (int p[10]) {}
+void mf (int p[]) {}
+```
+`dataType * arrayName[length]` // arrayName是一个数组，其长度是length，每个元素的类型是`dataType *`
+当sizeof、alignof、&后使用数组名时，当作指向数组首地址的指针使用。
+数组名相当于指向数组第一个元素的指针。
+
+pointer = a <=> pointer = &a[0];
+`*(pinter + i)` <=> `*(a+i)` <=> a[i]
+pointer + i <=> a+i <=> &a[i]
+a++无意义 a是常量。
+p++有意义 p是变量。
+p可以指向非数组内。
+
+`*` 取值符
+`&` 取址符
+
+数组名相当于指向数组第一个元素的指针。
+a <=> &a[0]
+&a 指向数组的指针。
+`*a` 数组的第一个元素a[0] `*a <=> a[0]`
+
+输入、输出都是按照字符流的方式处理。
+文本流是由多行字符构成的字符序列。
+`c = getchar()`从文本流中读入下一个输入字符。在没有输入时会返回`EOF`end of file.使用`int c;`是为了接收`EOF`.eof被定义在<stdio.h>里，具体数值是什么不重要，重要的是它与任何char类型的数据都不相同。
+`putchar()`
+
+函数原型是：在main前对函数的声明。在函数原型中参数名可省略。
+
+自动变量就是局部变量。
+函数是使用外部变量需要在函数内使用extern类型的声明。用于表明这是外部变量。
+若定义外部变量在使用外部变量前，则可以在函数中省略使用extern。
+头文件中会包括外部变量的声明。
+定义：创建变量或分配存储单元
+声明：说明变量的性质，不分配存储单元。
+
+c程序需要一个main()为入口函数。
+编译
+printf("format", meta)
+char short long double
+for (int; condition; step) {...}
+#define name replaceString
+c = getchar() // 读入一个字符
+putchar(c) // 输出一个字符
+关系运算符 > 赋值运算符
+type arr[length];
+参数--传值调用
+字符数组最后一个字符为'\0'
+extern type var; // 声明外部变量。
