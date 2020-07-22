@@ -36,3 +36,47 @@ readyState
 url
   websocket的绝对路径
 
+## 方法
+
+close([code[, reason]])
+  关闭当着链接
+send(data)
+  对要传输的数据进行排队
+
+## 事件
+
+close
+  当一个 WebSocket 连接被关闭时触发。
+  也可以通过 onclose 属性来设置。
+error
+  当一个 WebSocket 连接因错误而关闭时触发，例如无法发送数据时。
+  也可以通过 onerror 属性来设置.
+message
+  当通过 WebSocket 收到数据时触发。
+  也可以通过 onmessage 属性来设置。
+open
+  当一个 WebSocket 连接成功时触发。
+  也可以通过 onopen 属性来设置。
+
+## 常见报错
+
+### Unexpected response code: 502
+
+原因：接口报错了，不是websocket的问题。
+
+### Error in v-on handler: "InvalidStateError: Failed to execute 'send' on 'WebSocket': Still in CONNECTING state."
+
+原因： 未完成链接时发送信息。
+
+### failed: Error in connection establishment: net::ERR_CONNECTION_TIMED_OUT
+
+原因：连接超时。
+解决方法：
+可能是没有开通服务、端口、防火墙。
+
+### error: connect ECONNREFUSED 47.94.105.206:9875
+
+原因：服务端没有开通相应的端口、接口等。
+解决方法：
+可能是没有开通服务、端口、防火墙。
+
