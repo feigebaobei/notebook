@@ -48,6 +48,7 @@ send(data)
 close
   当一个 WebSocket 连接被关闭时触发。
   也可以通过 onclose 属性来设置。
+  在本次数据接收或发送后关闭连接。
 error
   当一个 WebSocket 连接因错误而关闭时触发，例如无法发送数据时。
   也可以通过 onerror 属性来设置.
@@ -57,6 +58,8 @@ message
 open
   当一个 WebSocket 连接成功时触发。
   也可以通过 onopen 属性来设置。
+terminate
+  直接关闭连接
 
 ## 常见报错
 

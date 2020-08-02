@@ -749,3 +749,15 @@ type arr[length];
 参数--传值调用
 字符数组最后一个字符为'\0'
 extern type var; // 声明外部变量。
+
+流(stream)是程序输入或输出的一个连续的字节序列
+ stdin        标准输入           键盘
+ stdout       标准输出            屏幕
+ stderr       标准错误            屏幕
+ stdprn       标准打印机          LPT1端口
+ stdaux       标准串行设备        COM1端口
+
+
+
+
+

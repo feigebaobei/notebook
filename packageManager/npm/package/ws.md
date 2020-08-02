@@ -31,12 +31,13 @@ options             object
   handleProtocols   function
   path              string
   noServer          boolean
-  clientTracking    boolean
+  clientTracking    boolean                      是否跟踪client
   perMessageDeflat  boolean | object
-  maxPayload        number
+  maxPayload        number                       消息最多x byte.
 cb                  function
 
 会返回一个server的实例。必须有port/server/noServer三者之一，否则会报错。若使用port，则会自动创建一个http server.当使用http/s server时，需要使用server/noServer来扩展http/s server.当使用noServer模式时会把WebSocket server与http/s server分开。如在多个websocket server间共享一个http/s server.
+“noServer”模式允许WebSocket服务器完全脱离HTTP/S服务器。这使得在多个WebSocket服务器之间共享一个HTTP/S服务器成为可能。
 
 > 不鼓励使用verifyClient.鼓励在http服务器的upgrade事件中处理客户端身份验证的工作。详情见下文。
 
@@ -76,15 +77,20 @@ perMessageDeflate可以控制permessage-deflate extension.默认值为false。�
 #### 事件
 
 close
-connection
+connection(socket, request)
+  socket websocket
+  request http.IncomingMessage
 error
-headers
+headers(headers, request)
+  headers array
+  request http.IncomingMessage
+  在返回socket前写回馈头。
 listening
 
 #### 属性
 
 server.address()
-server.clients
+server.clients                                     set     返回所有`clientTracking`为真的client组成的集合。
 server.close
 server.handleUpgrade(request, socket, head, cb)
 server.shouldHandle(request)
