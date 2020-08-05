@@ -4,6 +4,11 @@ const fs = require('fs')
 
 异步方法的最后一个参数是回调方法。回调方法的第一个参数是异常。若无异常则第一个参数是null/undefined.
 
+## 文件描述符
+
+在POSIX系统上，对每个进程，在内核中都维护着一张打开着的文件和资源的表格。每个打开的文件都有一个标识。这个标识就是文件描述符。文件描述符中integer类型的。
+在各个操作系统跟踪打开的文件方式不同，但类似。nodejs统一了不同操作系统的差异。
+
 ## fs.rename(oldname, newname, (err) => {...})
 ## fs.stat(filename, (err, stats) => {...})
 ## fs.open(path, mode, (err, fd) => {...})
@@ -136,6 +141,62 @@ options: {
 ## fs.appendFileSync(path, data[, options])
 ## fs.chmod(path, mode, (err) => {...})
 异步变更文件权限。
+## fs.chmodSync(path, mode)
+同步变更文件权限。
+## fs.chown(path, uid, gid, (err) => {})
+path string | buffer | url
+udi integer
+gid integer
+cb function error
+## fs.chownSync(path, uid, gid)
+## fs.close(fd, (err) => {...})
+## fs.closeSync(fd)
+## fs.constants
+返回包含文件系统操作常用常量的对象。
+## fs.copyFile(src, dest[, mode], (err) => {...})
+默认创建或覆盖目标文件。
+使用 COPYFILE_EXCL，如果目标文件存在，则操作将失败。
+## fs.copyFileSync(src, dest[, mode])
+## fs.createReadStream(path[, options])
+## fs.createWriteStream(path[, options])
+## fs.existsSync(path)
+## fs.fchmod(fd, mode, (err) => {...})
+## fs.fchmod(fd, mode)
+## fs.fchown(fd, uid, gid, (err) => {...})
+## fs.fchownSync(fd, uid, gid)
+## fs.fdatasync(fd, (err) => {...})
+## fs.fstat(fd[, options], (err, stats) => {...})
+## fs.fstatSync(fd[, options])
+## fs.fsync(fd, (err) => {...})
+## fs.ftruncate(fd[, len], (err) => {})
+截取文件的前len部分。len大于文件长度时填充空字节`\0`。
+## fs.ftruncateSync(fd[, len])
+## fs.futimes(fd, atime, mtime, (err) => {...})
+更改文件描述符指向的对象的文件系统时间戳。
+## fs.futimesSync(fd, atime, mtime)
+## fs.lchmod(path, mode, (err) => {...})
+## fs.mkdir(path[, options], (err) => {...})
+options object | integer
+  recursive boolean default false
+  mode string | integer
+创建一个目录。
+## fs.mkdirSync(path[, options])
+## fs.mkdtemp(prefix[, options], (err, directotory) => {...})
+创建一个临时文件。
+## fs.mkdtempSync(prefix[, options])
+## fs.open(path[, flags[, mode]], (err, id) => {...})
+## fs.opendir(path[, options], (err, dir) => {...})
+## fs.opendirSync(path[, options])
+## fs.stat
+## fs.stat
+## fs.stat
+## fs.stat
+## fs.stat
+## fs.stat
+## fs.stat
+## fs.stat
+## fs.openSync(path[, flags, mode])
+返回表示文件描述符的整数。
 ### xxxx
 ### xxxx
 ### xxxx
@@ -143,7 +204,6 @@ options: {
 ### xxxx
 ### xxxx
 ### xxxx
-### xxxx
 ## fs.stat
 ## fs.stat
 ## fs.stat
@@ -152,16 +212,60 @@ options: {
 ## fs.stat
 ## fs.stat
 ## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
-## fs.stat
+## fs常量
+
+||||
+|-|-|-|
+|可访问性的常量|适用于fs.access()||
+||F_OK||
+||R_OK||
+||W_OK||
+||X_OK||
+|文件拷贝的常量|适用于fs.copyFile()||
+||COPYFILE_EXCL||
+||COPYFILE_FICLONE||
+||COPYFILE_FICLONE_FORCE||
+|文件打开的常量|适用于fs.open()||
+||O_REDONLYE||
+||O_WRONLY||
+||O_RDWR||
+||O_CREATE||
+||O_EXCL||
+||O_NOCTTY||
+||O_TRUNC||
+||O_APPEND||
+||O_DIRECTORY||
+||O_NOATIME||
+||O_NOFOLLOW||
+||O_SYNC||
+||O_DSYNC||
+||O_SYMLINK||
+||O_DIRECT||
+||O_NONBLOK||
+||UV_FS_O_FILEMAP||
+|文件类型的常量|适用于fs.State对象的mode属性||
+||S_IFMT||
+||S_IFRED||
+||S_IFDIR||
+||S_IFCHR||
+||S_IFBLK||
+||S_IFIFO||
+||S_IFLNK||
+||S_IFSOCK||
+|文件模式的常量|适用于fs.State对象的mode属性||
+||S_IRWXU||
+||S_IRUSR||
+||S_IWUSR||
+||S_IXUSR||
+||S_IRWXG||
+||S_IRGRP||
+||S_IWGRP||
+||S_IXGRP||
+||S_IRWXO||
+||S_IROTH||
+||S_IWOTH||
+||S_IXOTH||
+
 ## 文件的模式
 
 |常量|八进制值|说明|

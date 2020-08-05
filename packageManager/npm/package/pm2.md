@@ -44,5 +44,11 @@ pm2 unstartup
 
 pm2 install <module_name> // 安装pm2的模块
 
-pm2 update
+pm2 update // 保存进程，杀死pm2和保存的进程。
+
+pm2 reset <app_name|id> // 重置启动次数。
+pm2 scale <app_name|id> 10 // 把指定应用扩展到10个实例。
+pm2 save // 保存当前应用列表
+pm2 resurrect 重新加载保存在应用列表
+pm2 generate // 生成一个简单的json配置文件。
 ```

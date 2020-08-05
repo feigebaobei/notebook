@@ -294,7 +294,10 @@ lrange key 0 10
 15  RPOPLPUSH source destination
 移除列表的最后一个元素，并将该元素添加到另一个列表并返回
 16  RPUSH key value1 [value2]
-在列表中添加一个或多个值
+在列表中添加一个或多个值。
+当key没有对应数据里，创建一个空列表再执行rpush操作。
+当key对应的数据类型是列表类型时，在列表中追加数据。
+当key对应的数据类型不是列表类型时，返回一个错误。
 17  RPUSHX key value
 为已存在的列表添加值
 
