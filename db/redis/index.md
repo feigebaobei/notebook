@@ -39,6 +39,9 @@ cd src
 // 测试安装结果
 set foo bar // OK
 get foo // "bar"
+
+// redis-cli
+./redis-cli
 ```
 
 ### Ubuntu 下安装

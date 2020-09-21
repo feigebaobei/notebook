@@ -119,7 +119,7 @@ obj，非必填，fn执行时this指向的对象。即上下文参数。
     var g = 2;
     f.map(function(item, index, arr) {return item * this}, g); // [0,2,4,2,4,16]
 
-**forEach(fn, obj)** 对指定数组的每个元素依次执行fn。不返回东西。  
+**forEach(fn, obj)** 对指定数组的每个元素依次执行fn。不返回东西。原数组不变。  
 fn，必填。
 obj，上下文参数。
 
