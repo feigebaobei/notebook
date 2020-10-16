@@ -133,3 +133,16 @@ ps aux|grep nginx // 查看nginx路径
 nginx -t // 查看nginx配置文件路径。
 ```
 
+## linux下安装nginx
+
+```
+yum install nginx
+// 出提示
+// Is this ok [y/d/N]:
+// 输入 y
+nginx -v // 查看版本
+nginx -V // 查看编译参数
+// 下面是几个常用参数
+// rpm -ql nginx // 查看安装目录
+// nginx -t // 查看nginx配置文件路径
+```

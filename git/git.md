@@ -346,8 +346,8 @@ User 配置使用用户名
 
 ###5. 使用管理员身份打开git bash客户端。测试是否配置成功。  
 
-    sss -T git@github.com
-    sss -T git@github.com
+    ssh -T git@github.com
+    ssh -T git@github.com
 
 ## fatal: remote origin already exists
 
