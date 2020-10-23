@@ -406,6 +406,51 @@ smart contract减到小于0时，会。。。
 
 在应用中取得一个smart contract需要 address and ABI of contract
 
+## solidity: structure
+
+solidity是一个高级语言，由下列组成
+1. js
+2. java
+3. c++
+就是为etheruem写smart contranct的。
+这节课会使用2种方法编写smart contract.
+1. remix web ide.
+2. 
+
+remix 可以提供测试环境
+1. javascript vm
+2. injected web3(eg:metamask)
+3. web3 provider
+
+学习目标：
+1. 讨论elements of solidity
+2. 描述data type, data structures, functions, enum, modifiers, and evnets.
+3. design, develop, deploy, and test a smart contract
+
+1. data of state variables
+2. list of Funcitons
+> 1. constructor
+> 2. fallback
+> 3. view
+> 4. pure
+> 5. public
+> 6. private
+> 7. internal
+> 8. external
+3. user defined types in struct and enums
+4. modifiers
+5. evnets
+
+
+javascript vm 是什么？
+
+
+
+
+## basic data type & statements
+## speciifc data types
+## data structure
+## access modifier & application
 
 
 
@@ -417,8 +462,6 @@ smart contract减到小于0时，会。。。
 
 
 
-
-## text
 ## text
 ## text
 ## text
