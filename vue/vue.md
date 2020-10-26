@@ -425,3 +425,281 @@ vue把 data 选项中的属性使用 object.defineProperty 全部转变 setter/g
 # vue的原理。
 
 把每个数据添加到观察者模式里。使用存取描述符处理绑定数据改变时重新渲染文档片段。在vue对象初始化时会把所有数据添加到观察者模式内。并把使用初始数据渲染出文档片段（此时是虚拟文档）再添加到指定dom里。
+
+# vue 原理
+
+## 响应式原理(监听数据变化)
+```
+Object.defineProperty(obj, 'hello', {
+  get: function () {...},
+  set: function (newValue) {...},
+})
+obj.hello // 获取
+obj.hello = 'string' // 设置
+```
+## 虚拟dom树
+
+```
+var frag = document.createDocumentFragment()
+```
+解释：
+1、通过virtualDom创建虚拟节点，将目标盒子内所有子节点添加到其内部，注意这里只是子节点；
+2、子节点通过compile进行编译，a:如果节点为元素，其nodeType = 1,b:如果节点为文本，其nodeType = 3,具体可以查看详情[http://www.w3school.com.cn/js...](https://www.w3school.com.cn/jsref/prop_node_nodetype.asp)；
+3、如果第二步子节点仍有子节点，通过hasChildNodes()来确认，如果有递归调用compile方法。
+```
+var container = document.getElementById('container');
+  //这里我们把vue实例中的data提取出来，更加直观
+  var data = {
+      msg: 'Hello world!',
+      inpText: 'Input text'
+  };
+  var fragment = virtualDom(container, data);
+  container.appendChild(fragment);
+
+  //虚拟dom创建方法
+  function virtualDom(node, data){
+      let frag = document.createDocumentFragment();
+      let child;
+      // 遍历dom节点
+      while(child = node.firstChild){
+          compile(child, data);
+          frag.appendChild(child);
+      }
+      return frag;
+  }
+   
+  //编译规则
+  function compile(node, data){
+      let reg = /\{\{(.*)\}\}/g;
+      if(node.nodeType === 1){ // 标签
+          let attr = node.attributes;
+          for(let i = 0, len = attr.length; i < len; i++){
+              // console.log(attr[i].nodeName, attr[i].nodeValue);
+              if(attr[i].nodeName === 'v-model'){
+                  let name = attr[i].nodeValue;
+                  node.value = data[name];
+              }
+          }
+          if(node.hasChildNodes()){
+              node.childNodes.forEach((item) => {
+                  compile(item, data); // 递归
+              });
+          }
+      }
+      if(node.nodeType === 3){ // 文本节点
+          if(reg.test(node.nodeValue)){
+              let name = RegExp.$1;
+              name = name.trim();
+              node.nodeValue = data[name];
+          }
+      }
+  }
+```
+## 响应式原理
+核心思想：Object.defineProperty(obj, key, {set, get})
+```
+function Vue (options) {
+  this.data = options.data
+  let id = options.el
+  observe(this.data, this)
+  let container = document.getElementById(id)
+  let fragment = virtualDom(container, this) // 对vm对象初始化
+  container.appendChild(fragment)
+}
+function observe (obj, vm) {
+  Object.keys(obj).forEach((key) => {
+    defineReact(vm, key, obj[key])
+  })
+}
+function defineReact(obj, key, value){
+    Object.defineProperty(obj, key, {
+        set: function(newValue){
+            console.log(`触发setter`);
+            value = newValue;
+            console.log(value);
+        },
+        get: function(){
+            console.log(`触发getter`);
+            return value;
+        }
+    });
+}
+var vm = new Vue({
+  el: 'container',
+  data: {
+    msg: 'string',
+    inpText: 'inputString'
+  }
+})
+function compile(node, data){
+    let reg = /\{\{(.*)\}\}/g;
+    if(node.nodeType === 1){ // 标签
+        let attr = node.attributes;
+        for(let i = 0, len = attr.length; i < len; i++){
+            // console.log(attr[i].nodeName, attr[i].nodeValue);
+            if(attr[i].nodeName === 'v-model'){
+                let name = attr[i].nodeValue;
+                node.value = data[name];
+
+                // ------------------------添加监听事件
+                node.addEventListener('keyup', function(e){
+                    data[name] = e.target.value;
+                }, false);
+                // -----------------------------------
+            }
+        }
+        if(node.hasChildNodes()){
+            node.childNodes.forEach((item) => {
+                compile(item, data);
+            });
+        }
+    }
+    if(node.nodeType === 3){ // 文本节点
+        if(reg.test(node.nodeValue)){
+            let name = RegExp.$1;
+            name = name.trim();
+            node.nodeValue = data[name];
+        }
+    }
+}
+```
+## 观察者模式原理
+发布者通过notify方法对订阅者广播，订阅者通过update来接受信息。
+```
+// 三个订阅者
+var subscribe1 = {
+  update: function () {...}
+}
+var subscribe2 = {
+  update: function () {...}
+}
+var subscribe3 = {
+  update: function () {...}
+}
+// 发布者
+function Publisher () {
+  this.subs = [subscribe1, subscribe2, subscribe3]
+}
+Publisher.prototype = {
+  constructor: Publisher,
+  notify: function () {
+    this.subs.forEach(function (sub) {
+      sub.update()
+    })
+  }
+}
+// 实例化
+var publisher = new Publisher()
+publisher.notify()
+```
+
+```
+// 封装成为中间件
+var publisher = new Publisher()
+var middleware = {
+  publish: function () {
+    publisher.notify()
+  }
+}
+middleware.publish()
+```
+## 观察者模式嵌入
+```
+// 发布者：
+function Publisher(){
+    this.subs = []; // 订阅者容器
+}
+Publisher.prototype = {
+    constructor: Publisher,
+    add: function(sub){
+        this.subs.push(sub); // 添加订阅者
+    },
+    notify: function(){
+        this.subs.forEach(function(sub){
+            sub.update(); // 发布订阅
+        });
+    }
+};
+// 订阅者：
+// 考虑到要把订阅者绑定data的每个属性，来观察属性的变化，参数：name参数可以有compile中获取的name传参。由于传入的node节点类型分为两种，我们可以分为两订阅者来处理，同时也可以对node节点类型进行判断，通过switch分别处理。
+function Subscriber(node, vm, name){
+    Publisher.global = this
+    this.node = node;
+    this.vm = vm;
+    this.name = name;
+    this.update()
+    Publisher.global = null
+}
+Subscriber.prototype = {
+    constructor: Subscriber,
+    update: function(){
+        let vm = this.vm;
+        let node = this.node;
+        let name = this.name;
+        switch(this.node.nodeType){
+            case 1:
+                node.value = vm[name];
+                break;
+            case 3:
+                node.nodeValue = vm[name];
+                break;
+            default:
+                break;
+        }
+    }
+};
+// 我们要把订阅者添加到compile进行虚拟dom的初始化，替换掉原来的赋值
+function compile(node, data){
+    let reg = /\{\{(.*)\}\}/g;
+    if(node.nodeType === 1){ // 标签
+        let attr = node.attributes;
+        for(let i = 0, len = attr.length; i < len; i++){
+            // console.log(attr[i].nodeName, attr[i].nodeValue);
+            if(attr[i].nodeName === 'v-model'){
+                let name = attr[i].nodeValue;
+                // --------------------这里被替换掉
+                // node.value = data[name]; 
+                new Subscriber(node, data, name);
+
+                // ------------------------添加监听事件
+                node.addEventListener('keyup', function(e){
+                    data[name] = e.target.value;
+                }, false);
+            }
+        }
+        if(node.hasChildNodes()){
+            node.childNodes.forEach((item) => {
+                compile(item, data);
+            });
+        }
+    }
+    if(node.nodeType === 3){ // 文本节点
+        if(reg.test(node.nodeValue)){
+            let name = RegExp.$1;
+            name = name.trim();
+            // ---------------------这里被替换掉
+            // node.nodeValue = data[name];
+            new Subscriber(node, data, name);
+        }
+    }
+}
+// 发布者添加到defineReact，来观察数据的变化：
+function defineReact(data, key, value){
+      let publisher = new Publisher();
+      Object.defineProperty(data, key, {
+          set: function(newValue){
+              console.log(`触发setter`);
+              value = newValue;
+              console.log(value);
+              publisher.notify(); // 发布订阅
+          },
+          get: function(){
+              console.log(`触发getter`);
+              if(Publisher.global){ //这里为什么来添加判断条件，主要是让publisher.add只执行一次，初始化虚拟dom编译的时候来执行
+                  publisher.add(Publisher.global); // 添加订阅者
+              }
+              return value;
+          }
+      });
+  }
+```
