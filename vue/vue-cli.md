@@ -2,8 +2,14 @@
 
     $ npm install -g vue-cli // 1.x 2.x
     npm uninstall -g vue-cli
-    npm i -g @vue/cli
+    npm i -g @vue/cli // 4.x
     vue --version
+
+## update
+
+```
+npm update -g @vue/cli
+```
 
 ## usage  
 
@@ -22,6 +28,47 @@
 
     // 在已有的项目中添加插件
     vue add eslint // 可能会修改现有文件
+
+### 创建项目
+
+```
+vue create program-name // 项目名需要全小写
+```
+
+### 安装插件
+```
+vue add plugin-name // 在一个已经创建好的项目中安装插件
+```
+vue add 的设计意图是为了安装和调用 Vue CLI 插件。
+
+### preset
+
+一个 Vue CLI preset 是一个包含创建新项目所需预定义选项和插件的 JSON 对象，让用户无需在命令提示中选择它们。
+```
+// example
+{
+    "userConfigFiles": true,
+    "cssPreprocessor": "sass",
+    "plugins": {
+        "@vue/cli-plugin-babel": {},
+        "@vue/cli-plugin-eslink": {
+            "config": "airbnb",
+            "lintOn": ["save", "commit"]
+        },
+        "@vue/cli-plugin-router": {},
+        "@vue/cli-plugin-vuex": {},
+    }
+}
+```
+
+
+```
+vue create --preset username/repo pn // 使用github上的preset仓库
+vue create --preset gitlab:username/repo pn // 使用gitlab上的preset仓库
+vue create --preset ./my-preset pn // 使用本地的preset
+```
+
+
 
 
 
