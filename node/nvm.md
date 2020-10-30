@@ -4,6 +4,7 @@
 
 ## install
 
+### win安装方法
 去[官网](https://github.com/coreybutler/nvm-windows/releases)下载再安装。  
 
 |版本|说明|-|
@@ -16,6 +17,24 @@
 |source code(tar.gz)|源码。一般用于*nix系统||
 
 我使用的nvm-setup.zip.  
+
+### mac安装方法
+
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+// or
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+// tip
+// 我在安装最新版时失败了。在安装0.33.8时成功了。
+```
+
+执行完安装语句后，不报错，则成功。
+然后关闭terminal.
+再打开terminal.输入：
+```
+nvm --version
+```
+若显示版本号，则安装成功。否则失败。
 
 ## setting
 

@@ -43,6 +43,7 @@
 |httpOnly|boolean|是否只有服务器可以操作该cookie|不设置||
 |secure|boolean|只有使用ssl链接时才发送到服务器|不设置||
 |sameSite|boolean / string|是否使用相同站点执行。有效控制跨站点请求伪造。|true:必须使用相同站点才发送cookie，只有当前url与请求目标一致才会发送该cookie。 false:不设置。 'lax':发送cookie(a,link,get),不发送cookie(post,iframe,ajax,image)||
+|priority|string|优先级。Low/Medium/High|当cookie数量超出时，低优先级的cookie会被优先消除。||
 
 ---
-2018/03/25 by stone
+2020/10/30 by stone
