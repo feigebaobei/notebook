@@ -101,3 +101,15 @@ module.exports = {
 ```
 在该文件里调试的配置项会在被`@vue/cli-service`自动加载。
 各配置项可参考 https://cli.vuejs.org/zh/config
+
+
+## issue
+
+```
+command failed: npm install --loglevel error
+```
+原因：
+.vuerc是@vue/cli的全局配置文件。这里默认不使用taobao的registry。估计又与墙有关。
+解决方法：
+打开`~/.vuerc`
+修改`useTaobaoRegistry`为`true`。

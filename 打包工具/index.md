@@ -15,7 +15,14 @@ grunt gulp browserify webpack
 
 
 
-# title
+# 提取公共代码
+
+webpack.optimize.CommonsChunkPlugin({
+  name: 'common',
+  minChunks: 2,
+  chunks: ['subPageA', 'subPageB']
+})
+
 # title
 # title
 # title

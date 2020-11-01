@@ -703,3 +703,39 @@ function defineReact(data, key, value){
       });
   }
 ```
+
+## 懒加载
+
+1. 在vue组件中懒加载
+
+```
+Vue.component('compName', () => import('./compName.vue'))
+
+new Vue({
+  components: {
+    compName: () => import('./compName.vue')
+  }
+})
+```
+
+2. 在router中懒加载
+
+```
+new VueRouter({
+  routes: [
+    ...
+    {
+      path: '/login',
+      component: () => import('compName.vue')
+    }
+  ]
+})
+```
+
+3. 在vues中懒加载
+```
+const store = new Vuex.Store()
+import('./store/login').then(loginModule => {
+  store.registerModule('login', loginModule)
+})
+```
