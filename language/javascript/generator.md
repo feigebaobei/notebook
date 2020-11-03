@@ -5,6 +5,7 @@
 3. 使用`function`与函数名之间的`*`。demo:`function * gen() {yield 'string'}`  
 4. 内部使用`yield`表达式。只能在genrator函数内部使用。  
 5. yield表达式必须在
+6. value表示当前内部状态的值。done表示是否结束。
 
 **用途**  
 1. 用于多次返回数据。（数列）
@@ -224,15 +225,22 @@ generator对象返回的是iterator对象。且不需要执行next方法。
 
 **斐波那契数列**  
 
-    function * fib (max) {
-        let count = 0,
-            i = 0, 
-            j = 1
-        while (count < max) {
-            yield i
-            [i, j] = [j, i + j]
-            count++
+    function * fib () {
+        let [f, e] = [0, 1]
+        while (true) {
+            yield e
+            [f, e] = [e, f + e]
         }
+    }
+    function genfb (count) {
+        let ele = fib()
+        let arr = []
+        let index = 0
+        while (index < count) {
+            arr.push(ele.next().value)
+            index++
+        }
+        return arr
     }
 
 **大衍数列**  
@@ -336,21 +344,3 @@ generator对象返回的是iterator对象。且不需要执行next方法。
     }
 
 
-****
-****
-****
-****
-****
-****
-****
-****
-##
-##
-##
-##
-##
-##
-##
-##
-##
-##
