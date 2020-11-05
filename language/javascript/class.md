@@ -112,18 +112,21 @@ for (let x of new Foo('first', 'second', 'third')) {
     }
     const p1 = new Point(5, 5)
     const p2 = new Point(10, 10)
-    console.log(Point.distance(p1, p2))
+    console.log(Point.distance(p1, p2)) // 使用
 
 静态方法不能在实例上调用.
         只能在类上调用.
         因此一般静态方法用作工具函数.
         可以被子类继承。
+        内部的this指向类。
+        可与非静态方法重名。
 
 各方法间不使用逗号分隔。
 
 ## this
 
 class内部的方法中的this默认指向类的实例。
+super后使用this
 
     class Animal {
         constructor (name) {
@@ -157,6 +160,11 @@ es6不提供静态方法、静态属性。
 
 每一个function都会形成一个作用域。变量声明时在函数中，所以就处于这个函数的作用域中，外部是无法访问的。要想访问变量，就必须new一个实例出来。  
 
+## new.target属性
+
+若构造函数不是被`new / Reflect.construct`调用的，则new.target为undefined。
+使用该属性可以判断出构造函数是被怎么使用的。
+
 ## 继承
 
 super() // 表示父类的构造函数。必须在子类的constractor里使用。
@@ -175,6 +183,8 @@ class ColorPoint extends Point {
 ```
 
 ## Object.getPrototypeOf(SubClass) // 返回子类的父类
+
+从子类上获取父类。
 
 ## super()
 
