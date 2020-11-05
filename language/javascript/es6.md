@@ -108,11 +108,12 @@ es6中规定：只要函数参数使用了默认值、解构赋值、扩展运�
 2. 把函数包在一个无参数的立即执行函数里。  
 
 **注意：**  
-
+箭头函数：
 1. 函数体内的this对象是定义时所在的对象。  
 2. 不能用作构造函数。  
 3. 不能使用arguments对象。使用rest参数可以启相同作用。  
 4. 不能使用yield命令。  
+5. 不存在this/arguments/super/new.target
 
 **绑定this**  
 
@@ -189,9 +190,38 @@ object.assign(target, source1[, source2, source3]) // 将多个源对象的可�
     Object.getOwnPropertySymbols(obj) // 以数组形式返回对象自身的所有Symbol属性
     Object.ownKeys(obj) // 以数组形式返回对象自身的所有属性
 
+## call/apply/bind
+bind 是固定某个函数的参数和this，返回另外一个函数。
+call 和 apply是指定this和参数调用这个函数，立即执行这个函数。
+call apply 的区别是他们指定参数的方式不同。
+都是重新定义this
+### call
+obj.fn.call(newThis, p0, p1, p2, ...)
+### apply
+obj.fn.apply(newThis, [p0, p1, p2, ...])
+### bind
+obj.fn.bind(newThis, p0, p1, p2, ...)
 
+```
+function fn(a,b){
+    console.log(this);
+    console.log(a);
+    console.log(b);
+}
+// bind(this,args...)
+bf = fn.bind("Bind this",10); // 没有任何输出，也就是说没有执行这个函数
+bf(); // "Bind this",10,undefined
+bf(20);// “Bind this”,10,20
+// 原函数不受影响
+fn(1,2); //window， 1，2
+bf2 = fn.bind("Bind this",1,2);
+bf2(); // "Bind this",1,2
 
+// call(this,args...)
+fn.call("Call this",1) // "Call this",1,undefined
+fn.call("Call this",1,2) // "Call this",1,2
 
-
-
-
+// apply(this,[args])
+fn.apply("Apply this",[1]) // "Apply this",1,undefined
+fn.apply("Apply this",[1,2]) // "Apply this",1,2
+```

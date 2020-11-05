@@ -108,6 +108,22 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 
     var p = Promise.race([p1, p2, p3]) // 最先改变状态的promise对象决定p的状态。  
 
+**Promise.allSettled()**  
+
+等所有这些实例都向返回结果（不管是fulfilled/rejected）。
+一旦结束，状态问题fulfilled。
+```
+let allSP = Promise.allSettled([p0, p1, p2]).then(([rp0, rp1, rp2]) => {...})
+```
+
+**Promise.any()**  
+
+当参数实例只要有一个变为fulfilled，则该实例为fulfilled状态。否则该实例为reject状态。
+若抛出错误，则该错误是一个AggregateError，它是一个数组，若每个成员对应一个rejected.
+```
+Promise.any([p0, p1, p2]).then(([rp0, rp1, rp2]) => {...}).catch(([ep0, ep1, ep2]) => {...})
+```
+
 **Promise.resolve()**  
 
 将参数转化为promise对象。  
@@ -133,6 +149,14 @@ then()方法返回的是一个promise对象，所以可以链式调用。
     // 等同于
     var p = new Promise((resolve, reject) => reject('error'))
 
+**Promise.try()**  
+
+未知某方法是同步、异步。
+```
+let f = () => {...} // 同步
+Promise.resolve().then(f) // 异步
+```
+
 **Promise.prototype.done()**  
 
 抛出最后一个错误。
@@ -147,6 +171,7 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 **Promise.prototype.finally()**  
 
 不管最后是什么状态，都会执行的操作。参数时一个函数。  
+它不返回promise对象，所以其后不能直接使用then/catch.
 
     Promise.prototype.finally = function (callback) {
         let p = this.constructor
