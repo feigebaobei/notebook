@@ -225,3 +225,10 @@ fn.call("Call this",1,2) // "Call this",1,2
 fn.apply("Apply this",[1]) // "Apply this",1,undefined
 fn.apply("Apply this",[1,2]) // "Apply this",1,2
 ```
+## new的过程做了什么
+var a = Object.create(Object)
+a[[prototype]] = Foo.prototype
+// or
+// a.__proto__ = Foo.prototype
+Foo.call(a)
+先创建一个实例，再把实例添加到原型链中。

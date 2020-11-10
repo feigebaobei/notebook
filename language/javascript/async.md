@@ -8,6 +8,10 @@ async函数对generator函数的改进：
 4. 返回promise对象。
 
 执行到async函数时会立即返回一个promise对象。当await后面的异步方法执行完后继续执行。
+async函数返回一个 Promise 对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。
+async函数内部的return语句调用then方法。
+async函数内部抛出错误，会调用catch方法。
+async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。
 
 ## uasge
 
@@ -110,3 +114,22 @@ async function dbFuc(db) {
 ```
 
 3. async函数保留运行堆栈。
+
+## await命令
+
+正常情况下，await命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值。
+await命令只能出现在 async 函数内部，否则都会报错。
+
+```
+async function f() {
+  // 等同于
+  // return 123;
+  return await 123;
+}
+f().then(v => console.log(v))
+// 123
+```
+## async函数的实现原理
+
+就是将 Generator 函数和自动执行器，包装在一个函数里。
+

@@ -1,6 +1,7 @@
 #map
 
-类似对象。实现了“值-值”的对应。就是记录键值对的映射关系的集合。  
+类似对象。实现了“值-值”的对应。就是记录键值对的映射关系的集合。Map 的键实际上是跟内存地址绑定的。如果 Map 的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map 将其视为一个键。虽然NaN不严格相等于自身，但 Map 将其视为同一个键。  
+null不能成为键名。
 
 **Map([[kay, value], [kay, value], [kay, value], [kay, value]])** 以数组为参初始化map对象。  
 |||||
@@ -16,6 +17,7 @@
 |get(key)|若存在key，则返回其对应的值。若不存在key，则返回其undefined。|||
 |has(key)|返回是否包含key。|||
 |set(key, value)|设置该map对象key对应的value。|||
+|keys()|返回一个iterator对象，其值为key。|||
 |values()|返回一个iterator对象，其值为value。|||
 
 **Map => Array**  
