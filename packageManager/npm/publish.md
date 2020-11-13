@@ -137,8 +137,20 @@ eslint --init
     <!-- 邮箱未验证 -->
     <!-- 镜像问题 -->
 
+    nrm ls
+
+    * npm -------- https://registry.npmjs.org/
+      yarn ------- https://registry.yarnpkg.com/
+      cnpm ------- http://r.cnpmjs.org/
+      taobao ----- https://registry.npm.taobao.org/
+      nj --------- https://registry.nodejitsu.com/
+      npmMirror -- https://skimdb.npmjs.com/registry/
+      edunpm ----- http://registry.enpmjs.org/
+      newssdk ---- http://10.0.68.202:4873/
+
 ####issue
 
+##### 1
     // 报错
     npm ERR! publish Failed PUT 401
     npm ERR! code E401
@@ -157,6 +169,7 @@ eslint --init
     // 解决方法
     // 改为正常的名字
 
+##### 2
 ```
 npm ERR! path C:\Users\Admin\AppData\Local\Temp\npm-12284-cd09bc74\tmp\fromDir-8703ef80\package.tgz
 npm ERR! code EPERM
@@ -178,6 +191,7 @@ npm ERR!   stack: 'Error: EPERM: operation not permitted, unlink \'C:\\Users\\Ad
 
 使用`npm login`登录时，输入Username/Password/Email后，提示：
 
+##### 3
 ```
 npm ERR! code E409
 npm ERR! Registry returned 409 for PUT on http://registry.npm.taobao.org/-/user/org.couchdb.user:feigebaobei: [conflict] User feigebaobei already exists
@@ -188,6 +202,15 @@ npm ERR! Registry returned 409 for PUT on http://registry.npm.taobao.org/-/user/
 `npm config set registry http://registry.npm.org`
 
 npm config [set | get | delete | list | edit]
+
+##### 4
+
+执行`npm publish`后，提示发布的版本号（说明已经发布成功）。
+去npm网站上查询，结果是没有该包。在作者的packages里没有找到相应的包。不会中因为缓存的问题。
+再执行`npm publish`后，仍提示发布的版本号。（没有升级版本号）。应该提示“因版本号冲突，发布失败”的消息。
+再去npm网站上查询仍没有结果。
+原因是执行`npm publish`时使用非`https://registry.npmjs.org/`。
+使用淘宝等代理都会发布失败。
 
 ###9. 删除
 
