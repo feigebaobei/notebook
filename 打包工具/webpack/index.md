@@ -48,14 +48,19 @@ module.exports = {
 在 webpack 打包应用程序时，你可以选择各种模块语法风格，包括 ES6, CommonJS 和 AMD。
 webpack将动态打包所有依赖项（创建所谓的依赖图）明确每个模块的依赖项，不会打包未使用的模块。
 
+![webpack的生命周期](https://img.alicdn.com/tps/TB1GVGFNXXXXXaTapXXXXXXXXXX-4436-4244.jpg)
+
 ### entry
 
 告诉webpack从哪儿开始打包。
 entry: string|Array<string>
+可以有多个入口。
 
 ### output
 
 打包后的输出位置。
+只能有一个出口。
+
 ```
 filename: 'fn.js'
 path: 'f/path'
@@ -112,6 +117,7 @@ module.exports = {
 ### plugins
 
 webpack的plugin是一个具有`apply`属性的js对象。该属性会被webpack compiler调用。compiler可在整个编译生命周期访问。
+可以在一个配置文件中多次使用同一个插件。只需要创建该插件的实例，再使用相应的option.
 
 ```
 // demo
@@ -1869,3 +1875,52 @@ thread-loader 可以将非常消耗资源的 loaders 转存到 worker pool 中�
 # loaders
 # plugins
 
+# title
+# title
+# title
+# title
+# title
+# 编写一个loader
+# 编写一个插件
+
+插件包括：
+1. 一个js命名函数。
+2. 插件函数的原型对像上定义apply方法。
+3. 绑定一个webpack的事件钩子。
+4. 处理webpack内部实例的特定数据。
+5. 功能完成时调用webpack提供的回调。
+
+compiler 对象代表了完整的 webpack 环境配置。这个对象在启动 webpack 时被一次性建立，并配置好所有可操作的设置，包括 options，loader 和 plugin。
+compilation 对象表现了当前的模块资源、编译生成资源、变化的文件、以及被跟踪依赖的状态信息。
+
+// 定义plugin
+```
+function HelloWorldPlugin (options) {
+  console.log('HelloWorldPlugin options', options)
+}
+HelloWorldPlugin.prototype.apply = (compiler) => {
+  // compiler: {options, loader, plugin}
+  compiler.plugin('done', () => {
+    console.log('hello finish')
+  })
+}
+```
+// 使用plugin
+```
+// webpack.config.js
+var HelloWorldPlugin = require('HelloWorldPlugin')
+...
+let config = {
+  ...
+  plugins: [
+    new HelloWorldPlugin({options: true})
+  ]
+}
+...
+
+```
+# title
+# title
+# title
+# title
+# title
