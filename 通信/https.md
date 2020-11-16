@@ -1,11 +1,12 @@
 https = http + ssl/tls
 
-            http                       https
-              |                          |
-            http                      https
-            tcp                      ssl/tls
-            ip                          tcp
-                                        ip
+            http                       https                      http/2                     http/3
+              |                          |                          |                          |
+            http                       http                        http                       http
+                                                          Hpack   stream             QPack    Stream
+                                       ssl/tls                  tls 1.2+                 quic    tls 1.3+
+    传输层    tcp                          tcp                    tcp                          udp
+    网络层     ip                          ip                      ip                          ip
 
         明文传输                       加密传输
         不需要ssl证书                    ssl证书
@@ -60,3 +61,59 @@ $ openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out
     httpsServer.listen(3000);
     //http监听3001端口
     httpServer.listen(3001);
+
+## 发展历史
+
+|||||
+|-|-|-|-|
+|http/0.9|1991|只能使用get请求。不涉及数据包传输。|没有作为正式的标准|
+|http/1.0|1996|增加了PUT/PATCH/HEAD/OPTIONS/DELETE命令。传输内容格式不限制。||
+|http/1.1|1997|长连接，节约带宽，host域、host域、管道机制。分块传输编码||
+|http/2|2015|多路复用，服务器推送、头信息压缩，二进制协议等||
+|http/3|--|||
+
+```
+    http/1.1                                http/2
+    client            server              client            server
+         open connection                      open connection
+         get /index.html                       get /index.html
+     -------------------->                  -------------------->
+
+         rsponse                                 rsponse
+     <--------------------                  <--------------------
+
+         get /style.css                         get /style.css
+     -------------------->                      get /script.js
+                                            -------------------->
+         rsponse                                  rsponse
+     <--------------------                        rsponse
+                                            <--------------------
+         get /script.js                   render
+     -------------------->                   close connection
+
+         rsponse
+     <--------------------
+  render
+        close connection
+```
+
+多路复用：一个http/2连接可以发起多重请求-回应。多个请求可以共享一个tcp连接。
+
+长连接（持久连接）：若在任意一端没有明确的提出断开连接，则保持tcp连接状态。
+在请求头中设置 `Connection: keep-alive`
+
+## http
+不能保证数据完整性。
+## https
+1. 使用混合加密。不能被直接看到明文。不能被中间者修改、篡改。
+2. c/s需要使用证书验证对方身份。
+
+## 成本
+
+1. ssl证书需要购买。需要绑定ip，不能在同一ip上绑定多个域名。
+2. https协议会延长加载时间约50%。增加10%-20%耗电。
+3. http更高效。https流量成本高。
+4. https占用服务端的资源多。
+5. 可采用分而治之的方式。在非私密数据的页面使用http,在有私密数据的页面使用https。
+
+## http3
