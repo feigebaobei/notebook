@@ -732,7 +732,7 @@ new VueRouter({
 })
 ```
 
-3. 在vues中懒加载
+3. 在vuex中懒加载
 ```
 const store = new Vuex.Store()
 import('./store/login').then(loginModule => {

@@ -29,18 +29,20 @@ module.exports = {
     // publicPath: '[filedir]',
     // path: path.resolve(__dirname, 'dist'), // 需要引入path模块。
   },
-  rules: [
-    {
-      test: /\.css$/,
-      use: [
-        {loader: 'style-loader'},
-        {
-          loader: 'css-loader',
-          options: {modules: true}
-        }
-      ]
-    }
-  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {loader: 'style-loader'},
+          {
+            loader: 'css-loader',
+            options: {modules: true}
+          }
+        ]
+      }
+    ],
+  }
   plugins: {},
   mode: 'production', // or development | none
 }

@@ -1,4 +1,4 @@
-# reb-aof
+# rdb-aof
 
 持久化机制rdb(redisDataBase)/aof(append only file)
 

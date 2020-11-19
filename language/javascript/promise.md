@@ -111,7 +111,7 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 **Promise.allSettled()**  
 
 等所有这些实例都向返回结果（不管是fulfilled/rejected）。
-一旦结束，状态问题fulfilled。
+一旦结束，状态变为fulfilled。
 ```
 let allSP = Promise.allSettled([p0, p1, p2]).then(([rp0, rp1, rp2]) => {...})
 ```

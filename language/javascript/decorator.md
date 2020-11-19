@@ -9,3 +9,4 @@ let readonly = (target, name, descriptor) => {
 	// descriptor 属性描述符对象，{configable,value,wirtable,enumberable}
 }
 ```
+装饰器不能用于函数。因为函数会被提升。
