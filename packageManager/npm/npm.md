@@ -45,6 +45,7 @@ npm
 |adduer|用户登录||
 |publish|发布模块||
 |access|在发布的包上设置访问级别||
+|rebuild|使用新版本的node时，重新编译所有c++插件。它会运行在与`npm build`相匹配的文件夹下。||
 ||||
 ||||
 
