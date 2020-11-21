@@ -4,6 +4,36 @@
 保证值都惟一。  
 es6时添加的第7种数据类型。（undefined, null, boolean, string, number, object）  
 它不是对象，不能添加属性。它类似string.  
+如果 Symbol 的参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值。
+Symbol 值不能与其他类型的值进行运算，会报错。
+Symbol 值作为对象属性名时，不能用点运算符。
+    是公开属性，不是私有属性。
+    不可被遍历。
+
+```
+var s0 = Symbol('hello')
+s0.toString() // Symbol(hello)
+var s1 = Symbol({})
+s1.toString() // Symbol([object Object])
+Boolean(s0) // true 当symbol对象转换为boolean时总是true
+```
+
+```
+let mySymbol = Symbol();
+// 第一种写法
+let a = {};
+a[mySymbol] = 'Hello!';
+// 第二种写法
+let a = {
+  [mySymbol]: 'Hello!'
+};
+// 第三种写法
+let a = {};
+Object.defineProperty(a, mySymbol, { value: 'Hello!' });
+// 以上写法都得到同样结果
+a[mySymbol] // "Hello!"
+```
+
 
 可以使用参数。即使使用相同的参数也得到的symbol对象也是不相等的。参数的作用大多是一个注释。对symbol对象使用toString()在视觉上更好区分。
 symbol可以转化为Boolean/String。
