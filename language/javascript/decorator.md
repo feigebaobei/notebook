@@ -5,7 +5,7 @@
 ```
 let readonly = (target, name, descriptor) => {
 	// target     目标(被装饰的对象，可以是类的方法也可以是类)
-	// name       类的属性
+	// name       被装饰的属性名
 	// descriptor 属性描述符对象，{configable,value,wirtable,enumberable}
 }
 ```

@@ -2,12 +2,14 @@
 
 1. reflect可以获得语言内部的新方法。  
 2. 修改object方法的返回结果。  
-3. 把object的部分命令式语法（delete o.p）改为方法式（Reflect.deleteProperty(o, p)） 
-4. 与proxy方法一一对应。可以方便的使用Reflect方法完成默认行为。  
-
-
+3. js的反射机制。
+4. 把object的部分命令式语法（delete o.p）改为方法式（Reflect.deleteProperty(o, p)） 
+5. 与proxy方法一一对应。可以方便的使用Reflect方法完成默认行为。  
+6. Reflect是一个内建的对象，用来提供方法去拦截JavaScript的操作。Reflect不是一个函数对象，所以它是不可构造的，也就是说它不是一个构造器，你不能通过`new`操作符去新建或者将其作为一个函数去调用Reflect对象。Reflect的所有属性和方法都是静态的。
 
 **Reflect.get(target, property, receiver)**  
+查找并返回target对象的name属性，如果没有该属性，则返回undefined
+
 **Reflect.set(target, property, value, receiver)**  
 **Reflect.has(target, property)** 对应 `in` 运算符  
 **Reflect.deleteProperty(target, property)** 删除对象的属性  

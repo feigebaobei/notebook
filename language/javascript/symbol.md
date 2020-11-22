@@ -106,7 +106,7 @@ Symbol.unscopables // 指定该对象不能被`with`使用的关键字。
 ## Symbol.for(param) / Symbol.keyFor(symbol)
         |                               |
         V                               V
-    检查是否已经存在             返回一个已经登记的Symbol值
+    检查是否已经存在             返回一个已经登记Symbol类型的key.（key是string）
     该参数作为名称的Symbol值
     |           |
     Y           N
@@ -130,6 +130,6 @@ Symbol.search  指向一个执行`String.prototype.search`时调用的方法
                 Symbol.search(string, value)
 Symbol.split String.prototype.split
             Symbol.split(string, seperate)
-Symbol.interator 指向该对象的默认遍历器方法
+Symbol.iterator 指向该对象的默认遍历器方法
 Symbol.toPrimitive 指向一个转化为原始类型的值时调用的方法。
 -----------------
