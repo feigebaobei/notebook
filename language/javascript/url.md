@@ -78,3 +78,12 @@ return domstring 表示该资源的引用。
 在html中写一个img.并设置一个本地图片。
 在canvas时渲染出这个图片。
 在input type=file中添加从canvas里得到的图片。  
+
+### 编码
+
+encodeURIComponent()
+对ascii字母数字编码。不对ascii标点编码。
+decodeURIComponent()
+encodeURI()
+对ascii+特殊字符执行编码。
+decodeURI()

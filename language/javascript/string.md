@@ -128,10 +128,13 @@ replacementstr: 必填，
 
 **replace(reg, replacementfn)** 匹配第一个符合要求的字符串替换后返回这个字符串。  
 reg: 必填，
-replacementfn: 必填，
+replacementfn: 必填，对每一个匹配项执行该方法。
 
-    var replace3 = str.replace(/\b\w+\b/g, function (word) {
-        return word.substring(0,1).toUpperCase()+word.substring(1)
+    var replace3 = str.replace(/\b\w+\b/g, function (match, index, string) {
+        // match 当前匹配项
+        // index 当前匹配项的下标
+        // string 全字符串
+        return match.substring(0,1).toUpperCase()+match.substring(1)
     })
     // '1 22 333 5444 Ha Ha Ha '
 
