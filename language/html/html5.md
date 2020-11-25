@@ -41,20 +41,3 @@ seamless     seamless
 src
 srcdoc       html_code   在iframe中显示的页面的html内容
 
-
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
-### object
