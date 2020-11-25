@@ -97,6 +97,7 @@ v-on:click.prevent="methods"
 缩写@click="methods"  
 ##计算属性和观察者
 在页面初始化时计算一次并保存在缓存中，当依赖没有改变时返回缓存中的结果，当依赖改变时重新计算再返回新结果。  
+不支持异步。
 默认只提供get方法  
 	computed: {
 		fullname: function () {
@@ -119,6 +120,10 @@ v-on:click.prevent="methods"
 	}
 **侦听器**  
 vue通过watch选项提供一个当需要数据变化时执行异步操作或操作开销较大时使用的方法。
+不支持缓存
+可支持异步
+可以接收2个参数。新值，旧值。
+当一个属性改变时，可以执行相应的操作。可以一对多。
 
 	value: {
         handler(newv, oldv) {
@@ -739,3 +744,15 @@ import('./store/login').then(loginModule => {
   store.registerModule('login', loginModule)
 })
 ```
+
+## 样式穿透
+
+1. 不想修改第三方组件的样式。
+2. 不想去除scoped的属性。
+3. 想在当前组件内修改第三方组件。
+
+外层 /deep/ 三方类 {
+  css
+}
+
+`>>>`是`/deep/`的别名，有些css预处理工具（sass）不支持`>>>`
