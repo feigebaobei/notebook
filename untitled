@@ -1,0 +1,180 @@
+vue
+
+react
+
+token
+前端工程化
+vue 10+ => project
+
+qiankun
+webpack
+
+
+
+|node-module
+  |--vue2.6
+|lib
+  |--公共组件
+  |--api
+  |--css
+  |--utils
+|project
+  |-- news
+      |-- project.js
+  |-- browser
+  |-- 官网
+  |-- xxx
+
+只打包当前项目。
+
+webpack.config.js
+
+|         |       |
+base     env     project
+-----------------------
+||
+ V
+webpack -> build -> dist ------------server/path/to/dir
+webpack --projectName
+
+url ng dir
+
+url/
+
+官网 商城 系统
+
+        ng
+url -------- dir
+
+sm2
+
+
+server 中心化
+node   node    node   node    node
+(data)
+blockChain (data)
+公开的。1. 明文 2. 指纹（hash）
+证书。
+sdk
+(sm4 sm2 sm3 ecdsa keccak256)
+
+server 去中心化
+
+express + 
+认证应用(web server） + sdk =》 中心化+去中心化的服务。
+
+sdk
+
+sm2
+genkey / encrypt / decrypt / sign / verify
+
+sm2
+go sm2
+
+js <=> go
+   sm2
+
+priKey + mt => ct0
+priKey + mt => ct1
+priKey + mt => ct2
+priKey + mt => ct3
+
+priKey + mt => ct3
+priKey + mt => ct3
+priKey + mt => ct3
+priKey + mt => ct3
+
+
+
+
+
+
+
+
+
+
+
+
+ ['abc', 'def', 'hig'] => ['adh', 'bei', 'cfg'] 
+
+let arr = ['abc', 'def', 'hig']
+let fn = (arr) => {
+  let l = arr[0].length
+  let res = []
+  for (let j = 0; j < l; j++) {
+    let temp = ''
+    for (let i = 0, iLen = arr.length; i < iLen; i++) {
+      temp += arr[i].substr(j, j + 1)
+    }
+    console.log(temp)
+    res.push(temp)
+  }
+  return res
+}
+fn(arr)
+
+
+arr = ['a', 'b', 'c'] => ['a', 'ab', 'abc']
+
+let fn = (arr) => {
+  let res = [], temp = ''
+  for (let i = 1; i < arr.length + 1; i++) {
+    temp = arr.slice(0, i).join('')
+    res.push(temp)
+  }
+  return res
+}
+fn(arr)
+
+封装
+npm包组件
+vue
+vue
+vue
+vue
+a
+a
+a
+new Vue()
+
+自定义
+export defaut {
+  install: () => {
+    return {
+      show() {
+        console.log('show')
+      }
+    }
+  }
+}
+插件
+import Toast from '../path/toast.js'
+
+Vue.use(Toast)
+new Vue({
+  el: '#app'
+  ,...
+})
+
+钩子
+react
+hook
+
+componentWillCreate
+componentDidCreate
+componentWillMount
+componentDidMount
+
+vue 3.0
+composition api
+
+lifyCycle
+
+react hooks
+web app
+sdk
+rest api
+express
+koa
+egg
+template => render ?

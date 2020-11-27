@@ -8,11 +8,11 @@
     function debounce(fn, delay) {
         var timer
         return () => {
-            var context = this
+            var self = this
             var args = arguments
             clearTimeout(timer)
             timer = setTimeout(function () {
-                fn.apply(context, args)
+                fn.apply(self, args)
             }, delay)
         }
     }
@@ -24,18 +24,18 @@
         var timer
         // threshhold || (threshhold = 250)
         return () => {
-          var context = this
+          var self = this
           var args = arguments
           var now = +new Date()
           if (last && last + threshhold > now) {
             clearTimeout(timer)
             timer = setTimeout(function () {
               last = now
-              fn.apply(context, args)
+              fn.apply(self, args)
             }, threshhold)
           } else {
             last = now
-            fn.apply(context, args)
+            fn.apply(self, args)
           }
         }
       }
