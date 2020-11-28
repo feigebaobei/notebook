@@ -1,3 +1,19 @@
+# 原理
+
+webpack 整体上是一个插件的架构，绝大多数功能都是通过插件实现的。 这里有一点比较容易让人迷惑，webpack 的插件有一个apply方法，他是在webpack的生命周期上再注册一些回调函数。所以插件有两个阶段：
+
+注册阶段，每个插件会在自己需要的生命周期上注册自己的回调
+编译阶段，webpack会把编译过程分为很多个生命周期，在编译启动后，会通过 applyPlugins(name) 各个生命周期中调用对应的回调函数。
+
+# 工作流程
+
+有2个webpack.js
+产生的原因：命令行中的命令是webpack。node调用的方法是webpack.
+|`bin/webpack.js`|`lib/webpack.js`|
+|-|-|
+|在命令行中直接启动入口。|webpack的逻辑入口。|
+|供命令行调用|供node调用|
+
 # 概念
 
 4个核心概念
@@ -43,7 +59,7 @@ module.exports = {
       }
     ],
   }
-  plugins: {},
+  plugins: [],
   mode: 'production', // or development | none
 }
 ```
@@ -1589,6 +1605,13 @@ webpack4/5与webpack-dev-server3+不兼容。
 
 ## 模块热替换
 
+1. client 和 server 建立一个 websocket 通信
+2. 当有文件发生变动的时候，webpack编译文件，并通过 websocket 向client发送一条更新消息
+3. client 根据收到的hash值，通过ajax获取一个 manifest 描述文件
+4. client 根据manifest 获取新的JS模块的代码
+5. 当取到新的JS代码之后，会更新 modules tree，（installedModules)
+6. 调用之前通过 module.hot.accept 注册好的回调，可能是loader提供的，也可能是你自己写的
+
 ### 启用hmr
 
 webpack.config.js
@@ -1644,6 +1667,8 @@ server.listen(5000, 'localhost', () => {
 ## tree shaking
 
 不打包未引用的代码。
+webpack 本身并不会删除任何多余的代码，删除无用代码的工作是 Uglify做的。
+webpack 通过静态语法分析，找出了不用的 export ，把他们改成 free variable，而 Uglify同样也通过静态语法分析，找出了不用的变量声明，直接把他们删了。
 
 ## 生产环境构建
 
