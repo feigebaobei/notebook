@@ -1,4 +1,4 @@
-# worker
+# web-worker
 
 在前端实现多线程工作。可以异步执行代码。  
 
@@ -16,20 +16,22 @@ worker内不能操作dom.可操作WebSockets、indexedDB等。
 
 ### 主线程
 
-    let worker = new Worker('url.js', options)
-    worker.postMessage('str') // 向子线程发送消息
-    worker.onmessage(function (event) {
+    let worker = new Worker('url.js', options) // url.js是worker线程需要执行的任务。
+    worker.postMessage('str') // 主线程向子线程发送消息
+    worker.onmessage(function (event) { // 接收从子线程传来的消息。消息中包括数据。
         // event.data 从子线程传来的数据
     })
     worker.addEventListener('message', function (event) {})
     worker.onerror(function (event) {}) // 当子线程错误时
     worker.addEventListener('error', function (event) {})
-    worker.terminate() // 关闭子线程
+    worker.terminate() // 关闭子线程。推荐在主线程中关闭线程。
 
 ### 子线程
 
     self是子线程的全局对象
-    self.addEventListener('message', function (event) {
+    self.addEventListener('message', function (event) { // 接收从父线程传来的消息。消息中包括数据。
+    // or
+    // addEventListener('message', function (event) { // 接收从父线程传来的消息。消息中包括数据。
         // event.data 是从父线程传来的数据
     })
     self.onmessage = function (event) {}
@@ -44,6 +46,14 @@ worker内不能操作dom.可操作WebSockets、indexedDB等。
 3. 子主线程间必须使用message传递数据。  
 4. 不能执行打断主线程的代码。  
 5. 必须来自网络不能使用本地文件。  
+6. 不能使用document/window/parent/alert()/confirm()...
+7. 可使用navigator/location.
+8. Worker()的参数必须来自网络。
+
+## 数据转移
+
+transferable Objects
+因拷贝方法处理二进制文件会造成性能问题。所以js允许主线程把原文件转换给子线程。转移后主线程就无法再使用二进制文件了。
 
 ## 建议
 
@@ -51,15 +61,24 @@ worker内不能操作dom.可操作WebSockets、indexedDB等。
 2. 使用同页面的web worker.  
 3. 数据在子线程/父线程间转移比拷贝性能高.  
 
+同页面使用web worker时，script的type使用浏览器不认识的值。如`app/worker`。
 ```
     <script id="workId" type="app/worker">
-        ...
+      self.addEventListener('message', (e) => {
+        postMessage('hi')
+      }, false)
     </script>
 
     // other
     let blob = new Blob([document.querySelector('#workId').textContent])
     let url = window.URL.createObjectURL(blob)
     let worker = new Worker(url)
+    worker.onmessage = (e) => {
+      ...
+    }
+    // 把页面中的脚本代码生成二进制对象。
+    // 把二进制对象生成url。
+    // 在worker中加载这个url.
 ```
 
 ## 专用worker
@@ -152,7 +171,7 @@ subworker解析 url时使用父worker的地址，这样方便记录它们的依�
 
 `importScript('foo.js')`
 
-`importScript('foo.js', 'bar.js')`
+`importScript('foo.js', 'bar.js')` // 同时加载多个脚本
 
 ## 共享worker
 
@@ -203,6 +222,22 @@ worker接口是操作系统级别的线程
 
 ## worker中可用的函数和接口
 
+## demo
+
+```
+let workStr = `
+self.addEventListener('message', (e) => {
+  console.log(e.data, 'worker')
+  postMessage('worker: "hi"')
+})
+`
+let createWorker = (workStr) => {
+  let worker = new Worker(window.URL.createObjectURL(new Blob([`${workStr}`])))
+  return worker
+}
+var w =createWorker(workStr)
+w.postMessage('hello')
+```
 
 ---
 2019/07/09 by stone

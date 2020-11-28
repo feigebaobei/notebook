@@ -193,9 +193,47 @@ Promise.resolve().then(f) // 异步
 
     p1.then(console.log(true)).catch(console.log(false))
 
+## promise写ajax请求
 
-
-
+```
+function mackAjax (url, method, params) {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = () => {
+      if (xhr.readState === 4) {
+        if (xhr.status >= 200 && xhr.status <= 299) {
+          resolve({
+            data: xhr.response,
+            status: xhr.status,
+            statusText: xhr.statusText
+          })
+        } else {
+          reject({
+            data: xhr.response,
+            status: xhr.status,
+            statusText: xhr.statusText
+          })
+        }
+      }
+    }
+    let mstr = method.toLowerCase()
+    switch (mstr) {
+      case 'get':
+        url = Object.entries(params).reduce((r, [k, v]) => r += `${k}=${v}&`, '?').slice(0, -1)
+        xhr.open(method, url)
+        xhr.send()
+        break
+      case 'post':
+        xhr.setRequesttheader('content-type', 'application/x-www-form-urlencoded')
+        xhr.open(method, url)
+        xhr.send()
+        break
+      default:
+      break
+    }
+  })
+}
+```
 
 
 

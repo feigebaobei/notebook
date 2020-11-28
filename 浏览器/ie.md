@@ -12,3 +12,11 @@
 
 <![if IE 9]-->
 <!end if-->
+
+propertychange
+
+<input onchange="fn" />
+<input oninput="fn" />
+<input onpropertychange="fn" />
+$('input').bind('input propertychange', fn) // 兼容ie的绑定input事件。
+
