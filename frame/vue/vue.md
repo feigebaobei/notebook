@@ -95,6 +95,36 @@ v-on:click="methods"
 v-on:click.prevent="methods"
 就是event.preventDefault()  
 缩写@click="methods"  
+
+### 自定义指令
+
+```
+export defaut {
+  install (Vue) {
+    Vue.directive('preventReEvent', {
+      inserted (el, t = 2000) {
+        el.addEventListener('click', () => {
+          if (!el.disabled) {
+            el.disabled = true
+            setTimeout(() => {
+              el.disabled = false
+            }, t)
+          }
+        })
+      }
+    })
+  }
+}
+```
+
+#### hook
+
+bind
+inserted
+update 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。
+componentUpdated 指令所在组件的 VNode 及其子 VNode 全部更新后调用。
+unbind
+
 ##计算属性和观察者
 在页面初始化时计算一次并保存在缓存中，当依赖没有改变时返回缓存中的结果，当依赖改变时重新计算再返回新结果。  
 不支持异步。
