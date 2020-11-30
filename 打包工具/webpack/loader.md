@@ -1,4 +1,14 @@
 # loader
+
+所有的loader都是一个管道
+在webpack中，可以把一个loader看做是一个数据管道，进口是 一个字符串，然后经过加工，输出另一个字符串，多个loader可以像水管一样串联起来，很像java中的stream流。
+所有模块都是JS模块 webpack 只支持JS模块，所有其他类型的模块，比如图片，css等，都需要通过对应的loader转成JS模块。所以在webpack中无论任何类型的资源，本质上都被当成JS模块处理。
+对于CSS，我们可以把它转成一段JS，这个JS会把CSS插入到DOM中。
+对于图片，我们可以把它进行base64转换变成一个字符串，或者进行文件拷贝然后导出它的URL
+
+let compiler = new Compiler(options.context)
+__webpack_require__ 函数定义了一个可以在浏览器中执行的加载函数来模拟 Node.js 中的 require 语句。
+
 ## style-loader原理解析
 
 1. require一个css文件，得到其中的字符串。
