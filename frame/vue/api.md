@@ -240,9 +240,13 @@ var vm = new Comp({
 
 ### template
 
-不会。
+一个字符串模板作为 Vue 实例的标识使用。。模板将会替换挂载的元素。挂载元素的内容都将被忽略，除非模板的内容有分发插槽。
 
 ### render
+
+接受一个`createElement`的方法为参数。
+若它存在，则不会使用template/el.
+
 ### renderError
 
 ## 选项、生命周期钩子

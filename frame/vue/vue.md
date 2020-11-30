@@ -1,5 +1,7 @@
 #vue  
+
 向下不兼容ie8。向上兼容es6。 
+就是 Vue 不支持 IE8 以及更低版本浏览器的原因。ie8无法支持Object.defineProperty(obj, key, pd)
 
 **引入`<script>`**   
 开发版本：包含完整的调试、警告。  
@@ -461,6 +463,14 @@ vue把 data 选项中的属性使用 object.defineProperty 全部转变 setter/g
 
 把每个数据添加到观察者模式里。使用存取描述符处理绑定数据改变时重新渲染文档片段。在vue对象初始化时会把所有数据添加到观察者模式内。并把使用初始数据渲染出文档片段（此时是虚拟文档）再添加到指定dom里。
 
+Vue 不能检测以下数组的变动：
+当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
+当你修改数组的长度时，例如：vm.items.length = newLength
+无法动态监听根级数据变化 property，
+Vue 在更新 DOM 时是异步执行的。只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。
+this.$nextTick(fn)
+this.$render渲染函数的优先级高于this.$template函数。
+
 # vue 原理
 
 ## 响应式原理(监听数据变化)
@@ -786,3 +796,5 @@ import('./store/login').then(loginModule => {
 }
 
 `>>>`是`/deep/`的别名，有些css预处理工具（sass）不支持`>>>`
+
+

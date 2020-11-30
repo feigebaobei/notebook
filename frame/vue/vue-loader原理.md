@@ -122,6 +122,25 @@ class VueLoaderPlugin {
     ...
 ```
 
+因为在selector里写死了参数，所以vue-loader无法扩展（就是不能与其他loader链式调用）。这与webpack的loader设计方式相背。
 
+Vue 的模板编译是在 mount 的过程中进行的，在mount的过程中进行的。在mount 的时候执行了 compile 这个方法来将 template 里的内容转换成真正的 HTML 代码。complie 之后执行的事情也蛮重要的，这个我们留到最后再说。complie 最终生成 render 函数，等待调用。这个方法分为三步：
+complie 最终生成 render 函数，等待调用。这个方法分为三步：
+1. parse 函数解析 template
+2. optimize 函数优化静态内容
+3. generate 函数创建 render 函数字符串
 
+## parse解析
 
+## optimiz优化
+
+静态内容指的是和数据没有关系，不需要每次都刷新的内容。
+optimize 的过程分为两步：
+1. 标记所有的静态和非静态结点
+2. 标记静态根节点
+
+## 标记静态根节点
+## generate 生成 render
+
+整个 Vue 渲染过程，前面我们说了 complie 的过程，在做完 parse、optimize 和 generate 之后，我们得到了一个 render 函数字符串。
+那么接下来 Vue 做的事情就是 new watcher，这个时候会对绑定的数据执行监听，render 函数就是数据监听的回调所调用的，其结果便是重新生成 vnode。当这个 render 函数字符串在第一次 mount、或者绑定的数据更新的时候都会被调用，生成 Vnode。如果是数据的更新，那么 Vnode 会与数据改变之前的 Vnode 做 diff，对内容做改动之后，就会更新到我们真正的 DOM 上啦~
