@@ -24,4 +24,3 @@ attachEvent(eventName, fn)
 detachEvent(eventName, fn)
 event.srcElement
 event.cancelBubble = true
-cla
