@@ -20,3 +20,8 @@ propertychange
 <input onpropertychange="fn" />
 $('input').bind('input propertychange', fn) // 兼容ie的绑定input事件。
 
+attachEvent(eventName, fn)
+detachEvent(eventName, fn)
+event.srcElement
+event.cancelBubble = true
+cla
