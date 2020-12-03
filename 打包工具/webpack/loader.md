@@ -36,3 +36,13 @@ pitch模式 从左向右执行。
 获取 limit 参数
 如果 文件大小在 limit 之类，则直接返回文件的 base64 编码后内容
 如果超过了 limit ，则调用 `file-loader
+
+
+# webpack常用的loader
+
+## file-loader
+## url-loader
+## node-sass
+## sass-loader
+## css-loader
+## style-loader

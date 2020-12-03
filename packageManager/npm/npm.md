@@ -203,6 +203,10 @@ main：npm包的入口文件。兼容browser / node。
 module: npm包的es规范的入口文件。兼容browser / node。
 browser：npm包的browser环境下的入口文件。
 
+只npm包只允许在web端（浏览器中）运行，则使用browser。
+只npm包只允许在server端（node中）运行，则使用main.
+使用npm包可以在web、server端都可运行，则使用browser+main.
+
 ---
 
 2018/12/23 by stone
