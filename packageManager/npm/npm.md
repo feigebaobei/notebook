@@ -139,7 +139,69 @@ npm cache clean --force
     npm link packagename
 
 require方法不能把全局安装的文件引入。若使用`npm link packagename`后就可以引入全局文件。  
-但是`npm link xxx`不支持windows.  -_-  
+但是`npm link xxx`不支持windows.  `-_-`  
+
+## package.json说明
+
+在运行时引入模块，引入的是package.json中"main"指向的文件。
+在webpack打包或者webpack-dev-server的时候，引入的是package.json中"module"指向的文件。
+
+## package.json各字段说明
+
+|key||||
+|-|-|-|-|
+|name||||
+|version||||
+|description||||
+|keywords||||
+|homepage||||
+|bugs||||
+|license|版权说明|||
+|author||||
+|contributors||||
+|funding|最新的信息所在网址的字段。|Object / Array||
+|files|当前包包括哪个文件。|||
+|main|主要入口。使用`require(packageName)`时就是从这个字段开始获取数据。|||
+|browser|当该包使用在browser时，会代替main字段的功能。|||
+|bin|二进制文件的目录|||
+|man|不会|||
+|directories|(目录)|||
+|description.lib||||
+|description.bin||||
+|description.man||||
+|description.doc||||
+|description.example||||
+|description.test||||
+|repository|该包的仓库|Object|{"type":"git","url":"xxxx"}|
+|script|可运行的脚本|Object||
+|config|使用该包时需要的配置项|||
+|dependencies|生产环境的依赖项|Object||
+|devDependencies||Object||
+|peerDependencies|不会|Object||
+|bundledDependencies|不会|||
+|optionalDependencies|不会|||
+|engines|需要什么样的运行环境支持||`{"engines": {"node": ">=10.0.0"}}`|
+|engineStrict|不会|||
+|os|需要什么样的操作系统|||
+|cpu||||
+|preferGlobal|不会|||
+|private|若true，则不能`npm publish`|Boolean||
+|publishConfig|不会|||
+|DEFAULT VALUES|不会|||
+
+## npm 包使用范围
+
+只允许在客户端使用的，
+只允许造服务端使用的，
+浏览器/服务端都可以使用。
+如果我们需要开发一个 npm 包同时兼容支持 web端 和 server 端，需要在不同环境下加载npm包不同的入口文件，显然一个 main 字段已经不能够满足我们的需求，这就衍生出来了 module 与 browser 字段。
+
+`*.mjs`文件是在 node 环境下原生执行 ESM 规范的脚本文件。当执行`require('index') / import('index')`时，优先加载`index.mjs`，即优先级：`*.mjs > *.js`
+
+main：npm包的入口文件。兼容browser / node。
+  main字段是npm包主要入口文件`require(xxx)`时就是从main字段取值的。
+module: npm包的es规范的入口文件。兼容browser / node。
+browser：npm包的browser环境下的入口文件。
 
 ---
 
