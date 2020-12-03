@@ -71,7 +71,7 @@ npm i antd babel-plugin-import
 
 ## 数据流向
 
-用户行为 -》 dispatch -> action -> effect
+用户行为 -> dispatch -> action -> effect
                                     |
                                     V
                                -> reducer -> state -> connect -> component
