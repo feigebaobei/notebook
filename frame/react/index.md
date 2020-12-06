@@ -79,6 +79,10 @@ function HelloMessage (props) {
 const element = <HelloMessage />
 ReactDOM.render(element, dom)
 
+### 受控组件
+
+
+
 ### 复合组件
 
 function Name (props) {
@@ -122,6 +126,9 @@ Boolean，是否挂载到dom中。
 ## state
 
 组件可看成一个状态机。
+使用setState修改state，不使用state。
+修改state是异步的。
+state的更新会被合并。
 this.setState({key: value})
 componentWillMount()
 componentDidMount()
@@ -289,5 +296,48 @@ class Hello extends React.Component {
     return <div ref="hi"></div>
   }
 }
+```
+
+## react对象
+
+```
+React: {
+  Children: {}
+  Component(),
+  Fragement
+  Profiler,
+  PureComponent()
+  StrictMode,
+  Suspense
+  cloneElement()
+  createContext()
+  createFactory()
+  craeteRef()
+  forwardRef()
+  isValidElement()
+  lazy()
+  memo()
+  useCallback()
+  useContext()
+  useDebugValue()
+  useEffect()
+  useLayoutEffect()
+  useMemo()
+  useReducer()
+  useRef()
+  useState()
+  version,
+  __SECRET_INTERNALS_NO_NOT_USE_OR_YOU_WILL_BE_FIRED
+}
+```
+## cdn
+
+```
+// umd版本
+<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 ```
 

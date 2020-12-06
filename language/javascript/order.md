@@ -20,7 +20,7 @@
             return arr
         }
         let pivotIndex = Math.floor(arr.length / 2),
-            pivot = arr.splice(pivoIndex, 1)[0],
+            pivot = arr.splice(pivotIndex, 1)[0],
             left = [],
             right = []
         for (let i = 0, iLen = arr.length; i < iLen; i++) {
