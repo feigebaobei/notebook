@@ -81,7 +81,31 @@ ReactDOM.render(element, dom)
 
 ### 受控组件
 
+让有自身行为的dom元素（如：表单组件）添加react处理事件的能力。
+```
+class NameForm extends React.Component {
+  constructor (props) {
+    super(props)
+  }
+  fn () {}
+  render () {
+    return (
+      <div>
+        <form>
+          <input text="input" value={this.state.value} onChange={this.fn} />
+        </form>
+      </div>
+      )
+  }
+}
+```
+多个输入
+```
+为form元素添加name属性。
+在处理方法体中检查target.name，再分别处理。
+```
 
+与非受控组件的区别在于是否有value prop。
 
 ### 复合组件
 
@@ -101,6 +125,28 @@ function App () {
       <Name />
       <Url />
     </div>
+  )
+}
+// or
+// 有点像vue里的slot
+function Parent (props) {
+  return (
+    <div>
+      <div>
+        {props.left}
+      </div>
+      <div>
+        {props.right}
+      </div>
+    </div>
+  )
+}
+funtion UserParent () {
+  return (
+    <Parent
+      left = <first/>
+      right = <second/>
+    />
   )
 }
 ReactDOM.render(<App />, dom)
@@ -283,6 +329,10 @@ class Hello extends React.Component {
 }
 ```
 
+## 状态提升
+
+当一个组件需要一个数据时，就把该数据设置到该组件的state里。若多个组件都需要使用同一份数据，则把该组件设置到这些组件的公共祖先组件里。这个过程称为状态提升。
+
 ## ref
 
 得到render()返回的支撑实例（backing instance）
@@ -340,4 +390,58 @@ React: {
 <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 ```
+
+## 代码分割
+
+React.lazy 目前只支持默认导出（default exports）。
+```
+import React, {Suspense} from 'react'
+function MyComponent () {
+  return (
+    <div>
+      <Suspense fallback={<div>hi</div>}
+        <OtherComponent />
+      </Suspense>
+    </div>
+  )
+}
+import React, {lazy} from 'react'
+const MyComponent = lazy(() => import('./MyComponent.js'))
+```
+
+## context
+
+处理组件间数据传递。
+使用content前时可以考虑把组件嵌套压扁些。减少组件嵌套的深度。
+context类似vue里的provide.
+
+### api
+
+```
+// 实例化
+const MyContext = React.createContext(defaultValue)
+MyContext.Provider
+<MyContext.Provider value={...}>
+Class.contextType
+MyClass.contextType = MyContext
+MyContext.displayName
+MyContext.Provider
+MyContext.Provider
+MyContext.Provider
+MyContext.Provider
+MyContext.Provider
+< >
+```
+
+## 错误边界
+
+### componentDidCatch(error, info)
+
+### title
+### title
+### title
+### title
+### title
+### title
+### title
 
