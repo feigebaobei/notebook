@@ -34,7 +34,7 @@ RR: {
   matchPath: ƒ matchPath(pathname, options)
   useHistory: ƒ useHistory()
   useLocation: ƒ useLocation()
-  useParams: ƒ useParams()
+  useParams: ƒ useParams() // 取出路由中的参数
   useRouteMatch: ƒ useRouteMatch(path)
   withRouter: ƒ withRouter(Component)
 }
@@ -43,7 +43,9 @@ RR: {
 ### BrowserRouter
 
 BrowserRouter主要使用在浏览器中，也就是WEB应用中。它利用HTML5 的history API来同步URL和UI的变化。
-
+无`#`
+会真的向server发送get请求。
+需要server处理404页面。
 BrowserRouter组件提供了四个属性。
 
 basename: 字符串类型，路由器的默认根路径
@@ -113,4 +115,56 @@ activeStyle: Object
 isActive: Function
 ```
 
-### title
+### HashRouter
+
+有`#`。
+不会真的向server发送get请求。
+需要前端处理404页面。
+
+# 404
+
+1. 写一个404页面。
+2. 当没有匹配到路由时，跳入404页面。
+
+```
+import React form 'react'
+class ErrorPage extends React.Componenet {
+  constructor (props) {
+    super(props)
+  }
+  render () {
+    return (
+      <div>
+        <h3>error page</h3>
+        <Link to="/">home</Link>
+      </div>
+    )
+  }
+}
+
+// 引入依赖+ErrorPage+...
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+  }
+  render () {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/path0" component={comp0} />
+          <Route path="/path1" component={comp1} />
+          <Route component={ErrorPage} />
+        </Switch>
+      </Router>
+      <div>
+
+      </div>
+    )
+  }
+}
+ReactDOM.render(
+  <App />,
+  document.querySelector('#root')
+)
+```
+

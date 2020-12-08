@@ -18,7 +18,6 @@
 |模板|jsx||
 |为每个属性设置watcher,当属性变化时，更新dom.watcher越多越可能卡顿。|setState后使用shouldComponentUpdate判断是否渲染，若为true，则重新渲染组件。||
 |中小型|都可以||
-||单向数据流||
 |把html/css/js放在一起。使用vue-loader统一处理。|使用js生成html/css.||
 |声明式的写法|使用扩展类式的写法。||
 |使用mixins扩展|使用高阶组件扩展||
