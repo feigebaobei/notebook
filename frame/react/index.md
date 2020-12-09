@@ -437,7 +437,54 @@ MyContext.Provider
 
 ### componentDidCatch(error, info)
 
-### title
+# 使用样式
+
+## 内联样式
+
+```
+<p style={{color: 'red'}}>string</p>
+// sobj = {
+  color: 'green'
+}
+<p style={sobj}>string</p>
+```
+
+单位是px时，可省略。
+
+## 引入样式文件
+
+```
+// 引入
+import './path/to/style.css'
+import './path/to/style.scss'
+import './path/to/style.styl'
+// 使用
+<p style={sobj}>string</p>
+```
+
+## 引入样式脚本
+
+```
+// style.js
+export default {
+  red: {
+    color: red
+  },
+  box: {
+    width: 50px,
+    height: 80px
+  }
+}
+// 引入
+import sobj from './path/to/style.js'
+// 使用
+<p style={sobj.box}>string</p>
+```
+
+## title
+## title
+## title
+
 ### title
 ### title
 ### title
