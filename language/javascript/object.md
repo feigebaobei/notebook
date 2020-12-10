@@ -1,4 +1,65 @@
 #Object
+
+## 三大对象
+
+### 本地对象
+
+1. Object
+2. String
+3. Array
+3. Date
+3. Number
+3. RegExp
+3. Function
+3. Boolean
+3. Error
+
+### 内置对象
+
+3. Global
+3. Math
+3. JSON
+
+### 宿主对象
+
+3. DOM
+3. BOM
+
+## Object 的常用方法描述
+
+|方法 | 描述|
+|-|-|
+|create(proto[, propertiesDescribeObject])   | 创建一个对象，其原型为prototype，同时可添加多个属性。|
+|assign(target, ...sources)                  | 把一个或多个源对象的可枚举、自有属性值复制到目标对象中，返回值为目标对象。会改变target对象。|
+|defineProperty(obj, prop, descriptor)       | 在一个对象上定义一个新属性或修改一个现有属性，并返回该对象。|
+|defineProperties()                          | 在一个对象上定义一个或多个新属性或修改现有属性，并返回该对象。|
+|getOwnPropertyDescriptor(obj, prop)         | 获取目标对象上某自有属性的配置特性（属性描述符），返回值为配置对象。|
+|getOwnPropertyDescriptors()                 | 获取目标对象的所有自身属性的描述符，如果没有任何自身属性，则返回空对象。|
+|getOwnPropertyNames(obj)                    | 获取目标对象上的全部自有属性名（包括不可枚举属性）组成的数组。|
+|getOwnPropertySymbols()                     | 返回目标对象自身的所有 Symbol 属性的数组。|
+|getPrototypeOf(obj)                         | 获取指定对象的原型，即目标对象的prototype属性的值。|
+|setPrototypeOf(obj, prototype)              | 设置目标对象的原型为另一个对象或null，返回该目标对象。|
+|seal(obj)                                   | 密封对象，阻止其修改现有属性的配置特性，即将对象的所有属性的configurable特性设置为false（也就是全部属性都无法重新配置，唯独可以把writable的值由true改为false，即冻结属性），并阻止添加新属性，返回该对象。可以修变已有属性。|
+|freeze(obj)                                 | 完全冻结对象，在seal的基础上，属性值也不可以修改，即每个属性的wirtable也被设为false。|
+|preventExtensions(obj)                      | 使某一对象不可扩展，也就是不能为其添加新属性。|
+|is()                                        | 判断两个值是否是相同的值|
+|isSealed(obj)                               | 用于判断目标对象是否被密封，返回布尔值。|
+|isFrozen(obj)                               | 用于判断目标对象是否被冻结，返回布尔值。|
+|isExtensible(obj)                           | 用于判断一个对象是否可扩展，即是否可以添加新属性。|
+|keys(obj)                                   | 获取目标对象上所有可枚举属性组成的数组。|
+|entries()                                   | 返回目标对象可枚举属性的键值对的数组。|
+|fromEntries()                               | 把目标键值对列表转换为一个对象。|
+|values(obj)                                 | 返回目标对象自身的所有可枚举属性值的数组，值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。|
+
+## Object.prototype对象方法
+
+|toString()                  | 返回当前对象的字符串形式，返回值为String类型。|
+|toLocaleString()            | 返回当前对象的"本地化"字符串形式，以便于当前环境的用户辨识和使用，返回值为String类型。|
+|valueOf()                   | 返回指定对象的原始值。|
+|hasOwnProperty(prop)        | 返回一个布尔值 ，表示某个对象是否含有指定的属性，而且此属性非原型链继承的。|
+|isPrototypeOf(obj)          | 返回一个布尔值，表示指定的对象是否在本对象的原型链中。|
+|propertyIsEnumberable(prop) | 方法返回一个布尔值，表示指定的属性是否可枚举。|
+
 ##Object.assign(target, ...sources)
 把一个或多个源对象复制到目标对象。并返回目标对象。简单理解为合并对象。  
 `Object.assign()`是浅拷贝。只复制一层，剩下的只复制指针。  
@@ -98,6 +159,10 @@
             return this.value
         }
     } 
+
+
+
+
 
 ## 创建对象  
 
