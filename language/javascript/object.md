@@ -16,14 +16,13 @@
 
 ### 内置对象
 
-3. Global
-3. Math
-3. JSON
+1. Math
+2. JSON
 
 ### 宿主对象
 
-3. DOM
-3. BOM
+1. DOM
+2. BOM
 
 ## Object 的常用方法描述
 
