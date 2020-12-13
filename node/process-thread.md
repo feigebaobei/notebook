@@ -20,6 +20,25 @@ child_process模块可以实现子进程，从而实现广义的多进程模式�
 
 工作进程由child_process.fork()方法创建，因此它们可以使用IPC和父进程通信，从而使各进程交替处理连接服务。
 
+## child_process
+
+node内置模块
+
+```
+const cp = require('child_process')
+cp: {
+  _forkChild Function
+  ChildProcess Function
+  exec Function
+  execFile Function
+  execFileSync Function
+  exexSync Function
+  fork Function
+  spawn Function
+  spawnSync Function
+}
+```
+
 ## 进程之间的通信
 
 send()向其他进程发送消息。

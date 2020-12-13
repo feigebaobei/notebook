@@ -102,7 +102,7 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 
     var p = Promise([p1, p2, p3]) // 参数可以不是数组，但一定要有Iterator接口，且每个成员必须是promise实例。  
 
-全是的resolved时p执行then方法。有一个rejected就执行p的catch方法。  
+全是的resolved时p执行then方法，参数各promise对象的结果组成的数组。有一个rejected就执行p的catch方法，参数是rejected状态的promise对象的结果。  
 
 **Promise.prototype.race()**  
 
@@ -111,15 +111,16 @@ then()方法返回的是一个promise对象，所以可以链式调用。
 **Promise.allSettled()**  
 
 等所有这些实例都向返回结果（不管是fulfilled/rejected）。
-一旦结束，状态变为fulfilled。
+一旦结束，状态变为fulfilled。总是触发then。不会触发catch.
+
 ```
 let allSP = Promise.allSettled([p0, p1, p2]).then(([rp0, rp1, rp2]) => {...})
 ```
 
 **Promise.any()**  
 
-当参数实例只要有一个变为fulfilled，则该实例为fulfilled状态。否则该实例为reject状态。
-若抛出错误，则该错误是一个AggregateError，它是一个数组，若每个成员对应一个rejected.
+当参数实例只要不全变为rejected状态，则该实例为fulfilled状态。否则该实例为reject状态，触发then方法，参数是最先变为fullfilled状态的结果。
+若全是rejected状态，则抛出错误，则该错误是一个AggregateError。
 ```
 Promise.any([p0, p1, p2]).then(([rp0, rp1, rp2]) => {...}).catch(([ep0, ep1, ep2]) => {...})
 ```
@@ -234,42 +235,4 @@ function mackAjax (url, method, params) {
   })
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
