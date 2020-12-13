@@ -82,10 +82,20 @@ worker_threads相对于I/O密集型操作是没有太大的帮助的，因为异
 # child_process
 
 child_process是node的内置模块。
-child_process.spawn()
-child_process.exec()
-child_process.execFile()
-child_process.fork()
+
+```
+child_process: {
+  _forkChild Function
+  ChildProcess Function
+  exec Function
+  execSync Function
+  execFile Function
+  execFileSync Function
+  spawn Function
+  spawnSync Function
+  fork Function
+}
+```
 
 ```
 const fork = require('child_process').fork
@@ -105,11 +115,131 @@ process.on('message', msg => { // 以消息形式发送给子进程数据
 })
 ```
 
+child_process.spawn()        别的方法都是基于它的。
+child_process.spawnSync()
+child_process.exec()         衍生 shell 并且在 shell 中运行命令，当完成时则将 stdout 和 stderr 传给回调函数。
+child_process.execSync()
+child_process.execFile()     类似于 child_process.exec()，但是默认情况下它会直接衍生命令而不先衍生 shell。
+child_process.execFileSync()
+child_process.fork()         衍生新的 Node.js 进程，并调用指定的模块，该模块已建立了 IPC 通信通道，可以在父进程与子进程之间发送消息。
+每个方法都返回一个 ChildProcess 实例。 这些对象实现了 Node.js 的 EventEmitter API，允许父进程注册监听器函数，在子进程的生命周期中当发生某些事件时会被调用。
+
+## api
+
+`child_process.spawn(command[, args][, options])`
+
+command 需要运行的命令
+args   命令的参数
+optison <Object> {
+  cwd String 子进程的当前工作目录 undefined
+  env Object 子进程的环境变量的键值对 process.env
+  argv0 显式地设置发送给子进程的 argv[0] 的值。 如果没有指定，则会被设置为 command 的值。
+  stdio Array | String 子进程的 stdio 配置
+  detached 使子进程独立于其父进程运行。 具体行为取决于平台。
+  uid 设置进程的用户标识
+  gid 设置进程的群组标识
+  serialization String 可选值'json'|'advanced'
+  shell Boolean | String
+  windowsVerbatimArguments Boolean
+  windowsHide Boolean 藏子进程的控制台窗口 false
+}
+return childProcess实例
+
+`child_process.exec(command[, options][, callback])`
+command
+options: {
+  cwd
+  env
+  encodiing
+  shell
+  timeout
+  maxBuffer
+  killSignal
+  uid
+  gid
+  windowsHide
+}
+callback: function (error, stdout, stderr) {}
+返回: <ChildProcess>
+衍生 shell，然后在 shell 中执行 command，并缓冲任何产生的输出。 传给 exec 函数的 command 字符串会被 shell 直接处理，特殊字符（因 shell 而异）需要被相应地处理：
+
+`child_process.execFile(file[, args][, options])`
+file
+args
+opitons: {
+  cwd
+  input <string> | <Buffer> | <TypedArray> | <DataView> 该值会作为 stdin 传给衍生的进程。提供此值会覆盖 stdio[0]。
+  stdio
+  env
+  uid
+  gid
+  timeout
+  killSignal
+  maxBuffer
+  encoding
+  windowsHide
+  shell
+}
+返回: <ChildProcess>
+
+`child_process.fork(modulePath[, args][, options])`
+modulePath
+args
+options: {
+  cwd
+  detached
+  env
+  execPath
+  execArgv
+  serialization
+  silent
+  stdio
+  windowsVerbatimArguments
+  uid
+  gid
+}
+返回: <ChildProcess>
+
+|ChildProcess类 事件|||||
+|-|-|-|-|-|
+|close|子进程的stdio流被关闭时|code, signal|||
+|disconnect|在父进程中执行`subProcess.disconnect`或在子进程中执行`process.disconnect`时触发||||
+|error|无法衍生进程、无法杀死进程、向子进程发消息失败时|error|||
+|exit||code, signal|||
+|message||message, sendHandle|||
+|subProcess.channel||Object|||
+|subProcess.channel.ref()||Object|||
+|subProcess.channel.unref()||Object|||
+
+|属性/方法|||||
+|-|-|-|-|-|
+|subProcess.connected|||||
+|subProcess.disconnect()|关闭父进程与子进程之间的 IPC 通道，一旦没有其他的连接使其保持活跃，则允许子进程正常退出。||||
+|subProcess.exitCode|||||
+|subProcess.kill([signal])|||||
+|subProcess.killed||Boolean|||
+|subProcess.pid||Number|||
+|subProcess.ref()|||||
+|`subProcess.send(msg[, sendHandle[, options]][, cb])`|||||
+|subProcess.signalCode|||||
+|subProcess.spawnargs|||||
+|subProcess.spwanfile|||||
+|subProcess.stderr|||||
+|subProcess.stdin|||||
+|subProcess.stdio|||||
+|subProcess.stdout|||||
+|subProcess.unref()|||||
+
+```
+// 使用事件
+cp.on('eventName', (params) => {...})
+```
+
 # cluster
 
 Cluster会创建一个master，然后根据你指定的数量复制出多个子进程，可以使用 cluster.isMaster属性判断当前进程是master还是worker(工作进程)。由master进程来管理所有的子进程，主进程不负责具体的任务处理，主要工作是负责调度和管理。
 cluster模块为什么可以让多个子进程监听同一个端口。master进程内部启动了一个TCP服务器，而真正监听端口的只有这个服务器，当来自前端的请求触发服务器的connection事件后，master会将对应的socket具柄发送给子进程。
-
+cluster 模块可以创建共享服务器端口的子进程。
 
 
 ```
