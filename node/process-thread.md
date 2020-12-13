@@ -1,4 +1,4 @@
-# 开启多进程
+# 开篇
 
 node的单线程是指js的引擎只有一个实例。因其是单线程模式，所以比其他语言更适合io密集型操作。
 node的单线程，以单一进程运行，因此无法利用多核CPU以及其他资源，为了调度多核CPU等资源，node还提供了cluster模块，利用多核CPU的资源，使得可以通过一串node子进程去处理负载任务，同时保证一定的负载均衡型。
@@ -69,10 +69,6 @@ worker_threads相对于I/O密集型操作是没有太大的帮助的，因为异
 
 我们启动一个服务、运行一个实例，就是开一个服务进程，例如 Java 里的 JVM 本身就是一个进程，Node.js 里通过 node app.js 开启一个服务进程，多进程就是进程的复制（fork），fork 出来的每个进程都拥有自己的独立空间地址、数据栈，一个进程无法访问另外一个进程里定义的变量、数据结构，只有建立了 IPC 通信，进程之间才可数据共享。
 
-
-
-
-
 # thread
 
 一个线程只能隶属于一个进程，但是一个进程是可以拥有多个线程的。
@@ -83,7 +79,7 @@ worker_threads相对于I/O密集型操作是没有太大的帮助的，因为异
 3. Node.js 开发过程中，错误会引起整个应用退出，应用的健壮性值得考验，尤其是错误的异常抛出，以及进程守护是必须要做的。
 4. 单线程无法利用多核CPU，但是后来Node.js 提供的API以及一些第三方工具相应都得到了解决，文章后面都会讲到。
 
-# node中的进程
+# child_process
 
 child_process是node的内置模块。
 child_process.spawn()
@@ -94,7 +90,7 @@ child_process.fork()
 ```
 const fork = require('child_process').fork
 compute = fork('path/to/file.js')
-compute.send('data')
+compute.send('data') // 以消息形式发送给子进程数据
 compute.on('message', param => {
   // 可得到当前环境的变量
   compute.kill()
@@ -104,17 +100,32 @@ compute.on('close', (code, signal) => {
 })
 
 // file.js
-process.on('message', msg => {
+process.on('message', msg => { // 以消息形式发送给子进程数据
   process.send('data')
 })
 ```
+
+# cluster
+
+Cluster会创建一个master，然后根据你指定的数量复制出多个子进程，可以使用 cluster.isMaster属性判断当前进程是master还是worker(工作进程)。由master进程来管理所有的子进程，主进程不负责具体的任务处理，主要工作是负责调度和管理。
+cluster模块为什么可以让多个子进程监听同一个端口。master进程内部启动了一个TCP服务器，而真正监听端口的只有这个服务器，当来自前端的请求触发服务器的connection事件后，master会将对应的socket具柄发送给子进程。
+
+
 
 ```
 // cluster demo
 ...
 ```
 
-process的属性
+
+# node中的进程
+
+
+
+
+
+# process的属性
+
 env
 nextTick
 pid
@@ -128,7 +139,7 @@ stdin
 stderr
 title
 
-# 进程间通信
+# 进程间通信 ipc
 
 ipc inter-process communication
 
