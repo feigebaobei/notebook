@@ -87,7 +87,7 @@ onUnmounted
 
 二者类似，都可以创建响应式对象。
 
-ref(obj) ~~ reactive({value: obj})
+ref(obj) 约等于 reactive({value: obj})
 
 ```
 // html

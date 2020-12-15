@@ -10,3 +10,26 @@ let readonly = (target, name, descriptor) => {
 }
 ```
 装饰器不能用于函数。因为函数会被提升。
+
+```
+
+npm i @babel/plugin-proposal-decorators
+
+// package.json
+{
+  "plugins": [
+    ["@babel/plugin-proposal-decorators": {"legacy": true}],
+    ["@babel/plugin-proposal-class-properties": {"loose": true}],
+  ]
+}
+
+// 只能这样写。写一行。
+export @decorator class Bar {...}
+
+@dec class Foo {
+  ...
+  @bar first () {...}
+  @ho(params) second () {...}
+}
+```
+

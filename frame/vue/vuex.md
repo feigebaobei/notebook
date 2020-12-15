@@ -340,5 +340,13 @@ getters/mutation/actions会注册到根状态管理里。
         })
     }
 
---- 
+## 经常保存的东西
+
+1. token
+2. 用户已经输入表单数据。(它也可以保存在localStorage/sessionStorage)
+3. 动态routes
+4. 多页面共享数据。
+
+---
+
 2018/11/08 by stone

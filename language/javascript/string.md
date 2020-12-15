@@ -244,19 +244,19 @@ end, 非必填，
 
     var val0 = baidu.valueOf() // baidu
 
-**includes** 返回是否包含指定的字符串。  
+**includes(subString)** 返回是否包含指定的字符串。  
 
     var bool0 = baidu.includes('ai')
 
-**startsWith** 是否以指定字符串开头。  
+**startsWith(str)** 是否以指定字符串开头。  
 
     baidu.startsWith('bai') // true
 
-**endsWith** 是否以指定字符串结尾
+**endsWith(str)** 是否以指定字符串结尾
     
     baidu.endsWith('du') // du
 
-**repeat** 将字符串重复n次  
+**repeat(num)** 将字符串重复n次  
 
     baidu.repeat(3) // 'baidubaidubaidu'
 

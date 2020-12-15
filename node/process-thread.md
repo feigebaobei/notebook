@@ -67,6 +67,8 @@ worker_threads相对于I/O密集型操作是没有太大的帮助的，因为异
 3. 进程是线程的容器.
 4. 进程是资源分配的最小单位。
 
+简单的来说，进程是一个应用程序的实例，同一个应用程序可以起多个实例（进程）。并且进程是一个系统资源的集合，这些资源包括内存、CPU等。同时进程也是系统各项资源使用的标识，像有了身份证才能办银行卡一样，各项如 fd、端口等资源都是通过进程为标识使用的。
+
 我们启动一个服务、运行一个实例，就是开一个服务进程，例如 Java 里的 JVM 本身就是一个进程，Node.js 里通过 node app.js 开启一个服务进程，多进程就是进程的复制（fork），fork 出来的每个进程都拥有自己的独立空间地址、数据栈，一个进程无法访问另外一个进程里定义的变量、数据结构，只有建立了 IPC 通信，进程之间才可数据共享。
 
 # thread
@@ -240,19 +242,98 @@ cp.on('eventName', (params) => {...})
 Cluster会创建一个master，然后根据你指定的数量复制出多个子进程，可以使用 cluster.isMaster属性判断当前进程是master还是worker(工作进程)。由master进程来管理所有的子进程，主进程不负责具体的任务处理，主要工作是负责调度和管理。
 cluster模块为什么可以让多个子进程监听同一个端口。master进程内部启动了一个TCP服务器，而真正监听端口的只有这个服务器，当来自前端的请求触发服务器的connection事件后，master会将对应的socket具柄发送给子进程。
 cluster 模块可以创建共享服务器端口的子进程。
+提升系统的吞吐率。对这样多个node实例，我们称之为cluster（集群）。
 
+## 原理
+
+工作进程由 child_process.fork() 方法创建，因此它们可以使用 IPC 和父进程通信，从而使各进程交替处理连接服务。
+cluster 模块支持两种分发连接的方法。
+
+第一种方法（也是除 Windows 外所有平台的默认方法）是循环法，由主进程负责监听端口，接收新连接后再将连接循环分发给工作进程，在分发中使用了一些内置技巧防止工作进程任务过载。
+
+第二种方法是，主进程创建监听 socket 后发送给感兴趣的工作进程，由工作进程负责直接接收连接。
+
+### 方案一：多个node实例+多个端口
+
+集群内的node实例，各自监听不同的端口，再由反向代理实现请求到多个端口的分发。
+优点：实现简单，各实例相对独立，这对服务稳定性有好处。
+缺点：增加端口占用，进程之间通信比较麻烦。
+
+### 方案二：主进程向子进程转发请求
+
+集群内，创建一个主进程(master)，以及若干个子进程(worker)。由master监听客户端连接请求，并根据特定的策略，转发给worker。
+优点：通常只占用一个端口，通信相对简单，转发策略更灵活。
+缺点：实现相对复杂，对主进程的稳定性要求较高。
 
 ```
 // cluster demo
-...
+
+const cluster = require('cluster');            // | |
+const http = require('http');                  // | |
+const numCPUs = require('os').cpus().length;   // | |    都执行了
+                                               // | |
+if (cluster.isMaster) {                        // |-|-----------------
+  // Fork workers.                             //   |
+  for (var i = 0; i < numCPUs; i++) {          //   |
+    cluster.fork();                            //   |
+  }                                            //   | 仅父进程执行
+  cluster.on('exit', (worker) => {             //   |
+    console.log(`${worker.process.pid} died`); //   |
+  });                                          //   |
+} else {                                       // |-------------------
+  // Workers can share any TCP connection      // |
+  // In this case it is an HTTP server         // |
+  http.createServer((req, res) => {            // |
+    res.writeHead(200);                        // |   仅子进程执行
+    res.end('hello world\n');                  // |
+  }).listen(8000);                             // |
+}                                              // |-------------------
+                                               // | |
+console.log('hello');                          // | |    都执行了
 ```
 
+## api
 
-# node中的进程
+|事件||||
+|-|-|-|-|
+|disconnect||||
+|error||||
+|exit||code, signal||
+|listening||address||
+|message||||
+|online||||
 
 
 
 
+|disconnect||||
+|disconnect||||
+|disconnect||||
+
+|事件||||
+|-|-|-|-|
+|disconnect||||
+
+|事件||||
+|-|-|-|-|
+|disconnect||||
+
+|事件||||
+|-|-|-|-|
+|disconnect||||
+
+
+
+
+
+# child_process & cluster
+
+|child_process|cluster||||
+|-|-|-|-|-|
+|需要处理cpu密集型时|需要提升系统的吞吐率时||||
+||||||
+||||||
+||||||
 
 # process的属性
 

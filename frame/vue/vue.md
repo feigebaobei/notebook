@@ -772,6 +772,8 @@ new VueRouter({
     {
       path: '/login',
       component: () => import('compName.vue')
+      // or
+      // component: (resolve) => require(['./path/to/first.vue'], resolve)
     }
   ]
 })
@@ -797,4 +799,10 @@ import('./store/login').then(loginModule => {
 
 `>>>`是`/deep/`的别名，有些css预处理工具（sass）不支持`>>>`
 
+## vue name的作用
+
+1. 在vue-tool中显示
+2. 是keep-alive的判断依据。
+3. 自定义插件时使用。因为Vue.use()需要的install方法需要组件的name。
+4. 递归组件。
 

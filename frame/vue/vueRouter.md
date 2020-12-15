@@ -23,6 +23,36 @@
 **this.$route // 路由记录**  
 **this.$router // 路由实例**  
 
+```
+vue: {
+  ...
+  $route: {
+    fullPath: '',
+    hash: '',
+    matched: [],
+    meta: {},
+    name: '',
+    params: {},
+    path: '/..',
+    query: {}
+  },
+  $router: {
+    app Vue
+    afterHooks: []
+    beforeHooks: []
+    fallback: false
+    history: HashHistory
+    matcher
+    mode
+    options
+    resolveHooks
+    currentRoute: {
+      ...
+    }
+  }
+}
+```
+
 ![$route&$router](./image/vue/vueRouter/router1.png)
 
 ## 动态路由
@@ -330,6 +360,16 @@ vue-router相对于vue是一个插件。上面这行代码会调用vue-router里
 
 改变路由的方法有：`push``replace``go``back``forward``addRoutes`等。
 
+### addRoutes
+
+```
+this.$router.options.routes.push({
+  path: '/three',
+  component: () => import('../components/three.vue')
+})
+this.$router.addRoutes(this.$router.options.routes)
+```
+
 ## 5. 更新视图
 
 以上这些方法会在各模式下触发相应的事件。
@@ -337,10 +377,6 @@ vue-router相对于vue是一个插件。上面这行代码会调用vue-router里
 history模式下为history.pushState/history.replaceState/popstate事件绑定方法。
 hash模式下为window.hash/window.replace/window.onpopstate事件绑定方法。
 非浏览器模式（即abstract）下，我不会。
-
-----
-
-2018.09.11 by stone
 
 ## hash / history的區別
 ### hash
@@ -352,5 +388,3 @@ hash模式下为window.hash/window.replace/window.onpopstate事件绑定方法�
 ## hash / history的相同点
 因此可以说，hash 模式和 history 模式都属于浏览器自身的特性，Vue-Router 只是利用了这两个特性（通过调用浏览器提供的接口）来实现前端路由。
 通过history api，我们丢掉了丑陋的#，但是它也有个问题：不怕前进，不怕后退，就怕刷新，f5，（如果后端没有准备的话）,因为刷新是实实在在地去请求服务器的。在hash模式下，前端路由修改的是#中的信息，而浏览器请求时不会将 # 后面的数据发送到后台，所以没有问题。但是在history下，你可以自由的修改path，当刷新时，如果服务器中没有相应的响应或者资源，则会刷新出来404页面。
-
-2020.10.26 by stone

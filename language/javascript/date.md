@@ -107,11 +107,11 @@ number 数字 必填
 
 **toTimeString()**  
 
-将时间部分转换为字符串。  
+将time部分（时、分、秒、及后面的）转换为字符串。  
 
 **toDateString()**
 
-将日期部分转换为字符串。  
+将date部分（星期、月、日、年）转换为字符串。  
 
 **toUTCString()**  
 **toGMTString()**请使用`toUTCString`代替。  

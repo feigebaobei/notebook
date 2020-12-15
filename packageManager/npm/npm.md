@@ -177,9 +177,10 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 |config|使用该包时需要的配置项|||
 |dependencies|生产环境的依赖项|Object||
 |devDependencies||Object||
-|peerDependencies|不会|Object||
-|bundledDependencies|不会|||
-|optionalDependencies|不会|||
+|peerDependencies|本node包依赖的其他依赖包|Object|{'vue': '2.6.0'}|
+|unpkg|上所有的文件都开启 cdn 服务地址||
+|bundledDependencies|一组包名，他们会在发布的时候被打包进去。|||
+|optionalDependencies|如果一个依赖可用，但你希望在它安装错误的时候npm也能继续初始化，|||
 |engines|需要什么样的运行环境支持||`{"engines": {"node": ">=10.0.0"}}`|
 |engineStrict|不会|||
 |os|需要什么样的操作系统|||

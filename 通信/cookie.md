@@ -14,8 +14,9 @@
 
     function setCookie(key, value, duration) {
         // duration 单位为ms
-        var d = new Date();
-        document.cookie = key + "=" + value + "; " + d.getTime() + duration
+        let oDate = new Date()
+        oDate.setTime(oDate.getTime() + duration)
+        document.cookie = `${key}=${value}; expires=${oDate.toString()}`
     } 
 
 **获取cookie的值**  
@@ -29,6 +30,12 @@
             }
         }
     } 
+
+**移除cookie的值**  
+
+    function removeCookie (k) {
+        setCookie(k, '', -1)
+    }
 
 ## options
 
