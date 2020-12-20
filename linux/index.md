@@ -44,7 +44,25 @@ NAME:    打开文件的确切名称
 kill -9 <pid>
 ```
 
+## lsof
+
+输出各列信息的意义如下：
+COMMAND：进程的名称 PID：进程标识符
+USER：进程所有者
+FD：文件描述符，应用程序通过文件描述符识别该文件。如cwd、txt等 TYPE：文件类型，如DIR、REG等
+DEVICE：指定磁盘的名称
+SIZE：文件的大小
+NODE：索引节点（文件在磁盘上的标识）
+NAME：打开文件的确切名称
+
+```
+lsof -i
+lsof -i<port>
+```
+
 ## ps
+
+`ps [-aefFly] [-p pid] [-u userid]`
 
 ## 常用命令
 cat
