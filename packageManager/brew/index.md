@@ -20,3 +20,22 @@ homebrew的配方都是ruby的脚本。
 brew create https://foo.com/bar-1.0.tgz
 Created /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/bar.rb
 ```
+
+# mac install brew
+
+## 方法一
+略
+## 方法二
+略
+## 方法三
+
+在![https://github.com/feigebaobei/notebook/blob/master/packageManager/brew/brew_install.rb](https://github.com/feigebaobei/notebook/blob/master/packageManager/brew/brew_install.rb)下载brew_install.rb
+```
+cd ~
+vim brew_install.rb
+把下载的内容复制到这个文件中。保存并退出文件。
+ruby brew_install.rb
+```
+等待若干时间。
+安装完成。
+完成后就可以删除brew_install.rb了。
