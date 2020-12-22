@@ -112,7 +112,7 @@ export NVM_DIR="$HOME/.nvm"
 zsh: command not found: nvm 解决方案
 请确保是已经安装了。
 如：再次安装时出现：nvm is already installed in /Users/cat/.nvm, trying to update using git
-### 解决方法
+### 解决方法一
 
 在`/User/<userName>/.bash_profile`，若不存在则创建。再添加以下内容。
 ```
@@ -124,8 +124,23 @@ export NVM_DIR="$HOME/.nvm"
 ```
 source .base_profile
 ```
-
-
+### 解决方法二
+判断你使用的是`zsh`/`bash`
+解决方法好像是（我没验证）：
+若是zsh:
+在`/User/<userName>/.zshrc`，若不存在则创建。再添加以下内容。
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+若是bash:
+在`/User/<userName>/.bash_profile`，若不存在则创建。再添加以下内容。
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
 
 
 
