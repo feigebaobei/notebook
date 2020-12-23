@@ -64,3 +64,90 @@ nvm提示安装的目录不要有空格。我使用的`D:\softtool\nvm`。
 |`nvm use [version] <arch>`|切换到指定版本、位长的node.|
 |`nvm root [path]`|设置在哪个目录下保存不同版本的node.|
 |`nvm version`|显示nvm的版本号。在window环境下可以使用v.|
+
+
+## 常见问题
+
+### 问题
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused
+### 解决方法
+在switchhost中添加
+199.232.68.133      raw.githubusercontent.com
+
+### 解决方法
+把switchyomega的切换规则设置为`*.github.com`直接连接。点击应用选项。
+
+### 问题
+LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to raw.githubusercontent.com:443 
+### 解决方法
+$ git config --global --unset http.proxy
+$ git config --global --unset https.proxy
+
+### 问题
+ping githup.com超时
+### 解决方法
+进入这里https://github.com.ipaddress.com/，复制查询到的ip address。
+在switchhost中添加`140.82.114.3        githum.com`
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+
+### 问题
+刚安装了nvm后执行nvm,报：command not found: nvm
+### 解决方法
+在`/User/<userName>/.bash_profile`，若不存在则创建。再添加以下内容。
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+
+```
+
+### 问题
+zsh: command not found: nvm 解决方案
+请确保是已经安装了。
+如：再次安装时出现：nvm is already installed in /Users/cat/.nvm, trying to update using git
+### 解决方法一
+
+在`/User/<userName>/.bash_profile`，若不存在则创建。再添加以下内容。
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+然后执行：
+```
+source .base_profile
+```
+### 解决方法二
+判断你使用的是`zsh`/`bash`
+解决方法好像是（我没验证）：
+若是zsh:
+在`/User/<userName>/.zshrc`，若不存在则创建。再添加以下内容。
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+若是bash:
+在`/User/<userName>/.bash_profile`，若不存在则创建。再添加以下内容。
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+
+
+
+
+
+
+
+
+
+

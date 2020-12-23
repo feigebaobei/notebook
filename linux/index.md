@@ -75,3 +75,21 @@ rm -f fileName
 rmdir dir
 cp f1 f2
 mv dir newDir
+
+## source
+
+也称为点命令，常用于执行`.文件`。它是bash内部命令。
+功能：使shell读入指定的shell文件。依次执行文件中的所有语句。
+source命令通常用于重新执行刚修改的初始化文件。使之立即生效。不必注销并重新登录。
+
+### usage
+
+```
+source .filename
+// or
+source filename
+```
+
+| sh filename | source filename |
+|-|-|
+|新建一个shell文件，再执行脚本文件，该子shell继承父shell的环境变量，但子shell新建的、修改的变量不会带加到父shell中，除非使用export|使用当前shell执行该脚本文件。新建、修改的变量都会作用于当前shell.|

@@ -156,7 +156,36 @@ Quick info	^T ^Q
 Build	(Win)^B or F7, (OSX) ⌘B or F7
 Error list	(via Command Palette)
 
+## 常见问题
 
----
+### 问题
+There are no packages available for installation
+### 解决方案
+sublime text -> Preference -> Package Settings -> Package Control -> Settings
+在打开的文件中添加：
+```
+"channels": ["http://cst.stu.126.net/u/json/cms/channel_v3.json"],
+```
 
-2018/09/18 by stone
+### 问题
+Unable to download Emmet. Please view the console for more details.
+### 解决方案
+sublime text -> Preference -> Package Settings -> Package Control -> Settings
+在打开的文件中添加：
+```
+"debug": true,
+"downloader_precedence": {
+  "linux": ["curl", "urllib", "wget"],
+  "osx": ["curl", "urllib"],
+  "windows": ["wininet"],
+},
+```
+
+### 问题
+Error while loading PyV8 binary: exit code 1 
+Try to manually install PyV8 from
+https://github.com/emmetio/pyv8-binaries
+### 解决方案（没解决）
+把`https://github.com/feigebaobei/notebook/blob/master/plugin/editer/PyV8`复制到`/Users/cat/Library/Application Support/Sublime Text/Installed Packages/`
+
+
