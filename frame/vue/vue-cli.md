@@ -14,17 +14,18 @@ npm update -g @vue/cli
 ## usage  
 
     // vue-cli
+    // 它与vue2.x一起工作。
     $ vue init <template-name> <project-name>
     $ vue init webpack firstvue
 
     // @vue/cli
     // 创建并打包单个*.vue文件
-    vue serve
-      ver serve main.js // 指定入口文件。可以main.js/index.js/App.vue/app.vue中的一个。也可自定义。
-    vue build
-
+    // 它与vue3.0一起工作。
     // 创建一个项目
     vue create program-name // 项目名需要全小写
+    vue serve // 启动服务
+    vue serve main.js // 指定入口文件。可以main.js/index.js/App.vue/app.vue中的一个。也可自定义。
+    vue build // 打包项目
 
     // 在已有的项目中添加插件
     vue add eslint // 可能会修改现有文件
