@@ -11,10 +11,31 @@ var intToRoman = (n) => {
 
 ## 两数相除
 
+## 表示数值的字符串
 
+```
+let isNumber = (param) => {
+  return !isNaN(Number(param)) && param.replace(/\s*/g, '') !== ''
+}
+```
 
-## title
-## title
+## 丑数3
+
+```
+var nthUglyNumber = function(n, a, b, c) {
+  let num = Math.max(a, b, c)
+  let min = Math.min(a, b, c)
+  let index = 0
+  while (index < n) {
+    num += min
+    if (num % a === 0 && num % b === 0 && num % c === 0) {
+      index++
+    }
+  }
+  return num
+};
+```
+
 ## title
 ## title
 ## title
