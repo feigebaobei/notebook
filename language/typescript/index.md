@@ -633,7 +633,37 @@ type Vehicle = Motorcycle | Car | Truck;
 
 ### Unknown
 ### Unknown
-### Unknown
+## tsc
+### options
+
+||||
+|-|-|-|
+|--help|显示帮助信息||
+|--module|载入扩展模块||
+|--target|设置ecma版本||
+|--declaration|额外生成一个.d.ts文件||
+|--removeComments|删除注释||
+|--out|把多个文件合并到一个文件。||
+|--sourcemap|生成一个sourcemap文件||
+|--module nolmpliciAny|在表达式和声明上有隐含的any类型时报错。||
+|--watch|在监视模式下运行编译器。当文件改变时重新编译。||
+
+## 书写规范
+
+TypeScript 会忽略程序中出现的空格、制表符和换行符。
+区分大小写
+分号可选
+```
+//
+/*  */
+```
+
+## title
+## title
+## title
+## title
+## title
+
 ```
 ```
 ```
