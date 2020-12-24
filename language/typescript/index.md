@@ -779,7 +779,7 @@ type Vehicle = Motorcycle | Car | Truck;
 |--help|显示帮助信息||
 |--module|载入扩展模块||
 |--target|设置ecma版本||
-|--declaration|额外生成一个.d.ts文件||
+|--declaration|额外生成一个.d.ts文件。它是声明文件。||
 |--removeComments|删除注释||
 |--out|把多个文件合并到一个文件。||
 |--sourcemap|生成一个sourcemap文件||
@@ -812,7 +812,6 @@ namespace Drawing {
 ```
 
 使用///引用。
-
 
 ### 嵌套全名空间
 
@@ -874,12 +873,23 @@ strs.add()
 let f1: <U> (arg: U) => U = fn
 ```
 
-## title
+## 声明文件
+
+虽然通过直接引用可以调用库的类和方法，但是却无法使用TypeScript 诸如类型检查等特性功能。
 
 ```
+declare var jQuery: (selector: string) => any
 ```
+
+declare 定义的类型只会用于编译时的检查，编译结果中会被删除。
+声明文件以 .d.ts 为后缀。
+
 ```
+// 引入声明文件
+/// <reference path = "filename.d.ts" />
 ```
+
+
 ```
 ```
 ```
