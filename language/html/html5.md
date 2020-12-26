@@ -41,3 +41,19 @@ seamless     seamless
 src
 srcdoc       html_code   在iframe中显示的页面的html内容
 
+### template
+
+`<template>`元素的出现旨在让HTML模板HTML变得更加标准与规范。
+
+就是html的模板盒子
+
+1.跟script标签一样在文档中是不可见的；
+2.拥有content属性（通过这个也可以判断浏览器是否支持template标签）；
+3.标签内的节点虽然不可见但支持DOM操作；
+
+importNode() 方法把一个节点从另一个文档复制到该文档以便应用。
+
+DocumentFragment是一个节点类型，代表轻量级的 Document 对象，能够容纳文档的某个部分，DocumentFragment 节点不属于文档树。
+
+
+
