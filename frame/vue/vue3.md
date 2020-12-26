@@ -597,6 +597,7 @@ Vue.createApp(...).mixin({...})
 ## 自定义指令
 
 ```
+// 全局注册
 const app = Vue.createApp({})
 app.directive("focus", {
   mounted(el) {
@@ -613,12 +614,25 @@ directives: {
 }
 ```
 ### 钩子函数
-beforeMount(el, binding, vnode, prevnode)
-mounted(el, binding, vnode, prevnode)
-beforeUpdate(el, binding, vnode, prevnode)
-updated(el, binding, vnode, prevnode)
-beforeUnmount(el, binding, vnode, prevnode)
-unmounted(el, binding, vnode, prevnode)
+beforeMount   (el, binding, vnode)
+mounted       (el, binding, vnode)
+beforeUpdate  (el, binding, vnode, prevnode)
+updated       (el, binding, vnode, prevnode)
+beforeUnmount (el, binding, vnode)
+unmounted     (el, binding, vnode)
+
+el dom
+binding: {
+  instance   组件实例
+  value      当前的值
+  oldValue   以前的值
+  arg        动态指令
+  modifiers  修饰符组成的对象
+  dir        一个对象，在注册指令时作为参数传递。
+}
+vnode        真实dom元素的蓝图
+prevNode     上一个虚拟节点，
+
 binding.arg是参数
 动态指令
 
@@ -654,6 +668,39 @@ Vue.createApp({...}).component('comp-a', {
 h() 到底会返回什么呢？其实不是一个实际的 DOM 元素。它更准确的名字可能是 createNodeDescription，因为它所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，包括及其子节点的描述信息。
 h() 函数是一个用于创建 vnode 的实用程序。也许可以更准确地将其命名为 createVNode()，但由于频繁使用和简洁，它被称为 h() 。它接受三个参数：
 `h(tag, props, children)`
+
+### 函数式组件
+
+用来定义那些没有响应数据，也不需要有任何生命周期的场景，它只接受一些props 来显示组件。
+1. 不维护响应数据
+2. 无钩子函数
+3. 无instance实例
+4. 没有this.(非函数式组件可用this访问当前组件vm)
+
+```
+// demo
+Vue.component('comp-a', {
+  functional: true, // 标明是函数式组件
+  props: {...}, // 可选
+  render: function (tag, context) {...} // 返回vnode
+})
+// or 单文件式
+<template functional></template>
+
+组件中需要的一切数据需要context提供。
+context: {
+  props
+  childrend
+  slots
+  scopedSlots
+  data
+  parent
+  listeneers
+  injections
+
+}
+```
+
 
 ### 使用js代替模板功能
 
@@ -840,6 +887,31 @@ inject(name[, default])
 # 工具
 
 ## 单文件组件
+
+```
+// usage
+// 该例子不是单文件组件
+Vue.component("comp-name", comp)
+
+缺点：
+1. 需要全局定义，且各component之间不能命名冲突。
+2. 字符串模板不高亮
+3. 不支持css
+4. 不能预处理，因没有构建步骤。
+```
+单文件组件是`*.vue`文件。
+```
+<template>
+  <div>...</div>
+</template>
+<script>
+...
+</script>
+<style>
+...
+</style>
+```
+在webpack中需要使用vue-loader处理`*.vue`单文件。
 
 ## 测试
 
