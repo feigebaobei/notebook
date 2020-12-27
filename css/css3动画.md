@@ -150,3 +150,25 @@ animation定义动画的属性值。
 
 ----------
 2018/02/12 by stone
+
+## flip
+
+first last invert play
+动画将用户界面带入生活。
+任何触发布局变化的属性（比如height），浏览器都会递归检查布局中的其他元素是否也因此改变，这样的一个过程花销是很贵的。如果这个计算所费的时间比一个动画帧（大约16.7ms）更长，那么动画就会丢帧，从而导致动画迟滞。
+
+flipping.js @Davidkpiano
+
+@Nick Babich
+@harrisfreddy
+@Paul Irish
+@Paul Lewis
+@davidkpiano
+@David Khourshid
+
+## 动画库
+
+animate.css
+
+----------
+2018/02/12 by stone

@@ -73,13 +73,36 @@ person 参数的类型信息在编译后被擦除了。
 
 ## typescript基础类型
 
+any
+number
+string
+boolean
+数组
+元组
+枚举
+void
+null
+undefined
+never
+
 ### Boolean
 
 let isDone: boolean = false
+var k: string
 
 ### Number
 
 let count: number = 10
+
+|属性||||
+|-|-|-|-|
+|MAX_VALUE||||
+|MIN_VALUE||||
+|NaN||||
+|NEGATIVE_INFINITY||||
+|POSITIVE_INFINITY||||
+|prototype||||
+|constructor||||
 
 ### String
 
@@ -213,9 +236,13 @@ function warnUser() {
 ### Null / Undefined
 undefined的类型分别为undefined
 null的类型分别为null
+
 ### object / Object / {}
+
 object 类型是：TypeScript 2.2 引入的新类型，它用于表示非原始类型。
 Object 类型：它是所有 Object 类的实例的类型，它由以下两个接口来定义：
+object 会定义该对象的结构。多、少都会报错。可修改。
+
 ```
 // node_modules/typescript/lib/lib.es5.d.ts
 interface Object {
@@ -258,6 +285,17 @@ function controlFlowAnalysisWithNever(foo: Foo) {
   }
 }
 ```
+
+### map
+
+```
+var mm = new Map()
+var mm = new Map([
+  ['k0', 'v0'],
+  ['k1', 'v1']
+])
+```
+
 ## 断言
 ### 尖括号语法
 ```
@@ -362,9 +400,35 @@ if (padder instanceof SpaceRepeatingPadder) {
   // padder的类型收窄为 'SpaceRepeatingPadder'
 }
 ```
-## typescript接口
+## typescript接口（interface）
 
 它是对行为的抽象，而具体如何行动需要由类去实现。
+需要注意接口不能转换为 JavaScript。 它只是 TypeScript 的一部分。
+
+实现类接口的关键字是implements.
+
+```
+interface ClockInterface {
+  currentTime:Date;
+  setTime(d:Date);
+}
+class Clock implements ClockInterface {
+  currentTime:Date;
+  h:number;
+  s:number;
+  setTime(d:Date) {
+    this.currentTime = d;
+  }
+  constructor(h:number, s:number) {
+    this.h = h;
+    this.s = s;
+  }
+  print() { console.log("hello lsw");}
+}
+var c:Clock = new Clock(10, 100);
+c.setTime(new Date());
+c.print();
+```
 
 ### 对象的形状
 
@@ -377,6 +441,14 @@ let semlinker: Person = {
   name: "semlinker",
   age: 33,
 };
+
+interface ages { 
+   [index:string]:number 
+} 
+ 
+var agelist:ages; 
+agelist["John"] = 15   // 正确 
+agelist[2] = "nine"   // 错误
 ```
 
 ### 可选|只读属性
@@ -446,6 +518,11 @@ type Data = [number, string];
 ```
 ```
 ## 类
+
+使用extends去继承。`class Child extends Parent {}`
+可以多重继承。
+不能继承多个父类。
+
 ### 类的属性与方法
 通过 Class 关键字来定义一个类：
 ```
@@ -453,6 +530,7 @@ class Greeter {
   // 静态属性
   static cname: string = "Greeter";
   // 成员属性
+  // 成员即实例的属性。需要明确定义类型。
   greeting: string;
   // 构造函数 - 执行初始化操作
   constructor(message: string) {
@@ -463,6 +541,7 @@ class Greeter {
     return "Class name is Greeter";
   }
   // 成员方法
+  // 可以标明返回的类型
   greet() {
     return "Hello, " + this.greeting;
   }
@@ -470,7 +549,8 @@ class Greeter {
 let greeter = new Greeter("world");
 ```
 ### 私有字段
-私有字段以 # 字符开头，有时我们称之为私有名称；
+
+私有字段以 # 字符开头，有时我们称之为私有名称；同private的功能一样。
 每个私有字段名称都唯一地限定于其包含的类；
 不能在私有字段上使用 TypeScript 可访问性修饰符（如 public 或 private）；
 私有字段不能在包含的类之外访问，甚至不能被检测到。
@@ -487,8 +567,8 @@ class Person {
 let semlinker = new Person("Semlinker");
 ```
 ### 访问器
+
 在 TypeScript 中，我们可以通过 getter 和 setter 方法来实现数据的封装和有效性校验，防止出现异常数据。
-### 联合类型
 ```
 let passcode = "Hello TypeScript";
 class Employee {
@@ -510,8 +590,12 @@ if (employee.fullName) {
   console.log(employee.fullName);
 }
 ```
+
+### 联合类型
 ### 继承
+
 通过 extends 关键字来实现继承：
+
 ```
 class Animal {
   name: string;
@@ -534,12 +618,54 @@ class Snake extends Animal {
 let sam = new Snake("Sammy the Python");
 sam.move();
 ```
+
+子类继承后可重写祖先类的方法、属性。
+
+### static
+
+用于定义类的数据成员（属性和方法）为静态的，静态成员可以直接通过类名调用。
+
+### 访问控制修饰符
+
+public    默认   任何地方都可被访问
+protected 受保存 可以被其自身以及其子类和父类访问。
+                访问控制修饰符 protected 可使类的属性、方法可被该类和其子类（不是实例）在类中访问。不参被实例得到。
+private   私有   只能被其定义所在的类访问。
+readonly  只读   不能被修改。可以被继承 但是继承后的实例还是不能修改只读成员。
+
+```
+class Animal {
+　　protected name: string;
+
+　　constructor(theName: string) {
+　　　　this.name = theName;
+　　}
+}
+
+class Rhino extends Animal {
+    constructor() {
+          super('Rhino');
+    }         
+    getName() {
+        console.log(this.name) //此处的name就是Animal类中的name
+    }
+}
+```
+构造函数也可以被标记为protected。这意味着这个类不能再包含它的类外被实例化，但是能被继承，也就是可以在派生类中被super执行。
+
 ### 抽象类
+
 使用 abstract 关键字声明的类，我们称之为抽象类。抽象类不能被实例化，因为它里面包含一个或多个抽象方法。所谓的抽象方法，是指不包含具体实现的方法：
+抽象类: abstract 修饰， 里面可以没有抽象方法。但有抽象方法(abstract method)的类必须声明为抽象类(abstract class)
+
+
 ```
 abstract class Person {
   constructor(public name: string){}
-  abstract say(words: string) :void;
+  abstract say(words: string) :void; // 只定义不实现
+  run () { // 它把run方法实现了，所以不是抽象方法。
+    console.log('run')
+  }
 }
 // Cannot create an instance of an abstract class.(2511)
 const lolo = new Person(); // Error
@@ -562,18 +688,30 @@ class Developer extends Person {
 const lolo = new Developer("lolo");
 lolo.say("I love ts!"); // lolo says I love ts!
 ```
+
+### 多态
+
+在一个抽象类是定义抽象方法。在其子类中实现该抽象方法，则该方法是是多态方法。
+
 ### 方法重载
+
+1. 在同一个类中；
+2. 方法名相同；
+3. 参数列表不同；
+
 ```
 class ProductService {
-    getProducts(): void;
-    getProducts(id: number): void;
-    getProducts(id?: number) {
-      if(typeof id === 'number') {
-          console.log(`获取id为 ${id} 的产品信息`);
-      } else {
-          console.log(`获取所有的产品信息`);
-      }
+  // 先声明需要重载的方法。不实现方法。
+  getProducts(): void;
+  getProducts(id: number): void;
+  // 在这里实现
+  getProducts(id?: number) {
+    if(typeof id === 'number') {
+        console.log(`获取id为 ${id} 的产品信息`);
+    } else {
+        console.log(`获取所有的产品信息`);
     }
+  }
 }
 const productService = new ProductService();
 productService.getProducts(666); // 获取id为 666 的产品信息
@@ -641,7 +779,7 @@ type Vehicle = Motorcycle | Car | Truck;
 |--help|显示帮助信息||
 |--module|载入扩展模块||
 |--target|设置ecma版本||
-|--declaration|额外生成一个.d.ts文件||
+|--declaration|额外生成一个.d.ts文件。它是声明文件。||
 |--removeComments|删除注释||
 |--out|把多个文件合并到一个文件。||
 |--sourcemap|生成一个sourcemap文件||
@@ -658,16 +796,100 @@ TypeScript 会忽略程序中出现的空格、制表符和换行符。
 /*  */
 ```
 
-## title
-## title
-## title
-## title
-## title
+## 命名空间
 
 ```
+namespace SomeNameSpaceName {
+  // 需要使用export显露出想要在外部调用的方法、类、属性。
+  export interface ISomeInterfaceName {}
+  export class SomeClassName {}
+}
+namespace Drawing {
+  export interface IShape {
+    draw()
+  }
+}
 ```
+
+使用///引用。
+
+### 嵌套全名空间
+
 ```
+// invoice.ts
+namespace N1 {
+  export namespace N2 {
+    export class C {...}
+  }
+}
+// invoiceTest.ts
+/// <reference path = "invoice.ts" />
+var invoice = new N1.N2.C()
 ```
+
+## 模块
+
+模块是在其自身的作用域里执行，并不是在全局作用域，这意味着定义在模块里面的变量、函数和类等在模块外部是不可见的，除非明确地使用 export 导出它们。
+使用export / import(require) 导出、导入。
+别的模块加载器是node.js的commonjs和web应用中的require.js
+
+```
+// someInterface.ts
+export interface SomeInterface {...}
+
+// otherFile.js
+import someInterfaceRef = require("./someInterface.ts")
+```
+
+转化为js会使用defind。
+
+## 泛型
+
+使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。
+
+```
+// 泛型的语法
+function fn<T> (arg: T) :T {
+  return arg
+}
+// demo
+class Collection<T> {
+  private _things: T[]
+  constructor () {
+    this._things = []
+  }
+  add(param: T): void {
+    this._things.push(param)
+  }
+  get(index: number): T {
+    return this._things[index]
+  }
+}
+let strs = new Collection<string>()
+strs.add()
+
+
+
+let f1: <U> (arg: U) => U = fn
+```
+
+## 声明文件
+
+虽然通过直接引用可以调用库的类和方法，但是却无法使用TypeScript 诸如类型检查等特性功能。
+
+```
+declare var jQuery: (selector: string) => any
+```
+
+declare 定义的类型只会用于编译时的检查，编译结果中会被删除。
+声明文件以 .d.ts 为后缀。
+
+```
+// 引入声明文件
+/// <reference path = "filename.d.ts" />
+```
+
+
 ```
 ```
 ```

@@ -105,4 +105,21 @@ funciton
 ---
 以上是一个简单的介绍。再深入的需要去官网学习。总体来说stylus不是难的。它就是一个css预处理工具。使用进来就当是css的语法糖。  
 
+## 常见问题
+
+### 使用stylus
+```
+npm i -D stylus // 我曾使用全局方式，不行。
+npm i -D stylus-loader@3.0.2
+```
+
+### 问题
+Invalid options object. Stylus Loader has been initialized using an options object that does not match the API schema
+### 解决方案
+原因是stylus-loader的版本问题，需要使用较旧一些的版本。如:@3.0.2
+```
+npm uninstall stylus-loader
+npm i -D stylus-loader@3.0.2
+```
+
 2018/11/07 by stone
