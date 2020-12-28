@@ -1,0 +1,39 @@
+<template>
+  <div class="first">
+    <h2>title</h2>
+  </div>
+  <!-- <div class="second"></div> -->
+</template>
+
+<script>
+import {
+  reactive,
+  ref,
+  // isRef,
+  // toRefs,
+  computed,
+  watch,
+  // onBeforeMount,
+  onMounted,
+  // onBeforeUpdate,
+  // onUpdated,
+  // onBeforeUnmount,
+  // onUnmounted,
+  // onErrorCaptured
+ } from 'vue'
+export default {
+  name: 'base3',
+  props: {
+  },
+  data() {
+    return {
+    }
+  },
+  setup (props, ctx) {
+    return {
+    }
+  }
+}
+</script>
+<style type="stylus" scoped="">
+</style>

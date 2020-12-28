@@ -483,3 +483,139 @@ renderTriggered -> onRenderTriggered
 
 ## provide/inject
 ## getCurrentInstance
+
+# composition api
+## setup(props, context)
+
+当前组件的入口。代替了beforeCreate/created.
+props是传入当前组件的props。
+context是当前组件的上下文。相当于this.
+
+## reactive(param)
+
+把参数处理为响应式的。
+返回一个Proxy对象。
+
+```
+setup () {
+  let state = reactive({
+    name: 'hi'
+  })
+  return {state}
+}
+```
+
+## ref(param)
+
+把参数处理为一个响应式的数据对象。在script标签中使用param.value获取。在template中使用param获取。
+其结果是RefImpl类型。
+
+```
+import { ref } from 'vue'
+setup () {
+  const count = ref<number>(10)
+  console.log(count.value)
+  return {
+    count
+  }
+}
+```
+
+## isRef(param)
+
+判断参数是否是ref()处理后的。
+返回Boolean
+
+```
+import { ref, isRef } from 'vue'
+...
+setup () {
+  let age = 3
+  let state = ref(age)
+  console.log(isRef(age))
+  console.log(isRef(state))
+}
+```
+
+## toRefs()
+
+toRefs() 函数可以将 reactive() 创建出来的响应式对象，转换为普通的对象，只不过，这个对象上的每个属性节点，都是ObjectRefImpl类型的响应式数据。
+当参数是`RefImpl`对象时可能会出错。
+返回Object对象
+ObjectRefImpl与RefImpl很像。
+```
+ObjectRefImpl: {
+  __v_isRef: Boolean,
+  _key:      String,
+  _object:   Proxy,
+  vlaue:     Value
+}
+```
+
+ObjectRefImpl里的每个key都是RefImpl对象。
+```
+RefImpl: {
+  __v_isRef: Boolean,
+  _rawValue: Value,
+  _shallow:  Boolean,
+  _vlaue:    Value,
+  value:     Value
+}
+```
+
+若参数是RefImpl对象，则结果是一个对象，该对象的`_value.value`是原本的值。
+```
+setup () {
+  let state = reactive({
+    name: 'top'
+  })
+  let a = toRefs(state)
+  return {
+    ...a
+  }
+}
+```
+
+|参数类型|来源|返回类型|
+|-|-|-|
+|Proxy|reactive(p)|`Object: {各个key: ObjectRefImpl}`|ObjectRefImpl对象的value就是原值。|
+|RefImpl|ref(p)|`Object: {..., _value: ObjectRefImpl}`|`object._value.value`|
+
+## computed(Function | {set: Fn, get: Fn})
+
+返回一个ComputedRefImpl对象。
+返回一个ref对象。
+
+```
+setup () {
+  let age = ref(18)
+  let compP = computed(() => age.value++)
+  return {
+    compP
+  }
+}
+```
+
+## watch
+
+返回停止监听的方法。
+
+```
+// 可监听reactive()、ref()的返回值
+// 可监听多个值
+// 停止监听
+setup () {
+  let state = reactive(obj0)
+  let foo   = ref(obj1)
+  watch(state.key, (nv, ov) => {...})
+  watch(foo.key,   (nv, ov) => {...})
+  let sw = watch([state.key, foo.key], (nv, ov) => {...})
+  sw() // 停止监听
+}
+```
+
+## LifeCycle Hooks
+
+参考文档
+https://juejin.cn/post/6887359442354962445?content_source_url=https%3A%2F%2Fgithub.com%2Fvue3%2Fvue3-News
+
