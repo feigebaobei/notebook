@@ -21,6 +21,7 @@ import {
   // onUnmounted,
   // onErrorCaptured
  } from 'vue'
+// import compA from '@/compoenet/com-a.vue'
 export default {
   name: 'base3',
   props: {
@@ -28,6 +29,9 @@ export default {
   data() {
     return {
     }
+  },
+  components: {
+    // compA
   },
   setup (props, ctx) {
     return {

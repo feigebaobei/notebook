@@ -619,3 +619,14 @@ setup () {
 参考文档
 https://juejin.cn/post/6887359442354962445?content_source_url=https%3A%2F%2Fgithub.com%2Fvue3%2Fvue3-News
 
+
+## reactive & ref
+
+|reactive|ref||
+|-|-|-|
+|返回Proxy对象|返回RefImpl对象||
+|在template中直接使用|在template中直接使用||
+|在script中直接使用|在script中使用.value使用||
+|偏低层一些|基于reactive实现的||
+|参数必须是引用类型（如：Object/Array）|参数任意||
+||||
