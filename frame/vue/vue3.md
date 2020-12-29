@@ -993,3 +993,14 @@ Vue.createApp(SimpleRouter).mount('#app')
 # 无障碍
 # 从vue2迁移
 # 贡献文档
+
+# tip
+
+当前的vue3做了一些兼容vue2的事。
+比如：
+在vue2中data/watch是export default 的对象的子属性、方法。
+在vue3中兼容此方式。
+在使用vue3时有更合适的写法。
+写在setup里。
+使用reactive/ref处理data.
+使用watchEffect代替watch的功能。
