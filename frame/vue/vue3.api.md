@@ -177,7 +177,7 @@ vue: {
   withScopeId: (...)
 }
 
-createApp(comp): { // createApp 方法返回应用实例本身，因此可以在其后链式调用其它方法，这些方法可以在以下部分中找到。
+createApp(comp, props): { // createApp 方法返回应用实例本身，因此可以在其后链式调用其它方法，这些方法可以在以下部分中找到。
   component: ƒ component(name, component)
   config: (...)
   directive: ƒ directive(name, directive) // 注册或检索全局指令
@@ -214,8 +214,11 @@ app.directive('my-directive', {
 ## provide
 ## unmount
 ## use
+
 # 全局api
+
 这里只说一些常用的、重要的。
+
 ## createApp(comp, props)
 ## h(tag, props, children)
 ## defineComponent(comp | setupFn)
@@ -268,6 +271,20 @@ render
 ## 生命周期钩子
 
 ## 选项、资源
+
+```
+// 定义指令
+directives: {
+  directiveName: {
+    ...
+  }
+}
+// 局部引入
+components: {
+  compA
+}
+```
+
 ## 组合
 
 mixins
@@ -421,26 +438,31 @@ teleport
 ### reactive(obj)
 返回对象的响应式副本
 ### readonly(obj)
-获取一个对象 (响应式或纯对象) 或 ref 并返回原始代理的只读代理。只读代理是深层的：访问的任何嵌套 property 也是只读的。
 
-### isProxy
+获取一个对象 (响应式或纯对象) 或 ref 并返回原始代理的只读代理。只读代理是深层的：访问的任何嵌套 property 也是只读的。
+被代理的原对象被修改后Proxy对象也会被修改。
+返回Proxy对象。
+
+### isProxy(param)
+
 检查对象是 reactive 还是 readonly创建的代理
 
-### isReactive
+### isReactive(param)
 
 检查对象是否是 reactive创建的响应式 proxy。
 
-### isReadonly
+### isReadonly(param)
 
 检查对象是否是由readonly创建的只读代理。
 
-### toRaw
+### toRaw(Proxy)
 
 返回 reactive 或 readonly 代理的原始对象。
 
 ### markRaw
 
 标记一个对象，使其永远不会转换为代理。返回对象本身。
+实际上 markRaw 函数所做的事情，就是在数据对象上定义 `__v_skip` 属性，从而跳过代理。
 
 ### shallowReactive
 
@@ -450,20 +472,66 @@ teleport
 
 ## refs
 
-ref
-unref
-toRef
-toRefs
-isRef
-customRef
-shallowRef
-triggerRef
+### ref
+
+返回RefImple对象。
+在script中使用.value得到数据。
+在template中直接得到数据。
+
+### unref
+
+`isRef(val) ? val.value : val`
+得到一个被ref()处理前的数据。
+
+### toRef(obj, key)
+
+返回把obj.key设置为RefImple对象。obj.key不变。
+在script标签中需要使用.value获取数据。
+
+### toRefs(obj)
+
+返回一个Object对象，其每个属性都是ObjectRefImpl对象。原obj不变。
+
+### isRef
+### customRef
+### shallowRef
+### triggerRef
 
 ## computed / watch
 
-computed
-watchEffect
-watch
+### computed
+### watchEffect(effect, {flush, onTrack, onTrigger})
+
+```
+effect: Function           它就是需要执行的副作用函数。
+  (onInvalidate) => {}
+    onInValidate: Function 用于消除effect产生的副作用
+      参数是一个Function
+      只作用于异步函数。
+      effect方法执行时执行。
+      监听器被注销时（如被卸载）执行。
+  options:                 何时运行副作用函数
+    {
+      flush: 'post' | 'pre' | 'sync',
+      onTrack(),           开发阶段有效
+      onTrigger()          开发阶段有效
+    }
+```
+立即执行Funtion，并根据Function中的数据添加追踪依赖。依赖变更时重新运行Funtion.
+返回一个停止监听函数。运行该函数可停止监听。
+
+```
+watchEffect(() => console.log(state.count))
+```
+onTrack 和 onTrigger 只能在开发模式下工作。
+onTrack 将在响应式 property 或 ref 作为依赖项被追踪时被调用。
+onTrigger 将在依赖项变更导致副作用被触发时被调用。
+
+### watch(source, Function)
+
+对source监听，当source变更时执行Function.
+source可是ref()后的结果，也可是reactive()的结果。
+可监听多个源。
 
 # 组合式api
 ## setup
@@ -489,7 +557,15 @@ renderTriggered -> onRenderTriggered
 
 当前组件的入口。代替了beforeCreate/created.
 props是传入当前组件的props。
+  父组件传入什么，当前组件的props里就有什么。
 context是当前组件的上下文。相当于this.
+  {
+    attrs
+    emit
+    expose
+    props
+    slots
+  }
 
 ## reactive(param)
 
@@ -630,3 +706,28 @@ https://juejin.cn/post/6887359442354962445?content_source_url=https%3A%2F%2Fgith
 |偏低层一些|基于reactive实现的||
 |参数必须是引用类型（如：Object/Array）|参数任意||
 ||||
+
+## isReactive & isProxy & isReadonly & isRef
+|isReactive | isProxy | isReadonly| isRef |
+|-|-|-|-|
+|是否是被reactive处理过的|是否是代理对象（被reactive/readonly处理过的）|是否是被readonly处理过的|是否是RefImpl对象|
+
+
+| ref        | reactive        | readonly | 
+| shallowRef | shallowReactive | shallowReadonly |
+
+toRaw(Proxy)
+  Proxy的来源：reactive | readonly
+markRaw(obj)
+
+|watchEffect|watch|effect|
+|基于effect的实现。|-|偏底层的实现。|
+|维护组件、实例、组件状态的关系。组件被卸载时自动stop.|source可是ref()后的结果，也可是reactive()的结果。|不维护，不自动卸载|
+|组件挂载时执行一次，然后开始追踪source的变化。若的变化则执行function。|source发生变化时执行|-|
+||||
+||||
+
+
+
+
+
