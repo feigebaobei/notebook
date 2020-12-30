@@ -1000,7 +1000,13 @@ Vue.createApp(SimpleRouter).mount('#app')
 比如：
 在vue2中data/watch是export default 的对象的子属性、方法。
 在vue3中兼容此方式。
-在使用vue3时有更合适的写法。
+在使用vue3时有更合适的写法:
+```
+setup() {
+  watch(source, fn)
+  watch([source0, source], ([nv0, ov0], [nv1, ov1]) => {...})
+}
+```
 写在setup里。
 使用reactive/ref处理data.
 使用watchEffect代替watch的功能。

@@ -537,9 +537,10 @@ setup () {
 }
 ```
 
-## toRefs()
+## toRefs(obj)
 
 toRefs() 函数可以将 reactive() 创建出来的响应式对象，转换为普通的对象，只不过，这个对象上的每个属性节点，都是ObjectRefImpl类型的响应式数据。
+因此可解构后使用。`...refs(obj)`
 当参数是`RefImpl`对象时可能会出错。
 返回Object对象
 ObjectRefImpl与RefImpl很像。
