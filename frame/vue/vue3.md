@@ -327,7 +327,6 @@ props: {
 <input type="text" :value="firstName" @input="$emit('update:firstName', $event.target.value)" />
 ```
 
-
 ## 插槽
 
 ```
@@ -401,6 +400,8 @@ app.component('async-comp', AsyncComp)
 ```
 
 ### suspense
+
+Suspense组件用于在等待某个异步组件解析时显示后备内容
 
 ```
 <suspense>

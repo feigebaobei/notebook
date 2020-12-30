@@ -7,14 +7,14 @@
 
 <script>
 import {
-  reactive,
-  ref,
+  // reactive,
+  // ref,
   // isRef,
   // toRefs,
-  computed,
-  watch,
+  // computed,
+  // watch,
   // onBeforeMount,
-  onMounted,
+  // onMounted,
   // onBeforeUpdate,
   // onUpdated,
   // onBeforeUnmount,
@@ -25,6 +25,10 @@ import {
 export default {
   name: 'base3',
   props: {
+    // text: {
+    //   type: String,
+    //   default: 'hi'
+    // }
   },
   data() {
     return {
@@ -33,7 +37,8 @@ export default {
   components: {
     // compA
   },
-  setup (props, ctx) {
+  setup (/*props, ctx*/) {
+    // onMounted(() => {})
     return {
     }
   }

@@ -47,3 +47,11 @@
 
     // 
     var snakeCase = compose(replace(/\s+/ig, '_'), upper)
+
+## oop & fp
+|oop|fp||
+|-|-|-|
+|面向对象编程|||
+|Object/Class是数据(variable)和逻辑(methods)的封装。|||
+|封装、继承、多态|||
+||数据与函数解耦||
