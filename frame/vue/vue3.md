@@ -1011,3 +1011,66 @@ setup() {
 写在setup里。
 使用reactive/ref处理data.
 使用watchEffect代替watch的功能。
+
+## 配置
+
+```
+// tsconfig.js
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    // 这样就可以对 `this` 上的数据属性进行更严格的推断`
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node"
+  }
+}
+// webpack.config.js
+module: {
+  rules: [
+    {
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      options: {
+        appendTsSuffixTo: [/\.vue$/]
+      },
+      exclude: /node_modules/
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader'
+    }
+  ]
+}
+```
+
+# 部署
+
+```
+// webpack.config.js
+module.exports = {
+  ...
+  mode: 'production'
+}
+```
+
+
+# 组件间通信
+
+- props/emit
+- v-model
+- vuex
+- provite/inject
+- refs             父组件使用refs方法得到子组件，再调用子组件时方法得到某数据。
+- 事件中心
+
+## 事件中心
+
+```
+import { EmitterHandles } from '@/type/utils'
+export class Emitter {
+  pr
+}
+```
+

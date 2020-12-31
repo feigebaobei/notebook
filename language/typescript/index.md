@@ -375,9 +375,12 @@ function padLeft(value: string, padding: string | number) {
   throw new Error(`Expected string or number, got '${padding}'.`);
 }
 ```
+
 ### instanceof关键字
+
 用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链
 `instance instanceof prototype`
+
 ```
 interface Padder {
   getPaddingString(): string;
@@ -400,7 +403,8 @@ if (padder instanceof SpaceRepeatingPadder) {
   // padder的类型收窄为 'SpaceRepeatingPadder'
 }
 ```
-## typescript接口（interface）
+
+## interface（接口）
 
 它是对行为的抽象，而具体如何行动需要由类去实现。
 需要注意接口不能转换为 JavaScript。 它只是 TypeScript 的一部分。
@@ -517,215 +521,10 @@ type Data = [number, string];
 ```
 ```
 ```
+
 ## 类
 
-使用extends去继承。`class Child extends Parent {}`
-可以多重继承。
-不能继承多个父类。
-
-### 类的属性与方法
-通过 Class 关键字来定义一个类：
-```
-class Greeter {
-  // 静态属性
-  static cname: string = "Greeter";
-  // 成员属性
-  // 成员即实例的属性。需要明确定义类型。
-  greeting: string;
-  // 构造函数 - 执行初始化操作
-  constructor(message: string) {
-    this.greeting = message;
-  }
-  // 静态方法
-  static getClassName() {
-    return "Class name is Greeter";
-  }
-  // 成员方法
-  // 可以标明返回的类型
-  greet() {
-    return "Hello, " + this.greeting;
-  }
-}
-let greeter = new Greeter("world");
-```
-### 私有字段
-
-私有字段以 # 字符开头，有时我们称之为私有名称；同private的功能一样。
-每个私有字段名称都唯一地限定于其包含的类；
-不能在私有字段上使用 TypeScript 可访问性修饰符（如 public 或 private）；
-私有字段不能在包含的类之外访问，甚至不能被检测到。
-```
-class Person {
-  #name: string;
-  constructor(name: string) {
-    this.#name = name;
-  }
-  greet() {
-    console.log(`Hello, my name is ${this.#name}!`);
-  }
-}
-let semlinker = new Person("Semlinker");
-```
-### 访问器
-
-在 TypeScript 中，我们可以通过 getter 和 setter 方法来实现数据的封装和有效性校验，防止出现异常数据。
-```
-let passcode = "Hello TypeScript";
-class Employee {
-  private _fullName: string;
-  get fullName(): string {
-    return this._fullName;
-  }
-  set fullName(newName: string) {
-    if (passcode && passcode == "Hello TypeScript") {
-      this._fullName = newName;
-    } else {
-      console.log("Error: Unauthorized update of employee!");
-    }
-  }
-}
-let employee = new Employee();
-employee.fullName = "Semlinker";
-if (employee.fullName) {
-  console.log(employee.fullName);
-}
-```
-
-### 联合类型
-### 继承
-
-通过 extends 关键字来实现继承：
-
-```
-class Animal {
-  name: string;
-  constructor(theName: string) {
-    this.name = theName;
-  }
-  move(distanceInMeters: number = 0) {
-    console.log(`${this.name} moved ${distanceInMeters}m.`);
-  }
-}
-class Snake extends Animal {
-  constructor(name: string) {
-    super(name); // 调用父类的构造函数
-  }
-  move(distanceInMeters = 5) {
-    console.log("Slithering...");
-    super.move(distanceInMeters);
-  }
-}
-let sam = new Snake("Sammy the Python");
-sam.move();
-```
-
-子类继承后可重写祖先类的方法、属性。
-
-### static
-
-用于定义类的数据成员（属性和方法）为静态的，静态成员可以直接通过类名调用。
-
-### 访问控制修饰符
-
-public    默认   任何地方都可被访问
-protected 受保存 可以被其自身以及其子类和父类访问。
-                访问控制修饰符 protected 可使类的属性、方法可被该类和其子类（不是实例）在类中访问。不参被实例得到。
-private   私有   只能被其定义所在的类访问。
-readonly  只读   不能被修改。可以被继承 但是继承后的实例还是不能修改只读成员。
-
-```
-class Animal {
-　　protected name: string;
-
-　　constructor(theName: string) {
-　　　　this.name = theName;
-　　}
-}
-
-class Rhino extends Animal {
-    constructor() {
-          super('Rhino');
-    }         
-    getName() {
-        console.log(this.name) //此处的name就是Animal类中的name
-    }
-}
-```
-构造函数也可以被标记为protected。这意味着这个类不能再包含它的类外被实例化，但是能被继承，也就是可以在派生类中被super执行。
-
-### 抽象类
-
-使用 abstract 关键字声明的类，我们称之为抽象类。抽象类不能被实例化，因为它里面包含一个或多个抽象方法。所谓的抽象方法，是指不包含具体实现的方法：
-抽象类: abstract 修饰， 里面可以没有抽象方法。但有抽象方法(abstract method)的类必须声明为抽象类(abstract class)
-
-
-```
-abstract class Person {
-  constructor(public name: string){}
-  abstract say(words: string) :void; // 只定义不实现
-  run () { // 它把run方法实现了，所以不是抽象方法。
-    console.log('run')
-  }
-}
-// Cannot create an instance of an abstract class.(2511)
-const lolo = new Person(); // Error
-```
-抽象类不能被直接实例化，我们只能实例化实现了所有抽象方法的子类。具体如下所示：
-```
-abstract class Person {
-  constructor(public name: string){}
-  // 抽象方法
-  abstract say(words: string) :void;
-}
-class Developer extends Person {
-  constructor(name: string) {
-    super(name);
-  }
-  say(words: string): void {
-    console.log(`${this.name} says ${words}`);
-  }
-}
-const lolo = new Developer("lolo");
-lolo.say("I love ts!"); // lolo says I love ts!
-```
-
-### 多态
-
-在一个抽象类是定义抽象方法。在其子类中实现该抽象方法，则该方法是是多态方法。
-
-### 方法重载
-
-1. 在同一个类中；
-2. 方法名相同；
-3. 参数列表不同；
-
-```
-class ProductService {
-  // 先声明需要重载的方法。不实现方法。
-  getProducts(): void;
-  getProducts(id: number): void;
-  // 在这里实现
-  getProducts(id?: number) {
-    if(typeof id === 'number') {
-        console.log(`获取id为 ${id} 的产品信息`);
-    } else {
-        console.log(`获取所有的产品信息`);
-    }
-  }
-}
-const productService = new ProductService();
-productService.getProducts(666); // 获取id为 666 的产品信息
-productService.getProducts(); // 获取所有的产品信息
-```
-### 联合类型
-
-
-### 联合类型
-### 联合类型
-### 联合类型
-```
-```
-
+移到了./class.md
 
 ## 联合类型和类型别名
 ### 联合类型

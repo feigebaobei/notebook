@@ -5,7 +5,7 @@ config 是一个包含了 Vue 应用全局配置的对象。你可以在应用�
 ```
 const {createApp} from 'vue'
 import App from './App.vue'
-createApp(App): {
+createApp(App).config: {
   errorHandler:          undefined
   globalProperties:      {}
   isCustomElement:       () => false
@@ -220,6 +220,32 @@ app.directive('my-directive', {
 这里只说一些常用的、重要的。
 
 ## createApp(comp, props)
+
+```
+// 第一种方法
+import App from './App.vue'
+const app = Vue.createApp(App)
+// 此方法是经过vue-loader处理过的*.vue文件。引入后得到
+{
+  render: Function // 只有它有用
+  ...
+}
+render是生成组件的方法。
+vue-loader就是把*.vue文件处理成一个render方法(表示式)供webpack使用。
+
+// 第二种方法
+const app = Vue.createApp({
+  data () {
+    return {...}
+  },
+  props: Object | Array,
+  computed,
+  methods,
+  watch
+  emits: Array<string> | Object.
+})
+```
+
 ## h(tag, props, children)
 ## defineComponent(comp | setupFn)
 
@@ -371,12 +397,12 @@ v-else-if
 v-for
 v-on @
 v-bind :
-v-model
+v-model   支持数据双向绑定
 v-slot #
-v-pre 跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
-v-cloak 这个指令可以隐藏未编译的 Mustache 标签直到组件实例准备完毕。
-  和 CSS 规则如 [v-cloak] { display: none } 一起用时，
-v-once 只渲染元素和组件一次。
+v-pre     跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
+v-cloak   这个指令可以隐藏未编译的 Mustache 标签直到组件实例准备完毕。
+  和 CSS  规则如 [v-cloak] { display: none } 一起用时，
+v-once    只渲染元素和组件一次。
 v-is
 
 # 特殊指令
@@ -512,9 +538,9 @@ effect: Function           它就是需要执行的副作用函数。
       监听器被注销时（如被卸载）执行。
   options:                 何时运行副作用函数
     {
-      flush: 'post' | 'pre' | 'sync',
-      onTrack(),           开发阶段有效
-      onTrigger()          开发阶段有效
+      flush: 'post' | 'pre' | 'sync', 何时执行
+      onTrack(),                      开发阶段有效
+      onTrigger()                     开发阶段有效
     }
 ```
 立即执行Funtion，并根据Function中的数据添加追踪依赖。依赖变更时重新运行Funtion.
@@ -558,6 +584,7 @@ renderTriggered -> onRenderTriggered
 当前组件的入口。代替了beforeCreate/created.
 props是传入当前组件的props。
   父组件传入什么，当前组件的props里就有什么。
+  驼峰命名需要使用中划线命名代替。因为html对大小写不敏感。
 context是当前组件的上下文。相当于this.
   {
     attrs
