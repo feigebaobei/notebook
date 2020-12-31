@@ -677,16 +677,52 @@ h() 函数是一个用于创建 vnode 的实用程序。也许可以更准确地
 2. 无钩子函数
 3. 无instance实例
 4. 没有this.(非函数式组件可用this访问当前组件vm)
+5. 无状态
+6. 无法实例化
+7. 内部没有任何生命周期处理函数
+8. 轻量,渲染性能高,适合只依赖于外部数据传递而变化的组件(展示组件，无逻辑和状态修改)
+9. 在template标签里标明functional
+10. 只接受props值
+11. 不需要script标签
+
+函数式组件最大的用途就是用它做中间件来实现render方法，下面是一个例子
+
+组件内的数据需要 context 参数传递。
+context: {
+  props: 
+  children
+  slots
+  scopedSlots
+  data
+  parent
+  listeners
+  injections
+}
 
 ```
 // demo
-Vue.component('comp-a', {
+// 组件注册中函数式组件的实现：
+// vue2写法
+Vue.component('my-fn-comp', {
   functional: true, // 标明是函数式组件
-  props: {...}, // 可选
-  render: function (tag, context) {...} // 返回vnode
+  props: {}, // 可选
+  render: function (createElement, context) {...} // 返回vnode
+})
+// vue3写法
+const app = Vue.createApp({})
+app.component('comp-a', {
+  props: {...},
+  render() {
+    const {h} = Vue
+    return h(tag, props, children)
+  }
 })
 // or 单文件式
-<template functional></template>
+<template functional>
+  <div>
+    <p v-for="(item, index) in props.itmes" :key="index">{{item}}</p>
+  <div>
+</template>
 
 组件中需要的一切数据需要context提供。
 context: {

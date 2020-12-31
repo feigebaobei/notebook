@@ -5,7 +5,7 @@
   <!-- <div class="second"></div> -->
 </template>
 
-<script>
+<script /*lang="ts"*/>
 import {
   // reactive,
   // ref,
@@ -44,5 +44,5 @@ export default {
   }
 }
 </script>
-<style type="stylus" scoped="">
+<style lang="stylus" scoped="">
 </style>
