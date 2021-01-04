@@ -250,6 +250,55 @@ const CompB = {
 组件名可以使用驼峰也可以使用中划线。推荐使用动词中划线名词的方式命名。
 全局注册后全局可用，局部注册后只在当前组件可使用，其子组件不可用。
 
+### 组件的名称
+
+在注册组件时需要提供名称。
+```
+const app = Vue.createApp({...})
+app.component('comp-a', {...})
+```
+
+1. 总是是全小写
+2. 使用中划线。
+
+在注册组件时可以使用驼峰命名法，也可以使用中划线命名法。
+在template中使用组件时必须使用中划线命名法。
+
+### 全局注册
+
+```
+Vue.createApp({...}).component('comp-a', {...})
+```
+
+### 局部注册
+
+不能被其后代组件直接使用。
+
+```
+import compA from './path/compA.vue'
+export default {
+  components: {
+    compA
+  }
+}
+```
+
+### 在模块中定义局部组件
+
+```
+// compModule.js
+// 在一个模块中引用并输出的多个组件。
+import compA from '/path/compA.vue'
+import compB from '/path/compB.vue'
+export default {
+  components: {
+    compA,
+    compB
+  }
+}
+// 在别组件中就可以引入该模块，并使用。
+```
+
 ## Props
 
 类型

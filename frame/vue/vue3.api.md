@@ -247,12 +247,36 @@ const app = Vue.createApp({
 ```
 
 ## h(tag, props, children)
-## defineComponent(comp | setupFn)
+## defineComponent(Object: ComponentOptions | setup: Function)
 
 defineComponent最重要的是：在TypeScript下，给予了组件 正确的参数类型推断 。
+返回一个组件。
+组件中是object.name | function的名字
 
-## defineAsyncComponent(createPromiseFn)
-创建一个只有在需要时才会加载的异步组件。
+## defineAsyncComponent(fn: Function)
+
+创建一个异步组件，当需要它时加载。
+fn: 返回Promise对象的方法。
+  promise的resolve参数是从服务器上得到的组件。
+  promise的reject参数是加载失败的说明。
+
+### usage
+
+```
+// 在根组件内使用（全局注册组件）。
+app.component('comp-a', defineAsyncComponent(() => {
+  return ('./components/comp-a.vue')
+}))
+
+// 在组件内使用
+createApp({
+  components: {
+    compA: defineAsyncComponent(() => {
+      return ('./components/comp-a.vue')
+    })
+  }
+})
+```
 
 ## resolveComponent
 
