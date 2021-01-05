@@ -59,9 +59,10 @@ yarn // 安装项目的全部依赖
 |-|-|-|-|-|
 |help|||||
 |init|||||
-|intall|或省略||||
-|add||yarn add [package]@[version]|||
+|intall|或省略|install all the dependencies|||
+|add||yarn add [package]@[version]|adding a dependency||
 ||||||
 ||||||
 ||||||
 ||||||
+

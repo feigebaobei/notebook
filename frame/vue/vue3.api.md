@@ -760,25 +760,28 @@ https://juejin.cn/post/6887359442354962445?content_source_url=https%3A%2F%2Fgith
 ||||
 
 ## isReactive & isProxy & isReadonly & isRef
+
 |isReactive | isProxy | isReadonly| isRef |
 |-|-|-|-|
 |是否是被reactive处理过的|是否是代理对象（被reactive/readonly处理过的）|是否是被readonly处理过的|是否是RefImpl对象|
 
+## 深&浅
 
-| ref        | reactive        | readonly | 
-| shallowRef | shallowReactive | shallowReadonly |
+|深|浅|
+|-|-|
+| ref      | shallowRef      |
+| reactive | shallowReactive |
+| readonly | shallowReadonly |
 
 toRaw(Proxy)
   Proxy的来源：reactive | readonly
 markRaw(obj)
 
 |watchEffect|watch|effect|
+|-|-|-|
 |基于effect的实现。|-|偏底层的实现。|
 |维护组件、实例、组件状态的关系。组件被卸载时自动stop.|source可是ref()后的结果，也可是reactive()的结果。|不维护，不自动卸载|
 |组件挂载时执行一次，然后开始追踪source的变化。若的变化则执行function。|source发生变化时执行|-|
-||||
-||||
-
 
 
 
