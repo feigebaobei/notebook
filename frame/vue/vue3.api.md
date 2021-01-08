@@ -429,6 +429,40 @@ v-cloak   这个指令可以隐藏未编译的 Mustache 标签直到组件实例
 v-once    只渲染元素和组件一次。
 v-is
 
+## v-model
+
+```
+// v-model arguments
+<comp-a v-model:title="param"></comp-a>
+props: {
+  title: String
+}
+emit('update:title', data)
+
+// multiple v-model binding
+<comp-a v-model:title="tp" v-model:cont="cp"></comp-a>
+props: {
+  title: String,
+  cont: String
+}
+emit('update:title', dataTitle)
+emit('update:cont', dataCont)
+```
+
+本质
+
+```
+<comp-a :title="pt" @update:title(data)></comp-a>
+```
+
+缩写
+
+```
+<comp-a :title.sync="pt"></comp-a>
+```
+`:title.sync`的值不能是表达式
+`.sync`的功能是使一个值变化时同步到其他组件。
+
 # 特殊指令
 
 key
