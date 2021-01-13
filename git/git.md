@@ -370,5 +370,15 @@ User 配置使用用户名
 
 	find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
 	// 将 .DS_Store 加入到 .gitignore
+
+## vscode 
+
+vscode://vscode.github-authentication/did-authenticate?windowid=7&code=4d0138292e7348b308db&state=b766b7a0-9597-4485-b897-e2bcd5391d32
+
+1. Copy the token.
+2. Switch back to VS code.
+3. Click Signing in to github.com... in the status bar.
+4. Paste the token and hit enter.
+
 ---
 2018/10/19 by stone
