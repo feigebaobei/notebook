@@ -175,13 +175,14 @@ function f(x: number): number {
 }
 ```
 
+# literal types
+
 ## title
 ## title
 ## title
 ## title
 ## title
 
-# literal types
 # unions and intersection types
 # title
 # title
