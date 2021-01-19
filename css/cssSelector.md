@@ -12,7 +12,7 @@ css选择器是使用css语言做选择。用于样式编写。选择特定元�
 |[attribute\]|有attribute属性的|p[attribute\]|
 |[attribute=value\]|||
 |![](./image/cssSelector0.png)|选中attribute的属性值以value开头的元素。有兼容问题。||
-|element1~element2|选中前面有element1的element2(可以不是紧挨着)||
+|element1~element2|选中element1后面的每个element2(可以不是紧挨着)||
 |[attribute^=value\]|选中属性attribute的属性值以value开头的元素||
 |[attribute$=value\]|||
 |[attribute*=value\]|||

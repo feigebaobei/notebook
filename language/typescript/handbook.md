@@ -177,11 +177,11 @@ function f(x: number): number {
 
 # literal types
 
-逐个类型。
+逐个类型。我把它理解为枚举。
 常用于限定可选范围。
 
 ```
-type Easing = "ease-in" | "ease-out" | "ease-in-out"
+type Easing = "ease-in" | "ease-out" | "ease-in-out" // Easing必须是这三个值。
 // 用于overload
 function createElement(tagName: 'img'): HTMLImageElement;
 function createElement(tagName: 'input'): HTMLImageElement;
@@ -197,12 +197,26 @@ interface ValidationFailure {
   isValid: false;
   reason: string;
 }
-type ValidationResult = ValidationSuccess | ValidationFailure
+type ValidationResult = ValidationSuccess | ValidationFailure // 其类型是二者之一。
 ```
 
 # unions and intersection types
 
 unions type 与联合可选值很像。
+```
+function f(a: string | number) {}
+// union with common field
+把我个interface的交集属性联合起来
+interface Bird {
+  fly(): void;
+  layEggs():void;
+}
+interface Fish {
+  swim(): void;
+  layEggs(): void
+}
+declare function getSmallPet(): Fish | Bird // 只有layEggs方法。
+```
 ```
 type NetworkLoadingState = {
   state: "loading";
