@@ -249,6 +249,20 @@ interface ArtworksData {
 type ArtworksResponse = ArtworksData & ErrorHandling
 ```
 # classes
+
+```
+class Abc {
+  public prop: type;
+  public constructor(p: type) {
+    this.prop = p
+  }
+  public fn(p: type) {
+    ...
+  }
+}
+```
+
+
 # enums
 # generics
 # tsconfig reference
