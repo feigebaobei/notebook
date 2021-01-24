@@ -253,6 +253,7 @@ type ArtworksResponse = ArtworksData & ErrorHandling
 ```
 class Abc {
   public prop: type;
+  #name: string;
   public constructor(p: type) {
     this.prop = p
   }
