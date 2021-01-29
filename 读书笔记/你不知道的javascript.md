@@ -152,11 +152,28 @@ var MyModules = (function () {
 import & export
 import可以将一个模块中的一个、多个api导入到当前作用域中。
 
+# 附录A: 动态作用域
+
+动态作用域：运行时作用域。
+与其相对的是词法作用域。
+只关心在何处调用。作用域链是基于调用栈的。
+它不好理解的原因是：平时写代码多以词法作用域的思维思考。若以运行时的思维思考则会很好理解。
+```
+// demo
+var a = 2
+function foo () {
+  console.log(a)
+}
+function bar () {
+  var a = 3
+  foo()
+}
+bar() // 3 因为foo有执行时执行了RHS。在调用栈中先查询到了a = 3（在bar的词法作用域中）。
+```
 
 
 
 
-# title
 # title
 # title
 # title
