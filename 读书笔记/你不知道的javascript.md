@@ -170,10 +170,36 @@ function bar () {
 }
 bar() // 3 因为foo有执行时执行了RHS。在调用栈中先查询到了a = 3（在bar的词法作用域中）。
 ```
+# 附录B: 块作用域的方案
+
+在es3时出来了try/catch。它是块级作用域。
+google开发了traceur，它可以把es6代码办的为es5代码。它在对待let时是使用try/catch的。
+```
+try {
+  throw 2
+} catch(a) {
+  console.log(a) // 2
+}
+```
+
+# 附录C: this词法
+
+
+
+# 附录D: 致谢
 
 
 
 
+
+# 关于this
+
+
+
+# title
+# title
+# title
+# title
 # title
 # title
 # title
