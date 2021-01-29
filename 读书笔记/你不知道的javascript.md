@@ -184,7 +184,31 @@ try {
 
 # 附录C: this词法
 
-
+当在代码中使用this时会出现，指向不好确定的问题，或者需要很在力气才能搞清的问题。
+对于以上问题可以使用箭头函数缓解。
+```
+let o = {
+  count: 0,
+  cool: function () {
+    if (this.count < 1) {
+      setTimeout(() => {
+        console.log(this.count++)
+      }, 100)
+    }
+  }
+}
+// or use bind
+let o = {
+  count: 0,
+  cool: function () {
+    if (this.cound < 1) {
+      setTimout(function () {
+        console.log(this.count++)
+      }.bind(this), 100)
+    }
+  }
+}
+```
 
 # 附录D: 致谢
 
