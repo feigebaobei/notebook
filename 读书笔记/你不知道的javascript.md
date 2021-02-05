@@ -216,13 +216,111 @@ let o = {
 
 this是指向当前方法（非箭头函数）所在的运行时上下文。
 使用this可以方便函数在改变上下文时使用。提高了函数的普适性。
+this不是指向词法作用域的。
 
+# this全面解析
 
+调用栈决定this的指向。
+因箭头函数没有自己的this，所以以下内容不作用于箭头函数。
 
+## 4种绑定this的规则：
 
+优先级：
+显式绑定>new绑定>隐式绑定>默认绑定
 
-# title
-# title
+### 默认绑定
+
+严格模式下不能把要全局对象用于默认绑定。
+默认绑定时this就是当前函数调用栈的this.
+是否是严格模式，由当前函数体是否使用严格模式决定。
+
+|模式|this指向|是否受影响|
+|-|-|-|
+|严格模式|undefined|不受影响|
+|非严格模式|全局对象|受影响|
+
+### 隐式绑定
+
+|隐式绑定|默认绑定|
+|-|-|
+|this指向调用位置的this.|this指向全局对象|
+
+```
+var bar = obj.foo
+obj.foo() // 隐式绑定
+foo() // 默认绑定
+```
+
+### 显式绑定
+
+#### 硬绑定
+
+apply/bind/call
+
+#### 上下文
+
+常出现在函数式编程中。
+```
+// demo
+[1, 2].forEach(fn, self)
+```
+
+### new绑定
+
+1. 创建一个全新的对象。
+2. 这个新对象会被执行[[Prototype]]连接。
+3. 函数体中的this指向新对象。
+4. 若没有返回其他对象，则返回这个新对象。
+
+先创建新对象，再返回新对象。
+
+### bind
+
+```
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== 'function') {
+      throw new Error('..')
+    }
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+        fToBind = this,
+        fNOP = function () {},
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP && oThis ? this : oThis), aArgs.concat(Array.prototype.slice.call(arguments))
+        }
+    fNOP.prototype = this.prototype
+    fBound.prototype = new fNOP
+    return fBound
+  }
+}
+```
+
+bind是柯里化的一种体现。
+
+## 被忽略的this
+
+当在apply/bind/call中把this设置为undefined/null时，会使用默认绑定。
+其缺点是把this指向全局对象。当在严格模式下要全局对象是undefined。更安全的方法是使用要DMZ(demilitarized zone，非军事区)。
+`fn.apply(Object.create(null), [p0, p1, ...])`
+
+## 软绑定
+
+因硬绑定后无法再使用隐式绑定、显式绑定。所以创建了软绑定。
+
+```
+if (!Function.prototype.softBind) {
+  Function.prototype.softBind = function (obj) {
+    var fn = this
+    var curried = Array.prototype.slice.call(arguments, 1)
+    var bound = function () {
+      return fn.apply((!this || this === (window || global)) ? obj : this, curried.concat.apply(curried, arguments))
+    }
+    bound.prototype = Object.create(fn.prototype)
+    return bound
+  }
+}
+```
+
 # title
 # title
 # title
