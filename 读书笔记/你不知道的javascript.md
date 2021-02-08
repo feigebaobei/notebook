@@ -321,8 +321,199 @@ if (!Function.prototype.softBind) {
 }
 ```
 
-# title
-# title
+# 对象
+
+js中有很多对象是基于object扩展出来的。
+常见对象：
+
+- String
+Number
+Boolean
+Object
+Funtion
+Array
+Date
+RegExp
+Error
+...
+
+## 内容
+
+对象的key都是字符串。
+若使用`[..]`方式，则可以接受任意UTF-8/Unicode字符串。
+`[]`里可以使用表达式计算出字符串后再使用计算出的字符串为key.
+对象里的方法是不属于对象的。只是对象的特定属性指向特定的方法。
+数组也是一种对象。当为数组添加key时，数组的length属性不变。
+Object.assign()是浅复制。
+
+js中使用二进制的前三位判断类型。object的前三位是0，null全是0.所以`typeof(null) // object`
+
+属性描述符
+```
+Object.defineProperty(obj, key, {
+  value: '',             // 值
+  writable: true,        // 是否可修改
+  configurable: true,    // 是否可配置。（即：是否可修改属性描述符。）
+  enumerable: true       // 是否可枚举
+})
+```
+把configurable设置为false是单向的。一旦为false后不可再修改。
+configurable:false时，可把writable由true设置为false，不可由false设置为true.
+
+## 不可变性
+
+- writable: false
+- Object.preventExtensions(obj) // 不可添加新属性。
+- Object.seal(obj)              // 等价于Object.preventExtensions(obj) + 每个属性的configurable: false
+- Object.freeze(obj)            // 等价于Object.seal(obj) + 每个属性的writable:false
+
+## [[get]] & [[put]]
+
+### [[get]]
+[[get]]操作的使用方法：obj.key
+原理：从当前对象到其在原型链上依次寻找key。若存在则返回其值，否则返回undefined.
+如何判断当其值是undefined还是不存在其key
+```
+// 当前对象上是否存在指定key.
+function reallyExist (o, k) {
+  // in 判断key是否存在于当前对象其原型链上。
+  // o.hasOwnProperty(k) 当前对象o上是否存在k。
+  return {
+    current: o.hasOwnProperty(k),
+    propotype: (k in o)
+  }
+}
+```
+
+### [[put]]
+使用方法：obj.key = value
+原理：
+1. 是否存在访问描述符。若存在则使用setter。否则不使用。
+2. 是否可写。若否，则静默失败。否则把obj.key设置为value.
+
+## getter & setter
+
+访问描述符（存取描述符）与数据描述符（属性描述符）相对。
+
+|访问描述符|数据描述符|||
+|-|-|-|-|
+|set get configurable enumerable|value writable configurable enumerable|||
+
+```
+let o = {
+  _a_: null,
+  get k () {return _a_},
+  set k (v) {this._a_ = v},
+  configurable: true,
+  enumerable: true
+}
+
+Object.defineProperty(o, key, {
+  get: function () {return this._a_},
+  set: function (v) {this._a_ = v},
+  configurable: function () {return true},
+  enumerable: function () {return true},
+  })
+```
+
+## 遍历
+
+对象没有Iterator接口。
+```
+// 为对象o添加Iterator接口
+function createIterator (o) {
+  Object.defineProperty(o, Symbol.iterator, {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value: function () {
+      let o = this,
+          i = 0,
+          ks = Object.keys(o) // Object.keys(o)返回的key的顺序是字面量+增加、删除的key的顺序。
+      return {
+        next: function () {
+          return {
+            value: o[ks[i++]],
+            done: i > ks.length
+          }
+        }
+      }
+    },
+  })
+}
+```
+
+## 静默失败
+
+- 设置writable: false，再修改其值。
+- 设置configurable: false，再delete obj.key
+- 
+
+## tip
+
+如何判断null的类型？
+使用toString()方法。
+
+# 混合对象“类”
+
+可以对数据做什么时类的方法。
+子类使用与父类相同的方法名会屏蔽父类中的方法。有时需要利用这个特性，有时需要避免这个特性。
+类设计模式：过程化编程、函数式编程。
+js中虽有关键字class，但是它不是真正的类。它是构造函数的语法糖。本质还是使用原型链。
+多态是子类直接使用父类中的方法，或修改后再使用父类中的方法。
+js不能多重继承，ks
+
+## 混入
+
+显式混入
+```
+// 混合复制
+function mixin(s, t) {
+  for (let k in s) {
+    if (!(k in t)) {
+      t[k] = s[k]
+    }
+  }
+}
+// 多态
+// 在子类中调用父类的方法
+super.fn.call(this)
+// 寄生继承
+function Car () {
+  var car = new Vehicle()
+  var vefn = car.fn
+  car.fn = function () {
+    vefn.call(this)
+    // modify something
+  }
+  return car
+}
+var car = new Car()
+car.fn()
+```
+隐式混入
+```
+let cool = {
+  fn: function () {...}
+}
+let other = {
+  fn: function () {
+    cool.fn.call(this)
+  }
+}
+```
+
+
+
+
+```
+```
+```
+```
+```
+```
+
+
 # title
 # title
 # title
