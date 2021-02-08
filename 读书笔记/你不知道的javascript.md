@@ -503,19 +503,63 @@ let other = {
 }
 ```
 
+# 原型
 
 
+isPorpotypeOf()
+
+## prototype
+
+设置、屏蔽属性
+
+1. 若原型链上存在指定属性且不为只读，则在当前对象上添加一个指定属性及其值。
+2. 若原型链上存在指定属性且为只读，则无法修改该属性。若在严格模式下，则报错。否则静默失败。
+3. 若原型链上存在指定属性且为setter，则调用这个setter，然后静默失败设置。
+
+## 类
+
+`new Fn()`/`Object.create()`都可以关联起来2个对象（新对象、原型对象）。构造函数方法可以有副作用，Object.create()不会有副作用，所以推荐使用Object.create()
+Object.create(proto, propertiesObject)
+// proto            原型对象
+// propertiesObject 描述对象
+该章强调了js中无继承，只有对象关联（书中常称为委托）。
+在new后面的方法都是构造函数。构造函数与函数之间区别。new可以把函数变为构造函数。
+
+判断某对象是否是某原型的实例
+```
+Fn.prototype.isPrototypeOf(obj) // 推荐
+obj instanceof Fn
+typeof(param)                       // 不严谨
+p.constructor === Fn                // 不可靠
+// 原因如下：
+constructor属性是不可枚举属性，不是不可变属性。
+p.constructor 的本质是 p.__proto__.constructor
+若p上没有constructor属性，则会关联到p.__proto__.constructor。
+还可以在p上修改或设置constructor属性。Object.defineProperty(p, constructor, {...})
+还可以在p的构造函数的原型对象上修改或设置constructor属性。Object.defineProperty(Fn.prototype, constructor, {...})
+```
+Object.getPrototypeOf(p)
+Object.setPrototypeOf(self, o) // 为
+`__proto__`的大致过程
+```
+Object.defineProperty(Object.Prototype, '__proto__', {
+  set: function (v) {
+    Object.setPrototypeOf(this, v)
+  },
+  get: function () {
+    return Object.getPrototypeOf(this)
+  }
+})
+```
+`__proto__`被叫做“笨蛋proto”
+原型上的方法不是备用的，应用作用“内部委托”来解决该问题。
+
+# 行为委托
 
 ```
 ```
-```
-```
-```
-```
 
 
-# title
-# title
 # title
 # title
 # title
