@@ -120,7 +120,7 @@
     // 为对象指定默认属性
     const options = Object.assign({}, defaults, option) // defauls对象里是默认的属性，option里是设置的属性。
 
-**object.getOwnPropertyDescriptor(obj, prop)** 返回对指定对象的指定属性的描述对象。  
+**Object.getOwnPropertyDescriptor(obj, prop)** 返回对指定对象的指定属性的描述对象。  
     let o = { foo: 234 }
     Object.getOwnPropertyDescriptor(o, 'foo')
 

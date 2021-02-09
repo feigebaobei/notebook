@@ -556,11 +556,64 @@ Object.defineProperty(Object.Prototype, '__proto__', {
 
 # 行为委托
 
+这是我学习这本书到现在最有用的一章。它纠正了我对js“继承”的认识。
+在上一章中我们明确了：js是使用`prototype`把对象关联起来的（形成原型链）。有了原型就可以使用原型上的属性、方法。
+js里本没有继承。我猜因为js中有new关键字，再加上程序员对面向类的语言的理解。所以把js的当成面向类的语言。实质上js是面向对象的语言。
+js中new出来的对象是函数处理过的this(新对象)。并给新对象添加`constructor`/`prototype`属性。在对象关联关系中较少使用`constructor`，较多使用`prototype`。
+js注重的是对象间的关联关系。没有继承关系。
+若干对象关联起来后，之间的关系是委托关系。`Object.create(proto, propertiesObject)`可以创建委托关系。比使用构造函数更符合js的本质，也更简洁创建关系关系（创建原型链）。
+原型链下层的元素可以重写、覆盖原型链上层的属性、方法。
+js禁止互相委托。
+class仍然是使用[[prototype]]机制实现的。
+
+## 比较思维模型
+
 ```
+// 原型风格
+function Foo (who) {this.me = who}
+Foo.prototype.identity = function () {return `I am ${this.me}.`}
+function Bar (who) {Foo.call(this, who)}
+Bar.prototype = Object.create(Foo.prototype)
+Bar.prototype.speak = function () {alert(`Hello, ${this.identify()}.`)}
+let b1 = new Bar('b1')
+let b2 = new Bar('b2')
+b1.speak()
+b2.speak()
 ```
 
+```
+// 对象关联风格
+let Foo = {
+  init: function (who) {this.me = who},
+  identify: function () {return `I am ${this.me}`}
+}
+let Bar = Object.create(Foo)                                  // 把Bar.prototype指向Foo
+Bar.speak = function () {alert(`Hello, ${this.identify()}.`)} // 创建Bar特有的方法。
+let b1 = Object.create(Bar)
+b1.init('b1')
+let b2 = Object.create(Bar)
+b2.init('b2')
+b1.speak()
+b2.speak()
+```
 
-# title
+```
+Object.getOwnPropertyDescriptor(o.__proto__, 'constructor')
+{
+  configurable: true,
+  enumerable: false,
+  value: ƒ Object(),
+  writable: true
+}
+Object.getOwnPropertyDescriptor(o, '__proto__')
+undefined
+```
+## 内省
+
+在面向类的语言中，通过创建方式来判断对象的结构和功能。`instance instanceof Fn`
+在面向对象的语言中，通过[[prototype]]委托互相关联。`Parent.isPrototypeOf(Child)`
+
+# 附录A es6中的class
 # title
 # title
 # title
