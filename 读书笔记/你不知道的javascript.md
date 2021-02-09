@@ -614,6 +614,17 @@ undefined
 在面向对象的语言中，通过[[prototype]]委托互相关联。`Parent.isPrototypeOf(Child)`
 
 # 附录A es6中的class
+
+class是es6时出现的新关键字。它可以使用`extends`继承另一个类。`constructor`中的this指向实例。`super`指向父类。super是静态绑定的，从定义class时就确定了子类与父类的关系。它是`[[prototype]]`的语法糖。
+`new Fn()`是面向类的写法。class是对其的优化。但是js是面向对象的。class的本质是使用`[[prototype]]`建立对象间的关联关系。
+早期的js既支持了`new`也支持了`prototype`。后来使用者多喜欢使用`new`。所以后来对`new`优化出`class`。虽然方便使用。但是阻碍了程序员理解js的本质。
+
+推荐的代码风格：
+1. class.
+2. Object.create()
+3. new Fn()
+
+
 # title
 # title
 # title
