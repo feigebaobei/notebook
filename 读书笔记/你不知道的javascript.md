@@ -624,7 +624,31 @@ class是es6时出现的新关键字。它可以使用`extends`继承另一个类
 2. Object.create()
 3. new Fn()
 
+# 类型
 
+js中有7种基本类型
+1. null
+undefined
+boolean
+number
+string
+object
+symbol
+
+function类型的对象中有一个内部属性`[[call]]`。
+```
+// 检查null类型
+(!u && typeof(u) === 'object') // boolean
+```
+typof对待undefined、undeclared都返回undefined.这是typeof的一种安全机制。
+`undefined`/`is not defined`是两码事。
+
+|undefined|undeclared||
+|-|-|-|
+|声明了，但没有赋值。|未声明。||
+
+# title
+# title
 # title
 # title
 # title
@@ -636,3 +660,4 @@ class是es6时出现的新关键字。它可以使用`extends`继承另一个类
 # 错误类型
 TypeError
 ReferenceError
+  xx is not declared
