@@ -538,6 +538,14 @@ p.constructor 的本质是 p.__proto__.constructor
 还可以在p上修改或设置constructor属性。Object.defineProperty(p, constructor, {...})
 还可以在p的构造函数的原型对象上修改或设置constructor属性。Object.defineProperty(Fn.prototype, constructor, {...})
 ```
+```
+var a = 2
+// 2
+var b = new Number(3)
+// Number {3}
+Number.prototype.isPrototypeOf(a) // false
+Number.prototype.isPrototypeOf(b) // true
+```
 Object.getPrototypeOf(p)
 Object.setPrototypeOf(self, o) // 为
 `__proto__`的大致过程
@@ -647,7 +655,116 @@ typof对待undefined、undeclared都返回undefined.这是typeof的一种安全�
 |-|-|-|
 |声明了，但没有赋值。|未声明。||
 
-# title
+# 值
+
+## 数组
+
+使用delete删除数组内的元素后。arr.length不变。
+使用稀疏数组时注意空白部分。取稀疏部分的值会得到undefined。与设置为undefined不同。
+若把数组的下标为字符串的下标设置值时，arr.length不变。
+若字符串的下标可被转换为十进制数字，则对应的下标会被设置为相应的值。arr.length会自动改变。
+```
+类数组=>数组
+Array.from(arguments)
+Array.prototype.slice.call(arguments)
+```
+
+## 字符串
+
+字符串不可改变，只会经过处理后返回新的字符串。
+```
+arr.join      // string
+str.split('') // array
+```
+
+## 数字
+
+小数点前面的0可省略。
+最后部分的0可省略。
+这章提到好多Number类型的操作方法。具体的方法、属性请查看`@/language/javascript/number.md`
+```
+n.toExponential() // 返回科学记数法。
+n.toFixed(x)      // 保留x位小数。
+
+Number.MIN_VALUE
+Number.MAX_SAFE_INTEGER
+Number.MIN_SAFE_INTEGER
+Number.isInteger(x)
+Math.pow(n, x)           // 求n的x次方。x的绝对值最大为32.
+Number.POSITIVE_INFIINTY // Infinity
+Number.NEGATIVE_INFIINTY // -Infinity
+```
+0x/0X 十六进制
+0o/0O 八进制
+0b/0B 二进制
+
+undefined // 表示没有赋值。
+null      // 已经赋值了，但是现在没有值。
+undefined是关键字，不要给它赋值。
+void运算符是不修改其后面的表达式的结果，只有让表达式不返回值。
+
+NaN
+不是数字的数字。可理解为“无效数值”，“失败数值”。
+是惟一一个与自身不相等的。
+`Number.isNaN(p)`可检查是否是NaN.推荐使用它。
+```
+// demo
+var a = 2 / 'foo' // NaN
+a == a            // false
+a === a           // false
+if (!Number.isNaN) {
+  Number.isNaN = function (n) {
+    return n !== n
+  }
+}
+Infinity / Infinity // NaN
+```
+
+当数学运算超出处理范围时，则就近取整。
+
+零值
+有正负。二者===。
+```
+JSON.stringify(-0) // '0'
+JSON.parse('-0')   // -0
+Number('-0')       // -0
+function isNegZero (n) {
+  n = Number(n)
+  return (n === 0) && (1 / n === -Infinity)
+}
+```
+Object.is(a, b) // 判断a与b是否绝对相等。
+```
+if (!Object.is) {
+  Object.is = function (a, b) {
+    // 判断是否是-0
+    if (a === 0 && b === 0) {
+      return 1 / a +++ 1 / b
+    }
+    // 判断是否是NaN
+    if (a !== b) {
+      return a !== b
+    }
+    return a === b
+  }
+}
+```
+`==`/`===`的效率比`Object.is()`高。
+
+## 值和引用
+
+js中没有指针，有引用。
+引用是指向内存中的空间的。
+简单值（标量基本类型值，scalar primitive）总是通过值复制的方式来赋值、传递。包括null/undefined/string/number/boolean/symbol.
+复合值（compound value）包括对象（数组属于对象）、函数。通过引用复制的方式来赋值、传递。
+```
+// 清空数组的方法
+arr.splice(0, arr.length)
+arr.length = 0            //
+arr = []                  // 最快。重新赋值一个空数组。旧数组会被垃圾回收。
+```
+浅复制的本质：创建当前子层的数据、引用。孙子层及以下层的值方式（引用、赋值）不变。
+
 # title
 # title
 # title

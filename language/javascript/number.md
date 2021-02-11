@@ -1,36 +1,39 @@
 #number
-  
-1. 在js中，整数和浮点数使用同样的储存方法。  
 
-**Number.isFinite(number)** 判断number是否是有限数。  
+## 语法
 
-    Number.isFinite(2.3) // true
+```
+new Number(v)
+var a = new Number('123')
+var b = Number('23')
+a instanceof Number // true
+b instanceof Number // false
+```
+## 属性
 
-**Number.isNaN(variable)** 判断number是否是NaN.
+||||||
+|-|-|-|-|-|
+|Number.EPSILON|2个可表示数之间的最小间隔| 2.220446049250313e-16|||
+|Number.MAX_SAFE_INTEGER|最大安全数|2^53 - 1|||
+|Number.MAX_VALUE|最大正数||||
+|Number.MIN_SAFE_INTEGER|最小安全数|-(2^53 - 1)|||
+|Number.MIN_VALUE|最小正数||||
+|Number.NaN|||||
+|Number.NEGATIVE_INFINITY|负无穷大||||
+|Number.POSITIVE_INFINITY||正无穷大|||
+|Number.prototype|||||
 
-    Number.isNaN(123) // false
-    Number.isNaN(NaN) // true
+## 方法
 
-**Number.parseInt(number)** 向下取整。  
-
-    Number.parseInt(2.6) // 2
-
-**Number.parseFloat(number)** 得到浮点型数值。
-
-    Number.parseFloat('2.4') // 2.4
-
-**Number.isInteger(number)** 判断一个数是否是整数。
-
-    Number.isInteger(2.3) // false
-
-**Number.EPSILON** 极小的常量。  
-
-    Number.EPSILON // 2.220446049250313e-16
-
-**Number.isSafeInteger()** 是否在-2e53到2e53之间。  
-
-    Number.isSafeInteger(Math.pow(2, 53) - 1) // true
-    Number.isSafeInteger(Math.pow(2, 53)) // false
+||||||
+|-|-|-|-|-|
+|Number.inNaN()|是不是NaN||||
+|Number.isFinite()|是否是有限数||||
+|Number.isInteger()|是否是整数||||
+|Number.inSafeInteger()|是否是安全数|(-(2^53 - 1), 2^53 - 1)|||
+|Number.toInteger()|把参数转换为整数。兜底解决方案是无穷大数。||||
+|Number.parseFloat()|把参数转化为小数。||||
+|Number.parseInt()|把参数转化为整数。|向下取整。|||
 
 #Math
 
