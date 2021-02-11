@@ -82,6 +82,7 @@ b instanceof Number // false
     2 ** 3 // 8
 
 
+# BigInt
 
 
 

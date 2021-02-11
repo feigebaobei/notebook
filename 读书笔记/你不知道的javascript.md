@@ -765,6 +765,60 @@ arr = []                  // 最快。重新赋值一个空数组。旧数组会
 ```
 浅复制的本质：创建当前子层的数据、引用。孙子层及以下层的值方式（引用、赋值）不变。
 
+# 原生函数
+
+常用的原生函数
+
+1. String()
+Number()
+Boolean()
+Array()
+Object()
+Function()
+RegExp()
+Date()
+Error()
+Symbol()
+
+string/number/boolean/function/regexp/array/object一般使用常量形式创建。
+object/function/regexp万不得已使用封装对象。
+Date/Error一般使用封装对象。
+symbol不使用new开头。
+
+根据文档约定，String.prototype.key可简写为String#key。别的原型属性同理。
+
+## [[class]]
+
+内部属性[[class]]无法直接访问。可以使用`Object.prototype.toString(p)`查看。
+```
+Object.prototype.toString.call([1,2,3]) // "[object Array]"
+```
+
+## 封装对象
+
+就是被new出来的对象。
+一般不推荐直接使用封闭对象。但是偶尔也会派上用场。
+
+## 拆封
+
+使用`valueOf()`可以取封装对象的基本类型值。
+```
+var n = new Number(12)
+n.valueOf() // 12
+```
+
+
+# title
+# title
+# title
+# title
+# title
+# title
+# title
+# title
+# title
+# title
+# title
 # title
 # title
 # title
