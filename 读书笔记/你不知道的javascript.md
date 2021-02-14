@@ -807,10 +807,140 @@ var n = new Number(12)
 n.valueOf() // 12
 ```
 
+# 强制类型转换
 
-# title
-# title
-# title
+可分为隐式强制类型转换和显式强制类型转换。
+
+## 抽象值操作
+
+### ToString
+
+```
+null      => 'null'
+undefined => 'undefined'
+true      => 'true'
+object    调用 Object.prototype.toString()
+array     => 各元素使用`,`连接，无法被字符串化的元素返回`null`.
+json      => JSON.stringify(jsonObj) // 会忽略undefined/function/symbol
+             JSON.stringify()优先调用toJSON()。
+             toJSON()应该返回一个安全的json对象，然后再由JSON.stringify()处理为字符串。
+             JSON.stringify(jsonObj, arr|fn, space)
+String(p) // 把p转换为字符串。
+```
+
+### ToNumber
+
+```
+true => 1
+false => 0
+undefined => NaN
+null => 0
+object   把每项转换为相应的基本类型值。
+          ToPrimitive：先检查是否有valueOf()，若存在，则返回该方法的值。若不存在，则使用toString()的值。否则报错（TypeError）。
+
+Number(p)       // 转换为number。当p为0开头的十六进制是按照十进制处理。不许出来非数字字符。
+parseInt(p)     // 解析为整数，                                  直到非数字字符。
+parseFloat(p)   // 可解析为小数。
+parseInt(str, radix) // str 字符串， radix 进率。
+```
+
+### ToBoolean
+
+```
+// 假值
+undefined
+null
+false
++0/-0/NaN
+''
+
+Boolean(p)
+!!p
+```
+非假值就是真值。
+
+## 显式强制类型转换
+
+### string => number
+
+```
+String(p)
+// date => number
+if (!Date.now) {
+  Date.now = function () {
+    return +new Date()
+  }
+}
+~              1. ToNumber 2. ToInt32
+              先把值转换为32位数字，再按位取非。
+-1            一般表示失败。如：indexOf()。
+~~p           可取32位数字的整数部分。
+Math.floor(p) 取比p小的最大整数。
+parseInt(str, r)
+parseFloat(str, r)
+Boolean(p)
+!!p           常用
+```
+一元运算符可显式转换，但是不要乱用。
+
+## 隐式强制类型转换
+
+```
+number => string
+p + ''
+
+string => number
+p - 0
+p * 1
+p / 1
+
+boolean => number
+function onlyOne () {
+  var sum = 0
+  for(var i = 0; i < arguments.length; i++) {
+    sum += Number(!!arguments[i])
+  }
+  return sum === 1
+}
+if() / for() / while() / do..while() / ?: / || &&Z
+```
+`||`/`&&`应该是“选择器运算符”。
+```
+a || b    当a为真是返回a.否则返回b.
+a && b    当a为真是返回b,否则返回a.
+a || b    a只执行一次。
+a && b    a只执行一次。
+a ? a : b a执行二次。
+```
+
+symbol不可以被转换为数字，可被转换为boolean，结果总是true.
+
+## 宽松相等和严格相等
+
+`==`允许在相等比较中进行强制类型转换，而`===`不允许。
+```
+字符串与数字之间的相等比较
+1. 转换为数字。 2. 比较。
+其他类型与boolean之间的比较。
+1. 转换为数字。 2. 比较。
+null/undefined之间的相等比较。
+null undefined 在==时相等。
+对象与非对象之间的相等比较
+1. 执行ToPrimitive 2. 比较。
+```
+
+不要修改内置原型。
+[] == ![] // true
+若两边有true/false时，不要使用==.
+若两边的值中有`[]` `''` `0`时，尽量不要使用==.
+比较双方首先调用ToPrimitive，如果出现非字符串，就根据ToNumber规则将双方强制类型转换为数字后进行比较。
+`<=`是不大于的意思。
+相等有严格相等，比较没有严格比较。
+
+# 语法
+
+
+
 # title
 # title
 # title
