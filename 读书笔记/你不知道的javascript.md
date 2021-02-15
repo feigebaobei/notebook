@@ -1022,11 +1022,19 @@ let fn = function (data) {
 ajax('url', fn)
 ```
 
+# 回调
 
+回调是编写和处理js程序异步逻辑的最常用方式。
+控制反转会把控制权交给别的的方法（有可能是第三方的方法）。会使信任链完全断裂。
+分离回调（把成功、失败的调用方法分别写在2个方法中）。如`ajax`的`success``failure`
+```
+ajax('url', success: sfn, failure: ffn)
+promise.then().catch()
+```
+回调需要注意“重复回调”。
+永远要异步。
 
-
-# title
-# title
+# promise
 # title
 # title
 # title
