@@ -1005,6 +1005,22 @@ js程序以阻塞方式在浏览器中运行的最长时间
 
 # 异步：现在与将来
 
+现在运行的部分与将来运行的部分之间的关系是异步编程的核心。常用回调函数解决。
+js从不跨线程共享数据。
+竞态条件。
+大数据量是常用方法
+```
+// 少阻塞
+let res = []
+let fn = function (data) {
+  let chunk = data.splice(0, 1000)
+  res = res.concat(chunk.map((v) => v * 2))
+  if (data.length > 0) {
+    setTimeout(() => fn(data), 0)
+  }
+}
+ajax('url', fn)
+```
 
 
 
