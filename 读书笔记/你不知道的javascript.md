@@ -939,10 +939,76 @@ null undefined 在==时相等。
 
 # 语法
 
+grammer
+语句statement和表达式expression不是同一件事。
+表达式可以返回一个结果。
+do{..}是一个表达式，可返回最后一行的结果。
+b = (a++, a) // 返回自加后的a.
+json是js语法的一个子集，但是json本身不是合法的js语法。
+优先级: `&&` > `||` > `?:`
+左关联 || &&
+右关联 ?: =
+asi automatic semicolon insertion 自动分号插入
+优点：1. 可省略不必要的代码。让代码更简洁。
+     2. 让许多`;`可有可无，因此只要让代码没问题，有没有`;`都一样。
+缺点：1. 自动插入`;`会改变代码的逻辑。
+     2. 有人认为省略`;`是错误的。用linter来处理错误。
+do..while后必须带`;`
+linter是纠错机制。不应该让js引擎处理错误代码。
+tdz temporal dead zone 暂时性死区。
+
+## try..finally
+try执行完后（不管是否return）都会执行finally。等finnaly执行完后再返回结果。
+
+## switch
+case后可以是表达式。需要`===`为真。严格为true时返回执行相应case.
+```
+switch (a) {
+  case !!(a || b == 0):
+    break
+  default:
+    break
+}
+```
+
+# 附录A 混合环境JavaScript
+
+js程序几乎总是在宿主环境中运行的。
+javascript语言的官方名称是ECMAScript
+运行环境：浏览器、node.js、rhino
+  浏览器一般使用v8引擎（使用c++写的）。
+  rhino是一个js引擎。与v8引擎竞争市场。
+  v8运行速度比rhino快很多。
+js有很多条件被宿主对象限制。
+宿主对象的方法：console/
+宿主对象的行为差异：
+1. 无法访问正常的object内建方法。如toString()
+无法写覆盖
+包含一些预定义的只读属性。
+包含无法将this重载为其他对象的方法。
+
+在创建带有id属性的dom元素时会创建同名的全局变量。
+不要扩展原生原型。
+在扩展原生方法时需要加入判断条件。
+es5-shim / es6-shim / traceur
+要么不做，要么100%符合规范。
+多个`<script>`共享globle对象（在浏览器中则是window）。也就是说这些代码在共享的命名空间中运行，并相互交互。
+在es5前，保留字不能用于对象常量中的属性名称或键值。
+
+限制
+1. 字符串常量中允许的最大字符数。
+可作为参数传递到函数中的数据大小。
+函数声明中的参数个数。
+未经优化的调用栈的最大层数。
+js程序以阻塞方式在浏览器中运行的最长时间
+变量名的最大长度。
+
+# 异步：现在与将来
 
 
-# title
-# title
+
+
+
 # title
 # title
 # title
