@@ -1,0 +1,1 @@
+gcc ${file}.c // 编译${file}.c
