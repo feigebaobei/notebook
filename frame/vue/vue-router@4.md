@@ -572,9 +572,12 @@ componet: getComp(comp)
 ## 导航失败
 
 失败的种类
-- aborted: false,
-- cancelled
-- duplicated 已经在当前路由了。
+
+1. 从当前页面跳转到当前页面。
+2. 导航守卫return false。
+3. 当前导航守卫未完成时，出现新导航守卫。
+4. 导航守卫返回一个新的位置，重定向到其他地方。
+5. 导航守卫抛出一个error.
 
 ## 动态路由
 
@@ -612,8 +615,6 @@ router.getRoutes()
 |tag|||
 |exact|||
 |router.match|router.resolve||
-||||
-||||
 
 # 解构vue-router
 
@@ -653,9 +654,6 @@ router.getRoutes()
 |||||||
 |||||||
 
-
-
-
 ## <router-link>
 
 |props|type|default|可选值|explain|
@@ -672,7 +670,18 @@ router.getRoutes()
 |to|||||
 |to|||||
 
+## v-slot api
+
+```
+href
+route
+navigate
+isActive
+isExactActive
+```
+
 ## <router-link>'s v-slot
+
 ## <router-view> props
 
 name
@@ -709,8 +718,6 @@ route
 ## createWebHistory(base: string)
 
 生成一个html5 history。一般用于spa。必须使用http协议。
-
-
 
 ## createWebHashHistory(base: string)
 
@@ -782,16 +789,3 @@ route record的标准化版本
 ## NavigationFailure
 ## NavigationGuard
 ## Component Injections
-
-
-
-
-### titile
-
-### titile
-### titile
-### titile
-### titile
-### titile
-### titile
-
