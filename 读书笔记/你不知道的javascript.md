@@ -1035,6 +1035,121 @@ promise.then().catch()
 永远要异步。
 
 # promise
+
+||||
+|-|-|-|
+|回调|通知任务调用回调||
+|promise|监听事件，当得到通知后，执行相应的方法。||
+promise反控制反转。
+关注点分离。then处理成功时，catch处理失败时。
+new Promise的参数会立即执行。
+```
+// 判断是否是promise对象。
+function isPromise (p) {
+  if (p !== null && (typeof(p) === 'object' || typeof() === 'function') && typeof(p.then) === 'function') {
+    return true
+  } else {
+    return false
+  }
+}
+原因：
+1. 可能是嵌套窗口、iframe中的promise实例。造成当前窗口无法识别。
+2. 某些库中自定义的Promise对象。浏览器使用es6 promise判断可能会出错。
+```
+
+promise可以解决：
+- 调用回调过早             // 当promise的状态改变时触发回调。
+- 调用回调过晚
+- 调用回调次数过多、过少。
+- 未能传递所需的环境、参数。
+- 吞掉可能出现的错误、异常。
+
+流式调用，不仅表达多个异步序列的流程控制，还是一个从一个步骤到另一个步骤的消息通道。
+
+以前的项目要使用“error-first回调”，现在我认为使用“split-callback”更好（分离回调）。
+
+```
+// 利用promise的状态只能改变一次的特点。实现按钮只能点击一次的功能。
+var p = new Promise((s) => {
+  clickFn('#id', s)
+})
+p.then((e) => {
+  var id = e.target.id
+  return reqFn('url' + queryString)
+}).then((data) => {...})
+// 这种处理方法破坏了“关注点分离”的思想。
+```
+
+```
+// promise的变体
+if (!Promise.first) {
+  Promise.first = (ps) => {
+    return new Promise((s) => {
+      let num = 0
+      let len = ps.length
+      ps.forEach((p) => {
+        Promise.resolve(p).then(s()).catch(() => {
+          num++
+          if (num === len) {Promise.reject('all promise not resolve')}
+        })
+      })
+    })
+  }
+}
+if (!Promise.last) {
+  Promise.last = (ps) => {
+    return new Promise((s, j) => {
+      let num = 0;
+      let len = ps.length
+      ps.forEach((p) => {
+        Promise.resolve(p).then(res => {
+          num++
+          if (num === len - 1) {
+            s(res)
+          }
+        }).catch(err => {
+          num++
+          if (num === len - 1) {
+            j(err)
+          }
+        })
+      })
+    })
+  }
+}
+// Promise.none
+if (!Promise.none) {
+  Promise.none = (ps) => {
+    return new Promise()
+  }
+}
+// Promise.any
+if (!Promise.any) {
+  Promise.any = (ps) => {
+    return new Promise((s, j) => {
+      let num = 0;
+      let len = ps.length;
+      ps.forEach(p => {
+        Promise.resolve(p).then(res => {
+          s(res)
+        }).catch(err => {
+          num++;
+          if (num === len) {
+            j('all error')
+          }
+        })
+      })
+    })
+  }
+}
+// Promise.every
+if (!Promise.every) {
+  Promise.every = (ps) => {
+    return Promise.all(ps).then(() => {Promise.resolve(true)}).catch(() => {Promise.resolve(false)})
+  }
+}
+```
+
 # title
 # title
 # title
