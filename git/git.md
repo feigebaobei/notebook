@@ -93,7 +93,7 @@ git只能跟踪文本文件的改动
 ![head](../image/gitHead.jpg)
 ![head](../image/gitHead1.jpg)
 
-	git revet // 提交回滚，使用当前提交替换一个指定的版本。
+	git reset // 提交回滚，使用当前提交替换一个指定的版本。
 	git reset // 重置指定版本。默认参数 --soft 把commit的修改退回到git缓冲区。 --hard 把commit的修改丢弃。  
 	git reset --hard HEAD^
 	git reset --hard <commitID>
