@@ -1035,7 +1035,30 @@ promise.then().catch()
 永远要异步。
 
 # promise
-# title
+
+
+
+# 生成器
+
+## Generator
+
+它是一个状态机，其内部使用yield定义多个状态。可以中断后再次执行。它返回一个iterator对象。
+`function * fn () {...}`
+`yield`只能在generator方法内。
+同一个generator方法生成的不同iterator对象互相不影响。
+多个generator方法之间可以交互。
+使用与普通函数一样。
+it.return([p])后结束生成器。
+`yield`可以理解为‘生成一种状态’。
+`yield *`是生成器委托。作用就是的把生成器嵌套起来。
+
+## Iterator
+
+它有next()方法。
+使用it.next(p)可以与generator方法交互数据。把p设置为上一个yield的值，并向下执行。
+第一个it.next()不能有参数。有参数也不启作用。
+it.next()的返回值是`{value: ..., done: boolean}`
+
 # title
 # title
 # title
