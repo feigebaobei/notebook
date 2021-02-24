@@ -3,6 +3,11 @@ iterator的作用
 1. 为各种数据结构提供一个统一的、简便的访问接口。  
 2. 使数据按照某种次序排列。  
 3. 创造一种新的遍历方法（`for...of`）  
+4. iteratro接口与数据结构是分开的。由iterator接口指向或创建数据。  
+5. 必须有next().可选return() / throw().
+
+[Symbol.iterator]指向一个方法。该方法返回一个遍历器对象。它包括next方法。
+generator方法执行后返回一个遍历器对象。所以可以把[Symbol.iterator]指向一个generator方法。
 
 ## iterator对象
 
