@@ -85,10 +85,10 @@ generator对象返回的是iterator对象。且不需要执行next方法。
 
 ## **Generator.prototype.throw()**  
 
-1. iterator对象(generator方法返回的)抛出错误时会被generator函数体内的捕获。第二次抛出时generator方法不捕获。  
+1. iterator对象(generator方法返回的)抛出错误时会被generator函数体内的捕获。第二次抛出时generator方法不捕获。此时catch语句已经执行过了，所以错误会被抛出到generator方法外面。  
 3. generator方法内部没写try...catch,则触发外部的try...catch。若外部没有try...catch，则报错并中断执行。
 2. throw()方法执行时会以附带执行一次next()方法。  
-3. throw() 和g.throw()互不影响。  
+3. throw() 和g.throw()互不影响。throw()是单纯的抛出错误，不会被generator方法内的try/catch处理。g.throw()会触发generator方法内的try/catch.  
 4. 一旦g执行过程中抛出错误，且没有被内部捕获。就不会再执行下去。再执行next()就会返回`{ value: undefined, done: true }`表示运行结束。  
 
 ## **Generator.prototype.return()**  
@@ -118,6 +118,7 @@ generator对象返回的是iterator对象。且不需要执行next方法。
 
 在一个g内部调用另一个g.  
 返回iterator对象。  
+有iterator接口的对象都可以使用yield*遍历。  
 
     function * bar () {
         yield: 'x';
@@ -146,14 +147,16 @@ generator对象返回的是iterator对象。且不需要执行next方法。
 
 **generator函数的this**  
 
+generator函数不能与new命令一起使用。
     // 生成一个空对象，使用`call`方法绑定generator函数内部的`this`
+    // 这是一个变通的方法。
     function * F() {
         this.a = 1
         yield this.b = 2
         yield this.c = 3
     }
     let obj = {}
-    let f = new F.call(obj)
+    let f = new F.call(obj) // 若把obj换为F.prototype则可在iterator对象上得到this里的属性。
     f.next() // { value: 2, done: false }
     f.next() // { value: 3, done: false }
     f.next() // { value: undefined, done: true }
@@ -178,6 +181,11 @@ generator对象返回的是iterator对象。且不需要执行next方法。
     f.a // 1
     f.b // 2
     f.c // 3
+
+
+## generator与上下文
+
+Generator 执行产生的上下文环境，一旦遇到yield命令，就会暂时退出堆栈，但是并不消失，里面的所有变量和对象会冻结在当前状态。等到对它执行next命令时，这个上下文环境又会重新加入调用栈，冻结的变量和对象恢复执行。
 
 ## 应用
 
@@ -314,6 +322,7 @@ generator对象返回的是iterator对象。且不需要执行next方法。
 
 ## 协程  
 
+这种可以并行执行、交换执行权的线程（或函数），就称为协程。
 有点像函数，也有点像线程。  
 
 1. 协程A开始。  
