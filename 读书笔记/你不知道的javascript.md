@@ -1174,9 +1174,50 @@ it.next()的返回值是`{value: ..., done: boolean}`
 
 # 程序性能
 
+两种交互建模：
+1. 顺序
+2. 并发（伪）
+
+## web worker
+
+在ui线程外开辟一个新的线程。
+父子worker之间使用消息通信。
+父子worker之间一一对应。
+有共享worker也有专用worker。
+```
+// api
+// 主线程
+var worker = new Worker('url/file.js')
+worker.addEventListener('message', function (event) {...})
+worker.postMessage('string')
+worker.terminal()
+// 子线程
+addEventListener('message', function (event) {...})
+postMessage('string')
+```
+
+使用场景
+1. 处理密集型计算
+大数据集排序
+数据处理（压缩、音频分析、图像处理……）
+高流量网络通信。
+
+## transferable
+
+像Unit8Array就是transferable.
+数据使用权转移。
+
+## SIMD
+单指令多数据
+
+## asm.js
+通常使用别的工具编译。
+影响性能的最大因素：内存分配、垃圾收集、作用域访问。
+该方法不适用于全部情况，一般用于特定任务，如数学运算（如游戏中的图形处理）
+
+# 性能与调优
 
 
-# title
 # title
 # title
 # title
