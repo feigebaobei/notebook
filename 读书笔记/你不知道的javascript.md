@@ -1217,8 +1217,25 @@ postMessage('string')
 
 # 性能与调优
 
+整体的框架性能大于局部性能。
+benchmark.js是测试js代码性能的库。请不要独自写测试性能的代码。因为很可能写的不对、不严谨。请使用大段代码测试。
+jsPerf.com是使用bencnmark.js测试代码的网站。
+js的运行环境会影响到性能。
+引擎运行的代码不一定是程序员写的代码。
 
-# title
+引擎优先例子
+- 递归 -> 循环
+- for ...
+- ++/--
+
+代码可读性 > 微性能提升
+“非关键路径上的优化是万恶之源” --高德纳
+尾调用优化（tail call optimization TCO）
+
+# 附录A asynquence库
+
+
+
 # title
 # title
 # title
