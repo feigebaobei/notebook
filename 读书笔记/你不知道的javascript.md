@@ -1233,11 +1233,35 @@ js的运行环境会影响到性能。
 尾调用优化（tail call optimization TCO）
 
 # 附录A asynquence库
+# 高级异步模式
+
+这2章中介绍asynquence库的。
+https://www.npmjs.com/package/asynquence
+
+# 深入编程
+# 深入javascript
+# 深入你不知道的javascript
+
+弱类型是js的特点，请利用它。（我反对ts的强类型）
+代码兼容性的转换方法：
+1. polyfill
+2. transpiling
+有新特性，请使用新特性。兼容性问题交给工具库。
+常用的兼容工具库
+1. babel
+2. traceur
+非js语言（就是宿主上的方法）
+1. window
+2. alert
+3. console
+4. ...
 
 
 
-# title
-# title
+# 深入人编程
+
+
+
 # title
 # title
 # title
