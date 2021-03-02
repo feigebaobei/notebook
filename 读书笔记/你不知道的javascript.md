@@ -1256,9 +1256,13 @@ https://www.npmjs.com/package/asynquence
 3. console
 4. ...
 
+# es?现在与未来
 
-
-# 深入人编程
+this绑定的4条基本原则。
+连接到其他对象的对象 objects linked to other objects oloo
+异步和性能。
+transpiling = transformation + compiling 转换+编译
+shim/polyfill是重要的工具，它能帮助程序员处于这个语言发展的最前沿。应该尽量使用最新的语法，并使用工具做兼容处理。
 
 
 
