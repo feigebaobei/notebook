@@ -1277,3 +1277,11 @@ shim/polyfill是重要的工具，它能帮助程序员处于这个语言发展�
 TypeError
 ReferenceError
   xx is not declared
+
+
+你不知道的javascript（2-3）
+陪孩子玩儿。
+做工作。思考如何实现cascader panel
+看了英文文档，背单词。
+晚上看李焕英。
+

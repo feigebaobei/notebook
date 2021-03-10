@@ -37,7 +37,7 @@
 |Object.getOwnPropertyNames(obj)                    | 获取目标对象上的全部自有属性名（包括不可枚举属性）组成的数组。|
 |getOwnPropertySymbols()                     | 返回目标对象自身的所有 Symbol 属性的数组。|
 |Object.getPrototypeOf(obj)                         | 获取指定对象的原型，即目标对象的prototype属性的值。|
-|setPrototypeOf(obj, prototype)              | 设置目标对象的原型为另一个对象或null，返回该目标对象。|
+|Object.setPrototypeOf(obj, prototype)              | 设置目标对象的原型为另一个对象或null，返回该目标对象。|
 |seal(obj)                                   | 密封对象，阻止其修改现有属性的配置特性，即将对象的所有属性的configurable特性设置为false（也就是全部属性都无法重新配置，唯独可以把writable的值由true改为false，即冻结属性），并阻止添加新属性，返回该对象。可以修变已有属性。|
 |freeze(obj)                                 | 完全冻结对象，在seal的基础上，属性值也不可以修改，即每个属性的wirtable也被设为false。|
 |preventExtensions(obj)                      | 使某一对象不可扩展，也就是不能为其添加新属性。|
