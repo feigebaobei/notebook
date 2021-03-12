@@ -1347,6 +1347,54 @@ Array.from(str).length // 1
 
 # 代码组织
 
+迭代器是一种有序的、连续的、基于拉取的用于消耗数据的组织方式。
+可迭代对象有iterator接口（Symbol.Iterator）。该接口对应一个generator方法。该方法会返回一个iterator对象。该对象执行next()方法后（也可执行return()/throw()）返回一个iteratorResult对象。该对象的结构是`{value: any, down: boolean}`
+
+```
+let tasks = {
+  [Symbol.iterator]() {
+    return {
+      [Symbol.iterator]() {return this},
+      next(v) {...},
+      return (v) {...}
+    }
+  }
+}
+```
+
+generator
+一般用于：产生一系列数据，顺序执行的任务队列。
+```
+// 无限生成随机数
+function *foo () {
+  while (true) {
+    yield Math.random()
+  }
+}
+```
+generator函数可当做普通函数执行。
+
+模块
+esm
+1. 基于文件的模块
+2. api是静态的。
+3. 模块是单例
+4. 公开的api会指向模块内的数据。
+5. 加载功能与宿主环境有关。
+6. 不能实现条件编译。
+7. 一个默认导出，多个命名导出。
+8. 默认导出，可在模块内修改需要导出的值。
+9. 命名导出后，不能在模块内修改需要导出的值。
+10. 虽然循环依赖不会出错，但是不是使用循环依赖。
+
+类
+构造函数+原型对象。
+super在构造函数中指向父构造器。
+super在原型对象中指向父构造器的原型对象。
+new.target指向直接构造器。
+使用static声明后的方法会放在构造器上，不放在构造器的原型对象上。
+
+
 
 |||||
 |||||
@@ -1373,3 +1421,4 @@ ReferenceError
 看了英文文档，背单词。
 晚上看李焕英。
 symbol
+reflect
