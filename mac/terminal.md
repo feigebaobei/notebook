@@ -124,3 +124,9 @@ env $SSHELL 查看当前终端环境变量
 env $PATH 查看当前用户环境变量
 ·```
 ## chmod 文件权限
+
+## DS.Store
+1、先手动删除这些文件
+find . -name .DS_Store -type f -delete ; find . -type d | xargs dot_clean 
+2、然后执行一下命令让设备永久无法生生成该文件
+defaults write com.apple.finder AppleShowAllFiles -bool false

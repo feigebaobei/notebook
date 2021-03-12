@@ -1256,18 +1256,106 @@ https://www.npmjs.com/package/asynquence
 3. console
 4. ...
 
+请使用“面向对象”的方式理解js的原型链。
+使用“行为委托”比“构造函数”更准确理解原型链。
+js中不存在“继承”。
+
+回调的缺点：
+1. 控制反转（造成信任丢失）
+2. 线性理解能力差。
+3. 可被多次触发。
+promise/generator可很好地解决以上缺点。
+
+
 # es?现在与未来
 
 this绑定的4条基本原则。
 连接到其他对象的对象 objects linked to other objects oloo
 异步和性能。
 transpiling = transformation + compiling 转换+编译
-shim/polyfill是重要的工具，它能帮助程序员处于这个语言发展的最前沿。应该尽量使用最新的语法，并使用工具做兼容处理。
+shim/polyfill是重要的工具，它能帮助程序员处于这个语言发展的最前沿。应该尽量使用最新的语法，并使用工具做兼容处理
+void 0 <=> undefined
+
+# 语法
+
+for循环+let会在每次循环中执行一次let声明。
+const只使赋值不可变。
+spread / rest
+...arr => arr // rest
+arr => ...arr // spread
+暂时性死区（TDZReferenceError）
+
+解构赋值
+1. 可重复赋值
+2. undefined就是缺失。
+
+```
+// 带默认值的对象解构
+
+```
+```
+// 为对象设置默认值
+{
+  let {
+    options: {
+      remove = default.options.remove,
+      enable = default.options.enable,
+      instance = default.options.instance,
+    } = {},
+    log: {
+      warn: default.log.warn
+      error: default.log.error
+    } = {}
+  } = config
+  config = {
+    optons: {remove, enable, instance},
+    log: {warn, error}
+  }
+}
+```
+简洁写法
+get修饰方法后，可当做属性使用。
+
+|prototype|__proto__|||
+|-|-|-|-|
+|构造函数|任意对象|||
+|指定原型对象|由继承来的属性组成的对象|||
+|向外输出|用于接收|||
+
+Object.setPrototypeOf(obj, proto)
+Object.getOwnPropertySymbols(o) // 得到当前对象的符号属性对应的值。
+String.raw(p) // 得到字符串的原始版本
+String.fromCharCode()
+String.fromCodePoint()
+instance instanceof proto
+Symbol.for(p) // 在全局符号注册中搜索
+Symbol.keyFor(p) // 得到symbol的描述文本。
+一般内置属性、方法使用`@@`开头。
+
+for...of => array
+for...in => object
+
+正则表达式flags
+'gimuy'
+
+```
+// 计算字符串长度
+var str = '§'
+[...arr].length        // 1
+Array.from(str).length // 1
+```
+
+# 代码组织
+
+
+|||||
+|||||
 
 
 
-# title
-# title
+
+
+
 # title
 # title
 # title
@@ -1284,4 +1372,4 @@ ReferenceError
 做工作。思考如何实现cascader panel
 看了英文文档，背单词。
 晚上看李焕英。
-
+symbol

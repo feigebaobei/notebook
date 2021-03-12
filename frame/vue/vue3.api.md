@@ -315,8 +315,23 @@ emits
 ```
 ## dom
 
-template
-render
+template // 组件式风格
+render   // 命令式风格
+
+```
+let app = createApp({})
+app.component('compName', {
+  render() {
+    return h('tag', props, children)
+  },
+  props: {
+    key: {
+      type: Type,
+      default: () => {...}
+    }
+  }
+})
+```
 
 ## 生命周期钩子
 
