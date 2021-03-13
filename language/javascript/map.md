@@ -4,6 +4,7 @@
 null不能成为键名。
 
 **Map([[kay, value], [kay, value], [kay, value], [kay, value]])** 以数组为参初始化map对象。  
+以第一个参数为key，以第二个参数为value。
 |||||
 |-|-|-||
 |属性||||
@@ -15,7 +16,7 @@ null不能成为键名。
 |entries()|返回一个iterator对象，其值为[key, value]|||
 |forEach(callback(item, index, arr)[, thisArg])||||
 |get(key)|若存在key，则返回其对应的值。若不存在key，则返回其undefined。|||
-|has(key)|返回是否包含key。|||
+|has(key)|返回是否包含key。|比较算法和Object.is()几乎一样。||
 |set(key, value)|设置该map对象key对应的value。|||
 |keys()|返回一个iterator对象，其值为key。|||
 |values()|返回一个iterator对象，其值为value。|||

@@ -272,7 +272,10 @@ end, 非必填，
 
     `str0 ${baidu} str1` // str0 baidu str1
 
-**raw()** 
+**String.raw(string)** 返回原始字符串
+
+    let str = `asf\twe`
+    String.raw(str) // asf\twe
 
 （待续）  
 

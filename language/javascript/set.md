@@ -18,7 +18,6 @@ set类似数组。其成员的值都是唯一的。其键名与键值相同。
 **Set.delete(value)** 删除set对象中的指定的值，并返回bool结果。
 **Set.has(value)** 检查set对象中是否有指定的值
 **Set.clear()** 删除指定set对象中的所有值
-
 **Set.keys()** 返回一个以指定set对象的key组成的类数组对象。键名和键值是同一个值。其返回结果与Set.values一样。
 **Set.values()** 返回一个以指定set对象的value组成的类数组对象。
 **Set.entries()** 返回一个以key和value组成的数组组成的数组。

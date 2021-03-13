@@ -1,7 +1,6 @@
-#bfc
-
 块级格式化上下文 block fromatting context  
-
+(block formatting context 块格式化上下文)  
+bfc的特性就是包裹浮动元素。  
 使用bfc的条件。  
 
 1. float不是none.  
@@ -19,8 +18,6 @@
 6. display: table
 7. :after
 8. :before :after
-(block formatting context 块格式化上下文)  
-bfc的特性就是包裹浮动元素。  
 
 ##功能
 
@@ -33,17 +30,11 @@ bfc的特性就是包裹浮动元素。
 `position: absolute, fixed`  
 `display: inline-block, table-cell, table-caption, table-cell`  
 
----
-
-2018/08/16 by stone
-
-
-
-
-
 包裹浮动元素的方法有2种。  
 
 1. clearfix  
 2. bfc  
 
+---
 
+2020/10/28 by stone

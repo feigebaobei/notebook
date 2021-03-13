@@ -53,7 +53,7 @@ end，非必填。
     
     var e = newd.slice(1,3); // [3, 2]
 
-**sort(sortby)** 把指定数组的各元素按照指定方法（sortby）排序。会改变原数组。  
+**sort(sortby)** 把指定数组的各元素按照指定方法（sortby）排序。会改变原数组。返回改变后的数组。  
 sortby，可选。必须是函数。
 
     var f = [1,7,3,6,8,4,2];
@@ -170,26 +170,6 @@ fn，必填，返回boolean值。
     Array.from(objArr)
     [].slice.call(objArr)
 
-**Array.from(arrayLike[, mapFn[, thisArg]])**  
-
-arrayLike 必填 数组、伪数组、可迭代对象。  
-mapFn 选填 把arrayLike里的数据放入新数组再对每个元素执行这个回调函数再返回到新数组。  
-thisArg 选填 mapFn的this对象  
-
-Array.from(obj, mapFn, thisArg) <=> Array.from(obj).map(mapFn, thisArg)
-
-    Array.from([1, 2, 3], x => x + x) // [2, 4, 6]
-    Array.from([1, 2, 3], function (item) {
-        return item + this
-    }, 5) // [6, 7, 8]
-    Array.from({length: 5}, (item, index) => index) // [0, 1, 2, 3, 4]
-
-**Array.of(item0[, item1, item2])** 将一组值转化为一个数组。  
-
-    Array.of('a', 3, 2, 'b', 'c') // ['a', 3, 2, 'b', 'c']
-
-**Array.copyWithin(target, start = 0, end = this.length)** 将数组内部指定位置的成员复制到其它位置（会覆盖原有成员）。不会改变数组长度.  
-
 **find(fn(item, index, arr) {}, obj)** 返回第一个符合条件的元素。  
 
     [3, 3, 5, -6, 12].find((item, index, arr) => {
@@ -232,6 +212,9 @@ end 选填。结束的位置。不包含这个位置。
         console.log(key)
     }
 
+**copyWithin(target, start = 0, end = this.length)** 将数组内部指定位置的成员复制到其它位置（会覆盖原有成员）。不会改变数组长度.  
+
+
 **includes(value, start)** 数组中是否包含给定的值。  
 
     arr.includes('3') // true,
@@ -244,6 +227,26 @@ end 选填。结束的位置。不包含这个位置。
     for (let item of arr) {
         //
     }
+
+**Array.from(arrayLike[, mapFn[, thisArg]])**  
+
+arrayLike 必填 数组、伪数组、可迭代对象。  
+mapFn 选填 把arrayLike里的数据放入新数组再对每个元素执行这个回调函数再返回到新数组。  
+thisArg 选填 mapFn的this对象  
+
+Array.from(obj, mapFn, thisArg) <=> Array.from(obj).map(mapFn, thisArg)
+
+    Array.from([1, 2, 3], x => x + x) // [2, 4, 6]
+    Array.from([1, 2, 3], function (item) {
+        return item + this
+    }, 5) // [6, 7, 8]
+    Array.from({length: 5}, (item, index) => index) // [0, 1, 2, 3, 4]
+
+**Array.of(item0[, item1, item2])** 将一组值转化为一个数组。  
+
+    Array.of('a', 3, 2, 'b', 'c') // ['a', 3, 2, 'b', 'c']
+
+## TypedArray
 
 ****
 ****

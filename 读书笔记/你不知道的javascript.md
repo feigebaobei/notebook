@@ -1393,6 +1393,12 @@ super在构造函数中指向父构造器。
 super在原型对象中指向父构造器的原型对象。
 new.target指向直接构造器。
 使用static声明后的方法会放在构造器上，不放在构造器的原型对象上。
+Symbol.species用于指定构造器。
+```
+class MyCoolArray extends Array {
+  static get [Symbol.species]() {return Array}
+}
+```
 
 # 异步流控制
 
@@ -1432,6 +1438,17 @@ function run(gen, ...rest) {
 run(main).then(...).catch(...)
 ```
 
+# 集合
+
+所谓小端模式（Little-endian）, 是指数据的高字节保存在内存的高地址中,而数据的低字节保存在内在的低地址中,这种存储模式将地址的高低和数据位 权有效结合起来,高地址部分权值高,低地址部分权值低,和我们的逻辑方法一致;
+1字节=8bit
+浏览器一般为小端。
+```
+var buf = new ArrayBuffer(32)
+buf.byteLength                  // 32
+```
+
+# 新增API
 
 
 
@@ -1443,7 +1460,7 @@ run(main).then(...).catch(...)
 
 
 
-# title
+
 # title
 # title
 
@@ -1454,10 +1471,10 @@ ReferenceError
   xx is not declared
 
 
-你不知道的javascript（2-3）
-陪孩子玩儿。
-做工作。思考如何实现cascader panel
-看了英文文档，背单词。
-晚上看李焕英。
+
+
+
 symbol
 reflect
+typedArray
+Buffer

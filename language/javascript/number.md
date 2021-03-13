@@ -11,7 +11,7 @@ b instanceof Number // false
 ```
 ## 属性
 
-||||||
+|都是静态的|||||
 |-|-|-|-|-|
 |Number.EPSILON|2个可表示数之间的最小间隔| 2.220446049250313e-16|||
 |Number.MAX_SAFE_INTEGER|最大安全数|2^53 - 1|||
@@ -25,7 +25,7 @@ b instanceof Number // false
 
 ## 方法
 
-||||||
+|都是静态的|||||
 |-|-|-|-|-|
 |Number.inNaN()|是不是NaN||||
 |Number.isFinite()|是否是有限数||||
