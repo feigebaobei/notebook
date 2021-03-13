@@ -1394,6 +1394,45 @@ super在原型对象中指向父构造器的原型对象。
 new.target指向直接构造器。
 使用static声明后的方法会放在构造器上，不放在构造器的原型对象上。
 
+# 异步流控制
+
+Promsie.resolve()可用于规范异步。
+thenable 是 类promise对象。不是promise对象。
+当Promise.all()的参数是[]时，永远不会决议。
+
+generator + promise
+```
+function *main () {
+  let res = yield p0()
+  try {
+    res = yield p1(res)
+  } catch (e) {
+    res = yield p2(e)
+  }
+  res = yield Promise.all([
+    p3(res),
+    p4(res),
+    p5(res)
+  ])
+  yield p5(res)
+}
+function run(gen, ...rest) {
+  let it = gen.apply(this, rest)
+  return Promise.resolve().then(function nextHandler (v) {
+    let next = it.next(v)
+    return (function resultHandler (next) {
+      if (next.done) {
+        return next.value
+      } else {
+        return Promise.resolve(next.value).then(nextHandler).catch(e => Promise.resolve(it.throw(e)).then(resultHandler))
+      }
+    })(next)
+  })
+}
+run(main).then(...).catch(...)
+```
+
+
 
 
 |||||
