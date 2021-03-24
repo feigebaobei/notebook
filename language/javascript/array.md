@@ -233,6 +233,7 @@ end 选填。结束的位置。不包含这个位置。
 arrayLike 必填 数组、伪数组、可迭代对象。  
 mapFn 选填 把arrayLike里的数据放入新数组再对每个元素执行这个回调函数再返回到新数组。  
 thisArg 选填 mapFn的this对象  
+不会出现空槽位。  
 
 Array.from(obj, mapFn, thisArg) <=> Array.from(obj).map(mapFn, thisArg)
 
