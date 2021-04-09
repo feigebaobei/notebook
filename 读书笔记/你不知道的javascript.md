@@ -1476,8 +1476,3 @@ ReferenceError
 
 
 
-
-symbol
-reflect
-typedArray
-Buffer
