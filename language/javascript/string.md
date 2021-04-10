@@ -277,5 +277,11 @@ end, 非必填，
     let str = `asf\twe`
     String.raw(str) // asf\twe
 
+**trim()** 删除首尾的空格
+**trimStart()**
+**trimLeft()** 删除首空格
+**trimEnd()**
+**trimRight()** 删除尾空格
+
 （待续）  
 

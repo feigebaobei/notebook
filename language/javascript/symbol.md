@@ -4,6 +4,7 @@
 保证值都惟一。  
 es6时添加的第7种数据类型。（undefined, null, boolean, string, number, object）  
 它不是对象，不能添加属性。它类似string.  
+参数应该是string.若不是string,则使用参数的toString()再传入Symbol.
 如果 Symbol 的参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值。
 Symbol 值不能与其他类型的值进行运算，会报错。
 Symbol 值作为对象属性名时，不能用点运算符。
@@ -51,35 +52,22 @@ Symbol.prototype.description // 返回一个symbol对象的描述（string类型
 Symbol.toStringTag // 若该对象上没有prototype.toString方法，就会出现toStringy方法返回的字符串，来表示该对象的类型。利用Symbol.toStringTag指向定制返回字符串的方法3
 Symbol.unscopables // 指定该对象不能被`with`使用的关键字。
 
+## 众所周知的symbols
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Symbol.iterator      返回一个默认迭代器的方法。被for...of使用。
+Symbol.asyncIterator 返回一个默认迭代器的异步方法。被for await of使用.
+Symbol.match         定义一个被string.prototype.match()调用的方法。
+Symbol.replace       定义一个被String.prototype.replace()调用的方法。
+Symbol.search                 String.prototype.search()
+Symbol.split                  String.prototype.split()
+Symbol.hasInstance            instanceof()
+Symbol.isConcatSpreadable     Array.prototype.concat()   其值是boolean.表示是否可被concat.
+Symbol.unscoppables  在with环境中排除该对象上的指定的继承来的值。
+Symbol.species       指定构造器。
+Symbol.toPrimitive   定义一个方法，在该对象被转换为对应的原始值时调用。
+Symbol.toStringTag            Object.prototype.toString()
+Symbol.for(key)      
+Symbol.keyFor(symbol) 
 
 -----------------
 作为属性名的symbol
