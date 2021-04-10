@@ -65,3 +65,51 @@ this => proxy代理
             throw new Error('error by lixd')
         }
     }
+
+## 代理局限性
+
+```
+pobj + ''
+pobj == obj
+pobj === obj
+typeof(pobj)
+string(pobj)
+```
+
+## 使用代理
+
+```
+// 代理在前
+let pobj = new Proxy(obj, handler)
+// 代理在后
+let catchall = new Proxy({}, handler)
+Object.setPrototype(obj, catchall)    // 最后的保障
+// 伪原型环
+let hander = {
+    get(target, key, context) {
+        if (Reflect.has(target, key)) {
+            return Reflect.get(target, key, context)
+        } else {
+            return Reflect.get(target[Symbol.for("[[Prototype]]")], key, context)
+        }
+    }
+}
+let pobj1 = new Proxy({...}, handler)
+let pobj2 = Object.assign(Object.create(pobj1), {...})
+// 伪多继承
+let handler = {
+    get(target, key, context) {
+        if (Reflect.has(target, key)) {
+            return Reflect.get(target, key, context)
+        } else {
+            for (let p of target[Symbol.for("[[Prototype]]")]) {
+                if (Reflect.get(p, key)) {
+                    return Reflect.get(p, key, context)
+                }
+            }
+        }
+    }
+}
+let pobj = new Proxy({...}, handler)
+pobj[Symbol.for("[[Prototype]]")] = [obj1, obj2]
+```

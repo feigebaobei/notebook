@@ -1450,19 +1450,22 @@ buf.byteLength                  // 32
 
 # 新增API
 
+# 元编程
 
+对程序的编程的编程。
+元属性以属性的方式提供一些其他方法无法获取的元信息。
+new.target总是指向直接调用new的目标构造器。
 
-|||||
-|||||
+## 尾递归（Tail Call Optimization, TCO）
 
+常处理为高阶函数、在参数中求值。
 
+# es6之后
 
-
-
-
-
-# title
-# title
+async = generator + runner
+Object.observe(..)
+SIMD Single Instruction Multiple Data
+WASM webassembly
 
 # 严格模式与非严格模式的本质异同
 # 错误类型
@@ -1473,8 +1476,3 @@ ReferenceError
 
 
 
-
-symbol
-reflect
-typedArray
-Buffer

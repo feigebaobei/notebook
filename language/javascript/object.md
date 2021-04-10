@@ -41,7 +41,7 @@
 |seal(obj)                                   | 密封对象，阻止其修改现有属性的配置特性，即将对象的所有属性的configurable特性设置为false（也就是全部属性都无法重新配置，唯独可以把writable的值由true改为false，即冻结属性），并阻止添加新属性，返回该对象。可以修变已有属性。|
 |freeze(obj)                                 | 完全冻结对象，在seal的基础上，属性值也不可以修改，即每个属性的wirtable也被设为false。|
 |preventExtensions(obj)                      | 使某一对象不可扩展，也就是不能为其添加新属性。|
-|Object.is()                                        | 判断两个值是否是相同的值。同一个引用。|
+|Object.is()                                        | 判断两个值是否是相同的值。同一个引用。调用底层的SameValue算法（与===相同）。|
 |isSealed(obj)                               | 用于判断目标对象是否被密封，返回布尔值。|
 |isFrozen(obj)                               | 用于判断目标对象是否被冻结，返回布尔值。|
 |isExtensible(obj)                           | 用于判断一个对象是否可扩展，即是否可以添加新属性。|

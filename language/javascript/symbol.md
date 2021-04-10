@@ -103,7 +103,7 @@ Symbol.keyFor(symbol)
     Symbol值
 
 ## 11个内置的Symbol(都是对象的属性)
-Symbol.hasInstance 指向一个判断实例是否为对象的实例的方法。在使用`ele instanceof Proto`时，在语言内部实际运行的是`Proto[Symbol.hasInstance](ele)`
+Symbol.hasInstance 指向一个判断实例是否为对象的实例的方法。在使用`ele instanceof constructor`时，在语言内部实际运行的是`Proto[Symbol.hasInstance](ele)`
 Symbol.isConcatSpreadable 是否在使用`concat`时展开数组（或类数组）
                             作用于数组时，true时，展开
                                         非true时，不展开
