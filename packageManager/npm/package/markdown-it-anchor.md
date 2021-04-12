@@ -16,9 +16,6 @@ const md = require('markdown-it')()
 ```
 ### options
 
-
-
-
 |名称|描述|默认值|
 |-|-|-|
 |level|               若传入数字，代表最少包含的渲染层级；若传入一个数组，则会渲染数组中选定的层级|1|
@@ -33,10 +30,6 @@ const md = require('markdown-it')()
 |permalinkHref|       自定义渲染|                                                       href 函数.详见 index.js|
 |permalinkAttrs|      自定义标题渲染函数|                                                .详见 index.js|
 |callback|            渲染后的|                                                        callback 函数.|
-
-
-
-
 
 ## API
 
