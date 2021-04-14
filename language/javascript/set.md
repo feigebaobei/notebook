@@ -13,15 +13,15 @@ set类似数组。其成员的值都是唯一的。其键名与键值相同。
     var arr = Array.from(set)
     var set = new Set(arr)
 
-**Set.add(value)** 为set对象添加一个值
-**Set.size** 返回set对象的长度
-**Set.delete(value)** 删除set对象中的指定的值，并返回bool结果。
-**Set.has(value)** 检查set对象中是否有指定的值
-**Set.clear()** 删除指定set对象中的所有值
-**Set.keys()** 返回一个以指定set对象的key组成的类数组对象。键名和键值是同一个值。其返回结果与Set.values一样。
-**Set.values()** 返回一个以指定set对象的value组成的类数组对象。
-**Set.entries()** 返回一个以key和value组成的数组组成的数组。
-**Set.forEach(fn(value, key, set) {})** 对set对象进行遍历操作。(value 与 key 相同)
+**Set.prototype.add(value)** 为set对象添加一个值
+**Set.prototype.size** 返回set对象的长度
+**Set.prototype.delete(value)** 删除set对象中的指定的值，并返回bool结果。
+**Set.prototype.has(value)** 检查set对象中是否有指定的值
+**Set.prototype.clear()** 删除指定set对象中的所有值
+**Set.prototype.keys()** 返回一个以指定set对象的key组成的类数组对象。键名和键值是同一个值。其返回结果与Set.values一样。
+**Set.prototype.values()** 返回一个以指定set对象的value组成的类数组对象。
+**Set.prototype.entries()** 返回一个以key和value组成的数组组成的数组。
+**Set.prototype.forEach(fn(value, key, set) {})** 对set对象进行遍历操作。(value 与 key 相同)
 
 set对象没有提供访问指定值的方法。要想访问指定值需要转为数组后再用数组的方法取指定值。  
 
@@ -60,9 +60,9 @@ set对象没有提供访问指定值的方法。要想访问指定值需要转�
 1. 只能存放对象。  
 2. 对对象是弱引用。  
 
-**WeakSet.add(obj)** 为WeakSet对象指定添加的对象。
-**WeakSet.delete(obj)** 返回是否删除指定的对象。
-**WeakSet.has(obj)** 返回是否存在指定的对象。
+**WeakSet.prototype.add(obj)** 为WeakSet对象指定添加的对象。
+**WeakSet.prototype.delete(obj)** 返回是否删除指定的对象。
+**WeakSet.prototype.has(obj)** 返回是否存在指定的对象。
 没有办法遍历它的成员。
 
 WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用。

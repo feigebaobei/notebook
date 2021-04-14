@@ -71,12 +71,12 @@ null不能成为键名。
 1. 只能设置对象为key.  
 2. 对对象的引用是弱引用。  
 
-**WeakMap.length**
-**WeakMap.prototype** // WeakMap对象
-**WeakMap.set(obj, value)**
-**WeakMap.get(obj)**
-**WeakMap.has(obj)**
-**WeakMap.delete(obj)**
+**WeakMap.prototype.length**
+**WeakMap.prototype.prototype** // WeakMap对象
+**WeakMap.prototype.set(obj, value)**
+**WeakMap.prototype.get(obj)**
+**WeakMap.prototype.has(obj)**
+**WeakMap.prototype.delete(obj)**
 
 
 
