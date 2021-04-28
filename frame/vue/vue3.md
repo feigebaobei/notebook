@@ -258,7 +258,7 @@ const app = Vue.createApp({...})
 app.component('comp-a', {...})
 ```
 
-1. 总是是全小写
+1. 总是全小写
 2. 使用中划线。
 
 在注册组件时可以使用驼峰命名法，也可以使用中划线命名法。
@@ -596,7 +596,7 @@ methods: {
 </transition>
 ```
 
-过渡模式
+mode过渡模式
 
 in-out
 out-in
@@ -606,8 +606,11 @@ out-in
 
 ## 列表过渡
 
+需要使用`tag`，作用：指定标签。
+`name`会作用于`transition-group`的每个子元素。
+不能使用mode。
 ```
-<transition-group name="tgName"> // name指定自定义动画类前缀。
+<transition-group name="name" tag="ul"> // name指定自定义动画类前缀。
 // 也可以使用move-class 手动设置。
 
 </transition-group>
@@ -615,11 +618,13 @@ out-in
 
 ### 可复用的过渡
 
+封装成一个组件复用它。
 ```
 <transition>
   <slot></slot>
 </transition>
 ```
+
 ## 状态过渡
 # 可复用&组合
 ## 混入
@@ -671,7 +676,7 @@ updated       (el, binding, vnode, prevnode)
 beforeUnmount (el, binding, vnode)
 unmounted     (el, binding, vnode)
 
-el dom
+el           dom
 binding: {
   instance   组件实例
   value      当前的值
@@ -786,7 +791,6 @@ context: {
 
 }
 ```
-
 
 ### 使用js代替模板功能
 
