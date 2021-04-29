@@ -1,6 +1,4 @@
-defer&async.md
-
-
+## defer&async
 
 无修饰
 	读取并执行该script标签。
@@ -22,6 +20,30 @@ $(document).ready()   // (function() {})
 window.onload         // $(window).load(function () {...})
 	在no.6后执行。
 	若编写多个，则只执行最后一个。
+
+
+
+
+
+## 在浏览器中使用esmascript
+
+
+`type=module`
+	1. 被当做inline / external脚本处理。
+	2. import支持4种路由：url / `/` / `./` / `../`，其它的不支持。
+	3. nomodule 向后兼容。
+		```
+		<script type="module" src="module.mjs"></script>
+		<script nomodule src="fallback.js"></script>
+		```
+		若浏览器支持`type=module`则使用module.mjs，否则使用fallbakc.js。
+
+	4. 默认使用`defer`。行内script也是defer。
+	5. 若多次引入同一文件，则只执行一次。
+	6. 总是cors。需要设置`Access-Control-Allow-Origin: *`等字段。
+	7. 旧浏览器不会执行credential same-origin cookies
+		新浏览器发送cookie
+	8. 必须使用指定的`MIME types`: `text/javascript`
 
 
 
