@@ -121,6 +121,8 @@ command failed: npm install --loglevel error
 # @vue/cli
 是与vue3.x相配合使用的vue的命令行工具。
 它是基于webpack/webpack-dev-server开发的。
+@vue/cli是管理项目的command line工具。其中官网中多次提到多种插件（基于`webpack`的`vue-cli-service`）/编译工具`babel`
+预置了很好常用配置。可在`vue.config.js`修改。该文件作用于多个地方，不只有`webpack`
 
 ## overview
 ### 功能
@@ -234,24 +236,272 @@ vue build MyComp.vue
 ```
 vue ui   图形化界面
 
+### plugin & preset
 
+#### plugin
 
+vue cli使用了一套基于插件的架构。插件可以修改webpack的内部配置，也可以向`vue-cli-server`注入命令。
+```
+vue add eslint // 安装eslint插件
+```
+使用本地插件            不会
 
+#### preset
 
+预置项是创建项目时的配置文件。包括用到的插件/预定义项。放在`home/.vuerc`
 
+### cli service
 
-
-
-
-
-
-
-
-
-
+```
+vue-cli-service serve [options] [entry]
+options: 
+  --open  在服务器启动时打开浏览器
+  --copy  在服务器启动时将url复制到剪切板
+  --mode  指定环境模式（default: development）
+  --host  指定host(default: 0.0.0.0)
+  --open  指定port(defalut: 8080)
+  --https 是否使用https(default: false)
+```
+```
+vue-cli-service build [options] [entry|pattern]
+options:
+  --mode    指定环境模式(default: production)
+  --dest    指定输出目录(default: dist)
+  --modern  面向现货浏览器带自动回退地构建应用
+  --target  app | li | wc | wc-async(default: app)
+  --name    库或Web Components 模式下的名字（default: package.json中的name字段或入口文件名）
+  --no-clean    在构建项目之前不清除目标目录
+  --report    生成report.html以帮助分析包内容
+  --report-json    生成report.json以帮助分析包内容
+  --watch    监听文件变化
+```
+```
+vue-cli-service inspect [options] [...paths]
+options:
+  --mode  指定环境模式（default: development）
+```
+```
+npx vue-cli-service help           // 查看所有注入的命令
+npx vue-cli-service help [command] // 查看指定的命令
+```
+文件会缓存在`node_modules/.cache`。
+`cache-loader`会默认为`Vue/Babel/TypeScript`编译开启。
+`thread-loader`会在多核cpu上为`Babel/TypeScript`转译开启。
 
 
 ## development
+### 浏览器兼容性
+
+在 package.json 文件里的 browserslist 字段 (或一个单独的 .browserslistrc 文件)，指定了项目的目标浏览器的范围。这个值会被 @babel/preset-env 和 Autoprefixer 用来确定需要转译的 JavaScript 特性和需要添加的 CSS 浏览器前缀。
+
+### html和静态资源
+public/index.html 文件是一个会被 html-webpack-plugin 处理的模板。在构建过程中，资源链接会被自动注入。
+
+插值
+  `<%= VALUE %>` 用来做不转义插值；
+  `<%- VALUE %>` 用来做 HTML 转义插值；
+  `<% expression %>` 用来描述 JavaScript 流程控制。
+
+`<link rel="preload">` 是一种 resource hint，用来指定页面加载后很快会被用到的资源，所以在页面加载的过程中，我们希望在浏览器开始主体渲染之前尽早 preload。
+
+`<link rel="prefetch">` 是一种 resource hint，用来告诉浏览器在页面加载完成后，利用空闲时间提前获取用户未来可能会访问的内容。默认情况下会按`import`自动生成prefetch提示。
+
+不使用index
+```
+// vue.config.js
+module.exports = {
+  // 去掉文件名中的 hash
+  filenameHashing: false,
+  // 删除 HTML 相关的 webpack 插件
+  chainWebpack: config => {
+    config.plugins.delete('html')
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
+  }
+}
+```
+
+多页面应用 
+Vue CLI 支持使用 vue.config.js 中的 pages 选项构建一个多页面的应用。
+```
+```
+
+处理静态资源
+在 JavaScript 被导入或在 template/CSS 中通过相对路径被引用。这类引用会被 webpack 处理。
+放置在 public 目录下或通过绝对路径被引用。这类资源将会直接被拷贝，而不会经过 webpack 的处理。
+
+url转换规则
+如果 URL 是一个绝对路径 (例如 /images/foo.png)，它将会被保留不变。
+如果 URL 以 . 开头，它会作为一个相对模块请求被解释且基于你的文件系统中的目录结构进行解析。
+如果 URL 以 ~ 开头，其后的任何内容都会作为一个模块请求被解析。这意味着你甚至可以引用 Node 模块中的资源：
+如果 URL 以 @ 开头，它也会作为一个模块请求被解析。它的用处在于 Vue CLI 默认会设置一个指向 `<projectRoot>/src` 的别名 @。(仅作用于模版中)
+
+public文件夹
+任何放置在 public 文件夹的静态资源都会被简单的复制，而不经过 webpack。你需要通过绝对路径来引用它们。（即`/`开头）
+```
+// 模板文件。一般是index.html
+<link rel="icon" href="<%= BASE_URL %>favicon.ico">
+// *.vue
+data () {
+  return {
+    publicPath: process.env.BASE_URL
+  }
+}
+<img :src="`${publicPath}my-image.png`"
+```
+
+何时使用 public 文件夹
+- 你需要在构建输出中指定一个文件的名字。
+- 你有上千个图片，需要动态引用它们的路径。
+- 有些库可能和 webpack 不兼容，这时你除了将其用一个独立的 `<script> `标签引入没有别的选择。
+
+### css相关
+Vue CLI 项目天生支持 PostCSS、CSS Modules 和包含 Sass、Less、Stylus 在内的预处理器。
+创建项目是会提示选择哪种css预处理器
+也可手动安装相应loader
+```
+npm i -D sass-loader sass
+npm i -D less-loader less
+npm i -D stylus-loader stylus
+```
+usage
+```
+// *.vue
+...
+<style lange="scss">
+  $color: red;
+  ...
+</style>
+```
+
+自动化导入            不会
+
+PostCSS
+CSS Modules
+在`vue.config.js`中向预处理loader传递选项
+
+### webpack相关
+
+```
+vue.config.js
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new MyAwesomeWebpackPlugin()
+    ]
+  }
+}
+```
+
+链式操作
+通过`webpack-chain`处理。
+  修改loader选项
+  添加新loader
+  替换loader
+  修改plugin选项
+
+审查项目的webpack配置
+`@vue/cli-service`会把内置的webpack配置与`vue.config.js`中的配置混合后得到最终的配置文件。
+```
+vue inspect > output.js    // 输出是被序列化的格式
+vue inspect module.rules.0 // 只看一小部分
+vue inspect --rule vue     // 查看指定的规则
+vue inspect --plugin html  // 查看指定的插件
+vue inspect --rules        // 查看所有规则
+vue inspect --plugins      // 查看所有插件
+ ```
+
+以一个文件的方式使用解析好的配置                  不会
+
+### 模式和环境变量
+
+模式
+  development 模式用于 vue-cli-service serve
+  test        模式用于 vue-cli-service test:unit
+  production  模式用于 vue-cli-service build 和 vue-cli-service test:e2e
+环境变量，需要创建。使用`key=value`方式定义。
+  .env                # 在所有的环境中被载入
+  .env.local          # 在所有的环境中被载入，但会被 git 忽略
+  .env.[mode]         # 只在指定的模式中被载入
+  .env.[mode].local   # 只在指定的模式中被载入，但会被 git 忽略
+
+别的不会
+
+
+### 构建目标
+
+使用`vue-cli-service build`创建。使用`--target`指定创建目标。有4种目标可选。创建是把同一源代码，创建为4种不同的构建目标。
+应用
+  index.html
+  独立的包中保存第三方库
+  小于4k的静态资源被内联在js中
+  public目录中的静态资源被复制后到输出目录中
+库
+  `vue-cli-service build --target lib --name myLib [entry]`
+  dist/myLib.common.js：一个给打包器用的 CommonJS 包 (不幸的是，webpack 目前还并没有支持 ES modules 输出格式的包)
+  dist/myLib.umd.js：一个直接给浏览器或 AMD loader 使用的 UMD 包
+  dist/myLib.umd.min.js：压缩后的 UMD 构建版本
+  dist/myLib.css：提取出来的 CSS 文件 (可以通过在 vue.config.js 中设置 css: { extract: false } 强制内联)
+
+  *.vue入口
+    默认导出组件
+  *.js/ts入口
+    暴露为一个模块。在umd中使用window.yourLib.default获得。在commonjs中使用const myLib = require('myLib').default获得。
+Web Components组件
+  `vue-cli-service build --target wc --name my-element [entry]`。生成`my-element.js`。它是一个独立的js文件。所有文件都是内联。
+  ```
+  // usage
+  <script src="https://unpkg.com/vue"></script>
+  <script src="path/to/my-element.js"></script>
+  <my-element></my-element>
+  ```
+  注册多个Web Components组件
+    `vue-cli-service build --target wc --name foo 'src/components/*.vue'`
+    --name 指定组件名前缀。最终结果：`foo-comp-name`。使用`<foo-comp-name />`
+  异步Web Components组件
+    `vue-cli-service build --target wc-async --name foo 'src/components/*.vue'`生成所有异步Web Components共享的运行时文件，并预先注册所有的自定义组件小入口文件。每个组件按需获取。
+    ```
+    <script src="https://unpkg.com/vue"></script>
+    <script src="path/to/foo.min.js"></script>
+    <!-- foo-one 的实现的 chunk 会在用到的时候自动获取 -->
+    <foo-one></foo-one>
+    ```
+  构建时使用vuex
+    - 入口是`entry-wc.js`，不是`main.js`
+    - 在`App.vue`中初始化。
+      ```
+      import store form './store'
+      export default {
+        store,
+        name: 'App',
+        ...
+      }
+      ```
+
+### 部署
+
+`vue-cli-service build`生成的`dist/`可以部署在任意静态文件服务器上。注意保证`publicPath`
+
+本地预览
+  生成dist/index.html若直接打开会无法找到相关资源。以致不能运行。解决方法：
+  - 修改publicPath为相对路由
+  - 启动serve
+    ```
+    npm i -g serve
+    serve -s dist
+    ```
+若使用history.pushState则需要后端做配置。
+cors
+pwa只能在https上工作。
+npm
+平台指南。列出很多云平台。
+
+
+
+
+
+
+
 
 
 
