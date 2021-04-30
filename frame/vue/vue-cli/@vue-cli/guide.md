@@ -128,7 +128,16 @@ vue add eslint // 安装eslint插件
 
 #### preset
 
-预置项是创建项目时的配置文件。包括用到的插件/预定义项。放在`home/.vuerc`
+预置项是创建项目时的配置文件。包括用到的插件/预定义项。放在`home/.vuerc`。该文件：
+- 可被编辑。
+- 可指定插件的版本
+- 可允许插件注入命令提示
+- 可发布远程preset。需要包括preset.json/generator.js/prompts.js
+- 可使用远程preset`vue create --preset username/repo my-project` // 使用github中的preset库。
+- 可使用私服中的preset。`vue create --preset gitlag:username/repo --clone my-project` // 请确保使用`--clone`
+- 可使用本地preset `vue create --preset ./path/to/file/my-preset my-project`
+
+
 
 ### cli service
 
