@@ -186,6 +186,7 @@ usage:
 vue create test-app
 npm i --save-dev file:/full/path/to/plugin
 vue invoke <your-plugin-name>
+// 若修改了插件，则需要再安装/再调用。
 ```
 
 ## ui集成
