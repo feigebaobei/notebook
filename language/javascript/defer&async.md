@@ -3,9 +3,9 @@
 无修饰
 	读取并执行该script标签。
 defer
-	向用户代理提示该脚本不会生成任何网页内容。用户代理可以继续解析和渲染。在DOMContentLoaded执行之前，由上到下依次加载。
+	向用户代理提示该脚本不会生成任何网页内容。用户代理可以继续解析和渲染。在DOMContentLoaded执行之前，由上到下依次加载。（即：立即下载/延迟执行）
 async
-	异步读取并执行该script标签。
+	异步读取并执行该script标签。加载完成后立即执行。
 
 dom文档加载步骤
 1. 解析html结构
@@ -21,12 +21,13 @@ window.onload         // $(window).load(function () {...})
 	在no.6后执行。
 	若编写多个，则只执行最后一个。
 
-
-
+### 区别
+|defer|async||
+|-|-|-|
+|依次执行|加载完成后立即执行||
 
 
 ## 在浏览器中使用esmascript
-
 
 `type=module`
 	1. 被当做inline / external脚本处理。
