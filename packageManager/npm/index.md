@@ -177,7 +177,7 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 |config|使用该包时需要的配置项|||
 |dependencies|生产环境的依赖项|Object||
 |devDependencies||Object||
-|peerDependencies|本node包依赖的其他依赖包|Object|{'vue': '2.6.0'}|
+|peerDependencies|本node包依赖的其他依赖包。同等依赖。|Object|{'vue': '2.6.0'}|
 |unpkg|上所有的文件都开启 cdn 服务地址||
 |bundledDependencies|一组包名，他们会在发布的时候被打包进去。|||
 |optionalDependencies|如果一个依赖可用，但你希望在它安装错误的时候npm也能继续初始化，|||
@@ -208,6 +208,26 @@ browser：npm包的browser环境下的入口文件。
 只npm包只允许在server端（node中）运行，则使用main.
 使用npm包可以在web、server端都可运行，则使用browser+main.
 
----
-
-2018/12/23 by stone
+## 脚本
+`npm run xxx` // 执行脚本
+`npm xxx` // 执行脚本
+npm run // 查看所有脚本
+脚本运行在`shell`中。
+传参数:使用`--`标明。如：`npm run lint -- --reporter checkstyle > checkstyle.xml`
+`&`：同时执行。`&&`：成功后向下执行。这2个符号是`bash`的功能。
+默认的脚本：`"start": "node server.js"` / `"install": "node-gyp rebuild"`。不需要定义即可执行。
+钩子:
+npm脚本支持`pre`/`post`2种钩子。每个脚本都可以如此处理。如：当执行`npm run build`时，会执行：`npm run prebuild && npm run build && npm run postbuild`.默认提供的金子：
+- prepublish, postpublish
+- preinstall, postinstall
+- preuninstall, postuninstall
+- preversion, postversion
+- pretest, posttest
+- prestop, poststop
+- prestart, poststart
+- prerestart, postrestart
+`npm restart`是`npm stop && npm restart && npm stop`的简写。
+简写：`npm start`.忽略了`run`
+### 变量
+通过`npm_package_`前缀可得到`package.json`中的字段。 如：`process.env.npm_package_version` / `process.env.npm_package_script_install`
+通过`npm_config`前缀可得到`package.json`中`config`里的变量。如：`npm_config_tag`。`npm config get xxx`
