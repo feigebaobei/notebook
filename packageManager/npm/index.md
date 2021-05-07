@@ -148,47 +148,63 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 
 ## package.json各字段说明
 
+|key|description|optional|type|demo|
+|-|-|-|-|-|
+|name|包的名字。可以使用作用域前缀`@myorg/mypackage`|n|string||
+|version|版本号|n|string||
+|description|展示必要的信息。方便`npm search`||string||
+|keywords|该包的关键字|string[]|string||
+|homepage|项目的主页|||"homepage": "https://github.com/owner/project#readme"|
+|bugs|当前包的issue的地址||||
+|license|版权说明||||
+|author|作者||||
+|contributors|贡献者||||
+|funding|最新的信息所在网址的字段。||Object / Array||
+|files|用于描述包作为依赖项安装时要包含的条目|y|||
+|main|主要入口。使用`require(packageName)`时就是从这个字段开始获取数据。||||
+|browser|当该包使用在browser时，会代替main字段的功能。包中不能使用node.js modules||||
+|bin|一个包会有若干个可执行文件。这些可执行文件需要安装到`PATH`。使用该字段定义命令与本包中可执行文件的映射关系。在安装后npm会链接到`prefix/bin`为全局使用或安装到`./node_modules/.bin`为本地使用。当有多可执行文件时需要写成`object`，当只有一个可执行文件时可写成`string`。可执行文件需要以`#!/usr/bin/env node`开头。|||`{"bin": {"myapp": "./cli.js"}}`|
+|man|方便linux的man命令查找文件||||
+|directories|本包的目录结构||||
+|description.lib|指定lib目录||||
+|description.bin|指定bin目录||||
+|description.man|指定man目录||||
+|description.doc|指定doc目录||||
+|description.example|指定示例目录||||
+|description.test|指定测试目录||||
+|repository|该包的仓库|Object|{"type":"git","url":"xxxx"}||
+|script|可运行的脚本。包括一些生命周期脚本。|Object|||
+|config|使用该包时需要的配置项，将用于该包的脚本。||||
+|dependencies|生产环境的依赖项。可以使用url/github url/本地路径/|Object|||
+|devDependencies|开发环境的依赖项。|Object|||
+|peerDependencies|本包依赖的其他依赖包。同等依赖，会同级安装。|Object|{'vue': '2.6.0'}||
+|peerDependenciesMeta|若安装peerDependencies中的包时，报警告。则使用`peerDependenciesMeta`指明提示信息。||`{peerDependenciesMeta: "${packageName}": {"optional": true}}`|
+|bundledDependencies|一组包名，他们会在发布的时候被打包进去。||||
+|optionalDependencies|如果一个依赖不可用，但你希望在它安装失败的时候npm也能继续初始化。npm会使用该字段对应的包。此时该字段的功能与`dependencies`的功能一样。使用`npm i --no-optional`时该字段无效。||||
+|engines|需要什么样的引擎环境支持||`{"engines": {"node": ">=10.0.0"}}`||
+|os|需要什么样的操作系统||string[]||
+|cpu|指定cpu||||
+|private|若true，则不能`npm publish`||Boolean||
+|publishConfig|发布时的配置||||
+|workspaces|它描述了本地文件系统中的位置，安装时应该查找这些位置，以找到需要与顶级node_modules文件夹进行符号链接的每个工作区。就像工作区内有package.json一样。|||
+|DEFAULT VALUES|不支持的value||||
+|unpkg|上所有的文件都开启 cdn 服务地址|||
+|engineStrict|不会||||
+|preferGlobal|不会||||
 |key||||
-|-|-|-|-|
-|name||||
-|version||||
-|description||||
-|keywords||||
-|homepage||||
-|bugs||||
-|license|版权说明|||
-|author||||
-|contributors||||
-|funding|最新的信息所在网址的字段。|Object / Array||
-|files|当前包包括哪个文件。|||
-|main|主要入口。使用`require(packageName)`时就是从这个字段开始获取数据。|||
-|browser|当该包使用在browser时，会代替main字段的功能。|||
-|bin|二进制文件的目录|||
-|man|不会|||
-|directories|(目录)|||
-|description.lib||||
-|description.bin||||
-|description.man||||
-|description.doc||||
-|description.example||||
-|description.test||||
-|repository|该包的仓库|Object|{"type":"git","url":"xxxx"}|
-|script|可运行的脚本|Object||
-|config|使用该包时需要的配置项|||
-|dependencies|生产环境的依赖项|Object||
-|devDependencies||Object||
-|peerDependencies|本node包依赖的其他依赖包|Object|{'vue': '2.6.0'}|
-|unpkg|上所有的文件都开启 cdn 服务地址||
-|bundledDependencies|一组包名，他们会在发布的时候被打包进去。|||
-|optionalDependencies|如果一个依赖可用，但你希望在它安装错误的时候npm也能继续初始化，|||
-|engines|需要什么样的运行环境支持||`{"engines": {"node": ">=10.0.0"}}`|
-|engineStrict|不会|||
-|os|需要什么样的操作系统|||
-|cpu||||
-|preferGlobal|不会|||
-|private|若true，则不能`npm publish`|Boolean||
-|publishConfig|不会|||
-|DEFAULT VALUES|不会|||
+|key||||
+|key||||
+|key||||
+
+## scope
+### 说明
+所有包必须有一个名字。有些包名有作用域。就遵守以下规则：`@somescope/somepackagename`
+把相关的包放在一起。
+
+### 安装作用域包
+### 引用作用域包
+### 发布作用域包
+### 关联作用域包
 
 ## npm 包使用范围
 
@@ -208,6 +224,26 @@ browser：npm包的browser环境下的入口文件。
 只npm包只允许在server端（node中）运行，则使用main.
 使用npm包可以在web、server端都可运行，则使用browser+main.
 
----
-
-2018/12/23 by stone
+## 脚本
+`npm run xxx` // 执行脚本
+`npm xxx` // 执行脚本
+npm run // 查看所有脚本
+脚本运行在`shell`中。
+传参数:使用`--`标明。如：`npm run lint -- --reporter checkstyle > checkstyle.xml`
+`&`：同时执行。`&&`：成功后向下执行。这2个符号是`bash`的功能。
+默认的脚本：`"start": "node server.js"` / `"install": "node-gyp rebuild"`。不需要定义即可执行。
+钩子:
+npm脚本支持`pre`/`post`2种钩子。每个脚本都可以如此处理。如：当执行`npm run build`时，会执行：`npm run prebuild && npm run build && npm run postbuild`.默认提供的金子：
+- prepublish, postpublish
+- preinstall, postinstall
+- preuninstall, postuninstall
+- preversion, postversion
+- pretest, posttest
+- prestop, poststop
+- prestart, poststart
+- prerestart, postrestart
+`npm restart`是`npm stop && npm restart && npm stop`的简写。
+简写：`npm start`.忽略了`run`
+### 变量
+通过`npm_package_`前缀可得到`package.json`中的字段。 如：`process.env.npm_package_version` / `process.env.npm_package_script_install`
+通过`npm_config`前缀可得到`package.json`中`config`里的变量。如：`npm_config_tag`。`npm config get xxx`
