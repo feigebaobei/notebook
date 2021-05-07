@@ -69,26 +69,43 @@ lerna-repo/
 
 # commands
 
-这些命令的说明是专门有它们的说明页面。
+这些命令的说明是专门有它们的说明页面。这里是简述，详情见下文。
 
-## learn publish
+```
+learn publish
+learn version
+  最后一次发布包的版本号
+learn bootstrap
+  把本地包关联起来，并下载依赖。
 
 
-## learn version
-## learn bootstrap
-## learn publish
-## learn list
-## learn changed
-## learn diff
-## learn exec
-## learn run
-## learn init
-## learn add
-## learn clean
-## learn import
-## learn link
-## learn create
-## learn info
+learn publish
+
+learn list
+  列出本地包
+learn changed
+  列出从最后一次发布后到此时有变动的包
+learn diff
+  对比最后一次发布的所有/指定的包
+learn exec
+
+learn run
+
+learn init
+
+learn add
+
+learn clean
+
+learn import
+
+learn link
+  链接所有包的互相依赖
+learn create
+
+learn info
+```
+
 # concepts
 
 lerna会把日志写在`lerna-debug.log`也叫`npm-debug.log`。当遇到error时会执行该命令。
@@ -127,7 +144,7 @@ lerna会把日志写在`lerna-debug.log`也叫`npm-debug.log`。当遇到error�
 |||npmClientArgs|`lerna bootstrap`时会执行`npm install`，该字段是为`npm install`提供参数的字段。由字符串组成的数组。||
 |||scope|定义`lerna bootstrap`的作用域。由字符串组成。||
 |packages|||由当地包组成。由字符串组成。||
-lerna.json里面是所有包的配置项。每个包的配置项由各包内的`package.json`设置。
+lerna.json里面是所有包的配置项。每个包的配置项由各包内的`package.json`设置。lerna是根据各子包的`package.json`去识别子包的。`lerna.json`中包含了整个库的`devDependencies` / `scripts`
 lerna默认初始化时把packages list设置为`["packages/*"]`，也可以自定义为其他目录。如：`["modules/*"]`/`["package1","package2"]`。该字段使用相对于lerna.json的相对路径。lerna.json通常在库的根目录下。各包不能嵌套。
 如`packages: ["packages/*","src/**"]`，则匹配的目录树如下：
 ```
@@ -214,16 +231,6 @@ lerna不会把git历史分隔到只读仓库中。
 
 
 
-
-
-# start
-
-```
-npm i -g lerna
-git init lerna-repo && cd lerna-repo
-lerna init 
-```
-
 # commands
 
 ```
@@ -274,9 +281,3 @@ For more information, find our manual at https://github.com/lerna/lerna
 turbo@turbo-System-Product-Name:~$ 
 
 ```
-
-# title
-# title
-# title
-# title
-# title
