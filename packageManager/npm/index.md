@@ -148,11 +148,11 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 
 ## package.json各字段说明
 
-|key||||
+|key|description|||
 |-|-|-|-|
-|name||||
+|description|展示必要的信息。|||
+|name|包的名字。可以使用作用域前缀`@myorg/mypackage`|||
 |version||||
-|description||||
 |keywords||||
 |homepage||||
 |bugs||||
@@ -189,6 +189,16 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 |private|若true，则不能`npm publish`|Boolean||
 |publishConfig|不会|||
 |DEFAULT VALUES|不会|||
+
+## scope
+### 说明
+所有包必须有一个名字。有些包名有作用域。就遵守以下规则：`@somescope/somepackagename`
+把相关的包放在一起。
+
+### 安装作用域包
+### 引用作用域包
+### 发布作用域包
+### 关联作用域包
 
 ## npm 包使用范围
 
