@@ -71,35 +71,35 @@ lerna-repo/
 这些命令的说明是专门有它们的说明页面。这里是简述，详情见下文。
 按常用顺序展示。
 
-## learn init
+## lerna init
 初始化lerna项目或更新当前库的lerna版本。生成基本的项目结构。
-## learn create
+## lerna create
 创建一个lerna管理的包
-## learn bootstrap
+## lerna bootstrap
 链接一个本地包或添加一个远程包。
-## learn publish
+## lerna publish
 发布当前项目中的包
-## learn add
+## lerna add
 在适当的包中添加依赖。
-## learn link
+## lerna link
 互相链接所有包
-## learn exec
+## lerna exec
 在每个包中执行任意命令。
-## learn run
+## lerna run
 在每个包括此脚本的包中执行此脚本
-## learn changed
+## lerna changed
 列出从最后一次发布后有改变的本地包
-## learn diff
+## lerna diff
 显示所有包或一个包的从最后一次发布后的不同
-## learn info
+## lerna info
 打印本地环境信息
-## learn clean
+## lerna clean
 清除所有包中的`node_modules`
-## learn import
+## lerna import
 使用`commit history`引入一个包到多包一库中。
-## learn list
+## lerna list
 列出本地包
-## learn version
+## lerna version
 从最后一次发布后有改变的所有包的集成版本号。
 
 # concepts
@@ -222,8 +222,8 @@ lerna不会把git历史分隔到只读仓库中。
 # filter flags
 
 # commands
-## learn version
-## learn bootstrap
+## lerna version
+## lerna bootstrap
 
 ### overview
 
@@ -382,7 +382,7 @@ lerna bootstrap --force-local
 ### 提示
 不会
 
-## learn publish
+## lerna publish
 
 ### overview
 
@@ -498,10 +498,10 @@ lerna不会发布私有包。package.json中private: true控制的。
 - postpack
 - publish
 - postpublish
-## learn list
-## learn changed
-## learn diff
-## learn exec
+## lerna list
+## lerna changed
+## lerna diff
+## lerna exec
 
 ### overview
 
@@ -528,9 +528,9 @@ lerna exec -- protractor conf.js
 不会
 #### --profile-location <location>
 
-## learn run
-## learn init
-## learn add
+## lerna run
+## lerna init
+## lerna add
 
 ### overivew
 
@@ -545,6 +545,18 @@ lerna exec -- protractor conf.js
 2. 引导包会改变package.json.(翻译不正确)
 若版本号不正确，则安装`latest`版本。
 ### options
+
+除了支持过滤标志：
+- `--scopt <glob>`
+- `--ignore <glob>`
+- `--no-private`
+- `--since [ref]`
+- `--exclude-dependents`
+- `--include-dependents`
+- `--include-dependencies`
+- `--include-merged-tags`
+还支持以下标志：
+
 #### --dev
 #### --exact
 #### --peer
@@ -553,17 +565,18 @@ lerna exec -- protractor conf.js
 
 #### --registry <url>
 
-不会
+从指定的注册表中下载包。
+`--registry`是为包管理工具设置数据源的字段。
 
 #### --no-bootstrap
 
 跳过`lerna bootstrap`
-## learn clean
+## lerna clean
 ### overivew
 ### overivew
 ### overivew
-## learn import
-## learn link
+## lerna import
+## lerna link
 ### overview
 
 链接所有互相依赖包。
@@ -576,7 +589,7 @@ lerna exec -- protractor conf.js
 不管版本号是否匹配，都链接本地包。
 #### publishConfig.directory
 不会
-## learn create
+## lerna create
 
 ### overview
 
