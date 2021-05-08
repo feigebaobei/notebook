@@ -613,7 +613,6 @@ Command Options:
   --yes           Skip all prompts, accepting default values
 ```
 
-
 ## learn info
 ## learn version
 
