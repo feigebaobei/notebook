@@ -15,7 +15,18 @@ linux下的命令
 |-d/-dir|删除空目录||||
 |-v/-verbose|显示删除结果||||
 
+# cp
+复制
+```
+cp dirSource/file.doc dirTarget
+cp -r dirSource/. dirTarget
+cp -r dirSource/. dirTarget
+```
 
-
-
+# mv
+移动
+```
+mv source target
+```
+# scp
 
