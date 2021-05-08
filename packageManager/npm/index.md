@@ -217,7 +217,7 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 
 main：npm包的入口文件。兼容browser / node。
   main字段是npm包主要入口文件`require(xxx)`时就是从main字段取值的。
-module: npm包的es规范的入口文件。兼容browser / node。
+module: npm包的esm规范的入口文件。兼容browser / node。
 browser：npm包的browser环境下的入口文件。
 
 只npm包只允许在web端（浏览器中）运行，则使用browser。
