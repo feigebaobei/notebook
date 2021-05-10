@@ -37,7 +37,23 @@ const program = new Command()
 默认行内选项没有次序。
 
 ## Common option types, boolean and value
-2种最常用的选项类型：boolean/从后面的参数中取出类型（使用`<>`处理，如：`--expect <value>`）。若二者都没有，则使用`undefined`
+2种最常用的选项：boolean/从后面的参数中取值（使用`<>`处理，如：`--expect <value>`）。若二者都没有，则使用`undefined`。
+```
+program
+	.option('-d, --debug', 'output extra debuggin')
+	.option('-s, --small', 'small pizza size')
+	.option('-p, --pizza-type <type>', 'flavour of pizza')
+program.parse(process.argv)
+const options = program.opts()
+if (options.debug) console.log(options)
+console.log('pizza details:')
+if (options.small) console.log('-small pizza size')
+if (options.pizzaType) console.log(`-${options.pizzaType}`)
+```
+```
+$ pizza-options -d
+```
+
 
 
 # overview
