@@ -206,7 +206,18 @@ commandName    命令的名字，可必填，可选填。
 
 
 
-# overview
+# 绑定、触发事件
+绑定
+- option
+- requireOption
+- parse
+- parseAsync
+
+触发
+- parse
+- parseAsync
+
+
 # overview
 # overview
 # overview
@@ -342,6 +353,7 @@ defaultValue    默认值
 
 #### Command#parse(argv)
 解析argv，设置选项并调用命令。
+在定义时，解析argv、设置option、执行command。
 序列化argv，再执行选项，再执行命令，再执行子命令。
 返回`Command`实例
 
@@ -485,8 +497,16 @@ options   array   需要提示帮助信息的选项组成的数组。
 私有方法使用下划线开头。
 
 ## 7.0.0
+## 7.2.0
+#### Command#action(fn)
+为命令设置回调方法。
+fn  回调方法。
+定义`listener`方法。参数是当前的args、额外的参数、当前命令。再设置`this._actionHandler`设置为`listener`
+返回当前命令。
 
-
+#### Command#parseAsync()
+异步调用`parse()`。
+返回promise对象。
 ## 为什么先讲option，再讲command
 ### 定义命令
 项目中的`package.json`。
