@@ -1,6 +1,5 @@
 # parse resource code
 把`@vue/cli`的源码从`github`上拉下来看。发现它使用了`lerna`管理若干包。这些包在`npm`上由`@vue`组织管理。这也是从`vue-cli`变为`@vue/cli`的原因。
-
 `@vue/cli`包的源码在`./packages/@vue/cli`中。
 
 ## parse package.json
@@ -24,11 +23,11 @@
 `lib/`包含此包的各个子功能文件。
 `util`工具目录
 `promptModules`模块目录
-```
+
+# 进步
+相较到2.x。3.x增加了扩展插件的功能。此功能由`Generator.js`负责。
 
 
-
-# overview
 # overview
 # overview
 # overview

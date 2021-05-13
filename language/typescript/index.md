@@ -52,6 +52,7 @@ Version 4.0.2
    b.ts       b.js          main.js        main.js
    c.ts       c.js
 ```
+即使编译出错，也会生成编译结果。（ts=>js）
 
 ### 初体验
 
@@ -191,7 +192,7 @@ var Enum;
 })(Enum || (Enum = {}));
 ```
 ### Any
-任何类型,是一种顶级类型。
+任何类型,是一种顶级类型。any 可在any类型上访问任意属性、方法。若求声明类型，则被识别为any型。
 ```
 let notSure: any = 66
 notSure = 'stri'
@@ -216,12 +217,14 @@ value = Symbol("type")
 ### Tuple
 元组。在“数组”中保存不同类型的值。可用于定义具有有限数量的未命名属性的类型。
 使用时必须保存元组内有下标、类型一致。
+不可越界。
+
 ```
 let t: [string, boolean]
 t = ['string', true]
 ```
 ### Void
-表示，没有任何类型。
+表示，没有任何类型。void类型的变量只能被赋值`undefined`/`null`
 ```
 function warnUser(): void {
   console.log('string')
@@ -297,6 +300,7 @@ var mm = new Map([
 ```
 
 ## 断言
+手动指定一个值的类型
 ### 尖括号语法
 ```
 let sv: any = 'string'
@@ -408,7 +412,8 @@ if (padder instanceof SpaceRepeatingPadder) {
 
 它是对行为的抽象，而具体如何行动需要由类去实现。
 需要注意接口不能转换为 JavaScript。 它只是 TypeScript 的一部分。
-
+它是对行为的抽象，由类实现具体行为。
+一般大写。有时有前缀`I`
 实现类接口的关键字是implements.
 
 ```
@@ -674,7 +679,66 @@ let f1: <U> (arg: U) => U = fn
 
 ## 声明文件
 
-虽然通过直接引用可以调用库的类和方法，但是却无法使用TypeScript 诸如类型检查等特性功能。
+声明文件：包含声明语言的文件。
+为了使用“代码补全”、“接口提示”。
+为了让编辑器知道某变量、方法、类……是什么。
+文件名：`*.d.ts`
+放置位置：
+- 编辑`*.d.ts`并在`package.json`中的`types`字段指向`*.d.ts`。
+- 发布`@types/xxx`。
+
+```
+// demo
+// 定义
+declare var jQeury: (selector: string) => any;
+// 使用
+jQuery('#foo')
+```
+### 全局变量
+- 自己编写。一般放在`src/`下。再在tsconfig.json中设置include/file/exclude。
+- `npm i @types/xxx -D`   // 推荐
+- 
+```
+declare let a: string
+declare function fn(a: string): any
+declare class A {
+    name: string;
+    constructor(name: string) {...};
+    sayHi(): string
+}
+declare enum D {
+    Up,
+    Down
+}
+declare namespace jQuery {
+    function ajax(url: string, setting?: any): void;
+    const version: number;
+    class Event {
+        blur(eventType: EventType): void
+    }
+    enum EventType {
+        CustomClick
+    }
+}
+// interface / type 可不写declare
+interface A {
+    method?: 'GET' | 'POST',
+}
+type A {
+    a: string
+}
+// 为防止命名冲突，最好放在namespace下
+declare namespace ns {
+    interface A {...}
+    type B {...}
+}
+// 重复声明不会被合并。
+declare function jQuery(a: string): any
+declare namespace jQuery{
+    function ajax(u: string): void;
+}
+```
+namespace是ts为了解决模块化，创建的关键字。在es6前namespace是module。在es6后是namespace。可嵌套。
 
 ```
 declare var jQuery: (selector: string) => any
@@ -687,43 +751,122 @@ declare 定义的类型只会用于编译时的检查，编译结果中会被删
 // 引入声明文件
 /// <reference path = "filename.d.ts" />
 ```
-
-
+## 内置对象
+ts中有好多已经内置的js对象。
 ```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
-```
+// js对象
+Boolean
+Error
+...
+// dom/bom
+Document
+HTMLElement
+Event
+NodeList
+// ts的核心库
+// 使用ts写node
+npm i @types/node -D
 ```
 
+## 函数
+```
+function sum(x, y) {
+    return x + y
+}
+function sum(x: number, y: number): number {
+    return x + y
+}
+let sum: (x: number, y: number) => number = function (x: number, y: number): number {
+    return x + y
+}
+interface Sf {
+    (a: string, b: string): boolean
+}
+let sf: Sf
+sf = function (x: string, y: string) {          // 使用接口定义函数
+    return x.search(b) !== -1
+}
+function sum(a: number, b: number, c?: number) {...}  // 可选参数必须在最后
+function sum(a: number = 0, b: number) {...}     // 参数的默认值
+function sum(a: number, ...items: any[]) {...}   // 剩余参数
+function sum(a: number): number
+function sum(a: string): string
+function sum(a: string | number): number | string {...} // 重载
+```
 
+## 别名
+```
+type newName = string;
+```
 
+## 类和接口
+```
+// 实现
+interface F {
+    alert(): void;
+}
+class A extends B implements F {
+    alert () {
+        console.log('alert')
+    }
+}
+interface E {...}
+interface G {...}
+class C implements F, E, G {
+    ...
+}
+// 接口继承接口
+interface A {...}
+interface B extends A {...}
+// 接口继承类
+// 在声明class P时，创建了P类，也创建了P类型的接口。
+class P {...}
+interface A extends P {...} // 实际上继承P类型的接口。
+```
 
+## 泛型
+泛型是类型的变量。即：用变量表示类型。
+```
+// demo 1
+function f<T>(l: number, v: T): Array<T> {
+    let result: T[] = Array.from({length: l}).map(item => item = v)
+    return results
+}
+// demo 2
+function f<U, T>(tuple: [U, T]): [T, U] {
+    return [tuple[1], tuple[0]]
+}
+// demo 3 泛型之间有结束
+function f<T extends U, U>(a: T, b: U): T {...}
+```
+方法名后面的`<T>` / `<U, T>`   表示该方法中会用到1个（或2个）泛型数据。在此声明后，才能在后面使用（参数中使用、返回值中使用）。
+参数中`v: T`                  表示该参数是`T`代表的类型。
+返回值中`Array<T>`            表示返回结果是`T`组成的数组。
+```
+// 在接口内的属性、方法中使用泛型。
+interface C {
+    <T>(l: number, v: T): Array<T>
+}
+let ca: C
+ca = function<T>(l: number, v: T): Array<T> {...}
+// 在接口名中使用泛型。则该接口中的属性、方法都可以使用该泛型。
+interface C<T> {
+    <l: number, v: T>: Array<T>
+}
+// 泛型类
+class A<T> {
+    name: T;
+    f: (x: T, y: T) => T
+}
+// 泛型的默认值
+function f<T = string>(l: number, v: T): Array<T> {...}
+```
 
+## 为什么使用ts
+- 代码检测，在编译时发现错误。
+  - 用于发现代码错误，统一代码风格。
+  - ts关注重点是检查类型，
+  - eslint是检查错误。统一风格。
+- 可配置编译选项。
 
 
