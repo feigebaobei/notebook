@@ -8,7 +8,7 @@
 
 ## parse vue.js
 `./packages/@vue/cli/bin/vue.js`是该包向外提供功能的文件
-使用`prorame`()
+使用`program()`
 `program`是`Commander`的实例。
 `.command()`       定义子命令。相对`package.json`中的`bin`字段定义的命令，`bin`字段定义的是主命令。`.command`定义的是子命令。
 `.description()`   当前（子）命令的说明。
@@ -26,7 +26,7 @@
 
 # 进步
 相较到2.x。3.x增加了扩展插件的功能。此功能由`Generator.js`负责。
-
+`Generator.js`的代码我还没看，猜测与`webpack`/`rollup`的原理差不多。都是创建一个提供若干钩子的核心部分。由此核心安装插件，插件再调用此核心的钩子方法，再安要求返回指定格式的结果。类化一列火车的车箱（类比插件）可以装任意东西，但车箱间（类比插件间）接口必须使用指定接口（钩子、数据结构）。
 
 # overview
 # overview
