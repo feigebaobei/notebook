@@ -169,7 +169,7 @@ npm cli工具会根据包名在缓存中使用本地缓存的包。
 在当前项目的所有已配置工作区的上下文中运行`npm init`。
 
 ## npm exec
-从本地、远程的npm包中执行命令
+在本地、远程的npm包中执行命令
 
 ### synopsis
 ```
@@ -193,6 +193,9 @@ common options:
 -c <cmd> --call=<cmd> (may not be mixed with positional arguments)
 ```
 ### description
+可在npm包中中执行二进制命令脚本的命令。
+
+
 ### npx vs npm exec
 ### exmaple
 ### workspace support
