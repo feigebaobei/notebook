@@ -91,7 +91,7 @@ options { file: 'main.js', minor: true }
 
 ## 写一个命令行需要什么
 1. 会用commander就行。主要是`program.command(..).option(..)`。这个太简单了。
-2. 有一定node.js的基础。这点需要一些知识储备。
+2. 有一定node.js的基础。这点需要一些知识储备。这个比较难。
 
 ## 恢复工作
 在`./projectCommand/packages/testCommand`下执行`npm unlink`

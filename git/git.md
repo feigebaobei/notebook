@@ -292,6 +292,22 @@ commit 必须写注释。
 有冲突必须解决 `git reset HEAD HEAD^`  
 merge前保证当前工作区干净  
 
+## merge规范
+|key|全称|description||
+|-|-|-|-|
+|feat|feature|新增功能||
+|to||正在修改bug||
+|fix||已经修改完成bug||
+|docs||仅仅修改了文档||
+|style||修改代码缩进等。不改变代码逻辑||
+|refactore||代码重构。||
+|perf|perform|优化||
+|test||测试用例||
+|chors||改变构建流程/增加依赖/工具||
+|revert||回滚||
+
+`<key>(scope): content`
+
 #《git版本控制管理》
 
 版本控制系统（vcs）

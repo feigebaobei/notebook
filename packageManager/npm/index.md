@@ -186,7 +186,7 @@ require方法不能把全局安装的文件引入。若使用`npm link packagena
 |cpu|指定cpu||||
 |private|若true，则不能`npm publish`||Boolean||
 |publishConfig|发布时的配置||||
-|workspaces|它描述了本地文件系统中的位置，安装时应该查找这些位置，以找到需要与顶级node_modules文件夹进行符号链接的每个工作区。就像工作区内有package.json一样。|||
+|workspaces|它描述了本地文件系统中的位置，安装时应该查找这些位置，以找到需要与顶级node_modules文件夹进行符号链接的每个工作区。就像工作区内有package.json一样。常用于一库多包。workspace中的每一项都是一个包，每个包都有一个package.json。|||
 |DEFAULT VALUES|不支持的value||||
 |unpkg|上所有的文件都开启 cdn 服务地址|||
 |engineStrict|不会||||
