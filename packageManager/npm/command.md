@@ -112,3 +112,91 @@ npm prefix -g
 ## npm bin
 ## npm diff
 ## npm test
+## npm init
+创建一个npm项目。包括`package.json`等。
+### synopsis
+```
+npm init [--force|-f|--yes|-y|--scope]
+npm init <@scope> (same as `npm exec <@scope>/create`)
+npm init [<@scope>/]<name> (same as `npm exec [<@scope>/]create-<name>`)
+npm init [-w <dir>] [args...]
+```
+### description
+`npm init <initializer>`可以用于初始化一个人新的或已经存在的npm包。
+当使用时`initializer`，其他完成的包名是`create-<initialzer>`。如：`npm init @vitejs/app`的完成的拼写是`npm init @vitejs/create-app`。
+该命令会执行`npm exec`，然后会使用主要的脚本创建或更新packag.json。再执行所有初始化相关的操作。
+初始化命令相当于`npm exec`的下列操作
+- `npm init foo` => `npm exec create-foo`
+- `npm init @usr/foo` => `npm exec @usr/create-foo`
+- `npm init @usr` => `npm exec @usr/create`
+
+**若要自己开发此功能，则需要开通付费功能。^…^**
+若使用`npm init`则会使用原始的初始化功能。它会询问你一起创建`package.json`需要的问题。若想使用默认选项，请使用`-y`/`--yes`。若使用`--scope`，则会创建一个作用域包。
+
+#### forwarding additional options
+若想在cli中使用附加字段，则用法如下 `npm init foo -- --hello`，相当于`npm exec -- create-foo --hello`
+
+### example
+略
+
+### workspace suport
+文档说可以支持工作空间，但是按文件操作走不通。
+
+### a note on caching
+npm cli工具会根据包名在缓存中使用本地缓存的包。
+
+#### prefer-online
+强制使用远程的包。
+
+#### prefer-offline
+不使用本地缓存的包，使用远程的包。
+#### offline
+强制使用本地缓存的包
+
+#### workspace
+- alias:   -w
+- type:    Array
+- default: []
+可以与`npm init`一起使用。用于指定工作空间。可以创建、更新任意不存在的目录。生成文件并添加、更新项目中根目录的`package.json`中的`workspaces`字段。
+- 工作空间的名字。
+- 指向工作空间的路径
+- 指向父工作空间的路径
+
+#### workspaces
+- alias:   -ws
+- type:    Boolean
+- default: false
+在当前项目的所有已配置工作区的上下文中运行`npm init`。
+
+## npm exec
+从本地、远程的npm包中执行命令
+
+### synopsis
+```
+npm exec -- <pkg>[@<version>] [args...]
+npm exec --package=<pkg>[@<version>] -- <cmd> [args...]
+npm exec -c '<cmd> [args...]'
+npm exec --package=foo -c '<cmd> [args...]'
+npm exec [--ws] [-w <workspace-name] [args...]
+
+npx <pkg>[@<specifier>] [args...]
+npx -p <pkg>[@<specifier>] <cmd> [args...]
+npx -c '<cmd> [args...]'
+npx -p <pkg>[@<specifier>] -c '<cmd> [args...]'
+Run without --call or positional args to open interactive subshell
+
+alias: npm x, npx
+
+common options:
+--package=<pkg> (may be specified multiple times)
+-p is a shorthand for --package only when using npx executable
+-c <cmd> --call=<cmd> (may not be mixed with positional arguments)
+```
+### description
+### npx vs npm exec
+### exmaple
+### workspace support
+### compatibility with older npx versions
+### a note on caching
+
+
