@@ -24,7 +24,37 @@ rollup main.js -o bundle.js -f cjs // 为了方便node使用。
 ```
 rollup main.js -o bundle.js -f umd --name "myBundle"
 ```
+## rollup的使用方式
+- cli
+- rollup.config.js
+- api
 
+### api
+```
+// rollup-build.js
+let rollup = require('rollup')
+let inportOption = require('path/to/input.js')
+let outputOpiton = require('path/to/output.js')
+let bundle = rollup.rollup(inportOption)         // 生成打包文件
+bundle.write(output)                             // 根据配置文件输出打包文件。
+```
+```
+// path/to/input.js
+module.exports = {
+    input: './src/main.js'
+}
+```
+```
+// path/to/output.js
+module.exports = {
+    file: './bundle.js',
+    format: 'cjs',
+}
+```
+```
+// 执行打包脚本
+node rollup-build.js
+```
 ## 为什么使用rollup
 在es6前。每段js代码都是独立的，无法与其它js代码联系起来。在es6之后，可以使用`import / export`输入/输出。可它仍有缺点：只能运行在现代浏览器中。rollup可以把小段代码打包成指定格式的大段代码。支持的格式：esm/commonjs/amd/umd/iife-style/system.
 
