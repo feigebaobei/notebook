@@ -1,6 +1,7 @@
 # serve
 
-可以提供静态站点（单页面应用或静态文件）服务。
+可以提供静态站点（单页面应用或静态文件）服务。它可以为目录里的内容提供一个灵巧的服务。
+在生产环境部署网站时，推荐使用[`vercel`](https://vercel.com)
 
 ## install
 
@@ -15,6 +16,8 @@ yarn add serve
 ## usage
 
 ```
+npx serve // 在当前目录启动服务
+// or
 serve // 在当前目录启动服务
 serve folder_name
 serve --help
@@ -22,6 +25,24 @@ serve --version
 serve [-l listen uri [-l ...]] [directory]
 ```
 默认把服务启动在0.0.0.0:5000。
+
+## configuration
+
+`serve`的配置文件是`serve.json`
+
+```
+public
+cleanUrls
+rewrites
+redirects
+headers
+directoryListing
+unlisted
+trailingSlash
+rederSingle
+symlinks
+etag
+```
 
 ## options
 
@@ -45,24 +66,6 @@ serve -l 1234
 serve -l tcp://hostname:1234
 serve -l unix:/path/to/socket.sock
 serve -l pipe:\\.\pipe\PipeName
-```
-
-## configuration
-
-创建serve.json自定义serve的行为。
-
-```
-public
-cleanUrls
-rewrites
-redirects
-headers
-directoryListing
-unlisted
-trailingSlash
-rederSingle
-symlinks
-etag
 ```
 
 ## api
