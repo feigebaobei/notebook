@@ -15,11 +15,12 @@ options
 ## api用法
 ```
 var mkdirp = require('mkdirp')
+mkdirp(dir, options) -> Promise<String|undefined>
 mkdirp(dir, options, cb)
 	创建目录`dir`。
 	需要指定八进制权限时请使用`options.mode`。若optiions不是对象，则要当做`options.mode`的值。默认值`0777 & (~process.umask())`
 	cb(error, made)
 
-mkdirp.sync(dir, options)
+mkdirp.sync(dir, options) -> String | null
 	同步创建目录
 ```
