@@ -79,18 +79,18 @@ bundle: {
     assetFileNames           自定义资源目录。
     banner                   生成文件的前缀
     chunkFileNames           自定义生成文件的名字。
-    compact
-    entryFileNames
-    extend
-    externalLiveBindings
+    compact                  生成的代码最小，不会修改程序员
+    entryFileNames           自定义入口文件的名字
+    extend                   在umd/iife格式时是否定义全局变量的名字。
+    externalLiveBindings     xxx不会
     footer                   生成文件的后缀
-    hoistTransitiveImports
-    inlineDynamicImports
-    interop
-    intro
-    manualChunks
+    hoistTransitiveImports   在入口文件中的import是否使用空块。（不理解）
+    inlineDynamicImports     是否使用行内动态引入。只在单入口时有用。它会影响执行顺序。
+    interop                  如何处理外部依赖
+    intro                    生成文件的前缀
+    manualChunks             
     minifyInternalExports
-    outro
+    outro                    生成文件的后缀
     paths
     preserveModules
     preserveModulesRoot
