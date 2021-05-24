@@ -88,25 +88,25 @@ bundle: {
     inlineDynamicImports     是否使用行内动态引入。只在单入口时有用。它会影响执行顺序。
     interop                  如何处理外部依赖
     intro                    生成文件的前缀
-    manualChunks             
-    minifyInternalExports
+    manualChunks             手动模块。用于指定共享模块。例：manualChunks:{lodash: "['lodash']}
+    minifyInternalExports    是否在es/system/output.compact:true时把要变量名压缩为一个字母。
     outro                    生成文件的后缀
-    paths
-    preserveModules
-    preserveModulesRoot
-    sourcemap
-    sourcemapExcludeSource
-    sourcemapFile
-    sourcempaPathTransform
-    validate
-    amd
-    esModule
-    exports
-    freeze
-    indent
-    namespaceToStringTag
-    noConflict
-    preferconst
+    paths                    设置外部模块的id对就的地址（url等）。生成的文件中会使用模块id代码模块的地址。
+    preserveModules          保护模块。为所有模块创建单独的模块。不是创建尽可能少的模块。以每个模块名作为文件名。必须与output.dir一起使用。
+    preserveModulesRoot      xx不会
+    sourcemap                如何对行代码地图
+    sourcemapExcludeSource   设置不使用代码地图的模块
+    sourcemapFile            代码地图的名字
+    sourcempaPathTransform   转换代码地图的名字
+    validate                 重解析每一个生成的模块，是否是合法的js文件。
+    amd                      只能用于单文件打包。不能与autoId/basePath一起使用。
+    esModule                 是否为非es格式添加__esModule:true属性。
+    exports                  设置生成文件的模式。默认auto，与输入文件的输出模式一样。
+    freeze                   是否对命名空间使用Ojbect.freeze()
+    indent                   是否缩进
+    namespaceToStringTag     设置.toString()方法
+    noConflict               xxx不会
+    preferconst              优先使用const相对于var
     strict
     systemNullSetters
 }
