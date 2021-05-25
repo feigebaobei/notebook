@@ -14,7 +14,7 @@ inputOption:
 |xxx|||||
 ```
 bundle.generate(outputOption)
-按outputOption输出打包内容。
+按outputOption输出打包内容。在内在中。
 可被执行多次。
 bundle.write()
 写入硬盘。
@@ -39,10 +39,19 @@ build()
 ### bundle对象
 ```
 bundle: {
-    xxx
-    xxx
-    xxx
-    xxx
+  cache: {
+    modules: [ [Object], [Object], [Object] ],
+    plugins: [Object: null prototype] {}
+  },
+  closed: false,
+  close: [AsyncFunction: close],
+  generate: [AsyncFunction: generate],
+  watchFiles: [
+    '/home/turbo/code/exercise/exRollup/src/main.js',
+    '/home/turbo/code/exercise/exRollup/package.json',
+    '/home/turbo/code/exercise/exRollup/src/foo.js'
+  ],
+  write: [AsyncFunction: write]
 }
 ```
 
@@ -134,12 +143,25 @@ watcher.close()
 ### event对象
 ```
 event: {
-    code
-    xxx
-    xxx
-    xxx
-    xxx
+  code: 'BUNDLE_END',
+  duration: 33,
+  input: './src/main.js',
+  output: [ '/home/turbo/code/exercise/exRollup/dist-multiple' ],
+  result: {
+    cache: { modules: [Array], plugins: [Object: null prototype] },
+    closed: false,
+    close: [AsyncFunction: close],
+    generate: [AsyncFunction: generate],
+    watchFiles: [
+      '/home/turbo/code/exercise/exRollup/src/main.js',
+      '/home/turbo/code/exercise/exRollup/package.json',
+      '/home/turbo/code/exercise/exRollup/src/foo.js'
+    ],
+    write: [AsyncFunction: write]
+  }
 }
+event: { code: 'END' }
+
 ```
 
 ### watchOptions
@@ -158,4 +180,75 @@ watchOptions: {
 }
 ```
 
-# demo
+# js-api demo（未完善）
+```
+let rollup = require('rollup')
+let json = require('rollup-plugin-json')
+let terser = require('rollup-plugin-terser')
+
+let inputOptions = {
+    input: './src/main.js', // 相对于执行命令行时的目录
+    external: ['lodash'],     // 不打包的模块id
+    plugins: [json()]
+}
+let outputOptionsList = [
+    {
+        dir: './dist-multiple',
+        format: 'cjs',
+        // globals: {}
+        // name: 
+        // plugins: [terser()]
+    },
+    {
+        file: './dist/bundle.es.js',
+        format: 'es'
+    },
+    {
+        file: './dist/bundle.iife.js',
+        format: 'iife',
+        globals: {
+            myBundle: '$b'
+        },
+        name: 'myBundle',
+        // plugins: [terser()]
+    },
+    {
+        file: './dist/bundle.amd.js',
+        format: 'amd'
+    },
+    {
+        file: './dist/bundle.umd.js',
+        format: 'umd',
+        globals: {                // 只作用于 umd/iife
+            myBundle: '$b' 
+        },
+        name: 'myBundle',         // 只作用于 umd/iife
+
+    },
+    {
+        file: './dist/bundle.system.js',
+        format: 'system'
+    }
+]
+
+async function build() {
+    let bundle = await rollup.rollup(inputOptions)
+    console.log(bundle)
+    // outputOptionsList.forEach((item) => {
+    //  // const {output} = await build.generate(item)
+    //  await bundle.write(item)
+    // })
+    // for (let i = 0; i < outputOptionsList.length; i++) {
+    //  await bundle.write(outputOptionsList[i])
+    // }
+        await bundle.write(outputOptionsList[0])
+}
+// build()
+function wfn() {
+    let watcher = rollup.watch(watchOptions)
+    watcher.on('event', event => {
+        console.log(event)
+    })
+}
+wfn()
+```
