@@ -36,7 +36,7 @@ async function build() {
 build()
 ```
 
-### bundle
+### bundle对象
 ```
 bundle: {
     xxx
@@ -107,13 +107,55 @@ bundle: {
     namespaceToStringTag     设置.toString()方法
     noConflict               xxx不会
     preferconst              优先使用const相对于var
-    strict
-    systemNullSetters
-}
+    strict                   是否使用严格模式，在非es时，
+    systemNullSetters        中systemjs 6.3.3+时，格式为system。则把setter方法设置为null
 ```
 ## rollup.watch
+使用`rollup.watch()`监视文档变化后重新打包。cli方式使用监视时请使用`--watch`。执行`event.result.close()`相当于触发`bundle_end`事件。会在`closeBundle`时清空缓存。
 
-# overview
-# overview
-# overview
-# overview
+### demo
+```
+const rullup = require('rollup')
+const watchOptions = {...}
+const watcher = rollup.watch(watchOptions)
+watcher.on('event', event => {
+    ...
+})
+// 确保在每个bundle在运行后关闭。
+watcher.on('event', ({result}) => {
+    if (result) {
+        result.close()
+    }
+})
+// stop watch
+watcher.close()
+```
+
+### event对象
+```
+event: {
+    code
+    xxx
+    xxx
+    xxx
+    xxx
+}
+```
+
+### watchOptions
+```
+watchOptions: {
+    ...inputOptions,
+    output: [outputOptions],
+    watch: {
+        buildDelay,    被监听的文件被修改后多久后重新打包。
+        chokidar,      xxx不会
+        clearScreen,   重新打包时是否清空屏幕
+        skipWrite,     重新打包后是否路过bundle.write()
+        exclude,       指定不监视的文件
+        include,       指定监视的文件
+    }
+}
+```
+
+# demo
