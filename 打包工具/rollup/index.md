@@ -33,10 +33,10 @@ rollup main.js -o bundle.js -f umd --name "myBundle"
 ```
 // rollup-build.js
 let rollup = require('rollup')
-let inportOption = require('path/to/input.js')
+let inputOption = require('path/to/input.js')
 let outputOpiton = require('path/to/output.js')
-let bundle = rollup.rollup(inportOption)         // 生成打包文件
-bundle.write(output)                             // 根据配置文件输出打包文件。
+let bundle = rollup.rollup(inputOption)         // 生成打包文件
+bundle.write(outputOpiton)                      // 根据配置文件输出打包文件。
 ```
 ```
 // path/to/input.js
