@@ -184,7 +184,7 @@ watchOptions: {
 ```
 let rollup = require('rollup')
 let json = require('rollup-plugin-json')
-let terser = require('rollup-plugin-terser')
+let {terser} = require('rollup-plugin-terser')
 
 let inputOptions = {
     input: './src/main.js', // 相对于执行命令行时的目录
@@ -197,7 +197,7 @@ let outputOptionsList = [
         format: 'cjs',
         // globals: {}
         // name: 
-        // plugins: [terser()]
+        plugins: [terser()]
     },
     {
         file: './dist/bundle.es.js',
@@ -230,25 +230,30 @@ let outputOptionsList = [
         format: 'system'
     }
 ]
+let watchOptions = {
+    ...inputOptions,
+    output: [outputOptionsList[0]],
+    watch: {
+        include: './src/main.js'
+    }
+}
 
 async function build() {
     let bundle = await rollup.rollup(inputOptions)
-    console.log(bundle)
-    // outputOptionsList.forEach((item) => {
-    //  // const {output} = await build.generate(item)
-    //  await bundle.write(item)
-    // })
-    // for (let i = 0; i < outputOptionsList.length; i++) {
-    //  await bundle.write(outputOptionsList[i])
-    // }
-        await bundle.write(outputOptionsList[0])
+    // console.log(bundle)
+    for (let i = 0; i < outputOptionsList.length; i++) {
+        await bundle.write(outputOptionsList[i])
+    }
+        // await bundle.write(outputOptionsList[0])
 }
-// build()
+
+build()
 function wfn() {
     let watcher = rollup.watch(watchOptions)
     watcher.on('event', event => {
         console.log(event)
     })
 }
-wfn()
+// wfn()
+
 ```
