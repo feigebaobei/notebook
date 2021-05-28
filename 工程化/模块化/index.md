@@ -25,3 +25,11 @@ CommonJs 是先加载模块，输出一个对象，输出后内部不会再变�
 - 变量/方法的作用域问题
 - 引入顺序的问题
 - 更加模块化组织代码。把相关代码放在一起。
+
+# 种类
+- script标签。
+- amd asynchronous module definition
+- cmd common module definition
+- umd universal module definition
+- esm ecmascript module
+- cjs commonjs
