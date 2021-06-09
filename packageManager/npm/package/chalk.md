@@ -96,5 +96,5 @@ defineProperty
 ansi-styles
 supports-color
 
-有在终端中设置文本颜色的方法。（我不知道是什么方法）。`ansi-styles`使用该方法在终端中输出文本。
-`chalk`是基于`ansi-styles`开发的。
+有在终端中设置文本颜色的方法。（我不知道是什么方法）。`chalk`是基于`ansi-styles`开发的。
+`ansi-styles`使用该方法在终端中输出文本。

@@ -32,9 +32,23 @@ npm set-script prepare "husky install"
   }
 }
 ```
-npx husky add .husky/pre-commit "npm run test" // 为指定的git hook创建/添加一命令
+npx husky add .husky/pre-commit "npm run test" // 为指定的git hook创建/添加一命令。会创建.husky/pre-commit文件。
 git add .
 git commit -m 'str' // 测试pre-commit绑定的脚本。
+### 在package.json中设置husky
+```
+{
+    "husky": {
+        "hooks": {
+            "pre-commit": "echo string",
+            "commit-msg": "commitlint -E $HUSKY_GIT_PARAMS",
+            "pre-push": "echo push string"
+        }
+    },
+    ...
+}
+```
+通过HUSKY_GIT_PARAMS传递参数，-E|--env用于指向相关的编辑文件。
 
 ## yarn 2
 ...
@@ -67,7 +81,7 @@ install(dir = '.husky')
     要求已经使用git且。
     创建使用husky的环境：生成`.husky`。
 
-set(file, cmd)      
+set(file, cmd) 
     file: 与git hook同名。
     cmd:  npm的脚本。
     当执行git hook时执行对应的脚本。
