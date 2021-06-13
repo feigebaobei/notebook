@@ -16,5 +16,5 @@ vue3.0使用rollup打包。打包配置在`<root>/rollup.config.js`。
 里面定义了好多变量。在其他子包中被使用。如：
 __DEV__
 __BROWSER__
-__ESM_BUNDLER_
+__ESM_BUNDLER__
 __GLOBAL__
