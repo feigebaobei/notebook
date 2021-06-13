@@ -1,4 +1,5 @@
 # packages/runtime-dom
+如何渲染为dom的。
 同分析packages/vue的逻辑。得知：
 - 入口文件是src/index.ts
 - dependencies

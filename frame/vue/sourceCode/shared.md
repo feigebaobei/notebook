@@ -56,10 +56,3 @@ looseCompareArrays
 
 ## shared/src/toDisplayString.ts
 处理为string
-
-## shared/src/makeMap.ts
-## shared/src/makeMap.ts
-## shared/src/makeMap.ts
-## shared/src/makeMap.ts
-## shared/src/makeMap.ts
-## shared/src/makeMap.ts
