@@ -81,116 +81,17 @@ pnpm run lint --filter ./packages/<name>
 # adding plugins
 若想添加、讨论插件，请在twitter上联系@RollupJS。
 
-# @rollup/plugin-alias
-为打包时定义别名
+# lifeCircle
+# hooks
+## load
+加载器。
+自定义加载器，由其他loader决定是否返回null.(最后的行为是从文件系统中加载文件。)此时不能使用parser.
+此文方法已经使用`this.parse()`去解析了。该解析器会生成一个对象：
+`{code, ast, map}`
 
-## alias 101
-假设在文件是这样写的
-`import batman from '../../batman'`
-这样写虽然不是太差，但是为了更好的可读、可维护。可以这样写
-```
-import batman from 'batman'
-```
-就像webpack里的`resovle.extensions`/`resolve.alias`
-## requirements
-node   >= 8.0.0
-rollup >= 1.20.0
-
-## install
-```
-npm install @rollup/plugin-alias --save-dev
-// or
-yarn add -D @rollup/plugin-alias
-```
-
-## usage
-```
-// rollup.config.js
-import alias from '@rollup/plugin-alias'
-module.exports = {
-    input: 'src/input.js',
-    output: {
-        dir: 'output',
-        format: 'cjs'
-    },
-    plugins: [
-        alias({
-            entries: [
-                {find: 'utils', replacement: '../../utils'},
-                {find: 'batman-1.0.0', replacement: './joker-1.5.0'},
-            ]
-        })
-    ]
-}
-```
-使用api/cli执行rollup。若出现错误，则使用`alias`为标记输出标准错误(stderr)。
-
-## options
-### customResolver
-type     function | object
-defualt  null
-指导插件去使用另一种解析算法，而不使用rollup的解析算法。
-
-### entries
-type     object | array[...object]
-default  null
-定义一个代替`import`/`require`的声明。
-注意定义的顺序很重要。先定义的被先使用。
-
-#### object
-以别名为key，以相当的值为value。
-```
-entries: {
-    utils: '../../utils',
-    'batman-1.0.-': './joker-1.5.0'
-}
-```
-
-#### array[...object]
-指定别名为一个对象。成为一个复合的k/v对象。
-```
-entries: [
-    {find: 'utils', replacement: '../../utils'},
-    {find: 'batman-1.0.0', replacement: './joker-1.5.0'},
-]
-```
-
-## regular expression alias
-原理同上，demo如下：
-```
-{find: /^i18n\!(.*)/, replacement: '$1.js'}
-{find: /^(.*)\.js/, replacement: '$1.alias'}
-```
-## resolving algorithm
-不会
-
-## custom resolvers
-为单个的别名指定特定的模块解析。
-```
-// rollup.config.js
-import alias from '@rollup/plugin-alias';
-import resolve from '@rollup/plugin-node-resolve';
-
-const customResolver = resolve({
-  extensions: ['.mjs', '.js', '.jsx', '.json', '.sass', '.scss']
-});
-const projectRootDir = path.resolve(__dirname);
-
-export default {
-  // ...
-  plugins: [
-    alias({
-      entries: [
-        {
-          find: 'src',
-          replacement: path.resolve(projectRootDir, 'src')
-          // OR place `customResolver` here. See explanation below.
-        }
-      ],
-      customResolver
-    }),
-    resolve()
-  ]
-};
-```
-此例是关于处理别名`src`的。使用`node-resolve`算法作用于`src`，引入`customResolver`选项。`resolve()`插件会作用于非别名的文件。`customResolver`会作用于每个别名控制的文件。
+## hookfn
+## hookfn
+## hookfn
+## hookfn
+## hookfn
+## hookfn
