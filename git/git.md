@@ -295,19 +295,38 @@ merge前保证当前工作区干净
 ## merge规范
 |key|全称|description||
 |-|-|-|-|
-|feat|feature|新增功能||
+|feat|-|新增功能||
 |to||正在修改bug||
 |fix||已经修改完成bug||
 |docs||仅仅修改了文档||
 |style||修改代码缩进等。不改变代码逻辑||
 |refactore||代码重构。||
-|perf|perform|优化||
+|perf|-|优化||
 |test||测试用例||
-|chors||改变构建流程/增加依赖/工具||
+|chore||改变构建流程/增加依赖/工具||
 |revert||回滚||
 
 `<key>(scope): content`
 
+## git hook
+执行git init时会生成`.git`目录。其下的`hooks`目录是git的所有钩子。
+所有钩子可分为4类：
+- 提交工作流钩子
+    + pre-commit    // 提交前执行。使用git commit --no-verify可路过此钩子。
+    + prepare-commit-msg
+    + commit-msg
+    + post-commit
+- 电子邮件钩子
+    + post-applypatch
+- 其他客户端钩子
+    + pre-rebase
+    + post-rewrite
+    + pre-push
+- 服务端钩子
+    + pre-receive
+    + update
+    + post-receive
+ 
 #《git版本控制管理》
 
 版本控制系统（vcs）

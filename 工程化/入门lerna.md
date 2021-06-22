@@ -11,6 +11,9 @@ lerna是一个“一库多包”的管理工具。
 ```
 mkdir lerna-demo1
 cd lerna-demo1
+lerna init // 需要已经全局安装lerna
+// or
+// npm init -y && npm i lerna && npx lerna init
 ```
 
 ## create

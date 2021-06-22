@@ -109,3 +109,4 @@ var map = bundle.generateMap({
 # principle
 
 只定义了三个类（Bundle/SourceMap/MagicString）。再输出这三个类。
+感觉它就是把代码当做字符串操作。
