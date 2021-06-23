@@ -68,7 +68,6 @@ JASMINE_CONFIG_APTH  指定配置文件。相对/绝对。
 --seed               xxxx
 --reporter           xxxx
 
-
 ## api
 
 jasmine.fn(param, first: string, second: boolean = true) => void
