@@ -203,3 +203,32 @@ common options:
 ### a note on caching
 
 
+## set-script
+### synopsis
+在package.json中的script部分添加脚本命令的命令。
+在npm v7+时支持。
+
+#### example
+```
+npm set-script [<script>] [<command>]
+```
+运行结果
+```
+{
+    "script": {
+        "start": "http-server ."
+    }
+}
+```
+
+### configuration
+#### workspace
+设置工作空间。默认是当前工作空间。也可设置：
+- workspace name
+- path to workspace directory
+- path to parent workspace directory(基于运行结果是选中所有嵌套的工作空间)
+执行`npm init`时，不存在workspace。
+在子线程中不支持。
+
+#### workspaces
+是否包括所有工作空间。
