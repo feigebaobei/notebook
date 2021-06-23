@@ -94,6 +94,8 @@ jasmine.cloc().uninstall
 `done.fail`在测试细则失败时执行。
 
 ## 使用promise
+`beforeAll/afterAll/beforeEach/afterEach/it`可以返回promise。当resolve时测试细则完成。当reject时测试细则失败，触发fail。
 
 ## 使用async/await
 
+`beforeAll/afterAll/beforeEach/afterEach/it`可以被声明为`async`。使用`jasmine.DEFAULT_TIMEOUT_INTERVAL`设置默认的timeout。
