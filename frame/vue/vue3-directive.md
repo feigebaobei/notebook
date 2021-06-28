@@ -10,7 +10,6 @@
 
 mounted(el, binding, vnode) {
   let vm = binding.instance
-
 }
 app.directive('dire-name', {
   // 各钩子方法。
@@ -57,6 +56,9 @@ v-dire:[arg]="value"
 export function withDirectives<T extends VNode>
 在vnode上增加directive的功能。
   为什么默认挂载在mounted/updated上。
+invokeDirectiveHook
+调用directive的方法。
+
 
 `<root>/packages/runtime-core/src/compat/reanderFn.ts`
 convertLegacyDirectives
@@ -66,6 +68,20 @@ convertLegacyDirectives
 `<root>/packages/vue/src/index.ts`
 export * from '@vue/runtime-dom'
 
+`<root>/packages/runtime-core/src/component.ts`
+createComponentInstance
+返回一个被初始化后的实例对象。其中有`directives`属性。
+
+`<root>/packages/runtime-core/src/renderer.ts`
+setupRenderEffect
+触发各个钩子方法。
+
+`<root>/packages/runtime-core/src/vnode.ts`
+VNode.dirs就是用于放置directive的。
+
 
 // demo: 内置指令
 `<root>/packages/runtime-dom/src/directives/vShow.ts`
+
+
+`app.directive('d-n', {...})`
