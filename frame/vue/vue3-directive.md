@@ -1,0 +1,71 @@
+
+{
+  beforeMount
+  mounted
+  beforeUpdate
+  updated
+  beforeUnmounted
+  unmounted
+}
+
+mounted(el, binding, vnode) {
+  let vm = binding.instance
+
+}
+app.directive('dire-name', {
+  // 各钩子方法。
+})
+
+参数说明：
+el:      指令所在的dom
+binding: {
+  instance // 组件的实例
+  value    // 传入指令的值 v-dire="1 + 1"中的2。只有一个。
+  oldvalue // 只在beforeUpdate / updated中有效。
+  arg      // 传入指令的参数。只有一个。
+  modifiers // 指令的修饰符 v-dire.foo.bar中的修饰对象是{foo: true, bar: true}
+  dir       // 注册指令时的对象
+}
+vnode:      el对应的真实dom
+prevNode:   上一个虚拟节点。在beforeUpdata/updated时有效。
+
+// defined
+app.directive('focus', {
+  mounted(el) {
+    el.focus()
+  }
+})
+directives: {
+  focus: {
+    mounted(el) {
+      el.focus()
+    }
+  }
+}
+directives: {
+  focus: (el, binding, vnode, prevNode) => {} //
+}
+// usage
+`<input v-focus>`
+v-focus:for="value"
+v-dire:[arg]="value"
+// 原理
+`<root>/packages/runtime-core/src/directives.ts`
+/**
+ * Adds directives to a VNode.
+ */
+export function withDirectives<T extends VNode>
+在vnode上增加directive的功能。
+  为什么默认挂载在mounted/updated上。
+
+`<root>/packages/runtime-core/src/compat/reanderFn.ts`
+convertLegacyDirectives
+给vnode添加指令。部分挂载。
+此方法在compatH中使用。
+
+`<root>/packages/vue/src/index.ts`
+export * from '@vue/runtime-dom'
+
+
+// demo: 内置指令
+`<root>/packages/runtime-dom/src/directives/vShow.ts`

@@ -76,7 +76,6 @@ JASMINE_CONFIG_APTH  指定配置文件。相对/绝对。
 --seed               xxxx
 --reporter           xxxx
 
-
 ## api
 
 `afterAll([fn: function[, timeout: number = jasmine.DEFAULT_TIMOUT_INTERVAL]])`
