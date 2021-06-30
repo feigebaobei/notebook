@@ -1,6 +1,7 @@
 # overview
 本示例展示了：
-- 在项目中如何使用`chai`
+- 在项目中如何使用`mocha`
+- 与断言库（本示例使用`chai`）一起使用
 
 # init project
 ```
@@ -14,12 +15,21 @@ module.exports = {
     add: (a, b) => (a + b)
 }
 ```
-创建`<root>/test/index.js`。这是测试文件。
+创建`<root>/test/first.js`。这是测试文件。
 ```
 let {add} = require('../index.js')
 let {assert} = require('chai')
-assert.equal(add(1, 2), 3)
-assert.equal(add(1, 2), 4)
+describe('Array', () => {
+    it('string', () => {
+        assert.equal(add(1, 2), 3)
+    })
+    it('string', () => {
+        assert.equal(add(1, 2), 4)
+    })
+    it('string', () => {
+        assert.equal([1, 2, 3].indexOf(4), -1)
+    })
+})
 ```
 
 ## dir construct
@@ -27,13 +37,13 @@ assert.equal(add(1, 2), 4)
 <root>
 |-- index.js     // 被测试的文件
 |-- test
-    |-- index.js // 测试文件
+    |-- first.js // 测试文件
 |-- packag.json
 |-- xxxx
 ```
 
 # 执行测试
 ```
-node test/index.js
+npx mocha
 ```
 当有断言失败时报错。
