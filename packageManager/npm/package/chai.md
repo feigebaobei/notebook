@@ -1,0 +1,1 @@
+关于插件的文档在`notebooks/engineered/test/chai/index.md`里。

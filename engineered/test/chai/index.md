@@ -10,7 +10,7 @@
 
 ## install
 ```
-npm i chai
+npm i chai -D
 // or
 <script src="chai.js" type="text/javascript"></script>
 ```
