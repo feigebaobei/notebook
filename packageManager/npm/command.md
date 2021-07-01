@@ -122,7 +122,7 @@ npm init [<@scope>/]<name> (same as `npm exec [<@scope>/]create-<name>`)
 npm init [-w <dir>] [args...]
 ```
 ### description
-`npm init <initializer>`可以用于初始化一个人新的或已经存在的npm包。
+`npm init <initializer>`可以用于初始化一个新的或已经存在的npm包。
 当使用时`initializer`，其他完成的包名是`create-<initialzer>`。如：`npm init @vitejs/app`的完成的拼写是`npm init @vitejs/create-app`。
 该命令会执行`npm exec`，然后会使用主要的脚本创建或更新packag.json。再执行所有初始化相关的操作。
 初始化命令相当于`npm exec`的下列操作

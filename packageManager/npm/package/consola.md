@@ -68,8 +68,10 @@ reporters
 ## principle
 `consola.js`中定义了一个`consola`类。此类在初始化时设置`reporter`。在调用`_log`时，使用`reporter`输出日志。
 所有的内置`reporter`都在`reporter/index.js`统一输出。每个`reporter`都在`reporter/`目录下。每个reporter都有自己输出日志的方式。
+reporter负责对输出日志做格式化，是一个模板。
 作者说“优雅”什么的。我在代码中也没看多少优雅的代码。在终端中看日志也没发现多好看。只是比log多了一个小icon。比较好的地方是设置配置项的时候比较好。
 该包依赖`chalk`。直接使用chalk也挺好的。
+感觉使用chalk更灵活。
 
 ## todo
 > 未来迭代计划。
