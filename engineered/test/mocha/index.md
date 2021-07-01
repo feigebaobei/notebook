@@ -100,6 +100,80 @@ setTimeout(function () {
 ```
 
 ### pending tests
+`it()`中没有回调方法时会被pending.
+
+### exclusive tests
+若设置了`only()`，则只执行设置了only的测试用例。
+
+### inclusive tests
+若设置了`skip()`，则只执行设置了skip的测试用例。
+
+### entry tests
+设置重试的次数。
+```
+describe('retries', function() {
+  // Retry all tests in this suite up to 4 times
+  this.retries(4);
+  beforeEach(function() {
+    browser.get('http://www.yahoo.com');
+  });
+  it('should succeed on the 3rd try', function() {
+    // Specify this test to only retry up to 2 times
+    this.retries(2);
+    expect($('.foo').isDisplayed()).to.eventually.be.true;
+  });
+});
+```
+
+### dynamically generating tests
+用js代码生成`descipbe`/`it`。
+
+### test duration
+使用`slow(number)`设置slow阈值。
+- fast    < (slow / 2)
+- normal  < slow
+- slow    > slow
+
+### timeout
+使用`this.timeout`设置describe/it超时时间。
+
+#### suite-level
+describe级别的超时时间作用于该descirbe.
+
+#### test-level
+与suite-level同理。作用于该it.
+
+### diffs
+mocha可以支持显示期望值与实际值的不同。
+也可以被设置为`--inline-diffs`。
+
+### command-line usage
+基本上看看help就明白。
+
+### parallel tests
+并行运行测试文件。
+#### reporter limitations
+不能在并行运行测试中工作
+- markdown
+- progress
+- json-stream
+
+#### exclusive tests are disallowed
+不能使用`it.only / discribe.only / this.only`
+
+#### file order is non-deterministic
+因parallel mode不能保证运行顺序。所以不能运行以下方法：
+- --file
+- --sort
+- --delay
+
+#### test duration variability
+#### "bail" is "best effort"
+#### root hooks are not global
+#### no browser support
+#### limit reporter api for third-party reporters
+#### troubleshooting parallel mode
+#### caveats about testing in parallel
 
 ### root hook plugins
 支持所有测试文件被运行前的hook。
@@ -179,6 +253,168 @@ describe('my test suite', function() {
 #### global teardown fixture
 #### when to use global fixture
 #### when not to use global fixture
+
+### test fixture decision-tree wizard thing
+```
+            my tests need setup
+                    |
+                    |
+                    V
+                setup must run
+                once add only once
+                    |
+                yes |-----------------| no
+                    V                 V
+            sutup must share        should setup affect
+            state with test         test across all files?
+            |                               |
+        yes |--------------|            yes |----------------|
+            V              |                V                |
+    use root hooks and     |           Use root hooks        |
+    avoid parallel mode    | no                              | no
+                           |                                 |
+                           V                                 V
+                    use global fixture              use plain hooks
+```
+### interfaces
+bdd / tdd / exports / qunit / require
+
+#### bdd
+#### tdd
+#### exports
+#### qunit
+#### require
+
+### reporters
+默认值为spec
+
+#### spec
+#### dot matrix
+#### nyan
+#### tap
+#### loading strip
+#### list
+#### progress
+#### json
+#### json stream
+#### min
+#### doc
+#### markdown
+#### xunit
+#### third-pardy reporters
+#### html reporter
+### node.js native esm support
+支持esm，不支持cjs.
+
+### running mocha in the browser
+需要引入`./mocha.js`/`./mocha.css`
+1. 指定接口`mocha.setup('bdd')`
+2. 加载测试文件。
+3. 运行`mocha.run()`
+
+#### grep
+可以处理qs
+
+#### browser configuration
+```
+mocha.setup('tdd') // 设置接口
+// or
+mocha.setup({
+    ui: 'tdd'
+})
+// or
+mocha.setup({
+  allowUncaught: true,
+  asyncOnly: true,
+  bail: true,
+  checkLeaks: true,
+  dryRun: true,
+  forbidOnly: true,
+  forbidPending: true,
+  global: ['MyLib'],
+  retries: 3,
+  slow: '100',
+  timeout: '2000',
+  ui: 'bdd'
+});
+```
+
+#### browser-specific option(s)
+把cli中的`-`改为驼峰命名。
+
+#### reporting
+mochawesome可生成在html reporter
+
+### desktop notification support
+
+#### node-based notifications
+`mocha --growl`
+
+#### browser-based notifications
+```
+mocha.setup('bdd')
+mocha.growl()
+```
+```
+mocha.run()
+```
+
+#### configuration mocha (node.js)
+mocha的配置文件。支持以下格式：
+- js            .mocharc.js / .mocharc.cjs
+- yaml          .mocharc.yaml / .mocharc.yml
+- json          .mocharc.json / .mocharc.jsonc
+- package.json  设置mocha属性
+  
+#### custom locations
+`--config <path>`
+
+#### ignoring config files
+`--no-config`    不使用配置文件
+`--no-package`   不使用package.json中的mocha属性。
+
+#### priorities
+1. .mocharc.js
+2. .mocharc.yaml
+3. .mocharc.yml
+4. .mocharc.jsonc
+5. .mocharc.json
+
+#### merging
+优先级依次递减：
+1. cli
+2. 配置文件
+3. package.json里的mocha
+
+#### extending configuration
+#### configuration format
+
+### the `test/` directory
+默认： `./test/*.{js,cjs,mjs}`
+```
+mocha --recursive "./spec/*.js"
+// or
+mocha "./spec/**/*.js"
+```
+
+### error codes
+|Code	                            |Description|
+|-	                                |-|
+|ERR_MOCHA_INVALID_ARG_TYPE	        |wrong type was passed for a given argument|
+|ERR_MOCHA_INVALID_ARG_VALUE	    |invalid or unsupported value was passed for a given argument|
+|ERR_MOCHA_INVALID_EXCEPTION	    |a falsy or otherwise underspecified exception was thrown|
+|ERR_MOCHA_INVALID_INTERFACE	    |interface specified in options not found|
+|ERR_MOCHA_INVALID_REPORTER	        |reporter specified in options not found|
+|ERR_MOCHA_NO_FILES_MATCH_PATTERN	|test file(s) could not be found|
+|ERR_MOCHA_UNSUPPORTED	            |requested behavior, option, or parameter is unsupported|
+
+### editor plugins
+
+#### textmate
+#### jetbrains
+#### wallaby.js
+#### emacs
+#### mocha siderbar (vs code)
 
 ## configuration
 默认配置文件：`path/to/file.json`。
