@@ -363,9 +363,14 @@ describe('my test suite', function() {
 ```
 ### interfaces
 bdd / tdd / exports / qunit / require
+都是一种dsl.每个接口都有特有的方法
 
 #### bdd
+describe(), context(), it(), specify(), before(), after(), beforeEach(), afterEach().
+
 #### tdd
+suite(), test(), suiteSetup(), suiteTeardown(), setup(), and teardown():
+
 #### exports
 #### qunit
 #### require
@@ -395,7 +400,7 @@ bdd / tdd / exports / qunit / require
 需要引入`./mocha.js`/`./mocha.css`
 1. 指定接口`mocha.setup('bdd')`
 2. 加载测试文件。
-3. 运行`mocha.run()`
+3. 运行`mocha.run()` // 此方法用于指定使用哪种接口。
 
 #### grep
 可以处理qs

@@ -1,36 +1,29 @@
 # overview
-概览
 本示例展示了：
-- xxxx
-- xxxx
+- 如何使用karma-coverage实现测试覆盖率
 
 # init project
+同`demo0.md`
 ```
-mkdir projDir
-cd projDir
-// other command
+npm i -D karma-coverage
 ```
-
-## dir construct
+修改`<root>/karma.conf.js`
 ```
-<root>
-|-- xxxx // 说明主要文件/目录的功能
-|-- xxxx
-|-- xxxx
-|-- xxxx
+module.exports = function(config) {
+    config.set({
+        ...
+        // 这里配置哪些文件需要统计测试覆盖率，例如，如果你的所有代码文件都在 test文件夹中，你就需要如下配置。
+        prepreocessors: {'test/*.js': 'coverage'}, // key应该从file字段里取。
+        // 覆盖率报告者的配置。使用html格式，输出到coverage/。
+        coverageReporter: {
+            type: 'html',
+            dir: 'coverage/'
+        },
+        reporters: ['progress', 'coverage'],
+        ...
+    })
+}
 ```
-
-# defined
-需要定义什么。
-
-
+覆盖率 = 测试文件 / 被测试文件
 # usage
-如何使用的。
-
-# priciple
-原理
-
-# 后记
-本示例中需要注意的地方。
-为什么这么做示例。
-如何恢复本示例的运行结果。
+同`demo0.md`

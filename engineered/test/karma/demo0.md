@@ -7,7 +7,8 @@
 mkdir projDir
 cd projDir
 npm init -y
-npm i karma
+npm i karma -D
+npm i -D karma-jasmine karma-chrome-launcher jasmine-core
 ```
 
 # generate config
@@ -50,10 +51,5 @@ npx karma start
 // 在浏览器中打开`localhost:9876`
 // or
 // 在另一个终端窗口中运行 `npx karma run`
+// npx karma run  -- --grep <describe string> // 运行指定的测试集合、测试项。
 ```
-
-
-# 后记
-本示例中需要注意的地方。
-为什么这么做示例。
-如何恢复本示例的运行结果。

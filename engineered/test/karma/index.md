@@ -34,11 +34,13 @@ npm i -D karma-jasmine karma-chrome-launcher jasmine-core
 ## usage
 
 ```
+npx karma init               // 生成配置文件
+// 然后全选默认值
 ./node_modules/karma/bin/karma start
 // or
-// npx karma start // 启动一个服务
+// npx karma start           // 启动一个服务
 // 若要使用cli，则需要安装karma-cli
-// npm i -g karma-cli // 全局安装该包后，就用再使用npx了。
+// npm i -g karma-cli        // 全局安装该包后，就不用再使用npx了。
 ```
 
 ## configuration
