@@ -12,10 +12,7 @@
 - 在开发时测试本地代码。
 - 在连续集成服务上测试。
 - 在每次保存时测试。
-- 你喜欢你的终端（我不知道作者什么意思）
-- xxx
-- xxx
-- xxx
+- 喜欢用终端执行测试
 
 ### 推荐测试框架
 - jasmine    bdd 提供基于网页的输出结果
@@ -49,12 +46,15 @@ npx karma init               // 生成配置文件
 
 ### 快速生成配置文件
 ```
-karma init // 生成默认的配置文件
+karma init            // 生成默认的配置文件
 karma init my.conf.js // 生成指定的配置文件
 ```
 
 ### 开始运行karma
-`karma start my.conf.js`// 使用指定的配置文件。
+```
+karma start            // 使用默认的配置文件启动服务。
+karma start my.conf.js // 使用指定的配置文件启动服务。
+```
 运行Karma时配置文件可以作为第一个参数传入。
 默认情况下karma会在当前目录下寻找：
 ./karma.conf.js

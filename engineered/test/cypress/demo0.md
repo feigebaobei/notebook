@@ -47,8 +47,8 @@ describe('My First Test', () => {
 ```
 <root>
 |-- xxxx // 说明主要文件/目录的功能
-|-- cypress        // 需要cypress运行的测试文件
-    |-- integration
+|-- cypress
+    |-- integration        // 需要cypress运行的测试文件
       |-- sample_spec.js
     |-- xxxx
 |-- xxxx

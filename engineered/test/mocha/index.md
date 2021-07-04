@@ -70,7 +70,7 @@ done是回调方法，只会被执行一次。若执行多次会报错。
 - unexpected      extensible bdd
 
 ### asynchronous code
-为`it(str, fn)`的第二个参数设置参数。一般使用`down`。当此方法执行完时执行`down`.
+为`it(str, fn)`的第二个参数设置参数。一般使用`down`。当此方法执行完it时执行`down`.
 
 #### working with promises
 #### using async/await
@@ -363,13 +363,14 @@ describe('my test suite', function() {
 ```
 ### interfaces
 bdd / tdd / exports / qunit / require
-都是一种dsl.每个接口都有特有的方法
+默认是bdd
+都是一种dsl.每个接口都有特有的方法。
 
 #### bdd
 describe(), context(), it(), specify(), before(), after(), beforeEach(), afterEach().
 
 #### tdd
-suite(), test(), suiteSetup(), suiteTeardown(), setup(), and teardown():
+suite(), test(), suiteSetup(), suiteTeardown(), setup(), teardown():
 
 #### exports
 #### qunit
@@ -403,7 +404,7 @@ suite(), test(), suiteSetup(), suiteTeardown(), setup(), and teardown():
 3. 运行`mocha.run()` // 此方法用于指定使用哪种接口。
 
 #### grep
-可以处理qs
+可以处理queryString
 
 #### browser configuration
 ```

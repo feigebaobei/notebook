@@ -1,6 +1,7 @@
 # overview
 本文是根据[官网的教程](https://jasmine.github.io/tutorials/your_first_suite)翻译的。
 官网中代码与对应的说明更好。本文只对官网的文本记录了自己理解。
+支持自定义方法。
 
 # 一个测试集合
 测试集合：描述你的测试。
@@ -89,6 +90,7 @@ jasmine.cloc().uninstall
 - 设置一个回调方法。
 - 返回一个promise
 - 使用async
+用法与`mocha`相同。
 
 ## 使用回调
 `done.fail`在测试细则失败时执行。

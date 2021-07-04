@@ -131,13 +131,8 @@ Test and object for expression.
 定义assert的api.
 
 `<root>/chai/config.js`
-配置荐的集合。
+配置的集合。
 
 ## 后记
 多分出几文件可解决循环引用的问题。
 提出一个核心文件。然后多次使用。此包的核心文件是`<root>/chai/assertion.js`。vue的核心文件是`runtime-core`。也可以提出一个核心方法。再多次修改、使用。
-
-## todo
-> 未来迭代计划。
-> 未来迭代计划。
-> 未来迭代计划。
