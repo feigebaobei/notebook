@@ -117,6 +117,11 @@ s stop
 r restart
 f view all tests
 
+### component testing
+组件测试还在开发阶段，api可能还变动。
+前期准备
+- 项目中的`package.json`使用webpack 4 / 5.
+- 
 
 
 
@@ -201,6 +206,8 @@ folders
 
 ## api
 ### events
+
+
 ### assertions
 ### command
 cypress把每个方法称为命令。下面是各命令的说明：
