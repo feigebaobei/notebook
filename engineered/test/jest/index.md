@@ -4,7 +4,7 @@
 js测试框架
 
 ### feature
-- 无需配置
+- 可以不配置
 - 支持快照
 - 隔离的
 - 支持代码覆盖
@@ -148,6 +148,25 @@ pretty-format
 
 ## configuration
 默认配置文件：`path/to/file.json`。
+
+### 项目项
+|key|describe|type|default||
+|-|-|-|-|-|
+|testMatch|匹配测试文件的（正则）表态式|string[]|`[ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ]`||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
+|key|describe||||
 
 ## cli
 ```

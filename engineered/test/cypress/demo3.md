@@ -40,7 +40,7 @@ export default defineComponent({
 </style>
 ```
 
-修改`<root>/src/App.vue`
+编辑`<root>/src/App.vue`
 ```
 <template>
     // ... other code
@@ -65,7 +65,7 @@ export default defineComponent({
 </script>
 ```
 
-创建`<root>/cypress.json`
+编辑`<root>/cypress.json`
 ```
 {
     "baseUrl": "<此项目的本地服务地址>"
