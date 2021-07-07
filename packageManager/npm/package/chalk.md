@@ -1,6 +1,5 @@
 # overview
-在终端中高亮显示文本。
->>>>>>> 24b41625f91ace69117ef9a1934f713c641d5cd4
+> 在终端中高亮显示文本。
 
 # install
 `npm i chalk`
