@@ -12,8 +12,9 @@ js测试框架
 - 支持错误溯源
 - 支持测试异步代码
 - 支持only
-
-> TODO: description
+- 自带断言
+- 自带测试覆盖率工具
+- ……
 
 ## install
 `npm i jest -D`

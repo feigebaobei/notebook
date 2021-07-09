@@ -51,6 +51,10 @@ beverages.should.have.property('tea').with.lengthOf(3);
 
 ### difference
 `expect`用于测试期望值，其他的都使用`should`
+||引入|使用|
+|-|-|-|
+|expect|引入expect对象|以期望值为参数|
+|should|引入should方法的实例|链式调用|
 
 ### es6的使用方式
 ```
