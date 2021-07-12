@@ -7,7 +7,7 @@
 ```
 mkdir projDir
 cd projDir
-npm i chai -D
+npm i mocha chai -D
 ```
 创建`<root>/index.js`。这是项目的文件。用于被测试。
 ```

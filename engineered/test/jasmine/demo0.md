@@ -12,20 +12,38 @@ npm set-script test jasmine
 npm run test
 ```
 
+创建文件`<root>/index.js`
+```
+module.exports = {
+    add: (a, b) => (a + b)
+}
+```
+创建文件`<root>/spec/first_spec.js`
+```
+let {add} = require('../index.js')
+describe('first', () => {
+    it('second', () => {
+        expect(add(1, 2)).toEqual(3)
+    })
+    it('second', () => {
+        expect(add(1, 2)).toEqual(4)
+    })
+})
+```
 ## dir construct
 ```
 <root>
 |-- xxxx // 说明主要文件/目录的功能
-|-- xxxx
-|-- xxxx
+|-- sepc
+    |-- first_spec.js // 测试文件
+    |-- xxxx
+|-- index.js          // 被测试文件
 |-- xxxx
 ```
 
-# defined
-需要定义什么。
-
 # usage
-如何使用的。
+启动测试
+`npm run test`
 
 # priciple
 原理

@@ -22,12 +22,12 @@ jasmine init              // 生成默认配置文件。
 // or
 // npx jasmine init
 jasmine examples          // 为源代码生成在示例。
-jasmine path/to/file.js   // 执行指定的说明文件。也可使用glob。
+jasmine path/to/file.js   // 执行指定的测试文件。也可使用glob。
 
 // library用法
 let Jasmine = require('jasmine')
 let jasmine = new Jasmine()
-jasmine.loadConfigFile('spec/support/jasmine.json') // 加载说明文件
+jasmine.loadConfigFile('spec/support/jasmine.json') // 加载测试文件
 // or
 // jasmine.loadConfig({
 //     spec_dir: 'spec',
@@ -44,7 +44,7 @@ let CustomeReporter = require('./myCustomReporter')
 jasmine.addReporter(new CustomeReporter())           // 添加reporter
 jasmine.execute()                                    // 执行测试
 // or
-// jasmine.execute(['fooSpec.js'], 'a spec name')    // 执行指定的说明文件
+// jasmine.execute(['fooSpec.js'], 'a spec name')    // 执行指定的测试文件
 ```
 
 ## configuration
@@ -52,8 +52,8 @@ jasmine.execute()                                    // 执行测试
 支持dir glob。可在此文件设置很多配置。
 ```
 {
-    "spec_dir": "spec"                                   // 相对于当前工作的说明文件的目录
-    "spec_files": ["**/*[sS]pec.js", "!**/*nospec.js"]   // 指定包含和不包含（使用!开头）的说明文件
+    "spec_dir": "spec"                                   // 相对于当前工作的测试文件的目录
+    "spec_files": ["**/*[sS]pec.js", "!**/*nospec.js"]   // 指定包含和不包含（使用!开头）的测试文件
     "helpers": ["helpers/**/*.js"]                       // 相对于spec_dir的助手文件。
     "failSpecWithNoExpectations": false                  // 是否让一个没有期望的说明失败。
     "stopSpecOnExpectationFailure": false                // 当前一个期望失败时是否停止
@@ -70,9 +70,9 @@ jasmine.execute()                                    // 执行测试
 ## cli options
 JASMINE_CONFIG_APTH  指定配置文件。相对/绝对。
 --no-color           无颜色输出
---filter             指定需要运行的说明文件
+--filter             指定需要运行的测试文件
 --stop-on-failure    当期望失败时是否停止
---random             是否半随机运行说明文件
+--random             是否半随机运行测试文件
 --seed               xxxx
 --reporter           xxxx
 
