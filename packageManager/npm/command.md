@@ -232,3 +232,25 @@ npm set-script [<script>] [<command>]
 
 #### workspaces
 是否包括所有工作空间。
+
+## npm ci
+这个命令类似于npm install，不同的是它用于自动化环境，如测试平台、持续集成和部署——或者任何您想要确保对依赖项进行干净安装的情况。
+在下列情况下。`npm ci`会很快。
+- 有`package-lock.json`/ `npm-shrinkwrap.json`.
+- 没有`node_modules`。或它为空。
+
+### 不同
+|npm install|npm ci||
+|-|-|-|
+||必须存在`package-lock.json`/ `npm-shrinkwrap.json`||
+||当packages-lock中包与package.json中的包不同时，会报错。||
+|可以只安装一个依赖|只参全部安装依赖，||
+||若node_modules已经存在，则先清空再全部安装。||
+||不修改package.json。||
+
+### configuration
+`ignore-scripts`
+若为true，则不运行package.json中的脚本。
+
+`script-shell`
+使用shell执行脚本。
