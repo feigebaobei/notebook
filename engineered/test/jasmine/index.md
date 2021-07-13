@@ -4,6 +4,14 @@
 为node.js开发的测试助手包。默认输出到终端。
 可以在node.js中运行，也可以浏览器中运行。
 
+### feaction
+- 内置自己的断言库。
+- 简单的语法。
+- bdd
+- 运行指定的测试文件
+- 支持js api调用。
+- 支持cli。所有选项都是使用`=`设置选项值。
+
 ## 名词说明
 |||||
 |-|-|-|-|
@@ -18,7 +26,7 @@
 ## usage
 ```
 // cli用法
-jasmine init              // 生成默认配置文件。
+jasmine init              // 生成测试文件的目录`<root>/spec/`和默认配置文件。
 // or
 // npx jasmine init
 jasmine examples          // 为源代码生成在示例。
@@ -54,11 +62,13 @@ jasmine.execute()                                    // 执行测试
 {
     "spec_dir": "spec"                                   // 相对于当前工作的测试文件的目录
     "spec_files": ["**/*[sS]pec.js", "!**/*nospec.js"]   // 指定包含和不包含（使用!开头）的测试文件
-    "helpers": ["helpers/**/*.js"]                       // 相对于spec_dir的助手文件。
+    "helpers": ["helpers/**/*.js"]                       // 相对于spec_dir的助手文件。此文件会在每个测试文件运行前运行。主要功能是为测试做准备。
     "failSpecWithNoExpectations": false                  // 是否让一个没有期望的说明失败。
     "stopSpecOnExpectationFailure": false                // 当前一个期望失败时是否停止
     "stopOnSpecFailure": false                           // 当前一个期望文件失败时是否停止执行。
     "random": false                                      // 是否半随机执行
+    // jasmine默认使用cjs处理文件。若要处理esm文件，则需要使用`.mjs`。
+    // "jsLoader": "import"                              // 若设置此字段则兼容esm、cjs.
 }
 ```
 
@@ -68,6 +78,7 @@ jasmine.execute()                                    // 执行测试
 `jasmine --filter "adapter21*"`          // 执行匹配正则的文件。
 
 ## cli options
+所有选项都是使用`=`设置选项值。（与平时的习惯不同。）
 JASMINE_CONFIG_APTH  指定配置文件。相对/绝对。
 --no-color           无颜色输出
 --filter             指定需要运行的测试文件
@@ -157,5 +168,5 @@ xxx
 > 未来迭代计划。
 
 ## ??
-helper是做什么的？
-spec.js文件怎么写？
+helper是做什么的？   运行测试用例前的准备工作。
+spec.js文件怎么写？  jasmine内置了自己的断言工具，所以可以直接使用`describe` / `it`。再使用相应api写测试代码。
