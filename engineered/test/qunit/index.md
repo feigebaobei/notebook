@@ -1,7 +1,7 @@
 # `qunit`
 
 ## overview
-> TODO: description
+> 强大、易用的js测试框架。
 
 ### feature
 - feature0
