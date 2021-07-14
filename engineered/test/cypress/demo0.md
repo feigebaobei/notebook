@@ -58,7 +58,7 @@ describe('My First Test', () => {
 当执行`npx cypress open`后，会打开cypress的gui页面。列表中要内置的demo文件。点击任意一个可执行该测试文件。然后cypress会调用相应的浏览器运行该测试文件。
 
 # 后记
-## 很简单地安装/启动。还有一些基本示例。很好。我写东西时可以用上。
+## 官网上写了很简单地安装/启动。还有一些基本示例。很好。我写东西时可以用上。
 ## 创建`<root>/.gitignore`
 ```
 node_modules

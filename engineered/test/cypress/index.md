@@ -1,19 +1,19 @@
 # `cypress`
 
 ## overview
-> TODO: description
+> 完整的（服务）端到（客户）端测试体验。
+> 集成测试环境
 
 ### feature
 - 自动化测试
-- 集成mocha/chai/loadsh/jquery
+- 内置mocha/chai/loadsh/jquery等
+- 内置测试运行器
 - 支持快照
-- 支持快照
-- 支持快照
-- 支持快照
-- 支持快照
-- 支持快照
-- 支持快照
-- 支持快照
+- 监听测试文件变化
+- 支持单元测试、集成测试
+- 支持bdd/tdd
+- 支持模拟
+- 支持大盘
 - 支持快照
 - 支持快照
 
@@ -21,6 +21,11 @@
 `npm i cypress`
 
 ## usage
+cypress的gui工具支持执行：
+- 一个测试文件
+- 全部测试文件
+- 匹配条件的测试文件
+
 ### xxxx
 查询元素
 cypress内置了jQuery.查询元素的写法与jquery很像。
@@ -65,8 +70,8 @@ cy.get('@myEle').click()
     |--plugins       // 在node服务器中运行的文件。可以使用cy.task()执行。
     |--screenshots   // 快照的目录
     |--support       // 所有测试文件自动引入。可以写before/beforeEach方法
-    |--downloads       // 下载的文件
-    |--videos       // 视频文件
+    |--downloads     // 下载的文件
+    |--videos        // 视频文件
 
 ```
 cypress run  在浏览器中打开每个测试文件。
@@ -117,6 +122,24 @@ s stop
 r restart
 f view all tests
 
+### 变量与别名
+基本不用`const / let / var`
+
+#### alias
+共享上下文。this就是上下文。
+可用于：
+- 共享上下文
+- cy.get() 得到元素
+- cy.intercept() / cy.request()
+- 可在beforeEach()等钩子函数中使用。
+
+### conditional testing
+
+### the test runner
+- 在gui中点击command时会在dev tool中显示相应的信息。
+- selector playground
+- running experiments
+- 
 ### component testing
 组件测试还在开发阶段，api可能还变动。
 前期准备
@@ -125,8 +148,23 @@ f view all tests
 
 
 
+## guides
+### command line
+`cypress run [opt]`
+在electron browser中运行测试文件。默认运行全部。
+`cypress open`
+打开test runner，就是cypress的gui.
+`cypress info`
+当前的env.
+`cypress verify`
+验证cypress是否安装正确并可执行。
+`cypress version`
+`cypress cache [command]`
+`cypress open`
 
-
+`cypress open`
+`cypress open`
+`cypress open`
 
 
 
@@ -138,6 +176,7 @@ f view all tests
 
 
 ## configuration
+<!-- 应该用一个单独的文件写config -->
 默认配置文件：`<root>/cypress.json`。
 global
 |option|description|type|default||
