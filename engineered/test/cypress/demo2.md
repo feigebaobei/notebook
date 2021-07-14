@@ -128,7 +128,6 @@ it('renders a message', () => {
       msg: 'Hello Cypress!',
     },
   })
-
   cy.get('p').contains('Hello Cypress!')
 })
 ```
