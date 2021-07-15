@@ -80,7 +80,7 @@ chai.config.truncateThreshold = 0 // 设置断言失败时期望值与实际值�
 
 
 ## configuration
-默认配置文件：`path/to/file.json`。
+不需要配置文件
 
 ## api
 

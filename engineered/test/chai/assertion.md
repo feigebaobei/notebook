@@ -1,11 +1,11 @@
 # overview
 > chai提供了三种接口
-- assert 断言 tdd   先写测试代码再写逻辑代码
-- expect      bdd  使用行为、规范来驱动开发
-- should      bdd
-
+- assert 断言 tdd   先写测试代码再写逻辑代码  assert()->void     引入的是对象，直接链式使用此对象。
+- expect          bdd  使用行为、规范来驱动开发  expect()->assert   引入的是方法。需要为其传入参数后链式使用
+- should      bdd                        should()->{...}   引入的是方法。需要链式使用实例。
+  
 # assert
-
+ 
 ## usage
 ```
 var assert = require('chai').assert
