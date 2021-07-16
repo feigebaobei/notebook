@@ -7,7 +7,7 @@
 mkdir projDir
 cd projDir
 npm i jasmine -D
-npx jasmine init              // generate configuration file
+npx jasmine init              // generate configuration file + 测试文件的目录
 npm set-script test jasmine
 npm run test
 ```

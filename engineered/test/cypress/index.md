@@ -14,8 +14,6 @@
 - 支持bdd/tdd
 - 支持模拟
 - 支持大盘
-- 支持快照
-- 支持快照
 
 ## install
 `npm i cypress`
