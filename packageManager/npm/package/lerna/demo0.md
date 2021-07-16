@@ -96,7 +96,7 @@ lerna ERR! E403 You do not have permission to publish "calc". Are you logged in 
 请删除因运行本示例产生的包。
 `npm unpublish <packagename> --force`.
 
-## lerna bootsrap & lerna add
+## lerna add & bootstrap
 |lerna add|lerna bootstrap|
 |-|-|
-|把依赖项（本地来源或远端来源）添加到`package.json`中。|根据`package.json`安装依赖。|
+|把依赖项（本地来源或远端来源）添加到`package.json`中。默认会执行`lerna bootstrap`|根据`package.json`安装依赖。|

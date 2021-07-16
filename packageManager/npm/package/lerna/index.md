@@ -18,6 +18,13 @@ mkdir projName
 cd projName
 lerna init     // 生成基本的lerna库目录结构。
 ```
+结果如下：
+```
+<root>
+|--package.json
+|--lerna.json
+|--packages/
+```
 
 ### how it works
 
@@ -62,6 +69,7 @@ lerna init     // 生成基本的lerna库目录结构。
 
 ## api
 详见`./commands.md`
+
 `lerna init`
 创建一个lerna仓库或在已经存在的库中初始化一个lerna仓库的目录结构。
 默认是`fixed`模式。可使用`--independent / -i`设置为分离模式。

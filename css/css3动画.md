@@ -1,6 +1,6 @@
 # css3动画 #
 
-##animation  
+## animation  
 
 使用css3动画需要2步  
 
@@ -68,7 +68,7 @@ animation定义动画的属性值。
 
 ![](./image/animation.png)
 
-##transition  
+## transition  
 
 1. ie9及以下不支持。  
 2. 各浏览器私有属性在前，通用属性在最后。  
