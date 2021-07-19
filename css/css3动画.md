@@ -65,6 +65,7 @@ animation定义动画的属性值。
 - animation-direction 定义动画在下一周期是否逆向播放 normal|reverse|alternate|alternate-reverse|initial|inherit  
 - animation-fill-mode 动画不播放时的样式（动画结束时的状态） none|forwards|backwards|both
 - animation-play-state 定义动画是否运行或停止 paused|runing  
+- 今天发现一个新属性`steps()`。还不知道它的明确属性是什么。知道animation的缩写中如何使用它：`animation: <animationName> <duration> steps(time | fn)`
 
 ![](./image/animation.png)
 
