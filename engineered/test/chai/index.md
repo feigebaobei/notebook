@@ -76,6 +76,32 @@ chai.config.truncateThreshold = 0 // 设置断言失败时期望值与实际值�
 |chai.config.showDiff|当断言失败时AssertionError对象中是否有showDiff字段。|true||
 |chai.config.truncateThreshold|设置断言失败时期望值与实际值的长度阈值。若超过阈值，则超过设置断言失败时期望值与实际值的长度阈值。若超过阈值，则走过部分被截断。|40||
 
+## 三种风格
+```
+// should style
+chai.should();
+foo.should.be.a('string');
+foo.should.equal('bar');
+foo.should.have.lengthOf(3);
+tea.should.have.property('flavors').with.lengthOf(3);
+
+// expect style
+var expect = chai.expect;
+expect(foo).to.be.a('string');
+expect(foo).to.equal('bar');
+expect(foo).to.have.lengthOf(3);
+expect(tea).to.have.property('flavors').with.lengthOf(3);
+
+// assert style
+var assert = chai.assert;
+assert.typeOf(foo, 'string');
+assert.equal(foo, 'bar');
+assert.lengthOf(foo, 3)
+assert.property(tea, 'flavors');
+assert.lengthOf(tea.flavors, 3);
+```
+三种风格之间没有本质的区别。它们都使用低层的`Assertion`对象。用了一段时间后才知道为什么作者开发三种风格了。作者想把断言做得更接近自然语言。断言过程中作者还做了一堆没用的关键字`to`/`be`……。我一个都不喜欢。我认为没用的便是用害的。不应该使用这些关键字。
+
 ## core plugin
 
 

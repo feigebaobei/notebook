@@ -12,7 +12,7 @@ angularjs团队做的。
 - 在开发时测试本地代码。
 - 在连续集成服务上测试。
 - 在每次保存时测试。
-- 喜欢用终端执行测试
+- 支持cli
 - 与多个测试框架一起使用。如：jasmine/mocha/qunit
 
 ### 推荐测试框架
@@ -30,7 +30,6 @@ npm i -D karma-jasmine karma-chrome-launcher jasmine-core
 ```
 
 ## usage
-
 ```
 npx karma init               // 生成配置文件
 // 然后全选默认值
@@ -137,6 +136,6 @@ karma start my.conf.js // 使用指定的配置文件启动服务。
 此包的处理逻辑。
 
 ## todo
-> 未来迭代计划。
+> 我总是解决了`import`/`require`的问题。
 > 未来迭代计划。
 > 未来迭代计划。

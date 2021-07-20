@@ -4,6 +4,21 @@
 > 它是js编译器
 所有包都在`@babel`下。
 使用了管道模式。所有轮换功能都需要插件完成。
+js的各版本向前兼容。即后发布的版本兼容先发布的版本。‘ 
+js规范的制作需要经过5个过程：
+- stage0 
+- stage1 
+- stage2 
+- stage3 
+- stage4 
+转译器是转译插件的集合。
+转译插件是有转译功能的插件。如转译箭头函数的功能。
+转译器分为3类：
+- 语法转译器     负责转译js最新的语法。
+- 补丁转译器     负责转译js最新的api和全局对象。如新增的String原型方法。
+- jsx/flow/ts
+命令行工具是`babel-cli`
+
 
 ### feature
 - 让使用es5+规范写的js代码编译为es5/es3规范。
@@ -120,21 +135,35 @@ process.cwd()
 不会
 
 `filenameRelative`
+
+
 `cwd`
 `cwd`
 `cwd`
 `cwd`
 `cwd`
 `cwd`
-`cwd`
-`cwd`
-`cwd`
-`cwd`
-`cwd`
-`cwd`
-`cwd`
-`cwd`
-`cwd`
+
+`presets`
+presets的顺序是从后往前的。
+个人理解就是预先设置好babel使用的环境，即告诉babel将编译哪些类型的代码。
+实际上，**presets用起来就像是一个组合好的plugins套餐而已**。比如说上面的代码中预设的react。如果我们想实现babel能编译react代码，那么我们就必须得在plugins中配置一堆插件。现在，babel官方将这些plugins组合成了一个 @babel/preset-react 预设，所以我们在presets中配置了就相当于是直接预设了react环境了。
+
+
+`exclude`
+`include`
+`ignore`
+`only`
+`overrides`
+`sourceType`
+告诉babel是否需要以ES6模块去编译，值有 script module(默认) unambiguous 。一般来说，我们项目都是在node环境下的，所以模块化标准用的是CommonJs。这时候如果我们想用ES6的模块化标准的话，我们就需要将其配置为 module 。
+而 unambiguous 就比较暴力了，他就看文件中是否出现了import/export，出现了就匹配为 script ,没出现就匹配为 module 。
+
+`parserOpts`
+该配置项的库为 @babel/parser 。用于解析文件时的配置，可以利用其解析一些语法，比如jsx，flow等。
+
+`highlightCode`
+
 `cwd`
 `cwd`
 `cwd`
@@ -186,9 +215,25 @@ description
 `@babel/types`
 
 ## principle
-此包的处理逻辑。
+Babel 本质上就是在操作 AST 来完成代码的转译。
+1. babel-cli开始读取我们的参数(源文件test1.js、输出文件test1.babel.js、配置文件.babelrc)
+2. babel-core根据babel-cli的参数开始编译
+3. Babel Parser 把我们传入的源码解析成ast对象
+4. Babel Traverse（遍历）模块维护了整棵树的状态，并且负责替换、移除和添加节点(也就是结合我们传入的插件把es6转换成es5的一个过程)
+5. Babel Generator模块是 Babel 的代码生成器，它读取AST并将其转换为代码和源码映射（sourcemaps）。
+
 
 ### uml
+Babel的编译过程跟绝大多数其他语言的编译器大致同理，分为三个阶段：
+1. 解析：将代码字符串解析成抽象语法树
+  2. 词法分析
+  2. 语法分析
+2. 变换：对抽象语法树进行变换操作
+3. 再建：根据变换后的抽象语法树再生成代码字符串
+  3. 
+
+
+
 ```
 ```
 

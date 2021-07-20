@@ -32,12 +32,3 @@ description
 1. 使用转换工具把源码转换
 2. 在轮换后的文件的最后一行添加`//@ sourceMappingURL=${sourceMap文件的位置}`
 3. 浏览器根据sourceMap的信息把到对应源码。
-
-### uml
-```
-```
-
-## todo
-> 未来迭代计划。
-> 未来迭代计划。
-> 未来迭代计划。
