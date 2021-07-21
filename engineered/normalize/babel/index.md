@@ -95,6 +95,7 @@ module.exports = function (api) {
 }
 ```
 ### 配置文件
+从当前目录依次向上找。
 babel.config.json / .babelrc好像用途不一样。
 可以使用js写`babel.config.json` / `.babelrc.json`。
 |project-wide configuration|file-relative configuration||||
@@ -153,7 +154,9 @@ presets的顺序是从后往前的。
 `exclude`
 `include`
 `ignore`
+不转译
 `only`
+只转译
 `overrides`
 `sourceType`
 告诉babel是否需要以ES6模块去编译，值有 script module(默认) unambiguous 。一般来说，我们项目都是在node环境下的，所以模块化标准用的是CommonJs。这时候如果我们想用ES6的模块化标准的话，我们就需要将其配置为 module 。
@@ -164,9 +167,15 @@ presets的顺序是从后往前的。
 
 `highlightCode`
 
-`cwd`
-`cwd`
-`cwd`
+`minified`
+是否压缩。default: false
+
+`plugins`
+转译前、依次执行。
+
+`presets`
+用于定义转译器的倒序执行顺序。（即：从最后的转译器开始执行）
+
 `cwd`
 `cwd`
 `cwd`
@@ -187,6 +196,9 @@ presets的顺序是从后往前的。
 
 
 
+## plugins & presets
+1. 依次执行plugins
+2. 倒序执行presets
 
 ## api
 `babel.fn(param, first: string, second: boolean = true) => void`
@@ -237,6 +249,22 @@ Babel的编译过程跟绝大多数其他语言的编译器大致同理，分为
 ```
 ```
 
+## 常用的转译器
+babel-preset-env
+转译结果是可以在不同版本的浏览器、node中运行。
+
+babel-preset-es2015
+es2015（即es6）转译为es5
+
+babel-preset-latest
+不推荐使用。
+
+兼容ie浏览器的转译器
+es3-member-expression-literals
+es3-property-literals
+es5-property-mutators
+
+## 常用的插件
 ## todo
 > 未来迭代计划。
 > 未来迭代计划。
@@ -247,3 +275,6 @@ plugin有轮换功能。每个插件的转换功能不一样。
 presets  设置一些插件
 
 
+babel-cli内置babel-node
+babel-register 用于改写require命令
+babel-core     主要用于node等环境。
