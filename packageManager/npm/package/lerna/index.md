@@ -47,7 +47,7 @@ lerna init     // 生成基本的lerna库目录结构。
 ```
 {
     version
-    npmClient          // 指定注册器客户端。默认npm.
+    npmClient               // 指定注册器客户端。默认npm.
     command: {         
         publish: {
             ignoreChanges   // 执行lerna change/publish时不包含的内容。
@@ -60,7 +60,7 @@ lerna init     // 生成基本的lerna库目录结构。
             scope            // 设置lerna bootstrap的执行范围。
             }  // 
     },
-    packages: [...]    // 各包的目录。用数组的元素表示多个值。
+    packages: [...]          // 各包的目录。用数组的元素表示多个值。
 }
 ```
 

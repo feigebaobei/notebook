@@ -37,7 +37,10 @@ npx babel <file.ext> --out-file <result.js>
 指定配置文件。
 
 ## principle
-此包的处理逻辑。
+分情况执行指定方法。
+const fn = opts.cliOptions.outDir ? dirCommand : fileCommand;
+想看看它的怎么整理的选项，也看不到。不会玩儿。
+在`util.js`中调用了`@babel/core`的`transform` / `transformFile`方法。只有这2个方法用于转译代码。别的代码都是做辅助工作，如：创建相应的目录。
 
 ### uml
 ```
