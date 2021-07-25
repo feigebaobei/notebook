@@ -59,7 +59,7 @@ module.exports = {
 在`clac`包中添加`lodash`依赖包。
 ```
 leran add lodash --scope=calc   // 只在calc包中安装lodash。在calc中就可以使用lodash了。
-lerna add calc                  // 在所有适合的包安装calc.i该示例中只所pointer是适合的包。因calc不能依赖自己，所以它不是适合的包。
+lerna add calc                  // 在所有适合的包安装calc.i该示例中只有pointer是适合的包。因calc不能依赖自己，所以它不是适合的包。
 ```
 
 ## bootstrap

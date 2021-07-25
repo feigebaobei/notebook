@@ -1,4 +1,4 @@
-
+// 各钩子函数
 {
   beforeMount
   mounted
@@ -7,10 +7,10 @@
   beforeUnmounted
   unmounted
 }
-
 mounted(el, binding, vnode) {
   let vm = binding.instance
 }
+
 app.directive('dire-name', {
   // 各钩子方法。
 })
@@ -25,15 +25,17 @@ binding: {
   modifiers // 指令的修饰符 v-dire.foo.bar中的修饰对象是{foo: true, bar: true}
   dir       // 注册指令时的对象
 }
-vnode:      el对应的真实dom
+vnode:      el对应的虚拟dom（即vnode）
 prevNode:   上一个虚拟节点。在beforeUpdata/updated时有效。
 
 // defined
+// 全局注册
 app.directive('focus', {
   mounted(el) {
     el.focus()
   }
 })
+// 组件内局部注册
 directives: {
   focus: {
     mounted(el) {
@@ -46,8 +48,8 @@ directives: {
 }
 // usage
 `<input v-focus>`
-v-focus:for="value"
-v-dire:[arg]="value"
+v-focus:for="value"    // for是静态指令参数
+v-dire:[arg]="value"   // arg是动态指令参数
 // 原理
 `<root>/packages/runtime-core/src/directives.ts`
 /**

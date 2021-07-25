@@ -10,8 +10,11 @@
 **prototype**  
 
 **Date()**  
-
 返回当前的日期和时间。  
+new Date();
+new Date(value);
+new Date(dateString);
+new Date(year, monthIndex [, day [, hours [, minutes [, seconds [, milliseconds]]]]]);
 
 **getDate()**  
 
@@ -126,3 +129,12 @@ number 数字 必填
 
 date对象的原始值。  
 经测试，发现该方法与`getTime()`得到的结果一样。  
+
+|||||
+|-|-|-|-|
+|s|1000|||
+|m|60000|||
+|h|3600000|||
+|d|86400000|||
+|m||||
+|y||||

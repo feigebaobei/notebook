@@ -1,24 +1,25 @@
 # `babel`
 
 ## overview
-> 它是js编译器
+它是js编译器
 所有包都在`@babel`下。
 使用了管道模式。所有轮换功能都需要插件完成。
 js的各版本向前兼容。即后发布的版本兼容先发布的版本。‘ 
 js规范的制作需要经过5个过程：
-- stage0 
-- stage1 
-- stage2 
-- stage3 
-- stage4 
+|阶段   |说明                          |对应的编译器|||
+|-|-|-|-|-|
+|stage0|未提交正式提案的讨论              |preset-stage-0|||
+|stage1|正式化提案                      |preset-stage-1|||
+|stage2|初始的规范，通过polyfill完成功能。 |preset-stage-2|||
+|stage3|候选推荐规范                     |preset-stage-3|||
+|stage4|必须有2个独立的通过验收测试的实现，会实现在下一个修订版中。|preset-stage-4|||
 转译器是转译插件的集合。
 转译插件是有转译功能的插件。如转译箭头函数的功能。
 转译器分为3类：
-- 语法转译器     负责转译js最新的语法。
+- 语法转译器     负责转译js最新的语法。如：class.
 - 补丁转译器     负责转译js最新的api和全局对象。如新增的String原型方法。
 - jsx/flow/ts
 命令行工具是`babel-cli`
-
 
 ### feature
 - 让使用es5+规范写的js代码编译为es5/es3规范。
@@ -197,8 +198,8 @@ presets的顺序是从后往前的。
 
 
 ## plugins & presets
-1. 依次执行plugins
-2. 倒序执行presets
+1. 先正序执行plugins
+2. 再倒序执行presets
 
 ## api
 `babel.fn(param, first: string, second: boolean = true) => void`
@@ -266,13 +267,10 @@ es5-property-mutators
 
 ## 常用的插件
 ## todo
-> 未来迭代计划。
+> 实现一个插件。
 > 未来迭代计划。
 > 未来迭代计划。
 
-
-plugin有轮换功能。每个插件的转换功能不一样。
-presets  设置一些插件
 
 
 babel-cli内置babel-node

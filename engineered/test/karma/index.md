@@ -24,7 +24,7 @@ angularjs团队做的。
 
 ## install
 ```
-npm i karma
+npm i karma -D
 // 通常还需要安装一些插件
 npm i -D karma-jasmine karma-chrome-launcher jasmine-core
 ```
@@ -136,6 +136,6 @@ karma start my.conf.js // 使用指定的配置文件启动服务。
 此包的处理逻辑。
 
 ## todo
-> 我总是解决了`import`/`require`的问题。
+> 我总是解决不了`import`/`require`的问题。
 > 未来迭代计划。
 > 未来迭代计划。

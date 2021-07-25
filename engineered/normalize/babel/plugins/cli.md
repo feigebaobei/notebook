@@ -2,6 +2,7 @@
 
 ## overview
 babel的命令行工具
+只在命令行中使用babel.不具有转译功能。
 
 ### feature
 - feature0

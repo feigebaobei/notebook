@@ -66,14 +66,13 @@ import 'chai/register-should'
 ### configuration
 ```
 chai.config.includeStack = true // 跟踪错误信息
-chai.config.showDiff = false    // 当断言失败时AssertionError对象中是否有showDiff字段。
+chai.config.showDiff = false    // 当断言失败时AssertionError对象中是否有showDiff字段。
 chai.config.truncateThreshold = 0 // 设置断言失败时期望值与实际值的长度阈值。若超过阈值，则走过部分被截断。
-
 ```
 |||defalut||
 |-|-|-|-|
 |chai.config.includeStack|跟踪错误信息|false||
-|chai.config.showDiff|当断言失败时AssertionError对象中是否有showDiff字段。|true||
+|chai.config.showDiff|当断言失败时AssertionError对象中是否有showDiff字段。|true||
 |chai.config.truncateThreshold|设置断言失败时期望值与实际值的长度阈值。若超过阈值，则超过设置断言失败时期望值与实际值的长度阈值。若超过阈值，则走过部分被截断。|40||
 
 ## 三种风格
@@ -100,7 +99,7 @@ assert.lengthOf(foo, 3)
 assert.property(tea, 'flavors');
 assert.lengthOf(tea.flavors, 3);
 ```
-三种风格之间没有本质的区别。它们都使用低层的`Assertion`对象。用了一段时间后才知道为什么作者开发三种风格了。作者想把断言做得更接近自然语言。断言过程中作者还做了一堆没用的关键字`to`/`be`……。我一个都不喜欢。我认为没用的便是用害的。不应该使用这些关键字。
+三种风格之间没有本质的区别。它们都使用低层的`Assertion`对象。用了一段时间后才知道为什么作者开发三种风格了。作者想把断言做得更接近自然语言。断言过程中作者还做了一堆没用的关键字`to`/`be`……。我一个都不喜欢。我认为没用的便是用害的。不应该多出这些关键字。
 
 ## core plugin
 
@@ -126,7 +125,7 @@ description
 `<root>/utils`
 里面都是一些工具方法。平时我们写项目也会以写一些工具方法。
 `flags(obj, key, value)`
-得到obj里的key对应的值，或设置`obj[key] = value`
+得到obj里的key对应的值，或设置`obj[key] = value`
 `proxify(obj, nonChainableMethodName)`
 返回一个代理对象。它的get方法被代理。若符合条件，则返回相应的值。
 `transferFlags(assertion, object, includeAll)`

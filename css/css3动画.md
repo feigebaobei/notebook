@@ -106,7 +106,7 @@ animation定义动画的属性值。
 
 *`transition`与`animation`的区别在于前者只做过渡效果，后者着重做动画效果。若实在分不清就把`transition`记为过渡。过渡是直线型的，不可以拆线。`animation`记为动画。动画是可以做很多拆线型的。*
 
-##transform  
+## transform  
 
 	div {
 		-ms-transform: rotate(30deg); /* ie */
@@ -149,9 +149,6 @@ animation定义动画的属性值。
 
 *`transform`是变换（若不理解变换就理解为变形）。`translate`是移动。是transform的一种属性值。没有动画。`transition`是过渡。有动画。*
 
-----------
-2018/02/12 by stone
-
 ## flip
 
 first last invert play
@@ -170,6 +167,3 @@ flipping.js @Davidkpiano
 ## 动画库
 
 animate.css
-
-----------
-2018/02/12 by stone

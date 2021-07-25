@@ -1,6 +1,6 @@
 # packages/compiler-sfc
 ## overview
-这是一低层的的编译vue的单文件组件（single file components）的工具。
+这是一个低层的的编译vue的单文件组件（single file components）的工具。
 可以基于该包再写一个用于sfc的插件/打包器。如: vue-loader/rollup-plugin-vue/vite
 
 ### api

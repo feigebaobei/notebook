@@ -4,12 +4,12 @@
 ## source map的格式
 ```
 {
-    version: 3                   // source map的版本.
-    file: 'out.js'               // 转换后的文件名
-    sourceRoot: ''               // 转换前的文件所在目录。
+    version: 3                    // source map的版本.
+    file: 'out.js'                // 转换后的文件名
+    sourceRoot: ''                // 转换前的文件所在目录。
     sources: ['foo.js', 'bar.js'] // 转换前的文件。
-    names: [...]                 // 转换前的所有变量名和属性名。
-    mappings: ''                 // 记录位置信息的字符串。
+    names: [...]                  // 转换前的所有变量名和属性名。
+    mappings: ''                  // 记录位置信息的字符串。
 }
 ```
 

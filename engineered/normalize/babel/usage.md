@@ -60,12 +60,13 @@
 # usage @babel/cli
 ```sh
 npm i @babel/cli @babel/core @babel/preset-env -D
-npx babel src -d lib              // 把<root>/src目录编译了
-
 ```
 创建`<root>/babel.config.json`
 ```json
 {
     "presets": ["@babel/preset-env"]
 }
+```
+```sh
+npx babel src -d lib              // 把<root>/src目录编译了
 ```
