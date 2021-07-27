@@ -235,6 +235,11 @@ Babel 本质上就是在操作 AST 来完成代码的转译。
 4. Babel Traverse（遍历）模块维护了整棵树的状态，并且负责替换、移除和添加节点(也就是结合我们传入的插件把es6转换成es5的一个过程)
 5. Babel Generator模块是 Babel 的代码生成器，它读取AST并将其转换为代码和源码映射（sourcemaps）。
 
+### 基于哪些包开发的
+|package|feature|author||||
+|-|-|-|-|-|-|
+|badylon||||||
+|source-map||mozilla||||
 
 ### uml
 Babel的编译过程跟绝大多数其他语言的编译器大致同理，分为三个阶段：
