@@ -21,12 +21,12 @@ google web toolkit (gwt)
 ## source map的格式
 ```
 {
-    version: 3                    // source map的版本.
-    file: 'out.js'                // 转换后的文件名
-    sourceRoot: ''                // 转换前的文件所在目录。若转换前的文件在同一目录，则该项为''
-    sources: ['foo.js', 'bar.js'] // 转换前的文件。
-    names: ["src", "maps", "are", "fun"]                  // 转换前的所有变量名和属性名。
-    mappings: ''                  // 使用base64 VLQ值映射。记录位置信息的字符串。
+    version: 3                                // source map的版本.
+    file: 'out.js'                            // 转换后的文件名
+    sourceRoot: ''                            // 转换前的文件所在目录。若转换前的文件在同一目录，则该项为''
+    sources: ['foo.js', 'bar.js']              // 转换前的文件。mappings中会用到此字段。
+    names: ["src", "maps", "are", "fun"]       // 转换前的所有变量名和属性名。mappings中会用到此字段。
+    mappings: ''                               // 使用base64 VLQ值映射。记录位置信息的字符串。
 }
 ```
 
@@ -39,7 +39,6 @@ java -jar compiler.jar \
      --source_map_format=V3 \
      --js_output_file script-min.js
 ```
-` --source_map_format=V3 \`明确指定使用v3版本。
 
 ### mappings属性
 分为三层:
@@ -47,12 +46,12 @@ java -jar compiler.jar \
 每个分号表示转换后的一行。
 每个逗号对应转换后的源码的一个位置．
 以vlq编码表示转换前的位置．
-`<此位置在指定行的列号><sources属性中的文件下标><源码的行号><源码的列号><names属性的哪个变量>`
+`<转换后代码的列号><sources属性中的文件下标><源码的行号><源码的列号><names属性的哪个变量>`
 
 
 ## Base64 VLQ使source map变小
 vlq(variable length quantity)
-最初为了做详细的映射，生成代码是源代码的10倍大。v2时减少了50%，v3又减少50%。
+最初为了做详细的映射，生成代码是源代码的10倍大。v2时减少了50%，v3又减少50%。
 ```
         A  A  g  B  C
         |  |  |  |  |

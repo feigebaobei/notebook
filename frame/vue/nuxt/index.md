@@ -28,7 +28,7 @@
         |-- index.vue
 |-- components       // 组件所有目录
     |-- first.vue
-|-- assets           // 不会编译的文件
+|-- assets           // 不会被编译的文件
     |-- xxxx.png
     |-- xxxx.styl
     |-- xxxx.fft
