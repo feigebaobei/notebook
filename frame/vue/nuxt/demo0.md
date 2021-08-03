@@ -29,7 +29,7 @@ cd <project-name>
 }
 ```
 
-执行`npm i nuxt`
+安装nuxt:`npm i nuxt`
 
 创建`<root>/pages/index/index.vue`
 ```
