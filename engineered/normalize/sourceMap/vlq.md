@@ -5,8 +5,8 @@
 一个base64字符可表示6bit（2^6）的数据
 
 ### feature
-- feature0
-- feature1
+- 把“在计算机中保存数字”改为“在计算机中保存文本”。
+- 减少体积。
 - feature2
 
 ## install
