@@ -14,6 +14,14 @@ ff已经支持coffeescript了。
 google web toolkit (gwt)
 `traceur`可以把es6+的代码转换为es3。
 
+## 术语说明
+|||||
+|-|-|-|-|
+|generated code|由编译器生成的代码|||
+|original source|在编译器处理前的代码|||
+|base 64 VLQ|用base64表示的vlq.它最多有6位。（最低位是第一位）最高位是延续位。最低位是符号位。。注意：base64 vlq可表示32bit内的数量。直到出现更大的值。|||
+|source mapping url|从generated code中引用source map的地址。|||
+
 ## source map 如何工作
 在压缩的文件后添加一行：`//# sourceMappingURL=/path/to/file.js.map`。就可以在浏览器中当未压缩的文件使用。
 设置`X-SourceMap: /path/to/file.js.map`可以不显示注释。

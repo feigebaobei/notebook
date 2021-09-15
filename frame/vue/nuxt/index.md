@@ -108,6 +108,14 @@ nuxt可以为静态目录提供服务。
 ||||||||
 ||||||||
 
+## views
+需要知道data/特定路由。
+组成部分：
+- app template
+- layout
+- 实际页面。
+  - 自定义元数据，都在`head`里。方便seo。
+
 ## api
 `nuxt.fn(param, first: string, second: boolean = true) => void`
 description

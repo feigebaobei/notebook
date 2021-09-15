@@ -1,5 +1,5 @@
-#number
-
+# number
+JavaScript 内部使用 64 位浮点数（国际标准 IEEE 754）表示数值，IEEE 754 规定第一位是符号位，0表示正数，1表示负数。所以会有两种零，+0是符号位为0时的零值，-0是符号位为1时的零值。实际编程中，判断一个值是+0还是-0非常麻烦，因为它们是相等的。
 ## 语法
 
 ```
@@ -35,7 +35,9 @@ b instanceof Number // false
 |Number.parseFloat()|把参数转化为小数。||||
 |Number.parseInt()|把参数转化为整数。|向下取整。|||
 
-#Math
+Number.toExponential() 转换为指数形式
+Number.toPrecision(x)  返回指定小数位数的字符串形式的数字
+# Math
 
 **Math.trunc()** 除去一个数的小数部分，返回整数部分。  
 
@@ -48,6 +50,14 @@ b instanceof Number // false
     Math.sign(-3.7) // -1
     Math.sign(0) // 0
     Math.sign(-0) // -0
+    
+    -0 > 0
+    false
+    -0 < 0
+    false
+    -0 == 0
+    true
+    -0 === 0
 
 **Math.cbrt(number)** 计算一个数的立方根。  
 
@@ -73,7 +83,7 @@ b instanceof Number // false
 **Math.acosh(n)**  
 **Math.atanh(n)**  
 
-**Math.singbit(n)** 判断一个数的符号是否被设置。  
+**Math.signbit(n)** 判断一个数的符号是否被设置。  
 
 **指数运算符(\**)**  
 它与Math.pow()的实现不同。  
