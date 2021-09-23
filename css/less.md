@@ -92,8 +92,85 @@ description
 
 如何实现跨平台？
 
+`<root>/index.js`
+从class中得到实例，再使用。
+输出的`Render`是`<root>/render`方法的输出值。
+
+`<root>/environment/environment.js`
+返回一个class，其实例有方法：`getFileMaager/addFileManager/clearFileManagers`
+
+`<root>/import-manager.js`
+```
+export default function (environment) {
+	return class ImportManager {
+		constructor(less, context, rootFileInfo) {...}
+		push(path, tryAppendExtention, currentFileInfo, importOptions, callback) {...}
+	}
+}
+```
+
+`<root>/parse-tree.js`
+```
+export default function (sourceMapBuilder) {
+	return class ParseTree {
+		constructor(lroot, imorts) {...}
+		toCSS(options) {
+			...
+			evaldRoot = transformTree(this.root, options);
+			result.css = evaldRoot.toCSS(toCSSOptions);
+			return result
+		}
+	}
+}
+```
+
+`<root>/transform-tree.js`
+```
+export default function (root, options) {
+	...
+}
+```
+
+`<root>/parse.js`
+添加plugin
+调用parser()
+```
+
+```
+
 ### uml
 ```
+```
+
+### 学到内容
+```
+// 同时支持cb/promise的方法
+let fn = (args, cb) => {
+    let f = (args, cb) => {
+        let r // 用于保存结果。
+        let err // 用于错误信息。
+        // ...
+        // 经过若干处理后得到结果
+        if (err) {
+            cb(err, null)
+        } else {
+            cb(null, r)
+        }
+    }
+    if (cb) {
+        f(args, cb)
+    } else {
+        new Promise((s, j) => {
+            fn(args, (e, r) => {
+                if (e) {
+                    j(e)
+                } else {
+                    s(r)
+                }
+            })
+        })
+    }
+}
 ```
 
 ## todo
