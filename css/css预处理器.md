@@ -1,0 +1,11 @@
+||less|sass|stylus|||
+|-|-|-|-|-|-|
+|var|@var|$var|-|||
+|作用域|-|-|-|||
+|嵌套|-|-|-|||
+|继承|@extend|@extend|@extend|less/sass/stylus使用样式覆盖。||
+|混合|.mixin(@args){...}/.mixin|@mixin/@include|@extend|在stylus中继承与混合是同一功能。||
+|引入|@import|@import|@import/@rquire相同功能|||
+|控制指令||||||
+||-|@use|-|||
+|||||||

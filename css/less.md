@@ -69,6 +69,22 @@ less.render(myLess, {plugins: [myplugin]}).then((output) => {...}, (error) => {.
 ```
 ### demo
 ```
+// 嵌套
+@import "lessFileName"
+// or
+#main {
+	@import "lessFileName"
+}
+
+// @extend
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
 ```
 
 ## configuration
@@ -135,7 +151,6 @@ export default function (root, options) {
 添加plugin
 调用parser()
 ```
-
 ```
 
 ### uml

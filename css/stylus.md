@@ -122,4 +122,10 @@ npm uninstall stylus-loader
 npm i -D stylus-loader@3.0.2
 ```
 
-2018/11/07 by stone
+### 优点
+- 最后出现，可以是最好的。（相比sass、less）
+- 有很多大神共建。如: tj。
+- 支持缩进式写法。括号、分号、逗号、冒号均可有可无。
+- 比sass更强大的选择器。
+
+
