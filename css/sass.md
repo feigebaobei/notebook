@@ -1,6 +1,35 @@
 # sass
 对css的一种简便写法。  
 
+## install
+需要先安装`ruby`。mac已内置它。
+`gem`是`ruby`的包管理工具。需要翻墙。
+
+## usage
+### cli
+```
+sass input.scss output.css
+sass --watch input.scss output.css
+sass --watch app/sass:publick/stylesheeets
+
+// options
+--style     使用指定排版
+    nested expanded compact compressed
+--sourcemap 是否启用sourcemap
+```
+
+### package
+[npm](https://www.npmjs.com/package/sass)  
+[git](https://github.com/sass/dart-sass)
+使用`dart`语言写的。
+```
+var sass = require('sass')
+sass.render({file: scss_filename}, function (error, result) {...})
+// or
+// var result = sass.renderSync({file: scss_filename})
+```
+// 写法与`less`很像。
+
 ## 可以分为6块内容
 变量、嵌套、导入、注释、混合器、继承。
 
@@ -129,4 +158,8 @@ ul {
 |@mixin|定义混合|@include|使用混合|
 |@extend|继承|||
 
+## sass & scss
+是同一事物在不同阶段的名称。
+在二代以前叫`sass`
+在三代以后叫`scss`
 
