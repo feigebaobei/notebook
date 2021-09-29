@@ -35,6 +35,16 @@ module.exports = function () {
 }
 ```
 
+## @babel/preset-env
+它是一个很灵巧的包。
+相当与`Stage-3`。
+
+## @babel/preset-typescript
+
+## @babel/preset-react
+
+## @babel/preset-flow
+
 ## principle
 此包的处理逻辑。
 
