@@ -281,3 +281,5 @@ es5-property-mutators
 babel-cli内置babel-node
 babel-register 用于改写require命令
 babel-core     主要用于node等环境。
+
+### 为什么要正逆两个方法执行plugins/presets?
