@@ -232,9 +232,131 @@ console.log(obj.v)
 ```
 
 
-# no.6
+# no.6 代码复用模式
+es5中的方法。  
+推荐此方法。因为此方法更遵守js语言的原型链（有对象/无类）的实际情况。  
+```
+Object.create(prot: object, attr: object)
+```
+利用复制实现继承
+```
+funtion extend(p, c = {}) {
+	for (let k in p) {
+		if (p.hasOwnProperty(k) {
+			c[k] = p[k]
+		})
+	}
+	return c
+}
+```
+深复制
+```
+function cloneDeep(p, c = {}) {
+	for (let k in p) {
+		if (p.hasOwnProperty(k)) {
+			if (typeof p[k] === 'object') {
+				c[k] = Object.prototype.toString.call(p[k]) === '[object Array]' ? [] : {}
+				cloneDeep(p[k], c[k])
+			} else {
+				c[k] = p[k]
+			}
+		}
+	}
+	return c
+}
+```
+混入
+```
+// define
+function mixin(...os) {
+	let r = {}
+	os.forEach(o => {
+		Object.entries(o) // [[k0, v0], ...]
+		.forEach([k, v] => {
+			r[k] = v
+		})
+	})
+	return r
+}
+// usage
+mixin(oa, ob, oc)
+```
+借用方法
+```
+// 又希望复用方法，又不想有父子关系
+pf.call(self: object, ...args)
+pf.apply(self: object, args: any[])
+```
+绑定方法
+```
+pf.bind(self: object, ...args): () => function
+// 实现
+if (typeof Function.prototype.bind === 'undefined') {
+	Funciton.prototype.bind = function(self, ...args) {
+		return this.apply(self, args)
+	}
+}
+```
+## 继承
+这种思想是受到`java`等语言的影响。非在js语言中使用类。不建议使用此方法。  
+```
+function inherit(c, p) {
+	c.prototype = new p()
+}
+```
+借用构造函数
+```
+function C(...args) {
+	P.apply(this, args)
+	// 也可以多次借用构造函数
+	// P1.apply(this, args)
+	// P2.apply(this, args)
+}
+```
+设置原型，共享原型。
+```
+function inherit(c, p) {
+	c.prototype = p.prototype
+}
+```
+临时构造函数
+```
+function inherit(c, p) {
+	let F = function () {}
+	F.prototype = p.prototype
+	c.prototype = new F()
+}
+```
+存储超类
+```
+function inherit(c, p) {
+	let F = function () {}
+	F.prototype = p.prototype
+	c.prototype = new F()
+	c.uber = c.prototype
+}
+```
+重置构造函数指针
+```
+let inherit = (funtion () {
+	let f = function () {}
+	return function (c, p) {
+		f.prototype = p.prototype
+		c.prototype = new f()
+		c.prototype.constructor = c
+		c.uber = c.prototype
+	}
+})()
+```
+klass  
+不推荐
+```
+
+```
+
 # no.7
 # no.8
+
 # 后记
 ## 惰性函数会越执行越快么？
 不会，会在第一次执行时做若干判断，返回一个新函数。其后执行该新函数。
