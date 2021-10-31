@@ -354,8 +354,238 @@ klass
 
 ```
 
-# no.7
-# no.8
+# no.7 设计模式
+## 单例模式
+一个特定类只有一个实例。
+```
+var universe
+(function() {
+	var instance
+	universe = function () {
+		if (instance) {
+			return instance
+		}
+		instance = this
+		this.a = 'a'
+		this.b = 'b'
+	}
+	})()
+```
+
+## 多例模式
+```
+var inst = new ClassName()
+```
+
+## 工厂模式
+为了批量创建对象。多见于构造函数。  
+```
+function Point(x, y) {
+	this.x = x
+	this.y = y
+}
+var p = new Point(1, 2)
+```
+
+## 迭代器模式
+常用于链表。  
+链表多作为一种数据结构出现。详见[数据基石](https://www.npmjs.com/package/data-footstone)
+```
+let makeLink = (...args) => {
+}
+```
+```
+for...of
+filter
+find
+map
+forEach
+reduce
+reduceRight
+```
+
+## 装饰器模式
+运行时为目标添加附加功能。
+```
+@decorator(args)
+Class Cn {
+	constructor() {...}
+	@decoratorF(argsf)
+	first() {...}
+}
+
+// 函数lan处理
+```
+
+## 策略模式
+定义关键字与方法的对应关系。运行时选择相应算法。（表单验证）
+可看作为if/else判断的另一种表现形式，在达到相同目的的同时，极大的减少了代码量以及代码维护成本。
+分离算法的使用、算法的实现。  
+```
+// demo0
+var realize = {
+    first: () => {},
+    second: () => {},
+    third: () => {}
+}
+let result = realize[param] ? realize[param]() : null
+
+// demo1
+// html
+<form>
+// js
+document.getElementById('submit').on('click', (event) => {
+  event.preventDefault()
+  var validator = new Validator()
+  var result = validator.test({
+    'userName': [
+      {rule: 'isRequired', value: this.userName.value, message: 'string'},
+      ...
+    ],
+    ...
+  })
+})
+
+function Validator () {}
+Validator.prototype.rules = {
+  isRequired: (value) => {
+    return value.replace(/(^\s*)|(\s*$)/g, '')
+  },
+  ...
+}
+Validator.prototype.test = (rules) => {
+  var that = this
+  var valid = null
+  for (let key in rules) {
+    for(let i = 0; i < rules[key].length; i++) {
+      let {rule, value, message} = rules[key][i]
+      let result = that.rules[rule](value)
+      // let result = that.rules[rule].apply(this, value)
+      if (!result) {
+        valid = {
+          errValue: key,
+          errMsg: message
+        }
+        break
+      }
+    }
+    if (valid) {
+      break
+    }
+  }
+  return valid
+}
+```
+
+## 外观模式
+统一对外接口
+```
+```
+
+## 代理模式
+
+## 中介模式
+为了促进松耦合。  
+```
+			  |---------|
+   -----------|   中介  |----------
+   |		  |---------|        |
+   A                             B
+
+A.fn() -> 中介.fn() -> B.fn()
+```
+
+## 观察者模式
+别名：订阅/发布模式  
+```
+let publisher = {
+	subscribers: {},
+	subscribe: (type, fn) => {
+		// subscribers[type] = [].push(fn)
+	},
+	unsubscribe: (type, fn) => {
+		// subscribers[type].splice(..)
+	},
+	publish: (type, self) => {
+		// subscribes[type].forEach(fn => fn(self))
+	}
+}
+function makePublisher(o) {
+	Object.keys(publisher).forEach(k => {
+		o[k] = publisher[k]
+	})
+}
+// use
+let p = {...}
+let a = makePublisher(p)
+let b1 = {...}
+let b2 = {...}
+a.subscribe('t', b1.f)
+a.subscribe('t', b2.f)
+a.publish('t')
+```
+
+# no.8 DOM和浏览器模式
+## 关注点分离  
+- 内容 html  
+- 表现 css  
+- 行为 js  
+特征检测技术
+```
+if (document.attachEvent) {
+	document.attachEvent('onclick', console.log)
+}
+```
+## 访问dom
+访问dom的代价是昂贵的。  
+- 避免在循环中使用dom访问。
+- 将dom引用分配给局部变量，并使用这些局部变量。  
+- 在可能的情况下使用selector api.  
+- 当在html容器中重复使用时，缓存重复的次数。  
+## 操作dom
+- 先整理文档碎片，  
+- 再一次插入到合适的父节点。  
+## 事件
+- 应该在js中附加监听器。
+- 事件委托
+## temp
+- setTimeout  
+- web worker  
+- xhr  
+```
+var xhr = new XMLHttpRequest()
+xhr.onreadystatechange = handler
+xhr.open('GET', 'page.html', true) // 指定http请求方法/url.
+xhr.send() // 发送请求
+```
+- jsonp  
+```
+https://www.temp.org/path.php?callback=handler
+```
+## 图像灯塔
+```
+new Image().src = "https://www.temp.org"
+```
+- 前端向后端发送，后端可以不回馈。可用于埋点。  
+## 配置脚本文件
+- 合并  
+- 分为不可改变的，和可改变的。  
+- 使用时间戳/hash为后缀  
+- 精简（压缩）  
+- expires报头  
+- 使用cdn  
+
+## 载入策略
+- 加载时遇到script标签会停止其他工作，直到加载完。  
+- 可用defer/async属性于script标签上。  
+- 可把注入脚本增加到一个数组中，当主脚本文件加载完后再执行该数组中的脚本。（有点像umd/amd）  
+- 增加script元素  
+- 建议在header中使用script标签  
+- 延迟加载。后来发展成为渐进式页面。  
+	+ 第一部分代码用于初始化页面。  
+	+ 第二部分代码用于用户交互等。  
+- 按需加载  
+- 预加载  
 
 # 后记
 ## 惰性函数会越执行越快么？
